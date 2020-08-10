@@ -9,7 +9,14 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -47,7 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   name: "Login",
   data: function data() {
     return {
@@ -59,35 +67,37 @@ __webpack_require__.r(__webpack_exports__);
       error: null
     };
   },
-  methods: {
+  computed: {},
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('user', {
+    Storelogin: 'login'
+  })), {}, {
     authenticate: function authenticate() {
       var _this = this;
 
       this.loading = true;
-      this.$store.dispatch("login");
-      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["login"])(this.$data.form).then(function (res) {
-        _this.$store.commit("LOGIN_SUCCESS", res);
+      this.Storelogin;
+      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_1__["login"])(this.$data.form).then(function (res) {
+        _this.$store.commit('user/LOGIN_SUCCESS', res);
 
         _this.$router.push({
-          path: "/dashboard"
+          path: '/dashboard'
         });
 
         _this.loading = false;
       })["catch"](function (error) {
-        _this.$store.commit("LOGIN_FAILED", {
+        _this.$store.commit('user/LOGIN_FAILED', {
           error: error
         });
 
         _this.loading = false;
       });
     }
-  },
-  computed: {
-    authError: function authError() {
-      return this.$store.getters.authError;
-    }
+  })
+}, "computed", {
+  authError: function authError() {
+    return this.$store.getters['user/authError'];
   }
-});
+}));
 
 /***/ }),
 

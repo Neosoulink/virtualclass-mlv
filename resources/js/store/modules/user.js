@@ -2,12 +2,12 @@ import { getLocalUser } from '../../helpers/auth'
 
 const user = getLocalUser();
 
-const state = {
+const state = () => ({
 	currentUser: user,
 	isLoggedIn: !!user,
 	loading: false,
 	auth_error: null,
-};
+});
 
 const getters = {
 	currentUser(state) {
@@ -54,12 +54,10 @@ const actions = {
 	},
 };
 
-let store = {
+export default {
 	namespaced: true,
 	state,
 	getters,
 	mutations,
 	actions,
 };
-
-export default store;

@@ -1,8 +1,8 @@
 require('./global/bootstrap');
 
 import Vue from 'vue';
-import store from './store/index';
-import router from './router/index';
+import store from './store';
+import router from './router';
 import App from './App.vue';
 import { initialize } from './helpers/general';
 

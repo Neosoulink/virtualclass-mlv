@@ -76441,8 +76441,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
-/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/general */ "./resources/js/helpers/general.js");
 /* harmony import */ var _global_globalComponents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./global/globalComponents */ "./resources/js/global/globalComponents.js");
@@ -76474,11 +76474,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_global_globalComponents__WEBPACK
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_global_globalDirectives__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_components_NotificationPlugin__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_8___default.a);
-Object(_helpers_general__WEBPACK_IMPORTED_MODULE_4__["initialize"])(_store_index__WEBPACK_IMPORTED_MODULE_1__["default"], _router_index__WEBPACK_IMPORTED_MODULE_2__["default"]);
+Object(_helpers_general__WEBPACK_IMPORTED_MODULE_4__["initialize"])(_store__WEBPACK_IMPORTED_MODULE_1__["default"], _router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  store: _store_index__WEBPACK_IMPORTED_MODULE_1__["default"],
-  router: _router_index__WEBPACK_IMPORTED_MODULE_2__["default"],
+  store: _store__WEBPACK_IMPORTED_MODULE_1__["default"],
+  router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
   components: {
     App: _App_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
@@ -77209,7 +77209,7 @@ function initialize(store, router) {
     var requireAuth = to.matched.some(function (record) {
       return record.meta.requireAuth;
     });
-    var currentUser = store.state.currentUser;
+    var currentUser = store.state.user.currentUser;
 
     if (requireAuth && !currentUser) {
       next('/login');
@@ -77228,18 +77228,16 @@ function initialize(store, router) {
   axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
-    console.log('efefdd20');
-
     if (error.response.status == 401 && router.history.current.path !== "/login") {
-      store.commit('LOGOUT');
+      store.commit('user/LOGOUT');
       router.push('/login');
     }
 
     return Promise.reject(error);
   });
 
-  if (store.getters.currentUser) {
-    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(store.getters.currentUser.token);
+  if (store.getters['user/currentUser']) {
+    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(store.getters['user/currentUser'].token);
   }
 }
 
@@ -77409,12 +77407,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/auth */ "./resources/js/helpers/auth.js");
 
 var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
-var state = {
-  currentUser: user,
-  isLoggedIn: !!user,
-  loading: false,
-  auth_error: null
+
+var state = function state() {
+  return {
+    currentUser: user,
+    isLoggedIn: !!user,
+    loading: false,
+    auth_error: null
+  };
 };
+
 var getters = {
   currentUser: function currentUser(state) {
     return state.currentUser;
@@ -77458,14 +77460,13 @@ var actions = {
     context.commit('LOGIN');
   }
 };
-var store = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: state,
   getters: getters,
   mutations: mutations,
   actions: actions
-};
-/* harmony default export */ __webpack_exports__["default"] = (store);
+});
 
 /***/ }),
 

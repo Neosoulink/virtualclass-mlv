@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { login } from "../helpers/auth";
+
 export default {
 	name: "Login",
 
@@ -49,26 +51,31 @@ export default {
 			error: null,
 		};
 	},
+	computed: {
+		},
 	methods: {
+		...mapActions('user', {
+			Storelogin : 'login'
+		}),
 		authenticate() {
 			this.loading = true;
-			this.$store.dispatch("login");
+			this.Storelogin;
 
 			login(this.$data.form)
 				.then((res) => {
-					this.$store.commit("LOGIN_SUCCESS", res);
-					this.$router.push({ path: "/dashboard" });
+					this.$store.commit('user/LOGIN_SUCCESS', res);
+					this.$router.push({ path: '/dashboard' });
 					this.loading = false;
 				})
 				.catch((error) => {
-					this.$store.commit("LOGIN_FAILED", { error });
+					this.$store.commit('user/LOGIN_FAILED', { error });
 					this.loading = false;
 				});
 		},
 	},
 	computed: {
 		authError() {
-			return this.$store.getters.authError;
+			return this.$store.getters['user/authError'];
 		},
 	},
 };

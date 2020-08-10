@@ -90,7 +90,7 @@ export default {
 			this.toggleList(this.sidebarImages, item);
 		},
 		logout() {
-			this.$store.commit("LOGOUT");
+			this.$store.commit("user/LOGOUT");
 			this.$router.push("/login");
 		},
 	},

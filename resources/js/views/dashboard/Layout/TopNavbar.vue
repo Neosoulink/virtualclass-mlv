@@ -94,7 +94,7 @@ export default {
 	},
 	computed: {
 		userEmail(){
-			return this.$store.getters.currentUser.email;
+			return this.$store.getters['user/currentUser'].email;
 		}
 	},
 };

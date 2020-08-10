@@ -269,7 +269,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_github_buttons__WEBPACK_IMPOR
       this.toggleList(this.sidebarImages, item);
     },
     logout: function logout() {
-      this.$store.commit("LOGOUT");
+      this.$store.commit("user/LOGOUT");
       this.$router.push("/login");
     }
   }
@@ -431,7 +431,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     userEmail: function userEmail() {
-      return this.$store.getters.currentUser.email;
+      return this.$store.getters['user/currentUser'].email;
     }
   }
 });
