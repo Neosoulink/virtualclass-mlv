@@ -1,17 +1,29 @@
-require('./bootstrap');
+require('./global/bootstrap');
 
 import Vue from 'vue';
-import store from './store';
-import router from './router';
+import store from './store/index';
+import router from './router/index';
+import App from './App.vue';
 import { initialize } from './helpers/general';
 
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.min.css';
-import 'vue-material/dist/theme/default.css';
+// Plugins
+import GlobalComponents from "./global/globalComponents";
+import GlobalDirectives from "./global/globalDirectives";
+import Notifications from "./components/NotificationPlugin";
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import Chartist from "chartist";
 
-Vue.use(VueMaterial)
+// MaterialDashboard plugin
+import MaterialDashboard from "./global/material-dashboard";
 
-import RenderView from './components/RouterView.vue';
+
+Vue.prototype.$Chartist = Chartist;
+
+Vue.use(MaterialDashboard);
+Vue.use(GlobalComponents);
+Vue.use(GlobalDirectives);
+Vue.use(Notifications);
+Vue.use(CKEditor);
 
 initialize(store, router);
 
@@ -20,6 +32,6 @@ new Vue({
 	store,
 	router,
 	components: {
-		RenderView
+		App
 	},
 });

@@ -1,6 +1,6 @@
 <template>
 	<div class="page-container">
-		<md-app md-waterfall md-mode="fixed">
+		<md-app md-waterfall md-mode="fixed" class="h-100">
 			<md-app-toolbar class="md-primary">
 				<span class="md-title">My Title</span>
 			</md-app-toolbar>
@@ -40,7 +40,7 @@
 
 <style lang="scss" scoped>
 .md-app {
-	max-height: 400px;
+	max-height: 800px;
 	border: 1px solid rgba(#000, 0.12);
 }
 
