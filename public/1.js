@@ -430,8 +430,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    userEmail: function userEmail() {
-      return this.$store.getters['user/currentUser'].email;
+    currentUser: function currentUser() {
+      return this.$store.getters['user/currentUser'];
     }
   }
 });
@@ -469,7 +469,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.centered-row {\n\tdisplay: flex;\n\theight: 100%;\n\talign-items: center;\n}\n.button-container .btn {\n\tmargin-right: 10px;\n}\n.centered-buttons {\n\tdisplay: flex;\n\tjustify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.centered-row {\r\n\tdisplay: flex;\r\n\theight: 100%;\r\n\talign-items: center;\n}\n.button-container .btn {\r\n\tmargin-right: 10px;\n}\n.centered-buttons {\r\n\tdisplay: flex;\r\n\tjustify-content: center;\n}\r\n", ""]);
 
 // exports
 
@@ -1214,12 +1214,16 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("md-list-item", { attrs: { href: "#user" } }, [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("person")
-                      ]),
-                      _vm._v(" " + _vm._s(_vm.userEmail) + "\n          ")
-                    ])
+                    _vm.currentUser
+                      ? _c("md-list-item", { attrs: { href: "#user" } }, [
+                          _c("i", { staticClass: "material-icons" }, [
+                            _vm._v("person")
+                          ]),
+                          _vm._v(
+                            " " + _vm._s(_vm.currentUser.email) + "\n          "
+                          )
+                        ])
+                      : _vm._e()
                   ],
                   1
                 )

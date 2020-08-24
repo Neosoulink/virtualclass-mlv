@@ -7,6 +7,10 @@ export function login(credential) {
 				axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
 			})
 			.catch(err => {
+				if (err === 401) {
+					console.log('Wrong email or password');
+
+				}
 				rej('Wrong email or password')
 			})
 	})

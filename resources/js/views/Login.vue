@@ -8,17 +8,19 @@
 			<div class="form">
 				<md-field>
 					<label>E-mail</label>
-					<md-input v-model="form.email" autofocus></md-input>
+					<md-input v-model="form.email" type="email" name="email" autocomplete="email" autofocus></md-input>
 				</md-field>
 
 				<md-field md-has-password>
 					<label>Password</label>
-					<md-input v-model="form.password" type="password"></md-input>
+					<md-input v-model="form.password" autocomplete="current-password" type="password"></md-input>
 				</md-field>
 			</div>
 
 			<div class="actions md-layout md-alignment-center-space-between">
-				<md-button class="md-link" to="/"><md-icon>arrow_back</md-icon> Back home</md-button>
+				<md-button class="md-link" to="/">
+					<md-icon>arrow_back</md-icon>Back home
+				</md-button>
 				<md-button type="submit" class="md-raised md-primary">Log in</md-button>
 			</div>
 
@@ -27,7 +29,8 @@
 			</div>
 
 			<div class="loading-overlay" v-if="loading">
-				<md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
+				<success-check v-if="isLoggedIn" />
+				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else></md-progress-spinner>
 			</div>
 		</md-content>
 		<div class="background" />
@@ -35,12 +38,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 import { login } from "../helpers/auth";
+import SuccessCheck from "../components/progess/SuccessCheck"
 
 export default {
 	name: "Login",
-
+	components: {SuccessCheck},
 	data() {
 		return {
 			loading: false,
@@ -51,32 +55,35 @@ export default {
 			error: null,
 		};
 	},
-	computed: {
-		},
+	computed: {},
 	methods: {
-		...mapActions('user', {
-			Storelogin : 'login'
-		}),
+		//...mapActions("user", {
+		//	Storelogin: "login",
+		//}),
 		authenticate() {
 			this.loading = true;
-			this.Storelogin;
+			this.$store.dispatch("user/login");
 
 			login(this.$data.form)
 				.then((res) => {
-					this.$store.commit('user/LOGIN_SUCCESS', res);
-					this.$router.push({ path: '/dashboard' });
-					this.loading = false;
+					this.$store.commit("user/LOGIN_SUCCESS", res);
+					setTimeout(() => {
+						this.$router.push({ path: "/dashboard" });
+					}, 2000);
 				})
 				.catch((error) => {
-					this.$store.commit('user/LOGIN_FAILED', { error });
+					this.$store.commit("user/LOGIN_FAILED", { error });
 					this.loading = false;
 				});
 		},
 	},
 	computed: {
 		authError() {
-			return this.$store.getters['user/authError'];
+			return this.$store.getters["user/authError"];
 		},
+		isLoggedIn(){
+			return this.$store.getters["user/isLoggedIn"];
+		}
 	},
 };
 </script>

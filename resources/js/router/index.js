@@ -43,6 +43,10 @@ const routes = [
 				component: resolve => require(['../views/dashboard/demo/Choice.vue'], resolve),
 			}
 		],
+	},
+	{
+		path: '*',
+		component: resolve => require(['../views/404.vue'], resolve),
 	}
 ];
 

@@ -151,7 +151,35 @@
 				</md-step>
 				<!-- /md-step -->
 
-				<md-step id="third" md-label="Third Step" :md-done.sync="steper.third.active">
+				<md-step id="third" md-label="Theme" :md-done.sync="steper.third.active">
+					<div class="md-layout" v-if="steper.third.logoThemes">
+						<div
+							v-for="logoTheme in steper.third.logoThemes"
+							:key="logoTheme"
+							class="md-layout-item md-xsmall-size-100 md-size-25"
+						>
+							<md-card>
+								<md-card-media-cover md-text-scrim>
+									<md-card-media md-ratio="16:9">
+										<img :src="logoTheme" />
+									</md-card-media>
+								</md-card-media-cover>
+								<md-card-content class="header-card px-2 pb-2">
+									<div class="md-title">Title goes here</div>
+									<div class="md-subhead">Subtitle here</div>
+
+								</md-card-content>
+
+								<md-card-expand>
+									<md-button :href="logoTheme" target="_blank" class="md-primary md-just-icon"><md-icon>visibility</md-icon></md-button>
+									<md-button class="md-primary md-just-icon"><md-icon>check</md-icon></md-button>
+								</md-card-expand>
+							</md-card>
+						</div>
+						<!-- :.md-layout-item -->
+					</div>
+					<!-- ./md-layout -->
+
 					<md-button class="md-raised md-success" @click="setDone('third')">Done</md-button>
 				</md-step>
 				<!-- /md-step -->
@@ -213,6 +241,7 @@ export default {
 					header: null,
 					content: null,
 				},
+				logoThemes: [],
 			},
 		},
 	}),
@@ -323,6 +352,16 @@ export default {
 		//	this.firstStepeCheck();
 		//	//console.log("qsq");
 		//},
+	},
+	mounted() {
+		axios
+			.get("/api/demo/logo-themes")
+			.then((res) => {
+				this.steper.third.logoThemes = res.data;
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 	},
 };
 </script>

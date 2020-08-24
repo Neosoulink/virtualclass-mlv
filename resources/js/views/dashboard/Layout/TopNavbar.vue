@@ -59,8 +59,8 @@
               </a>
             </li>
 
-            <md-list-item href="#user">
-              <i class="material-icons">person</i> {{ userEmail }}
+            <md-list-item href="#user" v-if="currentUser">
+              <i class="material-icons">person</i> {{ currentUser.email }}
             </md-list-item>
 
           </md-list>
@@ -93,8 +93,8 @@ export default {
     }
 	},
 	computed: {
-		userEmail(){
-			return this.$store.getters['user/currentUser'].email;
+		currentUser(){
+			return this.$store.getters['user/currentUser'];
 		}
 	},
 };
