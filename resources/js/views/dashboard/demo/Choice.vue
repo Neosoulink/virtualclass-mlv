@@ -15,13 +15,14 @@
 							<md-field>
 								<label for="chosen_type">Type of Document</label>
 								<md-select
-									v-model="steper.first.chosenType.chosen"
+									v-model="steper.first.chosenDatas.chosen"
 									name="chosen_type"
 									id="chosen_type"
 									required
+									class
 								>
 									<md-option value="letter">Letter</md-option>
-									<md-option value="document">Other Documents</md-option>
+									<md-option value="document" class>Other Documents</md-option>
 								</md-select>
 								<span class="md-helper-text">Select type of your demo document</span>
 								<span class="md-error"></span>
@@ -33,7 +34,7 @@
 							<div class="md-layout-item md-xsmall-size-100 md-size-25">
 								<md-field>
 									<label for="letter_type">Type of Letter</label>
-									<md-select v-model="steper.first.chosenType.letter.letterType" required>
+									<md-select v-model="steper.first.chosenDatas.letter.letterType" required>
 										<md-option value="Simple">Simple</md-option>
 										<md-option value="Copy Transmitted">Copy Transmitted</md-option>
 									</md-select>
@@ -43,16 +44,29 @@
 
 							<div
 								class="md-layout-item md-xsmall-size-100 md-size-25"
-								v-if="steper.first.chosenType.letter.letterType == 'Copy Transmitted'"
+								v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
 							>
 								<md-field>
 									<label for="movies">Select some persones</label>
-									<md-select v-model="steper.first.chosenType.letter.copyTransmitted" required multiple>
+									<md-select v-model="steper.first.chosenDatas.letter.copyTransmitted" required multiple>
 										<md-option
 											:value="`Person Exemple ${id}`"
 											v-for="id in 13"
 											:key="id"
 										>{{ `Person Exemple ${id}` }}</md-option>
+									</md-select>
+								</md-field>
+							</div>
+							<!-- /.md-layout-item -->
+						</template>
+
+						<template v-if="isDocument">
+							<div class="md-layout-item md-xsmall-size-100 md-size-25">
+								<md-field>
+									<label for="letter_type">Type of Letter</label>
+									<md-select v-model="steper.first.chosenDatas.document.documentType" required>
+										<md-option value="Official press release">Official press release</md-option>
+										<md-option value="Official Report">Official Report</md-option>
 									</md-select>
 								</md-field>
 							</div>
@@ -67,7 +81,7 @@
 							<md-field>
 								<md-icon>account_box</md-icon>
 								<label>For</label>
-								<md-input v-model="steper.first.chosenType.letter.for" required></md-input>
+								<md-input v-model="steper.first.chosenDatas.for" required></md-input>
 							</md-field>
 						</div>
 						<!-- /.md-layout-item -->
@@ -76,7 +90,7 @@
 							<md-field>
 								<md-icon>corporate_fare</md-icon>
 								<label>Establishment</label>
-								<md-input v-model="steper.first.chosenType.letter.establishment" required></md-input>
+								<md-input v-model="steper.first.chosenDatas.establishment" required></md-input>
 							</md-field>
 						</div>
 						<!-- /.md-layout-item -->
@@ -84,7 +98,7 @@
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
 							<md-field>
 								<label>Object</label>
-								<md-textarea v-model="steper.first.chosenType.letter.object" required md-autogrow></md-textarea>
+								<md-textarea v-model="steper.first.chosenDatas.object" required md-autogrow></md-textarea>
 							</md-field>
 						</div>
 						<!-- /.md-layout-item -->
@@ -96,7 +110,7 @@
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
 							<md-field>
 								<label for="movies">Status</label>
-								<md-select v-model="steper.first.chosenType.letter.status" required>
+								<md-select v-model="steper.first.chosenDatas.status" required>
 									<md-option value="Urgent">Urgent</md-option>
 									<md-option value="Important">Important</md-option>
 									<md-option value="Minor">Minor</md-option>
@@ -108,7 +122,7 @@
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
 							<md-field>
 								<label for="movies">Confidentiality</label>
-								<md-select v-model="steper.first.chosenType.letter.confidentiality" required>
+								<md-select v-model="steper.first.chosenDatas.confidentiality" required>
 									<md-option value="Private">Private</md-option>
 									<md-option value="Public">Public</md-option>
 								</md-select>
@@ -117,7 +131,7 @@
 						<!-- /.md-layout-item -->
 					</div>
 
-					<md-button class="md-raised md-success" @click="setDone('first', 'second')">Continue</md-button>
+					<md-button class="md-raised md-success" @click="firstStepCheck()">Continue</md-button>
 					<div v-if="steper.first.error.content">
 						<div class="text-danger" v-for="(error, index) in steper.first.error.content" :key="index">
 							<strong class="text-uppercase">{{index}} Field:</strong>
@@ -141,7 +155,7 @@
 						></ckeditor>
 					</div>
 
-					<md-button class="md-raised md-success" @click="setDone('second', 'third')">Continue</md-button>
+					<md-button class="md-raised md-success" @click="secondStepCheck()">Continue</md-button>
 					<div v-if="steper.second.error.content">
 						<div class="text-danger" v-for="(error, index) in steper.second.error.content" :key="index">
 							<strong class="text-uppercase">{{index}} Field:</strong>
@@ -151,7 +165,12 @@
 				</md-step>
 				<!-- /md-step -->
 
-				<md-step id="third" md-label="Theme" :md-done.sync="steper.third.active">
+				<md-step
+					id="third"
+					md-label="Theme"
+					:md-error="steper.third.error.header"
+					:md-done.sync="steper.third.active"
+				>
 					<div class="md-layout" v-if="steper.third.logoThemes">
 						<div
 							v-for="logoTheme in steper.third.logoThemes"
@@ -160,19 +179,24 @@
 						>
 							<md-card>
 								<md-card-media-cover md-text-scrim>
-									<md-card-media md-ratio="16:9">
+									<md-button
+										class="md-success md-just-icon position-absolute"
+										:class="logoTheme == steper.third.themeSelected ? 'show' : 'd-none'"
+										style="right:0;top:0;z-index: 10;"
+									>
+										<md-icon>check</md-icon>
+									</md-button>
+
+									<md-card-media md-ratio="4:3">
 										<img :src="logoTheme" />
 									</md-card-media>
 								</md-card-media-cover>
-								<md-card-content class="header-card px-2 pb-2">
-									<div class="md-title">Title goes here</div>
-									<div class="md-subhead">Subtitle here</div>
-
-								</md-card-content>
 
 								<md-card-expand>
-									<md-button :href="logoTheme" target="_blank" class="md-primary md-just-icon"><md-icon>visibility</md-icon></md-button>
-									<md-button class="md-primary md-just-icon"><md-icon>check</md-icon></md-button>
+									<md-button
+										class="md-primary md-round"
+										@click="steper.third.themeSelected = logoTheme"
+									>Select theme</md-button>
 								</md-card-expand>
 							</md-card>
 						</div>
@@ -180,11 +204,78 @@
 					</div>
 					<!-- ./md-layout -->
 
-					<md-button class="md-raised md-success" @click="setDone('third')">Done</md-button>
+					<md-button class="md-raised md-success" @click="thirdStepCheck()">Launch preview</md-button>
+
+					<div v-if="steper.third.error.content">
+						<div class="text-danger" v-for="(error, index) in steper.third.error.content" :key="index">
+							<strong class="text-uppercase">{{index}}:</strong>
+							{{error.join(',\n')}}
+						</div>
+					</div>
 				</md-step>
 				<!-- /md-step -->
 			</md-steppers>
 		</div>
+
+		<md-dialog :md-active.sync="printeredData.dialogPreview" class="md-size-100">
+			<md-dialog-title>Preview</md-dialog-title>
+
+			<md-dialog-content class="md-layout">
+				<div class="md-layout-item md-xsmall-size-100 md-size-25">
+					<div class="md-size-100 mb-3" v-if="steper.third.themeSelected">
+						<legend class="md-subheading">Theme :</legend>
+						<img :src="steper.third.themeSelected" alt />
+					</div>
+				</div>
+				<!-- /.md-layout-item -->
+				<div class="md-layout-item md-xsmall-size-100 md-size-75">
+					<div class="md-size-100 mb-3" v-if="editorDataEscaped">
+						<legend class="md-subheading mb-0 pb-2">Content :</legend>
+						<div class="bg-light p-2">{{ editorDataEscaped }}</div>
+					</div>
+					<!-- /.md-size-100 -->
+					<div class="md-size-100" v-if="steper.first.chosenDatas.chosen">
+						<legend class="md-subheading mb-0 pb-2">Document type :</legend>
+						<p class="bg-light text-uppercase p-2">{{steper.first.chosenDatas.chosen}}</p>
+					</div>
+					<!-- /.md-size-100 -->
+					<template v-if="isLetter">
+						<legend class="md-subheading mb-0 pb-2">Letter type :</legend>
+						<p
+							class="bg-light text-uppercase p-2"
+						>{{steper.first.chosenDatas.chosen}} / {{ steper.first.chosenDatas.letter.letterType }}</p>
+
+						<md-list
+							class="md-dense"
+							v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
+						>
+							<md-list-item
+								v-for="(item, index) in steper.first.chosenDatas.letter.copyTransmitted"
+								:key="index"
+								class="mb-2"
+							>
+								<span class="md-list-item-text p-2 bg-light">{{ item }}</span>
+							</md-list-item>
+						</md-list>
+					</template>
+					<template v-if="isDocument">
+						<legend class="md-subheading mb-0 pb-2">Model :</legend>
+						<p
+							class="bg-light text-uppercase p-2"
+						>{{ steper.first.chosenDatas.document.documentType }}</p>
+					</template>
+					<!-- /.md-size-100 -->
+				</div>
+				<!-- /.md-layout-item -->
+			</md-dialog-content>
+
+			<md-dialog-actions>
+				<md-button class="md-primary" @click="printeredData.dialogPreview = false">Close</md-button>
+				<md-button class="md-primary" @click="printeredData.dialogPreview = false">
+					<md-icon class="md-primary">print</md-icon>Print
+				</md-button>
+			</md-dialog-actions>
+		</md-dialog>
 	</div>
 </template>
 
@@ -207,18 +298,20 @@ export default {
 					header: null,
 					content: null,
 				},
-				chosenType: {
+				chosenDatas: {
 					chosen: null,
 					letter: {
-						for: null,
-						establishment: null,
 						letterType: null,
 						copyTransmitted: null,
-						object: null,
-						confidentiality: null,
-						status: null,
 					},
-					document: {},
+					document: {
+						documentType: null,
+					},
+					for: null,
+					establishment: null,
+					object: null,
+					confidentiality: null,
+					status: null,
 				},
 			},
 			second: {
@@ -242,7 +335,12 @@ export default {
 					content: null,
 				},
 				logoThemes: [],
+				themeSelected: null,
 			},
+		},
+		printeredData: {
+			dialogPreview: false,
+			content: "",
 		},
 	}),
 	methods: {
@@ -260,7 +358,7 @@ export default {
 			}
 			return true;
 		},
-		unActiveStepers() {
+		unactiveStepers() {
 			const steper = this.steper;
 			for (const key in steper) {
 				if (steper.hasOwnProperty(key)) {
@@ -272,13 +370,27 @@ export default {
 			}
 			return;
 		},
-		firstStepeCheck(setDone = true) {
+		activeStepers() {
+			const steper = this.steper;
+			for (const key in steper) {
+				if (steper.hasOwnProperty(key)) {
+					const element = steper[key];
+					if (isObject(element)) {
+						element.active = true;
+					}
+				}
+			}
+			return;
+		},
+		firstStepCheck(setDone = true) {
 			// Check formulary of first step
 			const id = "first",
 				index = "second";
 
-			this.steper.first.error.content = null;
-			this.steper.first.error.header = null;
+			this.steper[id].error.content = null;
+			this.steper[id].error.header = null;
+
+			let datas = this.steper[id].chosenDatas;
 
 			let constraints = {
 				chosen: { presence: { allowEmpty: false } },
@@ -290,37 +402,40 @@ export default {
 			};
 
 			if (this.isLetter) {
+				datas.letterType = this.steper[id].chosenDatas.letter.letterType;
 				constraints.letterType = { presence: { allowEmpty: false } };
 				if (
-					this.$data.steper.first.chosenType.letter.letterType ==
+					this.$data.steper[id].chosenDatas.letter.letterType ==
 					"Copy Transmitted"
 				) {
+					datas.copyTransmitted = this.steper[
+						id
+					].chosenDatas.letter.copyTransmitted;
 					constraints.copyTransmitted = { presence: { allowEmpty: false } };
 				}
 			} else if (this.isDocument) {
+				datas.documentType = this.steper[id].chosenDatas.document.documentType;
+				constraints.documentType = { presence: { allowEmpty: false } };
 			}
 
-			let datas = this.steper.first.chosenType.letter;
-			datas.chosen = this.steper.first.chosenType.chosen;
-
 			if (!this.setError(id, Validate(datas, constraints))) {
-				this.unActiveStepers();
+				this.unactiveStepers();
 				return false;
 			}
 			if (setDone) {
 				this.setDone(id, index);
 			} else return true;
 		},
-		secondStepeCheck(setDone = true) {
+		secondStepCheck(setDone = true) {
 			// Check formulary of second step
-			const id = "first",
-				index = "second";
+			const id = "second",
+				index = "third";
 
-			this.steper.second.error.content = null;
-			this.steper.second.error.header = null;
+			this.steper[id].error.content = null;
+			this.steper[id].error.header = null;
 
 			let data = {
-				editorData: this.steper.second.editorData,
+				editorData: this.steper[id].editorData,
 			};
 
 			let constraints = {
@@ -331,37 +446,92 @@ export default {
 			};
 
 			if (!this.setError(id, Validate(data, constraints))) {
-				this.unActiveStepers();
+				this.unactiveStepers();
 				return false;
 			}
 			if (setDone) {
 				this.setDone(id, index);
+
+				if (!this.steper.third.logoThemes.length) {
+					axios
+						.get("/api/demo/logo-themes")
+						.then((res) => {
+							this.steper.third.logoThemes = res.data;
+						})
+						.catch((err) => {
+							console.error(err);
+						});
+				}
+			} else return true;
+		},
+		thirdStepCheck(setDone = true) {
+			const id = "third";
+
+			this.steper[id].error.content = null;
+			this.steper[id].error.header = null;
+			let data = {
+				themeSelected: this.steper[id].themeSelected,
+			};
+
+			let constraints = {
+				themeSelected: {
+					presence: { allowEmpty: false },
+					url: {
+						allowLocal: true,
+					},
+				},
+			};
+
+			if (!this.setError(id, Validate(data, constraints))) {
+				this.unactiveStepers();
+				return false;
+			}
+			if (setDone) {
+				this.printeredData.dialogPreview = true;
+				this.activeStepers();
 			} else return true;
 		},
 	},
 	computed: {
 		isLetter() {
-			return this.steper.first.chosenType.chosen == "letter";
+			return this.steper.first.chosenDatas.chosen == "letter";
 		},
 		isDocument() {
-			return this.steper.first.chosenType.chosen == "document";
+			return this.steper.first.chosenDatas.chosen == "document";
+		},
+		editorDataEscaped() {
+			let dataEscaped = this.steper.second.editorData
+				.replace(/<[^>]*>/gi, " ")
+				.trim();
+			return dataEscaped;
 		},
 	},
 	watch: {
-		//'steper.first.chosenType.letter.for': function (newSteper, oldSteper) {
-		//	this.firstStepeCheck();
+		//'steper.first.chosenDatas.letter.for': function (newSteper, oldSteper) {
+		//	this.firstStepCheck();
 		//	//console.log("qsq");
 		//},
 	},
-	mounted() {
-		axios
-			.get("/api/demo/logo-themes")
-			.then((res) => {
-				this.steper.third.logoThemes = res.data;
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	},
+	mounted() {},
 };
 </script>
+
+<style>
+.md-select-menu > .md-menu-content-container > .md-list .md-list-item {
+	padding-left: -5px;
+	margin-left: -5px;
+}
+.md-select-menu > .md-menu-content-container > .md-list .md-list-item-text {
+	display: flex;
+	justify-content: center;
+	padding-left: 15px;
+}
+.md-select-menu
+	> .md-menu-content-container
+	> .md-list
+	.md-list-item-content
+	> .md-checkbox {
+	margin: 0;
+	display: inline;
+}
+</style>
