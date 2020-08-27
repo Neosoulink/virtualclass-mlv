@@ -22,7 +22,7 @@
 									class
 								>
 									<md-option value="letter">Letter</md-option>
-									<md-option value="document" class>Other Documents</md-option>
+									<md-option value="document" class>Documents</md-option>
 								</md-select>
 								<span class="md-helper-text">Select type of your demo document</span>
 								<span class="md-error"></span>
@@ -42,28 +42,34 @@
 							</div>
 							<!-- /.md-layout-item -->
 
-							<div
-								class="md-layout-item md-xsmall-size-100 md-size-25"
-								v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
-							>
-								<md-field>
-									<label for="movies">Select some persones</label>
-									<md-select v-model="steper.first.chosenDatas.letter.copyTransmitted" required multiple>
-										<md-option
-											:value="`Person Exemple ${id}`"
-											v-for="id in 13"
-											:key="id"
-										>{{ `Person Exemple ${id}` }}</md-option>
-									</md-select>
-								</md-field>
-							</div>
-							<!-- /.md-layout-item -->
+							<template v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'">
+								<div class="md-layout-item md-xsmall-size-100 md-size-25">
+									<md-field>
+										<label>Object</label>
+										<md-textarea v-model="steper.first.chosenDatas.object" required md-autogrow></md-textarea>
+									</md-field>
+								</div>
+								<!-- /.md-layout-item -->
+								<div class="md-layout-item md-xsmall-size-100 md-size-25">
+									<md-field>
+										<label for="movies">Select some persones</label>
+										<md-select v-model="steper.first.chosenDatas.letter.copyTransmitted" required multiple>
+											<md-option
+												:value="`Person Exemple ${id}`"
+												v-for="id in 13"
+												:key="id"
+											>{{ `Person Exemple ${id}` }}</md-option>
+										</md-select>
+									</md-field>
+								</div>
+								<!-- /.md-layout-item -->
+							</template>
 						</template>
 
 						<template v-if="isDocument">
 							<div class="md-layout-item md-xsmall-size-100 md-size-25">
 								<md-field>
-									<label for="letter_type">Type of Letter</label>
+									<label for="letter_type">Model of document</label>
 									<md-select v-model="steper.first.chosenDatas.document.documentType" required>
 										<md-option value="Official press release">Official press release</md-option>
 										<md-option value="Official Report">Official Report</md-option>
@@ -91,14 +97,6 @@
 								<md-icon>corporate_fare</md-icon>
 								<label>Establishment</label>
 								<md-input v-model="steper.first.chosenDatas.establishment" required></md-input>
-							</md-field>
-						</div>
-						<!-- /.md-layout-item -->
-
-						<div class="md-layout-item md-xsmall-size-100 md-size-25">
-							<md-field>
-								<label>Object</label>
-								<md-textarea v-model="steper.first.chosenDatas.object" required md-autogrow></md-textarea>
 							</md-field>
 						</div>
 						<!-- /.md-layout-item -->
@@ -234,48 +232,116 @@
 						<div class="bg-light p-2">{{ editorDataEscaped }}</div>
 					</div>
 					<!-- /.md-size-100 -->
-					<div class="md-size-100" v-if="steper.first.chosenDatas.chosen">
-						<legend class="md-subheading mb-0 pb-2">Document type :</legend>
-						<p class="bg-light text-uppercase p-2">{{steper.first.chosenDatas.chosen}}</p>
+					<div class="md-size-100 mb-3" v-if="steper.first.chosenDatas.chosen">
+						<legend class="md-subheading mb-0 pb-2">
+							Document type :
+							<span class="bg-light text-uppercase p-2">{{steper.first.chosenDatas.chosen}}</span>
+						</legend>
 					</div>
 					<!-- /.md-size-100 -->
 					<template v-if="isLetter">
-						<legend class="md-subheading mb-0 pb-2">Letter type :</legend>
-						<p
-							class="bg-light text-uppercase p-2"
-						>{{steper.first.chosenDatas.chosen}} / {{ steper.first.chosenDatas.letter.letterType }}</p>
+						<div class="md-size-100 mb-3">
+							<legend class="md-subheading mb-0 pb-2">
+								Letter type :
+								<span
+									class="bg-light text-uppercase p-2"
+								>{{steper.first.chosenDatas.chosen}} / {{ steper.first.chosenDatas.letter.letterType }}</span>
+							</legend>
 
-						<md-list
-							class="md-dense"
-							v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
-						>
-							<md-list-item
-								v-for="(item, index) in steper.first.chosenDatas.letter.copyTransmitted"
-								:key="index"
-								class="mb-2"
+							<md-list
+								class="md-dense"
+								v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
 							>
-								<span class="md-list-item-text p-2 bg-light">{{ item }}</span>
-							</md-list-item>
-						</md-list>
+								<md-list-item
+									v-for="(item, index) in steper.first.chosenDatas.letter.copyTransmitted"
+									:key="index"
+									class="mb-2"
+								>
+									<span class="md-list-item-text p-2 bg-light">{{ item }}</span>
+								</md-list-item>
+							</md-list>
+						</div>
 					</template>
+					<!-- /.md-size-100 -->
+
 					<template v-if="isDocument">
-						<legend class="md-subheading mb-0 pb-2">Model :</legend>
-						<p
-							class="bg-light text-uppercase p-2"
-						>{{ steper.first.chosenDatas.document.documentType }}</p>
+						<div class="md-size-100 mb-3">
+							<legend class="md-subheading mb-0 pb-2">
+								Model :
+								<span
+									class="bg-light text-uppercase p-2"
+								>{{ steper.first.chosenDatas.document.documentType }}</span>
+							</legend>
+						</div>
 					</template>
+					<!-- /.md-size-100 -->
+
+					<div class="md-size-100 mb-3">
+						<legend class="md-subheading mb-0 pb-2">
+							<md-icon>account_box</md-icon>For :
+							<span class="bg-light p-2">{{ steper.first.chosenDatas.for }}</span>
+						</legend>
+					</div>
+					<!-- /.md-size-100 -->
+
+					<div class="md-size-100 mb-3">
+						<legend class="md-subheading mb-0 pb-2">
+							<md-icon>corporate_fare</md-icon>Establishment :
+							<span class="bg-light p-2">{{ steper.first.chosenDatas.establishment }}</span>
+						</legend>
+					</div>
+					<!-- /.md-size-100 -->
+
+					<div class="md-size-100 mb-3">
+						<legend class="md-subheading mb-0 pb-2">
+							Object :
+							<span class="bg-light p-2">{{ steper.first.chosenDatas.object }}</span>
+						</legend>
+					</div>
+					<!-- /.md-size-100 -->
+
+					<div class="md-size-100 mb-3">
+						<legend class="md-subheading mb-0 pb-2">
+							<md-icon>security</md-icon>Confidentiality :
+							<span class="bg-light p-2">{{ steper.first.chosenDatas.confidentiality }}</span>
+						</legend>
+					</div>
+					<!-- /.md-size-100 -->
+
+					<div class="md-size-100 mb-3">
+						<legend class="md-subheading mb-0 pb-2">
+							Status :
+							<span class="bg-light p-2">{{ steper.first.chosenDatas.status }}</span>
+						</legend>
+					</div>
 					<!-- /.md-size-100 -->
 				</div>
 				<!-- /.md-layout-item -->
 			</md-dialog-content>
 
 			<md-dialog-actions>
-				<md-button class="md-primary" @click="printeredData.dialogPreview = false">Close</md-button>
-				<md-button class="md-primary" @click="printeredData.dialogPreview = false">
+				<md-button class="md-primary" @click="printeredData.dialogPreview = false">Cancel</md-button>
+				<md-button class="md-primary" @click="launchPrint()">
 					<md-icon class="md-primary">print</md-icon>Print
 				</md-button>
 			</md-dialog-actions>
 		</md-dialog>
+
+		<demo-printable
+			ref="demoPrintable"
+			:isLetter="isLetter"
+			:isDocument="isDocument"
+			:letterType="steper.first.chosenDatas.letter.letterType"
+			:documentType="steper.first.chosenDatas.document.documentType"
+			:copyTransmitted="steper.first.chosenDatas.letter.copyTransmitted"
+			:forPerson="steper.first.chosenDatas.for"
+			:establishment="steper.first.chosenDatas.establishment"
+			:object="steper.first.chosenDatas.object"
+			:confidentiality="steper.first.chosenDatas.confidentiality"
+			:status="steper.first.chosenDatas.status"
+			:editorData="steper.second.editorData"
+			:themeLogo="steper.third.themeSelected"
+		/>
 	</div>
 </template>
 
@@ -284,10 +350,13 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 //import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 //import NicolaCkeditor from '@nicolabello/ckeditor5-build-decoupled-document';
 import Validate, { isObject } from "validate.js";
+import DemoPrintable from "../../../components/printables/Demo";
 
 export default {
 	name: "DashboardChoice",
-	components: {},
+	components: {
+		DemoPrintable,
+	},
 	data: () => ({
 		steper: {
 			active: "first",
@@ -396,7 +465,6 @@ export default {
 				chosen: { presence: { allowEmpty: false } },
 				for: { presence: { allowEmpty: false } },
 				establishment: { presence: { allowEmpty: false } },
-				object: { presence: { allowEmpty: false } },
 				confidentiality: { presence: { allowEmpty: false } },
 				status: { presence: { allowEmpty: false } },
 			};
@@ -411,6 +479,7 @@ export default {
 					datas.copyTransmitted = this.steper[
 						id
 					].chosenDatas.letter.copyTransmitted;
+					constraints.object = { presence: { allowEmpty: false } };
 					constraints.copyTransmitted = { presence: { allowEmpty: false } };
 				}
 			} else if (this.isDocument) {
@@ -490,6 +559,10 @@ export default {
 				this.printeredData.dialogPreview = true;
 				this.activeStepers();
 			} else return true;
+		},
+		launchPrint() {
+			this.$refs.demoPrintable.launchPrint();
+			this.printeredData.dialogPreview = false;
 		},
 	},
 	computed: {

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
@@ -99,85 +99,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DemoPrintable",
   props: {
-    isLetter: {
-      type: Boolean,
-      "default": false
-    },
-    isDocument: {
-      type: Boolean,
-      "default": false
-    },
-    letterType: {
-      "default": null
-    },
     documentType: {
-      "default": null
-    },
-    copyTransmitted: {
-      type: Array
+      type: Object,
+      //required: true,
+      "default": function _default() {
+        return {};
+      }
     },
     forPerson: {
-      type: String
+      type: String,
+      //required: true,
+      "default": "Demo field 2"
     },
     establishment: {
-      type: String
+      type: String,
+      //required: true,
+      "default": "Demo field 3"
     },
     object: {
-      type: String
+      type: String,
+      //required: true,
+      "default": "Demo field 4"
     },
     confidentiality: {
-      type: String
+      type: String,
+      //required: true,
+      "default": "Demo field 5"
     },
     status: {
-      type: String
-    },
-    editorData: {
-      type: String
-    },
-    themeLogo: {
-      type: String
+      type: String,
+      //required: true,
+      "default": "Demo field 6"
     }
   },
-  data: function data() {
-    return {};
-  },
-  computed: {
-    dateString: function dateString() {
-      var d = new Date();
-      var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-      return datestring;
-    },
-    getThemeLogo: function getThemeLogo() {
-      return this.themeLogo ? this.themeLogo : "https://upload.wikimedia.org/wikipedia/commons/1/1b/Coat_of_arms_of_the_Democratic_Republic_of_the_Congo.svg";
-    }
-  },
-  methods: {
-    launchPrint: function launchPrint() {
+  mounted: function mounted() {
+    setTimeout(function () {
       print_js__WEBPACK_IMPORTED_MODULE_0___default()({
         printable: "printable",
         type: "html",
-        maxWidth: 900,
-        targetStyles: ["*"]
+        style: "#printable{height: 100%; width: 100%;}.content-text{position: relative;padding: 2vh 3vw 0 3vw; display: inline-block;z-index: 10;width: 100%}.header-left-side{width: 40.2vw; text-align: center;position: relative;}.header-left-side>.header-title{text-transform: uppercase;font-weight: 700;font-size: 0.95em}.item-person{ padding-left: 20px }"
       });
-    }
-  },
-  mounted: function mounted() {}
+    }, 2000);
+  }
 });
 
 /***/ }),
@@ -196,19 +163,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var validate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validate.js */ "./node_modules/validate.js/validate.js");
 /* harmony import */ var validate_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(validate_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_printables_Demo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/printables/Demo */ "./resources/js/components/printables/Demo.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -679,6 +633,11 @@ __webpack_require__.r(__webpack_exports__);
             allowEmpty: false
           }
         },
+        object: {
+          presence: {
+            allowEmpty: false
+          }
+        },
         confidentiality: {
           presence: {
             allowEmpty: false
@@ -701,11 +660,6 @@ __webpack_require__.r(__webpack_exports__);
 
         if (this.$data.steper[id].chosenDatas.letter.letterType == "Copy Transmitted") {
           datas.copyTransmitted = this.steper[id].chosenDatas.letter.copyTransmitted;
-          constraints.object = {
-            presence: {
-              allowEmpty: false
-            }
-          };
           constraints.copyTransmitted = {
             presence: {
               allowEmpty: false
@@ -800,8 +754,7 @@ __webpack_require__.r(__webpack_exports__);
       } else return true;
     },
     launchPrint: function launchPrint() {
-      this.$refs.demoPrintable.launchPrint();
-      this.printeredData.dialogPreview = false;
+      Print('printJS-form', 'html');
     }
   },
   computed: {
@@ -826,25 +779,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.add-ident-p > p {\n\t/*text-indent: 52%;*/\n}\n#printable {\n\theight: 100%;\n\twidth: 100%;\n}\n#printable * {\n\tcolor: #222;\n\tfont-family: serif;\n}\n.background-theme {\n\topacity: 0.1;\n\tposition: absolute;\n\tz-index: 0;\n\tmargin: auto;\n\tmargin-top: 35vh;\n\twidth: 100%;\n}\n.content-text {\n\tposition: relative;\n\tz-index: 10;\n\twidth: 100%;\n}\n.header-left-side {\n\tposition: relative;\n}\n.header-left-side > .header-title {\n\ttext-transform: uppercase;\n\tfont-weight: 700;\n\tfont-size: 0.95em;\n}\n.header-left-side > .container-header-logo {\n}\n.header-left-side > .container-header-logo > .header-logo {\n\tz-index: -1;\n\theight: 92px;\n}\n.header-right-side {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tfont-size: 1em;\n}\n.simple-letter-section > .title-section {\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n}\n.copy-transmited-section > .title-section {\n\ttext-transform: uppercase;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-weight: 700;\n}\n.copy-transmited-section > .subtitle-section {\n\tfont-weight: 700;\n}\n.list-group-person {\n\tfont-size: 1.25em;\n\tmargin-left: 20px;\n\tpadding: 0 0 20px;\n\tborder-bottom: 2px dashed;\n}\n.list-group-person > .list-item-person {\n\tpadding-left: 20px;\n}\n.object-title,\n.for-person {\n\tvertical-align: text-top;\n}\n.editor-datas > p {\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\ttext-align: justify;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/dashboard/demo/Demo.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/dashboard/demo/Demo.vue?vue&type=style&index=0&lang=css& ***!
@@ -861,36 +795,6 @@ exports.push([module.i, "\n.md-select-menu > .md-menu-content-container > .md-li
 
 // exports
 
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Demo.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -940,211 +844,127 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "d-none" }, [
-    _c(
-      "main",
-      {
-        staticClass: "position-relative m-0 p-0 pt-2",
-        attrs: { id: "printable" }
-      },
-      [
-        _c("img", {
-          staticClass: "background-theme",
-          attrs: { src: _vm.getThemeLogo, alt: "theme", width: "1200" }
-        }),
+    _c("main", { attrs: { id: "printable" } }, [
+      _c("div", { staticClass: "content-text" }, [
+        _c("header", [
+          _c("div", { staticClass: "header-left-side" }, [
+            _c("p", { staticClass: "header-title" }, [
+              _c("span", [_vm._v("République démocratique du congo")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.status))])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "header-right-side" }, [
+            _c("div", [_vm._v("Kinshasa le 20/13/41>")]),
+            _vm._v(" "),
+            _c("div", [_c("b", [_vm._v("Document " + _vm._s(_vm.forPerson))])])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-6" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticStyle: {
+                  "font-size": "1.2em",
+                  "margin-left": "20px",
+                  "border-bottom": "2px dashed",
+                  "padding-bottom": "20px"
+                }
+              },
+              [
+                _c("li", { staticClass: "item-person" }, [
+                  _vm._v("Son exelance " + _vm._s(_vm.establishment))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "item-person" }, [
+                  _vm._v("Son exelance " + _vm._s(_vm.establishment))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "item-person" }, [
+                  _vm._v("Son exelance " + _vm._s(_vm.establishment))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "item-person" }, [
+                  _vm._v("Son exelance " + _vm._s(_vm.establishment))
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c("h4", [_vm._v(_vm._s(_vm.object))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6" }, [
+            _c("h4", { staticStyle: { "text-transform": "uppercase" } }, [
+              _vm._v("à " + _vm._s(_vm.object))
+            ]),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "treu-content" }),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "content-text" },
+          {
+            staticStyle: {
+              padding: "0",
+              "font-size": "1.5em",
+              "line-height": "35px",
+              "text-align": "justify"
+            },
+            attrs: { id: "object_doc" }
+          },
           [
-            _c("header", [
-              _c(
-                "div",
-                { staticClass: "header-left-side d-inline-block text-center" },
-                [
-                  _c("div", { staticClass: "header-title m-0 p-0 pb-1" }, [
-                    _c("div", [_vm._v("République démocratique du congo")]),
-                    _vm._v(" "),
-                    _c("div", [_vm._v(_vm._s(_vm.status))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "container-header-logo py-2" }, [
-                    _c("img", {
-                      staticClass: "header-logo",
-                      attrs: { src: _vm.getThemeLogo, alt: "logo header" }
-                    })
-                  ])
-                ]
-              ),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-6" }),
               _vm._v(" "),
-              _c("div", { staticClass: "header-right-side" }, [
-                _c("div", [_vm._v("Kinshasa le " + _vm._s(_vm.dateString))]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("b", [
-                    _vm._v(
-                      "This document is " +
-                        _vm._s(_vm.status) +
-                        " a " +
-                        _vm._s(_vm.confidentiality)
-                    )
-                  ])
-                ])
-              ])
+              _c("div", { staticClass: "col-6" }, [_vm._v(_vm._s(_vm.object))])
             ]),
-            _vm._v(" "),
-            _vm.isLetter
-              ? [
-                  _vm.letterType != null
-                    ? [
-                        _vm.letterType != "Copy Transmitted"
-                          ? [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "simple-letter-section text-center mb-4"
-                                },
-                                [
-                                  _c(
-                                    "h2",
-                                    {
-                                      staticClass:
-                                        "title-section text-uppercase d-inline-block"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "Lettre ouvert à " +
-                                          _vm._s(_vm.forPerson)
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]
-                          : [
-                              _c("div", { staticClass: "row mb-4" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "offset-6 col-6 copy-transmited-section"
-                                  },
-                                  [
-                                    _vm._m(0),
-                                    _vm._v(" "),
-                                    _vm._m(1),
-                                    _vm._v(" "),
-                                    _c(
-                                      "ul",
-                                      {
-                                        staticClass:
-                                          "list-group-person list-group"
-                                      },
-                                      _vm._l(_vm.copyTransmitted, function(
-                                        item,
-                                        index
-                                      ) {
-                                        return _c(
-                                          "li",
-                                          {
-                                            key: index,
-                                            staticClass:
-                                              "list-item-person ml-0 mb-2"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "Son exelance " + _vm._s(item)
-                                            )
-                                          ]
-                                        )
-                                      }),
-                                      0
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row mb-4" }, [
-                                _c("div", { staticClass: "col-6" }, [
-                                  _c("h4", { staticClass: "object-title" }, [
-                                    _vm._v("Objet : " + _vm._s(_vm.object))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-6 text-uppercase" },
-                                  [
-                                    _c("h4", { staticClass: "for-person" }, [
-                                      _vm._v("à " + _vm._s(_vm.object))
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm._m(2)
-                                  ]
-                                )
-                              ])
-                            ]
-                      ]
-                    : _vm._e()
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "editor-datas",
-                class: { "add-ident-p": _vm.isLetter }
-              },
-              [
-                _vm.isLetter
-                  ? _c("p", { staticClass: "pb-0 mb-0" }, [
-                      _vm._v(_vm._s(_vm.forPerson))
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("p", [
-                  _c("span", {
-                    staticStyle: {
-                      "font-size": "1.5em",
-                      "line-height": "35px",
-                      "text-align": "justify"
-                    },
-                    domProps: { innerHTML: _vm._s(_vm.editorData) }
-                  })
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("footer", [
-              _c(
-                "h4",
-                {
-                  staticClass: "text-right",
-                  staticStyle: {
-                    opacity: "1",
-                    "margin-top": "100px",
-                    "text-transform": "uppercase",
-                    "word-spacing": "0.3vw"
-                  }
-                },
-                [
-                  _c("b", [
-                    _vm._v(
-                      _vm._s(_vm.isLetter ? "Lettre" : "Documment") +
-                        " adressé à " +
-                        _vm._s(_vm.forPerson)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("br")
-                ]
-              )
-            ])
-          ],
-          2
-        )
-      ]
-    )
+            _vm._v("\n\t\t\t\t" + _vm._s(_vm.object) + "\n\t\t\t")
+          ]
+        ),
+        _vm._v(" "),
+        _c("footer", [
+          _c(
+            "h4",
+            {
+              staticClass: "text-right",
+              staticStyle: {
+                opacity: "1",
+                "margin-top": "100px",
+                "text-transform": "uppercase",
+                "word-spacing": "0.3vw"
+              }
+            },
+            [
+              _c("b", [_vm._v("Lettre adressé à " + _vm._s(_vm.object))]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          )
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -1152,19 +972,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "title-section" }, [
-      _c("b", [_vm._v("N° CAB/MIN-UH/ here")])
+    return _c("h4", [_c("b", [_vm._v("N° CAB/MIN-UH/ here")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", [
+      _c("b", [
+        _c("u", [_vm._v("Transmis")]),
+        _vm._v(" copie pour information à :\n\t\t\t\t\t\t")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "subtitle-section p-0 m-0 pb-2" }, [
-      _c("b", [
-        _c("u", [_vm._v("Transmis")]),
-        _vm._v(" copie pour information à :\n\t\t\t\t\t\t\t\t\t")
-      ])
+    return _c("div", { staticClass: "col-2 text-right" }, [
+      _c("h4", [_c("b", [_vm._v("Objet :")])])
     ])
   },
   function() {
@@ -1291,7 +1117,7 @@ var render = function() {
                                   _c(
                                     "md-option",
                                     { attrs: { value: "document" } },
-                                    [_vm._v("Documents")]
+                                    [_vm._v("Other Documents")]
                                   )
                                 ],
                                 1
@@ -1373,113 +1199,69 @@ var render = function() {
                             _vm._v(" "),
                             _vm.steper.first.chosenDatas.letter.letterType ==
                             "Copy Transmitted"
-                              ? [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "md-layout-item md-xsmall-size-100 md-size-25"
-                                    },
-                                    [
-                                      _c(
-                                        "md-field",
-                                        [
-                                          _c("label", [_vm._v("Object")]),
-                                          _vm._v(" "),
-                                          _c("md-textarea", {
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "md-layout-item md-xsmall-size-100 md-size-25"
+                                  },
+                                  [
+                                    _c(
+                                      "md-field",
+                                      [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "movies" } },
+                                          [_vm._v("Select some persones")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "md-select",
+                                          {
                                             attrs: {
                                               required: "",
-                                              "md-autogrow": ""
+                                              multiple: ""
                                             },
                                             model: {
                                               value:
                                                 _vm.steper.first.chosenDatas
-                                                  .object,
+                                                  .letter.copyTransmitted,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.steper.first.chosenDatas,
-                                                  "object",
+                                                  _vm.steper.first.chosenDatas
+                                                    .letter,
+                                                  "copyTransmitted",
                                                   $$v
                                                 )
                                               },
                                               expression:
-                                                "steper.first.chosenDatas.object"
+                                                "steper.first.chosenDatas.letter.copyTransmitted"
                                             }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "md-layout-item md-xsmall-size-100 md-size-25"
-                                    },
-                                    [
-                                      _c(
-                                        "md-field",
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "movies" } },
-                                            [_vm._v("Select some persones")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "md-select",
-                                            {
-                                              attrs: {
-                                                required: "",
-                                                multiple: ""
+                                          },
+                                          _vm._l(13, function(id) {
+                                            return _c(
+                                              "md-option",
+                                              {
+                                                key: id,
+                                                attrs: {
+                                                  value: "Person Exemple " + id
+                                                }
                                               },
-                                              model: {
-                                                value:
-                                                  _vm.steper.first.chosenDatas
-                                                    .letter.copyTransmitted,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.steper.first.chosenDatas
-                                                      .letter,
-                                                    "copyTransmitted",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "steper.first.chosenDatas.letter.copyTransmitted"
-                                              }
-                                            },
-                                            _vm._l(13, function(id) {
-                                              return _c(
-                                                "md-option",
-                                                {
-                                                  key: id,
-                                                  attrs: {
-                                                    value:
-                                                      "Person Exemple " + id
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      "Person Exemple " + id
-                                                    )
-                                                  )
-                                                ]
-                                              )
-                                            }),
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]
+                                              [
+                                                _vm._v(
+                                                  _vm._s("Person Exemple " + id)
+                                                )
+                                              ]
+                                            )
+                                          }),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
                               : _vm._e()
                           ]
                         : _vm._e(),
@@ -1499,7 +1281,7 @@ var render = function() {
                                     _c(
                                       "label",
                                       { attrs: { for: "letter_type" } },
-                                      [_vm._v("Model of document")]
+                                      [_vm._v("Type of Letter")]
                                     ),
                                     _vm._v(" "),
                                     _c(
@@ -1623,6 +1405,39 @@ var render = function() {
                                 },
                                 expression:
                                   "steper.first.chosenDatas.establishment"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-xsmall-size-100 md-size-25"
+                      },
+                      [
+                        _c(
+                          "md-field",
+                          [
+                            _c("label", [_vm._v("Object")]),
+                            _vm._v(" "),
+                            _c("md-textarea", {
+                              attrs: { required: "", "md-autogrow": "" },
+                              model: {
+                                value: _vm.steper.first.chosenDatas.object,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.steper.first.chosenDatas,
+                                    "object",
+                                    $$v
+                                  )
+                                },
+                                expression: "steper.first.chosenDatas.object"
                               }
                             })
                           ],
@@ -2141,7 +1956,7 @@ var render = function() {
                                             staticClass:
                                               "md-list-item-text p-2 bg-light"
                                           },
-                                          [_vm._v(_vm._s(item))]
+                                          [_vm._v(" " + _vm._s(item))]
                                         )
                                       ]
                                     )
@@ -2188,7 +2003,7 @@ var render = function() {
                     { staticClass: "md-subheading mb-0 pb-2" },
                     [
                       _c("md-icon", [_vm._v("account_box")]),
-                      _vm._v("For :\n\t\t\t\t\t\t"),
+                      _vm._v(" For :\n\t\t\t\t\t\t"),
                       _c("span", { staticClass: "bg-light p-2" }, [
                         _vm._v(_vm._s(_vm.steper.first.chosenDatas.for))
                       ])
@@ -2203,7 +2018,7 @@ var render = function() {
                     { staticClass: "md-subheading mb-0 pb-2" },
                     [
                       _c("md-icon", [_vm._v("corporate_fare")]),
-                      _vm._v("Establishment :\n\t\t\t\t\t\t"),
+                      _vm._v(" Establishment :\n\t\t\t\t\t\t"),
                       _c("span", { staticClass: "bg-light p-2" }, [
                         _vm._v(
                           _vm._s(_vm.steper.first.chosenDatas.establishment)
@@ -2229,7 +2044,7 @@ var render = function() {
                     { staticClass: "md-subheading mb-0 pb-2" },
                     [
                       _c("md-icon", [_vm._v("security")]),
-                      _vm._v("Confidentiality :\n\t\t\t\t\t\t"),
+                      _vm._v(" Confidentiality :\n\t\t\t\t\t\t"),
                       _c("span", { staticClass: "bg-light p-2" }, [
                         _vm._v(
                           _vm._s(_vm.steper.first.chosenDatas.confidentiality)
@@ -2266,7 +2081,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Cancel")]
+                [_vm._v("Close")]
               ),
               _vm._v(" "),
               _c(
@@ -2275,7 +2090,7 @@ var render = function() {
                   staticClass: "md-primary",
                   on: {
                     click: function($event) {
-                      return _vm.launchPrint()
+                      _vm.printeredData.dialogPreview = false
                     }
                   }
                 },
@@ -2294,23 +2109,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("demo-printable", {
-        ref: "demoPrintable",
-        attrs: {
-          isLetter: _vm.isLetter,
-          isDocument: _vm.isDocument,
-          letterType: _vm.steper.first.chosenDatas.letter.letterType,
-          documentType: _vm.steper.first.chosenDatas.document.documentType,
-          copyTransmitted: _vm.steper.first.chosenDatas.letter.copyTransmitted,
-          forPerson: _vm.steper.first.chosenDatas.for,
-          establishment: _vm.steper.first.chosenDatas.establishment,
-          object: _vm.steper.first.chosenDatas.object,
-          confidentiality: _vm.steper.first.chosenDatas.confidentiality,
-          status: _vm.steper.first.chosenDatas.status,
-          editorData: _vm.steper.second.editorData,
-          themeLogo: _vm.steper.third.themeSelected
-        }
-      })
+      _c("demo-printable")
     ],
     1
   )
@@ -2333,9 +2132,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Demo_vue_vue_type_template_id_a245482a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Demo.vue?vue&type=template&id=a245482a& */ "./resources/js/components/printables/Demo.vue?vue&type=template&id=a245482a&");
 /* harmony import */ var _Demo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Demo.vue?vue&type=script&lang=js& */ "./resources/js/components/printables/Demo.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Demo.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -2343,7 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Demo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Demo_vue_vue_type_template_id_a245482a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Demo_vue_vue_type_template_id_a245482a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -2372,22 +2169,6 @@ component.options.__file = "resources/js/components/printables/Demo.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Demo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Demo.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/printables/Demo.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Demo_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

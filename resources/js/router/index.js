@@ -40,7 +40,7 @@ const routes = [
 			{
 				path: 'demo',
 				name: 'Dashboard-Demo',
-				component: resolve => require(['../views/dashboard/demo/Choice.vue'], resolve),
+				component: resolve => require(['../views/dashboard/demo/Demo.vue'], resolve),
 			}
 		],
 	},
