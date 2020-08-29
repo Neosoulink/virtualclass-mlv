@@ -7,7 +7,7 @@
 					<div class="header-left-side d-inline-block text-center">
 						<div class="header-title m-0 p-0 pb-1">
 							<div>République démocratique du congo</div>
-							<div>{{ status }}</div>
+							<div>{{ establishment }}</div>
 						</div>
 						<div class="container-header-logo py-2">
 							<img :src="getThemeLogo" alt="logo header" class="header-logo" />
@@ -15,9 +15,9 @@
 					</div>
 					<!-- /.header-left-side -->
 					<div class="header-right-side">
-						<div>Kinshasa le {{ dateString }}</div>
+						<div>Kinshasa le {{ dateHoursString }}</div>
 						<div>
-							<b>This document is {{ status }} a {{ confidentiality }}</b>
+							<b>This document is {{ status }} & {{ confidentiality }}</b>
 						</div>
 					</div>
 					<!-- /.header-right-side -->
@@ -37,7 +37,7 @@
 							<div class="row mb-4">
 								<div class="offset-6 col-6 copy-transmited-section">
 									<h4 class="title-section">
-										<b>N° CAB/MIN-UH/ here</b>
+										<b>N° CAB/MIN-UH/ {{ dateString }}</b>
 									</h4>
 									<h4 class="subtitle-section p-0 m-0 pb-2">
 										<b>
@@ -63,7 +63,7 @@
 								<!-- /.object-title -->
 
 								<div class="col-6 text-uppercase">
-									<h4 class="for-person">à {{ object }}</h4>
+									<h4 class="for-person">à {{ forPerson }}</h4>
 									<div>
 										<b>KINSAHSA/GOMBE</b>
 									</div>
@@ -75,21 +75,30 @@
 					</template>
 				</template>
 
-				<div class="editor-datas" :class="{ 'add-ident-p' : isLetter }">
+				<template v-if="isDocument">
+					<div class="text-center title_document" v-if="documentType != 'Official press release'">
+						<h2>Communiqué officiel N°36 DGI/DG/CO</h2>
+					</div>
+					<div class="text-center title_document" v-else>
+						<h2>Rapport officiel destiné au {{ forPerson }}</h2>
+					</div>
+				</template>
+
+				<div class="editor-datas">
 					<p class="pb-0 mb-0" v-if="isLetter">{{ forPerson }}</p>
-					<p>
-						<span v-html="editorData" style=" font-size: 1.5em; line-height: 35px; text-align: justify; "></span>
-					</p>
+					<p v-html="editorData"></p>
 				</div>
 				<!-- /.editor-datas -->
 
 				<footer>
-					<h4
-						class="text-right"
-						style="opacity: 1;margin-top: 100px; text-transform: uppercase;word-spacing: 0.3vw;white-space:"
-					>
+					<h4 class="text-right end-page" v-if="isLetter">
 						<b>{{ isLetter ? 'Lettre' : 'Documment' }} adressé à {{ forPerson }}</b>
 						<br />
+					</h4>
+					<h4 class="text-right end-page" v-if="isDocument">
+						Fais à kinshasa le {{ dateString }}
+						<br />
+						<div style="margin-top: 20px">{{ forPerson }}</div>
 					</h4>
 				</footer>
 			</div>
@@ -151,15 +160,25 @@ export default {
 
 			let datestring =
 				("0" + d.getDate()).slice(-2) +
-				"-" +
+				" / " +
 				("0" + (d.getMonth() + 1)).slice(-2) +
-				"-" +
+				" / " +
+				d.getFullYear();
+			return datestring;
+		},
+		dateHoursString() {
+			let d = new Date();
+
+			let datestring =
+				("0" + d.getDate()).slice(-2) +
+				" / " +
+				("0" + (d.getMonth() + 1)).slice(-2) +
+				" / " +
 				d.getFullYear() +
-				" " +
+				" à " +
 				("0" + d.getHours()).slice(-2) +
 				":" +
 				("0" + d.getMinutes()).slice(-2);
-
 			return datestring;
 		},
 		getThemeLogo() {
@@ -182,18 +201,15 @@ export default {
 };
 </script>
 <style>
-.add-ident-p > p {
-	/*text-indent: 52%;*/
-}
 #printable {
 	height: 100%;
 	width: 100%;
 }
 #printable * {
-	color: #222;
+	color: #171717;
 	font-family: serif;
 }
-.background-theme {
+#printable .background-theme {
 	opacity: 0.1;
 	position: absolute;
 	z-index: 0;
@@ -201,60 +217,80 @@ export default {
 	margin-top: 35vh;
 	width: 100%;
 }
-.content-text {
+#printable .content-text {
 	position: relative;
 	z-index: 10;
 	width: 100%;
 }
-.header-left-side {
+#printable .header-left-side {
 	position: relative;
 }
-.header-left-side > .header-title {
+#printable .header-left-side > .header-title {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 0.95em;
 }
-.header-left-side > .container-header-logo {
+#printable .header-left-side > .container-header-logo {
 }
-.header-left-side > .container-header-logo > .header-logo {
+#printable .header-left-side > .container-header-logo > .header-logo {
 	z-index: -1;
 	height: 92px;
 }
-.header-right-side {
+#printable .header-right-side {
 	position: absolute;
 	right: 0;
 	top: 0;
 	font-size: 1em;
 }
-.simple-letter-section > .title-section {
+#printable .simple-letter-section > .title-section {
 	padding-bottom: 5px;
 	border-bottom: 4px solid;
 }
-.copy-transmited-section > .title-section {
+#printable .copy-transmited-section > .title-section {
 	text-transform: uppercase;
 	margin: 0;
 	padding: 0;
 	font-weight: 700;
 }
-.copy-transmited-section > .subtitle-section {
+#printable .copy-transmited-section > .subtitle-section {
 	font-weight: 700;
 }
-.list-group-person {
+#printable .list-group-person {
 	font-size: 1.25em;
 	margin-left: 20px;
 	padding: 0 0 20px;
 	border-bottom: 2px dashed;
 }
-.list-group-person > .list-item-person {
+#printable .list-group-person > .list-item-person {
 	padding-left: 20px;
 }
-.object-title,
-.for-person {
+#printable .title_document h2 {
+	font-size: 1.8em;
+	text-transform: uppercase;
+	text-align: center;
+	padding-bottom: 5px;
+	border-bottom: 4px solid;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+#printable .object-title,
+#printable .for-person {
 	vertical-align: text-top;
 }
-.editor-datas > p {
+#printable .editor-datas {
 	font-size: 1.5em;
 	line-height: 35px;
 	text-align: justify;
+}
+#printable .editor-datas p,
+#printable .editor-datas a,
+#printable .editor-datas li {
+	font-size: inherit;
+}
+#printable .end-page {
+	opacity: 1;
+	margin-top: 80px;
+	text-transform: uppercase;
+	word-spacing: 0.3vw;
 }
 </style>

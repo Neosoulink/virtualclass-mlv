@@ -44,22 +44,23 @@
 
 							<template v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'">
 								<div class="md-layout-item md-xsmall-size-100 md-size-25">
-									<md-field>
+									<md-autocomplete
+										v-model="steper.first.chosenDatas.object"
+										:md-options="autocomplete.object"
+									>
 										<label>Object</label>
-										<md-textarea v-model="steper.first.chosenDatas.object" required md-autogrow></md-textarea>
-									</md-field>
+									</md-autocomplete>
 								</div>
 								<!-- /.md-layout-item -->
 								<div class="md-layout-item md-xsmall-size-100 md-size-25">
 									<md-field>
 										<label for="movies">Select some persones</label>
 										<md-select v-model="steper.first.chosenDatas.letter.copyTransmitted" required multiple>
-											<md-option
-												:value="`Person Exemple ${id}`"
-												v-for="id in 13"
-												:key="id"
-											>{{ `Person Exemple ${id}` }}</md-option>
+											<md-option :value="item" v-for="item in personsCopyTransmited" :key="item">{{ item }}</md-option>
 										</md-select>
+										<span class="md-helper-text">
+											<a href="#" class="md-simple text-dark" @click.prevent="selectAllPerson()">Select All</a>
+										</span>
 									</md-field>
 								</div>
 								<!-- /.md-layout-item -->
@@ -84,20 +85,21 @@
 					<div class="md-subheading">References</div>
 					<div class="md-layout">
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
-							<md-field>
+							<md-autocomplete v-model="steper.first.chosenDatas.for" :md-options="autocomplete.for">
 								<md-icon>account_box</md-icon>
 								<label>For</label>
-								<md-input v-model="steper.first.chosenDatas.for" required></md-input>
-							</md-field>
+							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
 
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
-							<md-field>
+							<md-autocomplete
+								v-model="steper.first.chosenDatas.establishment"
+								:md-options="autocomplete.establishment"
+							>
 								<md-icon>corporate_fare</md-icon>
 								<label>Establishment</label>
-								<md-input v-model="steper.first.chosenDatas.establishment" required></md-input>
-							</md-field>
+							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
 					</div>
@@ -248,21 +250,24 @@
 								>{{steper.first.chosenDatas.chosen}} / {{ steper.first.chosenDatas.letter.letterType }}</span>
 							</legend>
 
-							<md-list
-								class="md-dense"
-								v-if="steper.first.chosenDatas.letter.letterType == 'Copy Transmitted'"
-							>
-								<md-list-item
+							<div class="md-layout">
+								<span
 									v-for="(item, index) in steper.first.chosenDatas.letter.copyTransmitted"
 									:key="index"
-									class="mb-2"
-								>
-									<span class="md-list-item-text p-2 bg-light">{{ item }}</span>
-								</md-list-item>
-							</md-list>
+									class="mb-2 mr-2 p-2 bg-light"
+								>{{ item }}</span>
+							</div>
 						</div>
+						<!-- /.md-size-100 -->
+
+						<div class="md-size-100 mb-3">
+							<legend class="md-subheading mb-0 pb-2">
+								Object :
+								<span class="bg-light p-2">{{ steper.first.chosenDatas.object }}</span>
+							</legend>
+						</div>
+						<!-- /.md-size-100 -->
 					</template>
-					<!-- /.md-size-100 -->
 
 					<template v-if="isDocument">
 						<div class="md-size-100 mb-3">
@@ -288,14 +293,6 @@
 						<legend class="md-subheading mb-0 pb-2">
 							<md-icon>corporate_fare</md-icon>Establishment :
 							<span class="bg-light p-2">{{ steper.first.chosenDatas.establishment }}</span>
-						</legend>
-					</div>
-					<!-- /.md-size-100 -->
-
-					<div class="md-size-100 mb-3">
-						<legend class="md-subheading mb-0 pb-2">
-							Object :
-							<span class="bg-light p-2">{{ steper.first.chosenDatas.object }}</span>
 						</legend>
 					</div>
 					<!-- /.md-size-100 -->
@@ -358,6 +355,19 @@ export default {
 		DemoPrintable,
 	},
 	data: () => ({
+		autocomplete: {
+			for: ["Mr le ministre", "Adjoit ministre", "Secretaire"],
+			establishment: [
+				"Ministère des Finances",
+				"Ministères de L'Urbanisme",
+				"Ministère de l'économie politique",
+			],
+			object: [
+				"Test demo",
+				"Interaction d'interet",
+				"Mise en place du nouveau régime",
+			],
+		},
 		steper: {
 			active: "first",
 			first: {
@@ -412,9 +422,32 @@ export default {
 			content: "",
 		},
 	}),
+	computed: {
+		isLetter() {
+			return this.steper.first.chosenDatas.chosen == "letter";
+		},
+		isDocument() {
+			return this.steper.first.chosenDatas.chosen == "document";
+		},
+		editorDataEscaped() {
+			let dataEscaped = this.steper.second.editorData
+				.replace(/<[^>]*>/gi, " ")
+				.trim();
+			return dataEscaped;
+		},
+		personsCopyTransmited() {
+			let persons = [];
+			for (let i = 0; i <= 13; i++) {
+				persons.push(`Person Exemple ${i}`);
+			}
+			return persons;
+		},
+	},
 	methods: {
 		setDone(id, index) {
-			this.steper[id].active = true;
+			if (id) {
+				this.steper[id].active = true;
+			}
 
 			if (index) {
 				this.steper.active = index;
@@ -450,6 +483,9 @@ export default {
 				}
 			}
 			return;
+		},
+		selectAllPerson() {
+			this.steper.first.chosenDatas.letter.copyTransmitted = this.personsCopyTransmited;
 		},
 		firstStepCheck(setDone = true) {
 			// Check formulary of first step
@@ -488,6 +524,7 @@ export default {
 			}
 
 			if (!this.setError(id, Validate(datas, constraints))) {
+				this.setDone(null, id);
 				this.unactiveStepers();
 				return false;
 			}
@@ -515,6 +552,7 @@ export default {
 			};
 
 			if (!this.setError(id, Validate(data, constraints))) {
+				this.setDone(null, id);
 				this.unactiveStepers();
 				return false;
 			}
@@ -561,22 +599,14 @@ export default {
 			} else return true;
 		},
 		launchPrint() {
-			this.$refs.demoPrintable.launchPrint();
+			if (
+				this.firstStepCheck(false) &&
+				this.secondStepCheck(false) &&
+				this.thirdStepCheck(false)
+			) {
+				this.$refs.demoPrintable.launchPrint();
+			}
 			this.printeredData.dialogPreview = false;
-		},
-	},
-	computed: {
-		isLetter() {
-			return this.steper.first.chosenDatas.chosen == "letter";
-		},
-		isDocument() {
-			return this.steper.first.chosenDatas.chosen == "document";
-		},
-		editorDataEscaped() {
-			let dataEscaped = this.steper.second.editorData
-				.replace(/<[^>]*>/gi, " ")
-				.trim();
-			return dataEscaped;
 		},
 	},
 	watch: {

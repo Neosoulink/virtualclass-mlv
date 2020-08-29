@@ -14,9 +14,9 @@
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 
 	<!--  Fonts and icons     -->
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
-	<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	{{--<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">--}}
+	{{--<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">--}}
+	{{--<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">--}}
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,6 +28,13 @@
 	</div>
 	<!-- Scripts -->
 	<script src="{{ (env('APP_ENV') === 'development') ? mix('js/app.js') : asset('js/app.js') }}" defer></script>
+	<style>
+		i.md-icon,
+		i.fa,
+		i.material-icons {
+			display: none;
+		}
+	</style>
 </body>
 
 </html>
