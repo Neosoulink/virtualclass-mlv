@@ -31,6 +31,7 @@
 		"@ckeditor/ckeditor5-vue": "^1.0.1",
 		"@nicolabello/ckeditor5-build-decoupled-document": "^19.0.0",
 		"chartist": "^0.11.4",
+		"ckeditor4-vue": "^1.0.1",
 		"es6-promise": "^4.2.8",
 		"print-js": "^1.0.63",
 		"validate.js": "^0.13.1",

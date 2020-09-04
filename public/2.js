@@ -553,7 +553,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
  //import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 //import NicolaCkeditor from '@nicolabello/ckeditor5-build-decoupled-document';
 
@@ -1638,11 +1637,15 @@ var render = function() {
                             }
                           },
                           [
-                            _c("md-icon", [_vm._v("account_box")]),
-                            _vm._v(" "),
-                            _c("label", [_vm._v("For")])
-                          ],
-                          1
+                            _c(
+                              "label",
+                              [
+                                _c("md-icon", [_vm._v("account_box")]),
+                                _vm._v(" For")
+                              ],
+                              1
+                            )
+                          ]
                         )
                       ],
                       1
@@ -1675,11 +1678,15 @@ var render = function() {
                             }
                           },
                           [
-                            _c("md-icon", [_vm._v("corporate_fare")]),
-                            _vm._v(" "),
-                            _c("label", [_vm._v("Establishment")])
-                          ],
-                          1
+                            _c(
+                              "label",
+                              [
+                                _c("md-icon", [_vm._v("corporate_fare")]),
+                                _vm._v(" Establishment")
+                              ],
+                              1
+                            )
+                          ]
                         )
                       ],
                       1

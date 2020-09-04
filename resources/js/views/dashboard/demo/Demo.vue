@@ -86,8 +86,7 @@
 					<div class="md-layout">
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
 							<md-autocomplete v-model="steper.first.chosenDatas.for" :md-options="autocomplete.for">
-								<md-icon>account_box</md-icon>
-								<label>For</label>
+								<label><md-icon>account_box</md-icon> For</label>
 							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
@@ -97,8 +96,8 @@
 								v-model="steper.first.chosenDatas.establishment"
 								:md-options="autocomplete.establishment"
 							>
-								<md-icon>corporate_fare</md-icon>
-								<label>Establishment</label>
+
+								<label><md-icon>corporate_fare</md-icon> Establishment</label>
 							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->

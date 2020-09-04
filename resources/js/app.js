@@ -10,7 +10,8 @@ import { initialize } from './helpers/general';
 import GlobalComponents from "./global/globalComponents";
 import GlobalDirectives from "./global/globalDirectives";
 import Notifications from "./components/NotificationPlugin";
-import CKEditor from '@ckeditor/ckeditor5-vue';
+//import CKEditor from '@ckeditor/ckeditor5-vue';
+import CKEditor from 'ckeditor4-vue';
 import Chartist from "chartist";
 
 // MaterialDashboard plugin
