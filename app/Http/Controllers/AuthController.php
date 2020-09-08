@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -15,6 +16,30 @@ class AuthController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth:api', ['except' => ['login']]);
+	}
+
+	/**
+	 * Create user & get a JWT via given credentials.
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function signup()
+	{
+		$credentials = request(['email', 'name', 'password']);
+
+		if ($validate = $credentials->validate(
+			[
+				'email' => "email",
+				'name' => 'string|min:5',
+				'password' => 'min:8'
+			]
+		)) {
+			User::create($credentials);
+
+			return $this->respondWithToken(auth('api')->attempt($credentials));
+		} else {
+			return response()->json($validate, 401);
+		}
 	}
 
 	/**

@@ -15,6 +15,11 @@ const routes = [
 		component: resolve => require(['../views/Login.vue'], resolve),
 	},
 	{
+		path: '/signup',
+		name: 'signup',
+		component: resolve => require(['../views/Signup.vue'], resolve),
+	},
+	{
 		path: '/dashboard',
 		component: resolve => require(['../views/dashboard/Layout/DashboardLayout.vue'], resolve),
 		meta: {

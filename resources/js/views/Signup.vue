@@ -1,8 +1,8 @@
 <template>
-	<form class="centered-container" method="post" @submit.prevent="authenticate">
+	<form class="centered-container" method="post" @submit.prevent="newUser">
 		<md-content class="md-elevation-3">
 			<div class="title">
-				<div class="md-title">LOGIN</div>
+				<div class="md-title">Sign up</div>
 			</div>
 
 			<div class="form">
@@ -11,21 +11,40 @@
 					<md-input v-model="form.email" type="email" name="email" autocomplete="email" autofocus></md-input>
 				</md-field>
 
+				<md-field>
+					<label>Username</label>
+					<md-input
+						v-model="form.username"
+						type="username"
+						name="username"
+						autocomplete="username"
+						autofocus
+					></md-input>
+				</md-field>
+
 				<md-field md-has-password>
 					<label>Password</label>
 					<md-input v-model="form.password" autocomplete="current-password" type="password"></md-input>
+				</md-field>
+
+				<md-field md-has-password>
+					<label>confirm-Password</label>
+					<md-input v-model="form.confirmPassword" autocomplete="current-password" type="password"></md-input>
 				</md-field>
 			</div>
 
 			<div class="actions md-layout md-alignment-center-space-between">
 				<md-button class="md-link" to="/">
-					<md-icon>arrow_back</md-icon>Back home
+					<md-icon>arrow_back</md-icon>Go home
 				</md-button>
-				<md-button type="submit" class="md-raised md-primary">Log in</md-button>
+				<md-button type="submit" class="md-raised md-primary">Sign up</md-button>
 			</div>
 
 			<div class="md-layout mt-4">
-				<p>Don't have an account ? <router-link to="/signup">Sign-up !</router-link></p>
+				<p>
+					Alredy have an account ?
+					<router-link to="/login">Login now !</router-link>
+				</p>
 			</div>
 
 			<div class="text-danger pt-3" role="alert" v-if="authError">
@@ -37,57 +56,85 @@
 				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else></md-progress-spinner>
 			</div>
 		</md-content>
+
 		<div class="background" />
 	</form>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import { login } from "../helpers/auth";
-import SuccessCheck from "../components/progess/SuccessCheck"
+import { signup } from "../helpers/auth";
+import Validate from "validate.js";
+import SuccessCheck from "../components/progess/SuccessCheck";
 
 export default {
-	name: "Login",
-	components: {SuccessCheck},
+	name: "Signup",
+	components: { SuccessCheck },
 	data() {
 		return {
 			loading: false,
 			form: {
 				email: "",
+				username: "",
 				password: "",
+				confirmPassword: "",
 			},
 			error: null,
 		};
 	},
 	computed: {},
 	methods: {
-		//...mapActions("user", {
-		//	Storelogin: "login",
-		//}),
-		authenticate() {
+		newUser() {
 			this.loading = true;
-			this.$store.dispatch("user/login");
+			//this.$store.dispatch("user/login");
 
-			login(this.$data.form)
-				.then((res) => {
-					this.$store.commit("user/LOGIN_SUCCESS", res);
-					setTimeout(() => {
-						this.$router.push({ path: "/dashboard" });
-					}, 2000);
-				})
-				.catch((error) => {
-					this.$store.commit("user/LOGIN_FAILED", { error });
-					this.loading = false;
-				});
+			let data = this.form;
+			let constraint = {
+				email: {
+					presence: { allowEmpty: false },
+				},
+				username: {
+					presence: { allowEmpty: false },
+					length: { minimum: 5 },
+				},
+				password: {
+					presence: { allowEmpty: false },
+					length: { minimum: 8 },
+				},
+				confirmPassword: {
+					equality: "password",
+				},
+			};
+
+			let validation = Validate(data, constraint);
+
+			if (!validation) {
+				signup(this.$data.form)
+					.then((res) => {
+						//this.$store.commit("user/LOGIN_SUCCESS", res);
+						//setTimeout(() => {
+						//	this.$router.push({ path: "/dashboard" });
+						//}, 2000);
+						console.log(res);
+					})
+					.catch((error) => {
+						//this.$store.commit("user/LOGIN_FAILED", { error });
+						this.loading = false;
+						console.log(error);
+					});
+			} else {
+				console.log(validation);
+				this.loading = false;
+			}
 		},
 	},
 	computed: {
 		authError() {
 			return this.$store.getters["user/authError"];
 		},
-		isLoggedIn(){
+		isLoggedIn() {
 			return this.$store.getters["user/isLoggedIn"];
-		}
+		},
 	},
 };
 </script>
@@ -115,9 +162,6 @@ export default {
 		margin-bottom: 60px;
 	}
 	.background {
-		/*background: url('../img/file-searching.jpg');
-		background-position: center;
-		background-size: cover;*/
 		position: absolute;
 		height: 100%;
 		width: 100%;

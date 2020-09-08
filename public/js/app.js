@@ -77155,14 +77155,29 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************!*\
   !*** ./resources/js/helpers/auth.js ***!
   \**************************************/
-/*! exports provided: login, logout, getLocalUser */
+/*! exports provided: signup, login, logout, getLocalUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLocalUser", function() { return getLocalUser; });
+function signup(credential) {
+  return new Promise(function (resolve, rej) {
+    axios.post('/api/auth/signup', credential).then(function (res) {
+      //resolve(res.data)
+      console.log(res); //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
+    })["catch"](function (err) {
+      //if (err === 401) {
+      //	console.log('Wrong data');
+      //}
+      console.log(err);
+      rej('Wrong data');
+    });
+  });
+}
 function login(credential) {
   return new Promise(function (resolve, rej) {
     axios.post('/api/auth/login', credential).then(function (res) {
@@ -77273,7 +77288,13 @@ var routes = [{
   path: '/login',
   name: 'login',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Login.vue */ "./resources/js/views/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return Promise.all(/*! AMD require */[__webpack_require__.e(3), __webpack_require__.e(11)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Login.vue */ "./resources/js/views/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+  }
+}, {
+  path: '/signup',
+  name: 'signup',
+  component: function component(resolve) {
+    return Promise.all(/*! AMD require */[__webpack_require__.e(10), __webpack_require__.e(3), __webpack_require__.e(12)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Signup.vue */ "./resources/js/views/Signup.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }, {
   path: '/dashboard',
@@ -77305,7 +77326,7 @@ var routes = [{
     path: 'demo',
     name: 'Dashboard-Demo',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(10), __webpack_require__.e(2)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Demo.vue */ "./resources/js/views/dashboard/demo/Demo.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(10), __webpack_require__.e(2), __webpack_require__.e(13)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Demo.vue */ "./resources/js/views/dashboard/demo/Demo.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }]
 }, {

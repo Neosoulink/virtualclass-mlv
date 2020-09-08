@@ -8,7 +8,8 @@
 				<span class="md-medium text-uppercase">VirtualClass</span>
 			</div>
 			<div>
-				<router-link to="/login">Login</router-link>
+				<router-link to="/login">Login</router-link> /
+				<router-link to="/signup">SignUp</router-link>
 			</div>
 		</nav>
 

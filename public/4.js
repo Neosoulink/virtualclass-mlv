@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MainHome",
@@ -181,7 +182,11 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          [_c("router-link", { attrs: { to: "/login" } }, [_vm._v("Login")])],
+          [
+            _c("router-link", { attrs: { to: "/login" } }, [_vm._v("Login")]),
+            _vm._v(" /\n\t\t\t"),
+            _c("router-link", { attrs: { to: "/signup" } }, [_vm._v("SignUp")])
+          ],
           1
         )
       ]),
