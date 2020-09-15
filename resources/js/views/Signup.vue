@@ -14,7 +14,7 @@
 				<md-field>
 					<label>Username</label>
 					<md-input
-						v-model="form.name"
+						v-model="form.username"
 						name="name"
 						autocomplete="username"
 						autofocus
@@ -74,7 +74,7 @@ export default {
 			loading: false,
 			form: {
 				email: "",
-				name: "",
+				username: "",
 				password: "",
 				password_confirmation: "",
 			},
@@ -92,7 +92,7 @@ export default {
 				email: {
 					presence: { allowEmpty: false },
 				},
-				name: {
+				username: {
 					presence: { allowEmpty: false },
 					length: { minimum: 5 },
 				},

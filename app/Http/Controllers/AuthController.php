@@ -28,9 +28,9 @@ class AuthController extends Controller
 	{
 		$credentials = request()->validate(
 			[
-				'email' => "email|unique|required",
-				'name' => 'string|min:5|required',
-				'password' => 'min:8|required'
+				'email' => "email|unique:users|required",
+				'username' => 'string|min:5|required',
+				'password' => 'min:8|confirmed|required'
 			]
 		);
 

@@ -92,7 +92,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: false,
       form: {
         email: "",
-        name: "",
+        username: "",
         password: "",
         password_confirmation: ""
       },
@@ -113,7 +113,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             allowEmpty: false
           }
         },
-        name: {
+        username: {
           presence: {
             allowEmpty: false
           },
@@ -292,11 +292,11 @@ var render = function() {
                     autofocus: ""
                   },
                   model: {
-                    value: _vm.form.name,
+                    value: _vm.form.username,
                     callback: function($$v) {
-                      _vm.$set(_vm.form, "name", $$v)
+                      _vm.$set(_vm.form, "username", $$v)
                     },
-                    expression: "form.name"
+                    expression: "form.username"
                   }
                 })
               ],

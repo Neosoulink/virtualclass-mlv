@@ -77168,11 +77168,9 @@ function signup(credential) {
   return new Promise(function (resolve, rej) {
     axios.post('/api/auth/signup', credential).then(function (res) {
       resolve(res.data);
-      console.log(res);
       axios.defaults.headers.common['Authorization'] = "Bearer ".concat(res.data.access_token);
     })["catch"](function (err) {
-      console.log(err);
-      rej('Bad data sent');
+      rej(err.response.data);
     });
   });
 }
@@ -77180,14 +77178,13 @@ function login(credential) {
   return new Promise(function (resolve, rej) {
     axios.post('/api/auth/login', credential).then(function (res) {
       resolve(res.data);
-      console.log(res);
       axios.defaults.headers.common['Authorization'] = "Bearer ".concat(res.data.access_token);
     })["catch"](function (err) {
-      if (err === 401) {
-        console.log('Wrong email or password');
+      if (err.response.status == 401) {
+        rej('Wrong email or password');
+      } else {
+        rej(err.response.data);
       }
-
-      rej('Wrong email or password');
     });
   });
 }
