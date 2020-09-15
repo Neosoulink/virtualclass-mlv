@@ -97,7 +97,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	height: 100vh;
+	min-height: 100vh;
 	.title {
 		text-align: center;
 		margin-bottom: 30px;

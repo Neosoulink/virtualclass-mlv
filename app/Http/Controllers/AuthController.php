@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,7 +16,7 @@ class AuthController extends Controller
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth:api', ['except' => ['login']]);
+		$this->middleware('auth:api', ['except' => ['login', 'signup']]);
 	}
 
 	/**
@@ -25,21 +26,25 @@ class AuthController extends Controller
 	 */
 	public function signup()
 	{
-		$credentials = request(['email', 'name', 'password']);
-
-		if ($validate = $credentials->validate(
+		$credentials = request()->validate(
 			[
-				'email' => "email",
-				'name' => 'string|min:5',
-				'password' => 'min:8'
+				'email' => "email|unique|required",
+				'name' => 'string|min:5|required',
+				'password' => 'min:8|required'
 			]
-		)) {
-			User::create($credentials);
+		);
 
-			return $this->respondWithToken(auth('api')->attempt($credentials));
-		} else {
-			return response()->json($validate, 401);
+		$credentials['password'] = Hash::make($credentials['password']);
+
+		User::create($credentials);
+
+		$credentials = request(['email', 'password']);
+
+		if (!$token = auth('api')->attempt($credentials)) {
+			return response()->json(['error' => 'Unauthorized'], 401);
 		}
+
+		return $this->respondWithToken($token);
 	}
 
 	/**

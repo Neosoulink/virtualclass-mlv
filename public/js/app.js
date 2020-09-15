@@ -77167,14 +77167,12 @@ __webpack_require__.r(__webpack_exports__);
 function signup(credential) {
   return new Promise(function (resolve, rej) {
     axios.post('/api/auth/signup', credential).then(function (res) {
-      //resolve(res.data)
-      console.log(res); //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
+      resolve(res.data);
+      console.log(res);
+      axios.defaults.headers.common['Authorization'] = "Bearer ".concat(res.data.access_token);
     })["catch"](function (err) {
-      //if (err === 401) {
-      //	console.log('Wrong data');
-      //}
       console.log(err);
-      rej('Wrong data');
+      rej('Bad data sent');
     });
   });
 }

@@ -185,7 +185,7 @@ var render = function() {
           [
             _c("router-link", { attrs: { to: "/login" } }, [_vm._v("Login")]),
             _vm._v(" /\n\t\t\t"),
-            _c("router-link", { attrs: { to: "/signup" } }, [_vm._v("SignUp")])
+            _c("router-link", { attrs: { to: "/signup" } }, [_vm._v("Signup")])
           ],
           1
         )

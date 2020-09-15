@@ -78,7 +78,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -93,9 +92,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: false,
       form: {
         email: "",
-        username: "",
+        name: "",
         password: "",
-        confirmPassword: ""
+        password_confirmation: ""
       },
       error: null
     };
@@ -114,7 +113,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             allowEmpty: false
           }
         },
-        username: {
+        name: {
           presence: {
             allowEmpty: false
           },
@@ -130,7 +129,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             minimum: 8
           }
         },
-        confirmPassword: {
+        password_confirmation: {
           equality: "password"
         }
       };
@@ -138,13 +137,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (!validation) {
         Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_1__["signup"])(this.$data.form).then(function (res) {
-          //this.$store.commit("user/LOGIN_SUCCESS", res);
-          //setTimeout(() => {
-          //	this.$router.push({ path: "/dashboard" });
-          //}, 2000);
+          _this.$store.commit("user/LOGIN_SUCCESS", res);
+
+          setTimeout(function () {
+            _this.$router.push({
+              path: "/dashboard"
+            });
+          }, 2000);
           console.log(res);
         })["catch"](function (error) {
-          //this.$store.commit("user/LOGIN_FAILED", { error });
+          _this.$store.commit("user/LOGIN_FAILED", {
+            error: error
+          });
+
           _this.loading = false;
           console.log(error);
         });
@@ -177,7 +182,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".centered-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  height: 100vh;\n}\n.centered-container .title {\n  text-align: center;\n  margin-bottom: 30px;\n}\n.centered-container .title img {\n  margin-bottom: 16px;\n  max-width: 80px;\n}\n.centered-container .actions .md-button {\n  margin: 0;\n}\n.centered-container .form {\n  margin-bottom: 60px;\n}\n.centered-container .background {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  z-index: 0;\n}\n.centered-container .md-content {\n  z-index: 1;\n  padding: 40px;\n  width: 100%;\n  max-width: 400px;\n  position: relative;\n}\n.centered-container .loading-overlay {\n  z-index: 10;\n  top: 0;\n  left: 0;\n  right: 0;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.9);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}", ""]);
+exports.push([module.i, ".centered-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  min-height: 100vh;\n}\n.centered-container .title {\n  text-align: center;\n  margin-bottom: 30px;\n}\n.centered-container .title img {\n  margin-bottom: 16px;\n  max-width: 80px;\n}\n.centered-container .actions .md-button {\n  margin: 0;\n}\n.centered-container .form {\n  margin-bottom: 60px;\n}\n.centered-container .background {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  z-index: 0;\n}\n.centered-container .md-content {\n  z-index: 1;\n  padding: 40px;\n  width: 100%;\n  max-width: 400px;\n  position: relative;\n}\n.centered-container .loading-overlay {\n  z-index: 10;\n  top: 0;\n  left: 0;\n  right: 0;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.9);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}", ""]);
 
 // exports
 
@@ -282,17 +287,16 @@ var render = function() {
                 _vm._v(" "),
                 _c("md-input", {
                   attrs: {
-                    type: "username",
-                    name: "username",
+                    name: "name",
                     autocomplete: "username",
                     autofocus: ""
                   },
                   model: {
-                    value: _vm.form.username,
+                    value: _vm.form.name,
                     callback: function($$v) {
-                      _vm.$set(_vm.form, "username", $$v)
+                      _vm.$set(_vm.form, "name", $$v)
                     },
-                    expression: "form.username"
+                    expression: "form.name"
                   }
                 })
               ],
@@ -328,11 +332,11 @@ var render = function() {
                 _c("md-input", {
                   attrs: { autocomplete: "current-password", type: "password" },
                   model: {
-                    value: _vm.form.confirmPassword,
+                    value: _vm.form.password_confirmation,
                     callback: function($$v) {
-                      _vm.$set(_vm.form, "confirmPassword", $$v)
+                      _vm.$set(_vm.form, "password_confirmation", $$v)
                     },
-                    expression: "form.confirmPassword"
+                    expression: "form.password_confirmation"
                   }
                 })
               ],

@@ -14,9 +14,8 @@
 				<md-field>
 					<label>Username</label>
 					<md-input
-						v-model="form.username"
-						type="username"
-						name="username"
+						v-model="form.name"
+						name="name"
 						autocomplete="username"
 						autofocus
 					></md-input>
@@ -29,7 +28,7 @@
 
 				<md-field md-has-password>
 					<label>confirm-Password</label>
-					<md-input v-model="form.confirmPassword" autocomplete="current-password" type="password"></md-input>
+					<md-input v-model="form.password_confirmation" autocomplete="current-password" type="password"></md-input>
 				</md-field>
 			</div>
 
@@ -75,9 +74,9 @@ export default {
 			loading: false,
 			form: {
 				email: "",
-				username: "",
+				name: "",
 				password: "",
-				confirmPassword: "",
+				password_confirmation: "",
 			},
 			error: null,
 		};
@@ -93,7 +92,7 @@ export default {
 				email: {
 					presence: { allowEmpty: false },
 				},
-				username: {
+				name: {
 					presence: { allowEmpty: false },
 					length: { minimum: 5 },
 				},
@@ -101,7 +100,7 @@ export default {
 					presence: { allowEmpty: false },
 					length: { minimum: 8 },
 				},
-				confirmPassword: {
+				password_confirmation: {
 					equality: "password",
 				},
 			};
@@ -111,14 +110,14 @@ export default {
 			if (!validation) {
 				signup(this.$data.form)
 					.then((res) => {
-						//this.$store.commit("user/LOGIN_SUCCESS", res);
-						//setTimeout(() => {
-						//	this.$router.push({ path: "/dashboard" });
-						//}, 2000);
+						this.$store.commit("user/LOGIN_SUCCESS", res);
+						setTimeout(() => {
+							this.$router.push({ path: "/dashboard" });
+						}, 2000);
 						console.log(res);
 					})
 					.catch((error) => {
-						//this.$store.commit("user/LOGIN_FAILED", { error });
+						this.$store.commit("user/LOGIN_FAILED", { error });
 						this.loading = false;
 						console.log(error);
 					});
@@ -144,7 +143,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	height: 100vh;
+	min-height: 100vh;
 	.title {
 		text-align: center;
 		margin-bottom: 30px;
