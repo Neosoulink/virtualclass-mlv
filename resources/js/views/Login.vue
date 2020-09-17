@@ -33,8 +33,8 @@
 			</div>
 
 			<div class="loading-overlay" v-if="loading">
-				<success-check v-if="isLoggedIn" />
-				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else></md-progress-spinner>
+				<success-check v-if="isLoggedIn" :class="{'d-none' : !isLoggedIn}" />
+				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else ></md-progress-spinner>
 			</div>
 		</md-content>
 		<div class="background" />

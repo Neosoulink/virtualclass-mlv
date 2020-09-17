@@ -55,6 +55,13 @@ return [
 			'visibility' => 'public',
 		],
 
+		'users' => [
+			'driver' => 'local',
+			'root' => storage_path('app/users'),
+			'url' => env('APP_URL') . '/user-storage',
+			'visibility' => 'public',
+		],
+
 		'public' => [
 			'driver' => 'local',
 			'root' => storage_path('app/public'),

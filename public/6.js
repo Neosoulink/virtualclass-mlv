@@ -301,7 +301,9 @@ var render = function() {
               { staticClass: "loading-overlay" },
               [
                 _vm.isLoggedIn
-                  ? _c("success-check")
+                  ? _c("success-check", {
+                      class: { "d-none": !_vm.isLoggedIn }
+                    })
                   : _c("md-progress-spinner", {
                       attrs: { "md-mode": "indeterminate", "md-stroke": 2 }
                     })

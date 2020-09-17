@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\CustomFileSystem;
 
 class AuthController extends Controller
 {
@@ -37,6 +38,12 @@ class AuthController extends Controller
 		$credentials['password'] = Hash::make($credentials['password']);
 
 		User::create($credentials);
+
+		CustomFileSystem::createDirectory([
+			'disk' => 'users',
+			'path' => '/',
+			'name' =>  $credentials['email']
+		]);
 
 		$credentials = request(['email', 'password']);
 
