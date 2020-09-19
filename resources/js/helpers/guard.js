@@ -11,6 +11,10 @@ export function initialize(store, router) {
 		} else {
 			next();
 		}
+
+		if (to.name == "dashboard-creation-new" && !store.getters['document/getNewDocConfig']) {
+			next({ name: "dashboard-creation" })
+		}
 	});
 
 	axios.interceptors.request.use(config => {
@@ -23,7 +27,7 @@ export function initialize(store, router) {
 	axios.interceptors.response.use(response => {
 		return response;
 	}, error => {
-			if (error.response.status == 401 && router.history.current.path !== "/login") {
+		if (error.response.status == 401 && router.history.current.path !== "/login") {
 			store.commit('user/LOGOUT');
 			router.push('/login');
 		}

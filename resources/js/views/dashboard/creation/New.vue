@@ -11,11 +11,15 @@
 					<div class>
 						<ckeditor
 							:editor="steper.first.editor"
-							v-model="steper.first.editorData"
+							v-model="docConfig.body.content"
 							:config="steper.first.editorConfig"
 						></ckeditor>
 					</div>
-					<md-button class="md-raised md-primary" @click="setDone('first', 'second')">Continue</md-button>
+					<md-button
+						class="md-raised md-primary"
+						@click="$router.go({name: 'dashboard-creation'})"
+					>Go back</md-button>
+					<md-button class="md-raised md-primary" @click="setDone('first', 'second')">Next</md-button>
 				</md-step>
 				<!-- /md-step.first -->
 
@@ -33,7 +37,7 @@
 			<!-- /.left-side -->
 
 			<div class="right-side col-md-5 d-flex align-items-center justify-content-center">
-				<Paper></Paper>
+				<Paper :config="docConfig"></Paper>
 			</div>
 			<!-- /.right-side -->
 		</div>
@@ -58,12 +62,8 @@ export default {
 					header: null,
 					content: null,
 				},
-				// CKeditor
 				editor: ClassicEditor,
-				editorData: "<p>Content of the editor.</p>",
-				editorConfig: {
-					// The configuration of the editor.
-				},
+				editorConfig: {},
 			},
 			second: {
 				// Second step
@@ -72,6 +72,12 @@ export default {
 					header: null,
 					content: null,
 				},
+			},
+		},
+		docConfig: {
+			body: {
+				title: "default Title",
+				content: "Body here",
 			},
 		},
 	}),
@@ -116,6 +122,11 @@ export default {
 			}
 			return;
 		},
+	},
+	mounted() {
+		this.docConfig = JSON.parse(
+			JSON.stringify(this.$store.getters["document/getNewDocConfig"].config)
+		);
 	},
 };
 </script>

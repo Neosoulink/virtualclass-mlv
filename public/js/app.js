@@ -76444,7 +76444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
-/* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/general */ "./resources/js/helpers/general.js");
+/* harmony import */ var _helpers_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/guard */ "./resources/js/helpers/guard.js");
 /* harmony import */ var _global_globalComponents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./global/globalComponents */ "./resources/js/global/globalComponents.js");
 /* harmony import */ var _global_globalDirectives__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./global/globalDirectives */ "./resources/js/global/globalDirectives.js");
 /* harmony import */ var _components_NotificationPlugin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/NotificationPlugin */ "./resources/js/components/NotificationPlugin/index.js");
@@ -76475,7 +76475,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_global_globalComponents__WEBPACK
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_global_globalDirectives__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_components_NotificationPlugin__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(ckeditor4_vue__WEBPACK_IMPORTED_MODULE_8___default.a);
-Object(_helpers_general__WEBPACK_IMPORTED_MODULE_4__["initialize"])(_store__WEBPACK_IMPORTED_MODULE_1__["default"], _router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+Object(_helpers_guard__WEBPACK_IMPORTED_MODULE_4__["initialize"])(_store__WEBPACK_IMPORTED_MODULE_1__["default"], _router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -77209,10 +77209,10 @@ function getLocalUser() {
 
 /***/ }),
 
-/***/ "./resources/js/helpers/general.js":
-/*!*****************************************!*\
-  !*** ./resources/js/helpers/general.js ***!
-  \*****************************************/
+/***/ "./resources/js/helpers/guard.js":
+/*!***************************************!*\
+  !*** ./resources/js/helpers/guard.js ***!
+  \***************************************/
 /*! exports provided: initialize */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77232,6 +77232,12 @@ function initialize(store, router) {
       next('/dashboard');
     } else {
       next();
+    }
+
+    if (to.name == "dashboard-creation-new" && !store.getters['document/getNewDocConfig']) {
+      next({
+        name: "dashboard-creation"
+      });
     }
   });
   axios.interceptors.request.use(function (config) {
@@ -77269,16 +77275,62 @@ function initialize(store, router) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   return [{
-    name: 'Facture',
-    description: "Facture description",
+    name: 'Release',
+    description: "Release description",
     config: {
-      title: 'im a facture'
+      header: {
+        leftSide: {
+          icon: null,
+          title: "Enterprise name",
+          subTitle: null
+        },
+        rightSide: {
+          date: "21-10-2020",
+          title: null,
+          subTitle: 'Security'
+        }
+      },
+      body: {
+        personsCopyTransmitted: ['Bernard', 'Luis', 'Emery'],
+        title: 'im a release',
+        content: 'lorem ipsum dem dolor'
+      },
+      footer: {
+        leftSide: {},
+        rightSide: {
+          title: "Name of someone",
+          subTitle: "From somewhere"
+        }
+      }
     }
   }, {
     name: 'Letter',
     description: "Letter description",
     config: {
-      title: 'im a letter'
+      header: {
+        leftSide: {
+          icon: null,
+          title: "Enterprise name",
+          subTitle: null
+        },
+        rightSide: {
+          date: "21-10-2020",
+          title: null,
+          subTitle: 'Security'
+        }
+      },
+      body: {
+        personsCopyTransmitted: ['Bernard', 'Luis', 'Emery'],
+        title: 'im a letter',
+        content: 'lorem ipsum dem dolor'
+      },
+      footer: {
+        leftSide: {},
+        rightSide: {
+          title: "Name of someone",
+          subTitle: "From somewhere"
+        }
+      }
     }
   }];
 });
@@ -77304,24 +77356,24 @@ var routes = [{
   path: '/',
   name: 'home',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Home.vue */ "./resources/js/views/Home.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Home.vue */ "./resources/js/views/Home.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }, {
   path: '/login',
   name: 'login',
   component: function component(resolve) {
-    return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(6)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Login.vue */ "./resources/js/views/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return Promise.all(/*! AMD require */[__webpack_require__.e(2), __webpack_require__.e(7)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Login.vue */ "./resources/js/views/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }, {
   path: '/signup',
   name: 'signup',
   component: function component(resolve) {
-    return Promise.all(/*! AMD require */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(7)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Signup.vue */ "./resources/js/views/Signup.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return Promise.all(/*! AMD require */[__webpack_require__.e(3), __webpack_require__.e(2), __webpack_require__.e(8)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/Signup.vue */ "./resources/js/views/Signup.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }, {
   path: '/dashboard',
   component: function component(resolve) {
-    return Promise.all(/*! AMD require */[__webpack_require__.e(8), __webpack_require__.e(3)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Layout/DashboardLayout.vue */ "./resources/js/views/dashboard/Layout/DashboardLayout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return Promise.all(/*! AMD require */[__webpack_require__.e(12), __webpack_require__.e(5)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Layout/DashboardLayout.vue */ "./resources/js/views/dashboard/Layout/DashboardLayout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
     requireAuth: true
@@ -77330,19 +77382,19 @@ var routes = [{
     path: '/',
     name: 'dashboard',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(0), __webpack_require__.e(11), __webpack_require__.e(13)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Home.vue */ "./resources/js/views/dashboard/Home.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(0), __webpack_require__.e(9)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Home.vue */ "./resources/js/views/dashboard/Home.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }, {
     path: 'creation',
     name: 'dashboard-creation',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(0), __webpack_require__.e(11), __webpack_require__.e(4)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/Index.vue */ "./resources/js/views/dashboard/creation/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(0), __webpack_require__.e(10)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/Index.vue */ "./resources/js/views/dashboard/creation/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }, {
     path: 'creation/new',
     name: 'dashboard-creation-new',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(0), __webpack_require__.e(16), __webpack_require__.e(11), __webpack_require__.e(10)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/New.vue */ "./resources/js/views/dashboard/creation/New.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(0), __webpack_require__.e(11)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/New.vue */ "./resources/js/views/dashboard/creation/New.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }, {
     path: 'creation/new/preview',
@@ -77354,13 +77406,13 @@ var routes = [{
     path: 'demo',
     name: 'dashboard-demo',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(0), __webpack_require__.e(16), __webpack_require__.e(2), __webpack_require__.e(11), __webpack_require__.e(19)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Index.vue */ "./resources/js/views/dashboard/demo/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(0), __webpack_require__.e(14)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Index.vue */ "./resources/js/views/dashboard/demo/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }]
 }, {
   path: '*',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/404.vue */ "./resources/js/views/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 13).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/404.vue */ "./resources/js/views/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({

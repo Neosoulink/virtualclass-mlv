@@ -4,7 +4,7 @@ import Vue from 'vue';
 import store from './store';
 import router from './router';
 import App from './App.vue';
-import { initialize } from './helpers/general';
+import { initialize } from './helpers/guard';
 
 // Plugins
 import GlobalComponents from "./global/globalComponents";

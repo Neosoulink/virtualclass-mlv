@@ -1,6 +1,7 @@
 <template>
 	<div id="paper-item" class="bg-white position-relative text-dark">
-		<div class="text-center w-100">{{ getConfig.title }} fdgfdgfdgdfd</div>
+		<h5 class="text-center w-100">{{ getConfig.body.title }}</h5>
+		<div class="text-justify w-100">{{ getConfig.body.content }}</div>
 	</div>
 </template>
 
@@ -22,7 +23,10 @@ export default {
 				return doc.config;
 			} else {
 				return {
-					title: "default Title",
+					body : {
+						title: "default Title",
+            content : "Body here"
+					}
 				};
 			}
 		},
