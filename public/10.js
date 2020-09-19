@@ -74,18 +74,18 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["document/getDocs"];
     },
     docSelected: function docSelected() {
-      var config = this.$store.getters["document/getNewDocConfig"];
+      var docSelected = this.$store.getters["document/getDocSelected"];
 
-      if (config) {
-        return config;
+      if (docSelected) {
+        return docSelected;
       } else {
-        return {};
+        return false;
       }
     }
   },
   methods: {
-    selectDoc: function selectDoc(config) {
-      this.$store.dispatch('document/new_doc_config', config);
+    selectDoc: function selectDoc(dataDoc) {
+      this.$store.dispatch('document/select_doc', dataDoc);
     }
   }
 });

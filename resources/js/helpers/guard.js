@@ -5,16 +5,16 @@ export function initialize(store, router) {
 		const currentUser = store.state.user.currentUser;
 
 		if (requireAuth && !currentUser) {
-			next('/login');
+			return next('/login');
 		} else if (to.path == '/login' && currentUser) {
-			next('/dashboard');
-		} else {
-			next();
+			return next('/dashboard');
 		}
 
-		if (to.name == "dashboard-creation-new" && !store.getters['document/getNewDocConfig']) {
-			next({ name: "dashboard-creation" })
+		if (to.name == "dashboard-creation-new" && !store.getters['document/getDocSelected']) {
+			return next({ name: 'dashboard-creation'});
 		}
+
+		next();
 	});
 
 	axios.interceptors.request.use(config => {

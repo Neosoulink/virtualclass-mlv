@@ -17,7 +17,7 @@
 					</div>
 					<md-button
 						class="md-raised md-primary"
-						@click="$router.go({name: 'dashboard-creation'})"
+						@click="$router.go(-1)"
 					>Go back</md-button>
 					<md-button class="md-raised md-primary" @click="setDone('first', 'second')">Next</md-button>
 				</md-step>
@@ -37,7 +37,7 @@
 			<!-- /.left-side -->
 
 			<div class="right-side col-md-5 d-flex align-items-center justify-content-center">
-				<Paper :config="docConfig"></Paper>
+				<Paper></Paper>
 			</div>
 			<!-- /.right-side -->
 		</div>
@@ -122,11 +122,23 @@ export default {
 			}
 			return;
 		},
+		setNewDocConfig(config) {
+			this.$store.dispatch("document/set_config_doc_selected", config);
+		},
 	},
 	mounted() {
 		this.docConfig = JSON.parse(
-			JSON.stringify(this.$store.getters["document/getNewDocConfig"].config)
+			JSON.stringify(this.$store.getters["document/getDocSelected"].config)
 		);
+	},
+	watch: {
+		docConfig: {
+			handler: function (val) {
+				this.setNewDocConfig(val);
+			},
+			deep: true,
+			immediate: false
+		},
 	},
 };
 </script>

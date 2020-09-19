@@ -77227,18 +77227,18 @@ function initialize(store, router) {
     var currentUser = store.state.user.currentUser;
 
     if (requireAuth && !currentUser) {
-      next('/login');
+      return next('/login');
     } else if (to.path == '/login' && currentUser) {
-      next('/dashboard');
-    } else {
-      next();
+      return next('/dashboard');
     }
 
-    if (to.name == "dashboard-creation-new" && !store.getters['document/getNewDocConfig']) {
-      next({
-        name: "dashboard-creation"
+    if (to.name == "dashboard-creation-new" && !store.getters['document/getDocSelected']) {
+      return next({
+        name: 'dashboard-creation'
       });
     }
+
+    next();
   });
   axios.interceptors.request.use(function (config) {
     return config;
@@ -77443,7 +77443,8 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: _modules__WEBPACK_IMPORTED_MODULE_2__["default"],
-  strict: "development" !== 'production'
+  strict: false //process.env.NODE_ENV !== 'production'
+
 }));
 
 /***/ }),
@@ -77499,7 +77500,7 @@ var docs = Object(_mixins_documentsData__WEBPACK_IMPORTED_MODULE_0__["default"])
 var state = function state() {
   return {
     documents: docs,
-    newPaperConfig: null,
+    docSelected: null,
     error: null
   };
 };
@@ -77508,18 +77509,24 @@ var getters = {
   getDocs: function getDocs(state) {
     return state.documents;
   },
-  getNewDocConfig: function getNewDocConfig(state) {
-    return state.newPaperConfig;
+  getDocSelected: function getDocSelected(state) {
+    return state.docSelected;
   }
 };
 var mutations = {
-  NEW_DOC_CONFIGURATION: function NEW_DOC_CONFIGURATION(state, payload) {
-    state.newPaperConfig = payload;
+  SELECT_DOCUMENT: function SELECT_DOCUMENT(state, payload) {
+    state.docSelected = payload;
+  },
+  SET_CONFIG_DOCUMENT_SELECTED: function SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
+    state.docSelected.config = payload;
   }
 };
 var actions = {
-  new_doc_config: function new_doc_config(context, data) {
-    context.commit('NEW_DOC_CONFIGURATION', data);
+  select_doc: function select_doc(context, data) {
+    context.commit('SELECT_DOCUMENT', data);
+  },
+  set_config_doc_selected: function set_config_doc_selected(context, data) {
+    context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

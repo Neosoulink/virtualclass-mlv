@@ -4,7 +4,7 @@ const docs = DocsData();
 
 const state = () => ({
 	documents: docs,
-	newPaperConfig: null,
+	docSelected: null,
 	error: null,
 });
 
@@ -12,20 +12,26 @@ const getters = {
 	getDocs(state) {
 		return state.documents
 	},
-	getNewDocConfig(state) {
-		return state.newPaperConfig
+	getDocSelected(state) {
+		return state.docSelected
 	}
 };
 
 const mutations = {
-	NEW_DOC_CONFIGURATION(state, payload) {
-		state.newPaperConfig = payload
+	SELECT_DOCUMENT(state, payload) {
+		state.docSelected = payload
+	},
+	SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
+		state.docSelected.config = payload
 	}
 };
 
 const actions = {
-	new_doc_config(context, data) {
-		context.commit('NEW_DOC_CONFIGURATION', data);
+	select_doc(context, data) {
+		context.commit('SELECT_DOCUMENT', data);
+	},
+	set_config_doc_selected(context, data) {
+		context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
 	}
 };
 

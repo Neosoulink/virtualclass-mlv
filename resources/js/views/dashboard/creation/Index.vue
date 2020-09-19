@@ -64,17 +64,17 @@ export default {
 			return this.$store.getters["document/getDocs"];
 		},
 		docSelected() {
-			const config = this.$store.getters["document/getNewDocConfig"];
-			if (config) {
-				return config;
+			const docSelected = this.$store.getters["document/getDocSelected"];
+			if (docSelected) {
+				return docSelected;
 			} else {
-				return {} ;
+				return false ;
 			}
 		}
 	},
 	methods: {
-		selectDoc(config) {
-			this.$store.dispatch('document/new_doc_config', config);
+		selectDoc(dataDoc) {
+			this.$store.dispatch('document/select_doc', dataDoc);
 		}
 	},
 };

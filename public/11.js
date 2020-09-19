@@ -142,10 +142,22 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return;
+    },
+    setNewDocConfig: function setNewDocConfig(config) {
+      this.$store.dispatch("document/set_config_doc_selected", config);
     }
   },
   mounted: function mounted() {
-    this.docConfig = JSON.parse(JSON.stringify(this.$store.getters["document/getNewDocConfig"].config));
+    this.docConfig = JSON.parse(JSON.stringify(this.$store.getters["document/getDocSelected"].config));
+  },
+  watch: {
+    docConfig: {
+      handler: function handler(val) {
+        this.setNewDocConfig(val);
+      },
+      deep: true,
+      immediate: false
+    }
   }
 });
 
@@ -284,7 +296,7 @@ var render = function() {
                       staticClass: "md-raised md-primary",
                       on: {
                         click: function($event) {
-                          return _vm.$router.go({ name: "dashboard-creation" })
+                          return _vm.$router.go(-1)
                         }
                       }
                     },
@@ -353,7 +365,7 @@ var render = function() {
               staticClass:
                 "right-side col-md-5 d-flex align-items-center justify-content-center"
             },
-            [_c("Paper", { attrs: { config: _vm.docConfig } })],
+            [_c("Paper")],
             1
           )
         ],

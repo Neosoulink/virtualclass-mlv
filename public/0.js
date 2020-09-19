@@ -574,17 +574,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
   props: {
     config: {
       type: Object,
       "default": null
+    },
+    size: {
+      type: Object,
+      "default": function _default() {
+        return {
+          height: "410px",
+          width: "320px"
+        };
+      }
     }
   },
   computed: {
     getConfig: function getConfig() {
-      var doc = this.$store.getters["document/getNewDocConfig"];
+      var doc = this.$store.getters["document/getDocSelected"];
 
       if (this.config) {
         return this.config;
@@ -616,7 +629,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#paper-item {\n  min-height: 410px;\n  min-width: 320px;\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1339,16 +1352,19 @@ var render = function() {
     "div",
     {
       staticClass: "bg-white position-relative text-dark",
+      style: { height: _vm.size.height, width: _vm.size.width },
       attrs: { id: "paper-item" }
     },
     [
-      _c("h5", { staticClass: "text-center w-100" }, [
-        _vm._v(_vm._s(_vm.getConfig.body.title))
-      ]),
+      _c("h5", {
+        staticClass: "text-center w-100",
+        domProps: { innerHTML: _vm._s(_vm.getConfig.body.title) }
+      }),
       _vm._v(" "),
-      _c("div", { staticClass: "text-justify w-100" }, [
-        _vm._v(_vm._s(_vm.getConfig.body.content))
-      ])
+      _c("div", {
+        staticClass: "text-justify w-100",
+        domProps: { innerHTML: _vm._s(_vm.getConfig.body.content) }
+      })
     ]
   )
 }

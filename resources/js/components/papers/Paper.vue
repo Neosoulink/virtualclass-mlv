@@ -1,7 +1,11 @@
 <template>
-	<div id="paper-item" class="bg-white position-relative text-dark">
-		<h5 class="text-center w-100">{{ getConfig.body.title }}</h5>
-		<div class="text-justify w-100">{{ getConfig.body.content }}</div>
+	<div
+		id="paper-item"
+		class="bg-white position-relative text-dark"
+		:style="{height: size.height, width : size.width }"
+	>
+		<h5 class="text-center w-100" v-html="getConfig.body.title"></h5>
+		<div class="text-justify w-100" v-html="getConfig.body.content"></div>
 	</div>
 </template>
 
@@ -13,20 +17,29 @@ export default {
 			type: Object,
 			default: null,
 		},
+		size: {
+			type: Object,
+			default: () => {
+				return {
+					height: "410px",
+					width: "320px",
+				};
+			},
+		},
 	},
 	computed: {
 		getConfig() {
-			const doc = this.$store.getters["document/getNewDocConfig"];
+			const doc = this.$store.getters["document/getDocSelected"];
 			if (this.config) {
 				return this.config;
 			} else if (doc) {
 				return doc.config;
 			} else {
 				return {
-					body : {
+					body: {
 						title: "default Title",
-            content : "Body here"
-					}
+						content: "Body here",
+					},
 				};
 			}
 		},
@@ -36,7 +49,5 @@ export default {
 
 <style lang="scss">
 #paper-item {
-	min-height: 410px;
-	min-width: 320px;
 }
 </style>
