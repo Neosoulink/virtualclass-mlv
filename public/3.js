@@ -661,7 +661,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/dashboard" } },
+            { attrs: { to: { name: "dashboard" } } },
             [
               _c("md-icon", [_vm._v("dashboard")]),
               _vm._v(" "),
@@ -672,7 +672,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/dashboard/creation" } },
+            { attrs: { to: { name: "dashboard-creation" } } },
             [
               _c("md-icon", [_vm._v("create_new_folder")]),
               _vm._v(" "),
@@ -683,7 +683,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/dashboard/management" } },
+            { attrs: { to: "chart" } },
             [
               _c("md-icon", [_vm._v("pie_chart")]),
               _vm._v(" "),
@@ -694,7 +694,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/dashboard/user" } },
+            { attrs: { to: "user" } },
             [
               _c("md-icon", [_vm._v("person")]),
               _vm._v(" "),
@@ -705,7 +705,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/dashboard/demo" } },
+            { attrs: { to: { name: "dashboard-demo" } } },
             [
               _c("md-icon", [_vm._v("star")]),
               _vm._v(" "),
@@ -716,7 +716,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "/" } },
+            { attrs: { to: { name: "home" } } },
             [
               _c("md-icon", [_vm._v("arrow_back")]),
               _vm._v(" "),

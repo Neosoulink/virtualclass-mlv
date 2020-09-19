@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[18],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/dashboard/creation/Index.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
@@ -49,13 +49,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardCreation",
   components: {
-    StatsCard: _components__WEBPACK_IMPORTED_MODULE_0__["StatsCard"]
+    Paper: _components__WEBPACK_IMPORTED_MODULE_0__["Paper"]
   },
   data: function data() {
     return {
@@ -144,8 +142,6 @@ var render = function() {
     { staticClass: "content", attrs: { id: "home-creation-section" } },
     [
       _c("div", { staticClass: "row content-side" }, [
-        _vm._m(0),
-        _vm._v(" "),
         _c("div", { staticClass: "right-side col-7" }, [
           _c(
             "div",
@@ -194,7 +190,7 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._m(1, true),
+                      _vm._m(0, true),
                       _vm._v(" "),
                       _c("p", { staticClass: "mb-1" }, [
                         _vm._v(
@@ -216,19 +212,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "left-side col-5 d-flex align-items-center justify-content-center"
-      },
-      [_c("div", { staticClass: "bg-white", attrs: { id: "paper-item" } })]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

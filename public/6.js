@@ -9,9 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
-/* harmony import */ var _components_progess_SuccessCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/progess/SuccessCheck */ "./resources/js/components/progess/SuccessCheck.vue");
+/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
+/* harmony import */ var _components_progess_SuccessCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/progess/SuccessCheck */ "./resources/js/components/progess/SuccessCheck.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -59,11 +58,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   name: "Login",
   components: {
-    SuccessCheck: _components_progess_SuccessCheck__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SuccessCheck: _components_progess_SuccessCheck__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -77,15 +75,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {},
   methods: {
-    //...mapActions("user", {
-    //	Storelogin: "login",
-    //}),
     authenticate: function authenticate() {
       var _this = this;
 
       this.loading = true;
       this.$store.dispatch("user/login");
-      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_1__["login"])(this.$data.form).then(function (res) {
+      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["login"])(this.$data.form).then(function (res) {
         _this.$store.commit("user/LOGIN_SUCCESS", res);
 
         setTimeout(function () {

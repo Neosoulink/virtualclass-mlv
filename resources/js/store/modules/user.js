@@ -1,4 +1,4 @@
-import { getLocalUser } from '../../helpers/auth'
+import { getLocalUser } from '../../helpers/auth';
 
 const user = getLocalUser();
 

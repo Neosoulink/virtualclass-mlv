@@ -8,27 +8,27 @@
 			:icon="sidebarBackgroundImage"
 		>
 			<mobile-menu slot="content"></mobile-menu>
-			<sidebar-link to="/dashboard">
+			<sidebar-link :to="{name: 'dashboard'}">
 				<md-icon>dashboard</md-icon>
 				<p>Dashboard</p>
 			</sidebar-link>
-			<sidebar-link to="/dashboard/creation">
+			<sidebar-link :to="{name: 'dashboard-creation'}">
 				<md-icon>create_new_folder</md-icon>
 				<p>Creation</p>
 			</sidebar-link>
-			<sidebar-link to="/dashboard/management">
+			<sidebar-link to="chart">
 				<md-icon>pie_chart</md-icon>
 				<p>Management</p>
 			</sidebar-link>
-			<sidebar-link to="/dashboard/user">
+			<sidebar-link to="user">
 				<md-icon>person</md-icon>
 				<p>My Profile</p>
 			</sidebar-link>
-				<sidebar-link to="/dashboard/demo">
+				<sidebar-link :to="{name : 'dashboard-demo'}">
 				<md-icon>star</md-icon>
 				<p>Demo</p>
 			</sidebar-link>
-			<sidebar-link to="/">
+			<sidebar-link :to="{name: 'home'}">
 				<md-icon>arrow_back</md-icon>
 				<p>Go Home</p>
 			</sidebar-link>

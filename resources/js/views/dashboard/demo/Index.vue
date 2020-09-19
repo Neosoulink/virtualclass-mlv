@@ -86,7 +86,9 @@
 					<div class="md-layout">
 						<div class="md-layout-item md-xsmall-size-100 md-size-25">
 							<md-autocomplete v-model="steper.first.chosenDatas.for" :md-options="autocomplete.for">
-								<label><md-icon>account_box</md-icon> For</label>
+								<label>
+									<md-icon>account_box</md-icon>For
+								</label>
 							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
@@ -96,8 +98,9 @@
 								v-model="steper.first.chosenDatas.establishment"
 								:md-options="autocomplete.establishment"
 							>
-
-								<label><md-icon>corporate_fare</md-icon> Establishment</label>
+								<label>
+									<md-icon>corporate_fare</md-icon>Establishment
+								</label>
 							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
@@ -138,7 +141,7 @@
 						</div>
 					</div>
 				</md-step>
-				<!-- /md-step -->
+				<!-- /md-step first-->
 
 				<md-step
 					id="second"
@@ -162,7 +165,7 @@
 						</div>
 					</div>
 				</md-step>
-				<!-- /md-step -->
+				<!-- /md-step second-->
 
 				<md-step
 					id="third"
@@ -212,7 +215,7 @@
 						</div>
 					</div>
 				</md-step>
-				<!-- /md-step -->
+				<!-- /md-step third-->
 			</md-steppers>
 		</div>
 
@@ -323,7 +326,7 @@
 			</md-dialog-actions>
 		</md-dialog>
 
-		<demo-printable
+		<paper-demo-printable
 			ref="demoPrintable"
 			:isLetter="isLetter"
 			:isDocument="isDocument"
@@ -346,12 +349,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 //import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 //import NicolaCkeditor from '@nicolabello/ckeditor5-build-decoupled-document';
 import Validate, { isObject } from "validate.js";
-import DemoPrintable from "../../../components/printables/Demo";
+import { PaperDemoPrintable } from "../../../components";
 
 export default {
 	name: "DashboardChoice",
 	components: {
-		DemoPrintable,
+		PaperDemoPrintable,
 	},
 	data: () => ({
 		autocomplete: {
@@ -619,21 +622,4 @@ export default {
 </script>
 
 <style>
-.md-select-menu > .md-menu-content-container > .md-list .md-list-item {
-	padding-left: -5px;
-	margin-left: -5px;
-}
-.md-select-menu > .md-menu-content-container > .md-list .md-list-item-text {
-	display: flex;
-	justify-content: center;
-	padding-left: 15px;
-}
-.md-select-menu
-	> .md-menu-content-container
-	> .md-list
-	.md-list-item-content
-	> .md-checkbox {
-	margin: 0;
-	display: inline;
-}
 </style>

@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { signup } from "../helpers/auth";
 import Validate from "validate.js";
 import SuccessCheck from "../components/progess/SuccessCheck";
@@ -85,7 +84,6 @@ export default {
 	methods: {
 		newUser() {
 			this.loading = true;
-			//this.$store.dispatch("user/login");
 
 			let data = this.form;
 			let constraint = {

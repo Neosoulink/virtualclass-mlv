@@ -28,24 +28,29 @@ const routes = [
 		children: [
 			{
 				path: '/',
-				name: 'Dashboard',
+				name: 'dashboard',
 				component: resolve => require(['../views/dashboard/Home.vue'], resolve),
 			},
 			{
 				path: 'creation',
-				name: 'Dashboard-Creation',
-				component: resolve => require(['../views/dashboard/Creation.vue'], resolve),
-
+				name: 'dashboard-creation',
+				component: resolve => require(['../views/dashboard/creation/Index.vue'], resolve),
 			},
 			{
 				path: 'creation/new',
-				name: 'Dashboard-Creation-New',
+				name: 'dashboard-creation-new',
 				component: resolve => require(['../views/dashboard/creation/New.vue'], resolve),
 			},
 			{
+				path: 'creation/new/preview',
+				name: 'dashboard-creation-new-preview',
+				component: resolve => require(['../views/dashboard/creation/Preview.vue'], resolve),
+			},
+
+			{
 				path: 'demo',
-				name: 'Dashboard-Demo',
-				component: resolve => require(['../views/dashboard/demo/Demo.vue'], resolve),
+				name: 'dashboard-demo',
+				component: resolve => require(['../views/dashboard/demo/Index.vue'], resolve),
 			}
 		],
 	},

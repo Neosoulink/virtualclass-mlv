@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { login } from "../helpers/auth";
 import SuccessCheck from "../components/progess/SuccessCheck"
 
@@ -61,9 +60,6 @@ export default {
 	},
 	computed: {},
 	methods: {
-		//...mapActions("user", {
-		//	Storelogin: "login",
-		//}),
 		authenticate() {
 			this.loading = true;
 			this.$store.dispatch("user/login");
