@@ -6,7 +6,7 @@ export default () => {
 			config: {
 				header: {
 					leftSide: {
-						icon: null,
+						logo: null,
 						title: "Enterprise name",
 						subTitle: null
 					},
@@ -42,7 +42,7 @@ export default () => {
 			config: {
 				header: {
 					leftSide: {
-						icon: null,
+						logo: null,
 						title: "Enterprise name",
 						subTitle: null
 					},

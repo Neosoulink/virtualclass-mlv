@@ -578,6 +578,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
   props: {
@@ -629,7 +707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#paper-item > .container-PI-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-content-text {\n  z-index: 2;\n  background: transparent !important;\n}\n#paper-item > .PI-content-text > .PI-body {\n  min-height: 70%;\n}", ""]);
 
 // exports
 
@@ -648,7 +726,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#printable {\n\theight: 100%;\n\twidth: 100%;\n}\n#printable * {\n\tcolor: #171717;\n\tfont-family: serif;\n}\n#printable .background-theme {\n\topacity: 0.1;\n\tposition: absolute;\n\tz-index: 0;\n\tmargin: auto;\n\tmargin-top: 35vh;\n\twidth: 100%;\n}\n#printable .content-text {\n\tposition: relative;\n\tz-index: 10;\n\twidth: 100%;\n}\n#printable .header-left-side {\n\tposition: relative;\n}\n#printable .header-left-side > .header-title {\n\ttext-transform: uppercase;\n\tfont-weight: 700;\n\tfont-size: 0.95em;\n}\n#printable .header-left-side > .container-header-logo {\n}\n#printable .header-left-side > .container-header-logo > .header-logo {\n\tz-index: -1;\n\theight: 92px;\n}\n#printable .header-right-side {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tfont-size: 1em;\n}\n#printable .simple-letter-section > .title-section {\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n}\n#printable .copy-transmited-section > .title-section {\n\ttext-transform: uppercase;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-weight: 700;\n}\n#printable .copy-transmited-section > .subtitle-section {\n\tfont-weight: 700;\n}\n#printable .list-group-person {\n\tfont-size: 1.25em;\n\tmargin-left: 20px;\n\tpadding: 0 0 20px;\n\tborder-bottom: 2px dashed;\n}\n#printable .list-group-person > .list-item-person {\n\tpadding-left: 20px;\n}\n#printable .title_document h2 {\n\tfont-size: 1.8em;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n\tdisplay: inline-block;\n\tmargin-bottom: 20px;\n}\n#printable .object-title,\n#printable .for-person {\n\tvertical-align: text-top;\n}\n#printable .editor-datas {\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\ttext-align: justify;\n}\n#printable .editor-datas p,\n#printable .editor-datas a,\n#printable .editor-datas li {\n\tfont-size: inherit;\n}\n#printable .end-page {\n\topacity: 1;\n\tmargin-top: 80px;\n\ttext-transform: uppercase;\n\tword-spacing: 0.3vw;\n}\n", ""]);
+exports.push([module.i, "\n#printable {\n\theight: 100%;\n\twidth: 100%;\n}\n#printable * {\n\tcolor: #171717;\n\tfont-family: serif;\n}\n#printable > .background-theme {\n\topacity: 0.1;\n\tposition: absolute;\n\tz-index: 0;\n\tmargin: auto;\n\tmargin-top: 35vh;\n\twidth: 100%;\n}\n#printable > .content-text {\n\tposition: relative;\n\tz-index: 10;\n\twidth: 100%;\n}\n#printable .header-left-side {\n\tposition: relative;\n}\n#printable .header-left-side > .header-title {\n\ttext-transform: uppercase;\n\tfont-weight: 700;\n\tfont-size: 0.95em;\n}\n#printable .header-left-side > .container-header-logo {\n}\n#printable .header-left-side > .container-header-logo > .header-logo {\n\tz-index: -1;\n\theight: 92px;\n}\n#printable .header-right-side {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tfont-size: 1em;\n}\n#printable .simple-letter-section > .title-section {\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n}\n#printable .copy-transmited-section > .title-section {\n\ttext-transform: uppercase;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-weight: 700;\n}\n#printable .copy-transmited-section > .subtitle-section {\n\tfont-weight: 700;\n}\n#printable .list-group-person {\n\tfont-size: 1.25em;\n\tmargin-left: 20px;\n\tpadding: 0 0 20px;\n\tborder-bottom: 2px dashed;\n}\n#printable .list-group-person > .list-item-person {\n\tpadding-left: 20px;\n}\n#printable .title_document h2 {\n\tfont-size: 1.8em;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n\tdisplay: inline-block;\n\tmargin-bottom: 20px;\n}\n#printable .object-title,\n#printable .for-person {\n\tvertical-align: text-top;\n}\n#printable .editor-datas {\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\ttext-align: justify;\n}\n#printable .editor-datas p,\n#printable .editor-datas a,\n#printable .editor-datas li {\n\tfont-size: inherit;\n}\n#printable .end-page {\n\topacity: 1;\n\tmargin-top: 80px;\n\ttext-transform: uppercase;\n\tword-spacing: 0.3vw;\n}\n", ""]);
 
 // exports
 
@@ -1356,15 +1434,130 @@ var render = function() {
       attrs: { id: "paper-item" }
     },
     [
-      _c("h5", {
-        staticClass: "text-center w-100",
-        domProps: { innerHTML: _vm._s(_vm.getConfig.body.title) }
-      }),
+      _c(
+        "div",
+        {
+          staticClass:
+            "container-PI-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+        },
+        [
+          _c("img", {
+            staticClass: "PI-background-logo w-100",
+            attrs: { src: __webpack_require__(/*! ../../assets/img/vc_logo_0.jpg */ "./resources/js/assets/img/vc_logo_0.jpg") }
+          })
+        ]
+      ),
       _vm._v(" "),
-      _c("div", {
-        staticClass: "text-justify w-100",
-        domProps: { innerHTML: _vm._s(_vm.getConfig.body.content) }
-      })
+      _c(
+        "div",
+        { staticClass: "PI-content-text position-absolute w-100 h-100" },
+        [
+          _vm.getConfig.header
+            ? _c("div", { staticClass: "PI-header row" }, [
+                _vm.getConfig.header.leftSide
+                  ? _c("div", { staticClass: "left-side col" }, [
+                      _vm.getConfig.header.leftSide.logo
+                        ? _c("div", { staticClass: "container-logo" }, [
+                            _c("img", {
+                              staticClass: "logo",
+                              attrs: { src: _vm.getConfig.header.leftSide.logo }
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.getConfig.header.leftSide.title
+                        ? _c("div", { staticClass: "title" }, [
+                            _vm._v(_vm._s(_vm.getConfig.header.leftSide.title))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.getConfig.header.leftSide.subTitle
+                        ? _c("div", { staticClass: "sub-title" }, [
+                            _vm._v(
+                              _vm._s(_vm.getConfig.header.leftSide.subTitle)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.getConfig.header.rightSide
+                  ? _c("div", { staticClass: "right-side col" }, [
+                      _vm.getConfig.header.rightSide.date
+                        ? _c("div", { staticClass: "date" }, [
+                            _vm._v(_vm._s(_vm.getConfig.header.rightSide.date))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.getConfig.header.rightSide.title
+                        ? _c("div", { staticClass: "title" }, [
+                            _vm._v(_vm._s(_vm.getConfig.header.rightSide.title))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.getConfig.header.rightSide.subTitle
+                        ? _c("div", { staticClass: "sub-title" }, [
+                            _vm._v(
+                              _vm._s(_vm.getConfig.header.rightSide.subTitle)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.getConfig.body
+            ? _c("div", { staticClass: "PI-body" }, [
+                _vm.getConfig.body.title
+                  ? _c("div", { staticClass: "container-title" }, [
+                      _c("h5", {
+                        staticClass: "title text-center w-100",
+                        domProps: {
+                          innerHTML: _vm._s(_vm.getConfig.body.title)
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.getConfig.body.content
+                  ? _c("div", {
+                      staticClass: "content text-justify w-100",
+                      domProps: {
+                        innerHTML: _vm._s(_vm.getConfig.body.content)
+                      }
+                    })
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.getConfig.footer
+            ? _c("div", { staticClass: "PI-footer row" }, [
+                _vm.getConfig.footer.leftSide
+                  ? _c("div", { staticClass: "left-side col" })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.getConfig.footer.rightSide
+                  ? _c("div", { staticClass: "right-side col" }, [
+                      _vm.getConfig.footer.rightSide.title
+                        ? _c("div", { staticClass: "title" }, [
+                            _vm._v(_vm._s(_vm.getConfig.footer.rightSide.title))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.getConfig.footer.rightSide.subTitle
+                        ? _c("div", { staticClass: "sub-title" }, [
+                            _vm._v(
+                              _vm._s(_vm.getConfig.footer.rightSide.subTitle)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ]
+      )
     ]
   )
 }

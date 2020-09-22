@@ -4,9 +4,87 @@
 		class="bg-white position-relative text-dark"
 		:style="{height: size.height, width : size.width }"
 	>
-		<h5 class="text-center w-100" v-html="getConfig.body.title"></h5>
-		<div class="text-justify w-100" v-html="getConfig.body.content"></div>
+		<div
+			class="container-PI-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+		>
+			<img :src="require('../../assets/img/vc_logo_0.jpg')" class="PI-background-logo w-100" />
+			<!-- /.PI-background-logo -->
+		</div>
+		<!-- /.container-PI-background-logo -->
+
+		<div class="PI-content-text position-absolute w-100 h-100">
+			<div class="PI-header row" v-if="getConfig.header">
+				<div class="left-side col" v-if="getConfig.header.leftSide">
+					<div class="container-logo" v-if="getConfig.header.leftSide.logo">
+						<img class="logo" :src="getConfig.header.leftSide.logo" />
+						<!-- /.logo -->
+					</div>
+					<!-- /.container-logo -->
+					<div class="title" v-if="getConfig.header.leftSide.title">{{ getConfig.header.leftSide.title }}</div>
+					<!-- /.title -->
+					<div
+						class="sub-title"
+						v-if="getConfig.header.leftSide.subTitle"
+					>{{ getConfig.header.leftSide.subTitle }}</div>
+					<!-- /.sub-title -->
+				</div>
+				<!-- /.left-side -->
+
+				<div class="right-side col" v-if="getConfig.header.rightSide">
+					<div class="date" v-if="getConfig.header.rightSide.date">{{ getConfig.header.rightSide.date }}</div>
+					<!-- /.date -->
+					<div
+						class="title"
+						v-if="getConfig.header.rightSide.title"
+					>{{ getConfig.header.rightSide.title }}</div>
+					<!-- /.title -->
+					<div
+						class="sub-title"
+						v-if="getConfig.header.rightSide.subTitle"
+					>{{ getConfig.header.rightSide.subTitle }}</div>
+					<!-- /.sub-title -->
+				</div>
+				<!-- /.right-side -->
+			</div>
+			<!-- /.PI-header-->
+
+			<div class="PI-body" v-if="getConfig.body">
+				<div class="container-title" v-if="getConfig.body.title">
+					<h5 class="title text-center w-100" v-html="getConfig.body.title"></h5>
+					<!-- /.title -->
+				</div>
+				<!-- /.container-title -->
+
+				<div
+					class="content text-justify w-100"
+					v-if="getConfig.body.content"
+					v-html="getConfig.body.content"
+				></div>
+				<!-- /.content -->
+			</div>
+			<!-- /.PI-body-->
+
+			<div class="PI-footer row" v-if="getConfig.footer">
+				<div class="left-side col" v-if="getConfig.footer.leftSide"></div>
+				<div class="right-side col" v-if="getConfig.footer.rightSide">
+					<div
+						class="title"
+						v-if="getConfig.footer.rightSide.title"
+					>{{ getConfig.footer.rightSide.title }}</div>
+					<!-- /.title -->
+					<div
+						class="sub-title"
+						v-if="getConfig.footer.rightSide.subTitle"
+					>{{ getConfig.footer.rightSide.subTitle }}</div>
+					<!-- /.sub-title -->
+				</div>
+				<!-- /.right-side -->
+			</div>
+			<!-- /.PI-footer-->
+		</div>
+		<!-- /.PI-content-text -->
 	</div>
+	<!-- /#paper-item -->
 </template>
 
 <script>
@@ -49,5 +127,31 @@ export default {
 
 <style lang="scss">
 #paper-item {
+	> .container-PI-background-logo {
+		z-index: 1;
+		opacity: 0.03;
+		> .PI-background-logo {
+		}
+	}
+	> .PI-content-text {
+		z-index: 2;
+		background: transparent !important;
+
+		> .PI-header {
+			> .left-side {
+			}
+			> .right-side {
+			}
+		}
+		> .PI-body {
+			min-height: 70%;
+		}
+		> .PI-footer {
+			> .left-side {
+			}
+			> .right-side {
+			}
+		}
+	}
 }
 </style>

@@ -209,7 +209,7 @@ export default {
 	color: #171717;
 	font-family: serif;
 }
-#printable .background-theme {
+#printable > .background-theme {
 	opacity: 0.1;
 	position: absolute;
 	z-index: 0;
@@ -217,7 +217,7 @@ export default {
 	margin-top: 35vh;
 	width: 100%;
 }
-#printable .content-text {
+#printable > .content-text {
 	position: relative;
 	z-index: 10;
 	width: 100%;

@@ -1,7 +1,6 @@
 <template>
 	<div class="content" id="home-creation-section">
 		<div class="row content-side">
-
 			<div class="left-side col-5 d-flex align-items-center justify-content-center">
 				<Paper></Paper>
 			</div>
@@ -11,7 +10,11 @@
 				<div class="d-flex flex-column bg-white h-100 w-100">
 					<div class="d-flex align-items-center justify-content-between">
 						<md-subheader>which document do you want to create?</md-subheader>
-						<md-button class="md-primary" :disabled="!docSelected" :to="{name : 'dashboard-creation-new'}">Next</md-button>
+						<md-button
+							class="md-primary"
+							:disabled="!docSelected"
+							:to="{name : 'dashboard-creation-new'}"
+						>Next</md-button>
 					</div>
 
 					<div class="list-group">
@@ -25,9 +28,7 @@
 							<div class="d-flex w-100 justify-content-between">
 								<h5 class="mb-1">{{ item.name }}</h5>
 							</div>
-							<p
-								class="mb-1"
-							>{{ item.description }}</p>
+							<p class="mb-1">{{ item.description }}</p>
 							<small>Donec id elit non mi porta.</small>
 						</button>
 					</div>
@@ -68,44 +69,45 @@ export default {
 			if (docSelected) {
 				return docSelected;
 			} else {
-				return false ;
+				return false;
 			}
-		}
+		},
 	},
 	methods: {
 		selectDoc(dataDoc) {
-			this.$store.dispatch('document/select_doc', dataDoc);
-		}
+			this.$store.dispatch("document/select_doc", dataDoc);
+		},
 	},
 };
 </script>
 
 <style lang="scss">
-.content#home-creation-section > .content-side {
-
-	/*.left-side {
+.content#home-creation-section {
+	> .content-side {
+		/*>.left-side {
 		overflow: auto;
 		height: 100%;
 	}
 
-	.left-side > :first-child {
+	>.left-side > :first-child {
 		overflow: auto;
 		height: 100%;
 	}*/
 
-	.right-side {
-		overflow: auto;
-		min-height: 100%;
-		max-height: calc(100vh - 123px);
-	}
+		> .right-side {
+			overflow: auto;
+			min-height: 100%;
+			max-height: calc(100vh - 123px);
+		}
 
-	.right-side > :first-child {
-		overflow: auto;
-		height: 100%;
-
-		.list-group {
+		> .right-side > :first-child {
 			overflow: auto;
 			height: 100%;
+
+			.list-group {
+				overflow: auto;
+				height: 100%;
+			}
 		}
 	}
 }

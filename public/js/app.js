@@ -77280,7 +77280,7 @@ __webpack_require__.r(__webpack_exports__);
     config: {
       header: {
         leftSide: {
-          icon: null,
+          logo: null,
           title: "Enterprise name",
           subTitle: null
         },
@@ -77309,7 +77309,7 @@ __webpack_require__.r(__webpack_exports__);
     config: {
       header: {
         leftSide: {
-          icon: null,
+          logo: null,
           title: "Enterprise name",
           subTitle: null
         },

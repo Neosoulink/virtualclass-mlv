@@ -51,6 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardCreation",
@@ -85,7 +86,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectDoc: function selectDoc(dataDoc) {
-      this.$store.dispatch('document/select_doc', dataDoc);
+      this.$store.dispatch("document/select_doc", dataDoc);
     }
   }
 });
@@ -104,7 +105,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".content#home-creation-section > .content-side {\n  /*.left-side {\n  \toverflow: auto;\n  \theight: 100%;\n  }\n\n  .left-side > :first-child {\n  \toverflow: auto;\n  \theight: 100%;\n  }*/\n}\n.content#home-creation-section > .content-side .right-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n.content#home-creation-section > .content-side .right-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n.content#home-creation-section > .content-side .right-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".content#home-creation-section > .content-side {\n  /*>.left-side {\n  \toverflow: auto;\n  \theight: 100%;\n  }\n\n  >.left-side > :first-child {\n  \toverflow: auto;\n  \theight: 100%;\n  }*/\n}\n.content#home-creation-section > .content-side > .right-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n.content#home-creation-section > .content-side > .right-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n.content#home-creation-section > .content-side > .right-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
 
 // exports
 
