@@ -2,17 +2,24 @@
 	<div
 		id="paper-item"
 		class="bg-white position-relative text-dark"
-		:style="{height: size.height, width : size.width }"
+		:style="{
+			minHeight: size.height + 'px',
+			width: size.width + 'px',
+			fontSize: getFontSize + 'px',
+		}"
 	>
 		<div
 			class="container-PI-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
 		>
-			<img :src="require('../../assets/img/vc_logo_0.jpg')" class="PI-background-logo w-100" />
+			<img
+				:src="require('../../assets/img/vc_logo_0.jpg')"
+				class="PI-background-logo w-100"
+			/>
 			<!-- /.PI-background-logo -->
 		</div>
 		<!-- /.container-PI-background-logo -->
 
-		<div class="PI-content-text position-absolute w-100 h-100">
+		<div class="PI-content-text position-relative w-100 h-100">
 			<div class="PI-header row" v-if="getConfig.header">
 				<div class="left-side col" v-if="getConfig.header.leftSide">
 					<div class="container-logo" v-if="getConfig.header.leftSide.logo">
@@ -20,28 +27,29 @@
 						<!-- /.logo -->
 					</div>
 					<!-- /.container-logo -->
-					<div class="title" v-if="getConfig.header.leftSide.title">{{ getConfig.header.leftSide.title }}</div>
+					<div class="title" v-if="getConfig.header.leftSide.title">
+						{{ getConfig.header.leftSide.title }}
+					</div>
 					<!-- /.title -->
-					<div
-						class="sub-title"
-						v-if="getConfig.header.leftSide.subTitle"
-					>{{ getConfig.header.leftSide.subTitle }}</div>
+					<div class="sub-title" v-if="getConfig.header.leftSide.subTitle">
+						{{ getConfig.header.leftSide.subTitle }}
+					</div>
 					<!-- /.sub-title -->
 				</div>
 				<!-- /.left-side -->
 
 				<div class="right-side col" v-if="getConfig.header.rightSide">
-					<div class="date" v-if="getConfig.header.rightSide.date">{{ getConfig.header.rightSide.date }}</div>
+					<div class="date" v-if="getConfig.header.rightSide.date">
+						{{ getConfig.header.rightSide.date }}
+					</div>
 					<!-- /.date -->
-					<div
-						class="title"
-						v-if="getConfig.header.rightSide.title"
-					>{{ getConfig.header.rightSide.title }}</div>
+					<div class="title" v-if="getConfig.header.rightSide.title">
+						{{ getConfig.header.rightSide.title }}
+					</div>
 					<!-- /.title -->
-					<div
-						class="sub-title"
-						v-if="getConfig.header.rightSide.subTitle"
-					>{{ getConfig.header.rightSide.subTitle }}</div>
+					<div class="sub-title" v-if="getConfig.header.rightSide.subTitle">
+						{{ getConfig.header.rightSide.subTitle }}
+					</div>
 					<!-- /.sub-title -->
 				</div>
 				<!-- /.right-side -->
@@ -50,7 +58,10 @@
 
 			<div class="PI-body" v-if="getConfig.body">
 				<div class="container-title" v-if="getConfig.body.title">
-					<h5 class="title text-center w-100" v-html="getConfig.body.title"></h5>
+					<h3
+						class="title text-center w-100"
+						v-html="getConfig.body.title"
+					></h3>
 					<!-- /.title -->
 				</div>
 				<!-- /.container-title -->
@@ -67,15 +78,13 @@
 			<div class="PI-footer row" v-if="getConfig.footer">
 				<div class="left-side col" v-if="getConfig.footer.leftSide"></div>
 				<div class="right-side col" v-if="getConfig.footer.rightSide">
-					<div
-						class="title"
-						v-if="getConfig.footer.rightSide.title"
-					>{{ getConfig.footer.rightSide.title }}</div>
+					<div class="title" v-if="getConfig.footer.rightSide.title">
+						{{ getConfig.footer.rightSide.title }}
+					</div>
 					<!-- /.title -->
-					<div
-						class="sub-title"
-						v-if="getConfig.footer.rightSide.subTitle"
-					>{{ getConfig.footer.rightSide.subTitle }}</div>
+					<div class="sub-title" v-if="getConfig.footer.rightSide.subTitle">
+						{{ getConfig.footer.rightSide.subTitle }}
+					</div>
 					<!-- /.sub-title -->
 				</div>
 				<!-- /.right-side -->
@@ -88,6 +97,8 @@
 </template>
 
 <script>
+import Fitty from "fitty";
+
 export default {
 	name: "Paper",
 	props: {
@@ -99,8 +110,8 @@ export default {
 			type: Object,
 			default: () => {
 				return {
-					height: "410px",
-					width: "320px",
+					height: "410",
+					width: "320",
 				};
 			},
 		},
@@ -121,12 +132,30 @@ export default {
 				};
 			}
 		},
+		getFontSize() {
+			const ratio = (this.size.height / this.size.width) * 100;
+			return ratio / 10;
+		},
 	},
 };
 </script>
 
 <style lang="scss">
 #paper-item {
+	height: auto;
+	max-height: auto;
+	* {
+		font-size: inherit;
+	}
+	h1 {
+		font-size: 200%;
+	}
+	h2 {
+		font-size: 180%;
+	}
+	h3 {
+		font-size: 150%;
+	}
 	> .container-PI-background-logo {
 		z-index: 1;
 		opacity: 0.03;
@@ -136,7 +165,7 @@ export default {
 	> .PI-content-text {
 		z-index: 2;
 		background: transparent !important;
-
+		padding: 1vw;
 		> .PI-header {
 			> .left-side {
 			}
@@ -144,7 +173,8 @@ export default {
 			}
 		}
 		> .PI-body {
-			min-height: 70%;
+			width: 100%;
+			min-height: 50vh;
 		}
 		> .PI-footer {
 			> .left-side {

@@ -567,6 +567,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fitty */ "./node_modules/fitty/dist/fitty.module.js");
+/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fitty__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -656,6 +658,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
   props: {
@@ -667,8 +679,8 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       "default": function _default() {
         return {
-          height: "410px",
-          width: "320px"
+          height: "410",
+          width: "320"
         };
       }
     }
@@ -689,6 +701,10 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
       }
+    },
+    getFontSize: function getFontSize() {
+      var ratio = this.size.height / this.size.width * 100;
+      return ratio / 10;
     }
   }
 });
@@ -707,7 +723,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#paper-item > .container-PI-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-content-text {\n  z-index: 2;\n  background: transparent !important;\n}\n#paper-item > .PI-content-text > .PI-body {\n  min-height: 70%;\n}", ""]);
+exports.push([module.i, "#paper-item {\n  height: auto;\n  max-height: auto;\n}\n#paper-item * {\n  font-size: inherit;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item > .container-PI-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-content-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 1vw;\n}\n#paper-item > .PI-content-text > .PI-body {\n  width: 100%;\n  min-height: 50vh;\n}", ""]);
 
 // exports
 
@@ -1430,7 +1446,11 @@ var render = function() {
     "div",
     {
       staticClass: "bg-white position-relative text-dark",
-      style: { height: _vm.size.height, width: _vm.size.width },
+      style: {
+        minHeight: _vm.size.height + "px",
+        width: _vm.size.width + "px",
+        fontSize: _vm.getFontSize + "px"
+      },
       attrs: { id: "paper-item" }
     },
     [
@@ -1450,7 +1470,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "PI-content-text position-absolute w-100 h-100" },
+        { staticClass: "PI-content-text position-relative w-100 h-100" },
         [
           _vm.getConfig.header
             ? _c("div", { staticClass: "PI-header row" }, [
@@ -1467,14 +1487,20 @@ var render = function() {
                       _vm._v(" "),
                       _vm.getConfig.header.leftSide.title
                         ? _c("div", { staticClass: "title" }, [
-                            _vm._v(_vm._s(_vm.getConfig.header.leftSide.title))
+                            _vm._v(
+                              "\n\t\t\t\t\t" +
+                                _vm._s(_vm.getConfig.header.leftSide.title) +
+                                "\n\t\t\t\t"
+                            )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.getConfig.header.leftSide.subTitle
                         ? _c("div", { staticClass: "sub-title" }, [
                             _vm._v(
-                              _vm._s(_vm.getConfig.header.leftSide.subTitle)
+                              "\n\t\t\t\t\t" +
+                                _vm._s(_vm.getConfig.header.leftSide.subTitle) +
+                                "\n\t\t\t\t"
                             )
                           ])
                         : _vm._e()
@@ -1485,20 +1511,32 @@ var render = function() {
                   ? _c("div", { staticClass: "right-side col" }, [
                       _vm.getConfig.header.rightSide.date
                         ? _c("div", { staticClass: "date" }, [
-                            _vm._v(_vm._s(_vm.getConfig.header.rightSide.date))
+                            _vm._v(
+                              "\n\t\t\t\t\t" +
+                                _vm._s(_vm.getConfig.header.rightSide.date) +
+                                "\n\t\t\t\t"
+                            )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.getConfig.header.rightSide.title
                         ? _c("div", { staticClass: "title" }, [
-                            _vm._v(_vm._s(_vm.getConfig.header.rightSide.title))
+                            _vm._v(
+                              "\n\t\t\t\t\t" +
+                                _vm._s(_vm.getConfig.header.rightSide.title) +
+                                "\n\t\t\t\t"
+                            )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.getConfig.header.rightSide.subTitle
                         ? _c("div", { staticClass: "sub-title" }, [
                             _vm._v(
-                              _vm._s(_vm.getConfig.header.rightSide.subTitle)
+                              "\n\t\t\t\t\t" +
+                                _vm._s(
+                                  _vm.getConfig.header.rightSide.subTitle
+                                ) +
+                                "\n\t\t\t\t"
                             )
                           ])
                         : _vm._e()
@@ -1511,7 +1549,7 @@ var render = function() {
             ? _c("div", { staticClass: "PI-body" }, [
                 _vm.getConfig.body.title
                   ? _c("div", { staticClass: "container-title" }, [
-                      _c("h5", {
+                      _c("h3", {
                         staticClass: "title text-center w-100",
                         domProps: {
                           innerHTML: _vm._s(_vm.getConfig.body.title)
@@ -1541,14 +1579,22 @@ var render = function() {
                   ? _c("div", { staticClass: "right-side col" }, [
                       _vm.getConfig.footer.rightSide.title
                         ? _c("div", { staticClass: "title" }, [
-                            _vm._v(_vm._s(_vm.getConfig.footer.rightSide.title))
+                            _vm._v(
+                              "\n\t\t\t\t\t" +
+                                _vm._s(_vm.getConfig.footer.rightSide.title) +
+                                "\n\t\t\t\t"
+                            )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.getConfig.footer.rightSide.subTitle
                         ? _c("div", { staticClass: "sub-title" }, [
                             _vm._v(
-                              _vm._s(_vm.getConfig.footer.rightSide.subTitle)
+                              "\n\t\t\t\t\t" +
+                                _vm._s(
+                                  _vm.getConfig.footer.rightSide.subTitle
+                                ) +
+                                "\n\t\t\t\t"
                             )
                           ])
                         : _vm._e()

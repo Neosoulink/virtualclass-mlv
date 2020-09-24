@@ -1,7 +1,9 @@
 <template>
 	<div class="content" id="home-creation-section">
 		<div class="row content-side">
-			<div class="left-side col-5 d-flex align-items-center justify-content-center">
+			<div
+				class="left-side col-5 d-flex align-items-center justify-content-center"
+			>
 				<Paper></Paper>
 			</div>
 			<!-- /.left-side -->
@@ -13,8 +15,9 @@
 						<md-button
 							class="md-primary"
 							:disabled="!docSelected"
-							:to="{name : 'dashboard-creation-new'}"
-						>Next</md-button>
+							:to="{ name: 'dashboard-creation-new' }"
+							>Next</md-button
+						>
 					</div>
 
 					<div class="list-group">
@@ -22,7 +25,7 @@
 							v-for="(item, index) in getDocs"
 							:key="index"
 							class="list-group-item list-group-item-action"
-							:class="{'active' : (docSelected == item)}"
+							:class="{ active: docSelected == item }"
 							@click="selectDoc(item)"
 						>
 							<div class="d-flex w-100 justify-content-between">
@@ -38,6 +41,7 @@
 			</div>
 			<!-- /.right-side -->
 		</div>
+		<Paper :size="fakeDimention"></Paper>
 	</div>
 </template>
 <script>
@@ -51,6 +55,7 @@ export default {
 	data() {
 		return {
 			documentType: null,
+			fakeDimention: { width: 920, height: 1410 },
 		};
 	},
 	computed: {
