@@ -667,6 +667,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
@@ -675,14 +682,9 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       "default": null
     },
-    size: {
-      type: Object,
-      "default": function _default() {
-        return {
-          height: "410",
-          width: "320"
-        };
-      }
+    width: {
+      type: Number,
+      "default": 320
     }
   },
   computed: {
@@ -702,9 +704,27 @@ __webpack_require__.r(__webpack_exports__);
         };
       }
     },
-    getFontSize: function getFontSize() {
-      var ratio = this.size.height / this.size.width * 100;
-      return ratio / 10;
+    getSizes: function getSizes() {
+      //Longeur = Largeur * 1.414
+      var width = this.width;
+      var height = width * 1.414;
+      var ratio = height / this.width;
+      var modulo = height % this.width;
+      var marginHorizontal = width * 4 / 100;
+      var marginVertical = height * 3 / 100;
+      var font = width * 2.5 / 100;
+      var lineHeight = width * 4 / 100;
+      console.log(font, marginHorizontal);
+      return {
+        height: height,
+        width: width,
+        ratio: ratio,
+        modulo: modulo,
+        marginHorizontal: marginHorizontal,
+        marginVertical: marginVertical,
+        font: font,
+        lineHeight: lineHeight
+      };
     }
   }
 });
@@ -723,7 +743,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#paper-item {\n  height: auto;\n  max-height: auto;\n}\n#paper-item * {\n  font-size: inherit;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item > .container-PI-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-content-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 1vw;\n}\n#paper-item > .PI-content-text > .PI-body {\n  width: 100%;\n  min-height: 50vh;\n}", ""]);
+exports.push([module.i, "#paper-item {\n  height: auto;\n  max-height: auto;\n}\n#paper-item * {\n  font-size: inherit;\n  line-height: inherit;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item > .container-PI-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-content-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 0.5vw;\n}\n#paper-item > .PI-content-text > .PI-body {\n  width: 100%;\n  min-height: 50vh;\n  line-height: 200%;\n}", ""]);
 
 // exports
 
@@ -742,7 +762,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#printable {\n\theight: 100%;\n\twidth: 100%;\n}\n#printable * {\n\tcolor: #171717;\n\tfont-family: serif;\n}\n#printable > .background-theme {\n\topacity: 0.1;\n\tposition: absolute;\n\tz-index: 0;\n\tmargin: auto;\n\tmargin-top: 35vh;\n\twidth: 100%;\n}\n#printable > .content-text {\n\tposition: relative;\n\tz-index: 10;\n\twidth: 100%;\n}\n#printable .header-left-side {\n\tposition: relative;\n}\n#printable .header-left-side > .header-title {\n\ttext-transform: uppercase;\n\tfont-weight: 700;\n\tfont-size: 0.95em;\n}\n#printable .header-left-side > .container-header-logo {\n}\n#printable .header-left-side > .container-header-logo > .header-logo {\n\tz-index: -1;\n\theight: 92px;\n}\n#printable .header-right-side {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tfont-size: 1em;\n}\n#printable .simple-letter-section > .title-section {\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n}\n#printable .copy-transmited-section > .title-section {\n\ttext-transform: uppercase;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-weight: 700;\n}\n#printable .copy-transmited-section > .subtitle-section {\n\tfont-weight: 700;\n}\n#printable .list-group-person {\n\tfont-size: 1.25em;\n\tmargin-left: 20px;\n\tpadding: 0 0 20px;\n\tborder-bottom: 2px dashed;\n}\n#printable .list-group-person > .list-item-person {\n\tpadding-left: 20px;\n}\n#printable .title_document h2 {\n\tfont-size: 1.8em;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n\tdisplay: inline-block;\n\tmargin-bottom: 20px;\n}\n#printable .object-title,\n#printable .for-person {\n\tvertical-align: text-top;\n}\n#printable .editor-datas {\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\ttext-align: justify;\n}\n#printable .editor-datas p,\n#printable .editor-datas a,\n#printable .editor-datas li {\n\tfont-size: inherit;\n}\n#printable .end-page {\n\topacity: 1;\n\tmargin-top: 80px;\n\ttext-transform: uppercase;\n\tword-spacing: 0.3vw;\n}\n", ""]);
+exports.push([module.i, "\n#printable {\n\theight: 100%;\n\twidth: 100%;\n}\n#printable * {\n\tcolor: #171717;\n\tfont-family: Calibri, sans-serif;\n}\n#printable > .background-theme {\n\topacity: 0.1;\n\tposition: absolute;\n\tz-index: 0;\n\tmargin: auto;\n\tmargin-top: 35vh;\n\twidth: 100%;\n}\n#printable > .content-text {\n\tposition: relative;\n\tz-index: 10;\n\twidth: 100%;\n}\n#printable .header-left-side {\n\tposition: relative;\n}\n#printable .header-left-side > .header-title {\n\ttext-transform: uppercase;\n\tfont-weight: 700;\n\tfont-size: 0.95em;\n}\n#printable .header-left-side > .container-header-logo {\n}\n#printable .header-left-side > .container-header-logo > .header-logo {\n\tz-index: -1;\n\theight: 92px;\n}\n#printable .header-right-side {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tfont-size: 1em;\n}\n#printable .simple-letter-section > .title-section {\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n}\n#printable .copy-transmited-section > .title-section {\n\ttext-transform: uppercase;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-weight: 700;\n}\n#printable .copy-transmited-section > .subtitle-section {\n\tfont-weight: 700;\n}\n#printable .list-group-person {\n\tfont-size: 1.25em;\n\tmargin-left: 20px;\n\tpadding: 0 0 20px;\n\tborder-bottom: 2px dashed;\n}\n#printable .list-group-person > .list-item-person {\n\tpadding-left: 20px;\n}\n#printable .title_document h2 {\n\tfont-size: 1.8em;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tpadding-bottom: 5px;\n\tborder-bottom: 4px solid;\n\tdisplay: inline-block;\n\tmargin-bottom: 20px;\n}\n#printable .object-title,\n#printable .for-person {\n\tvertical-align: text-top;\n}\n#printable .editor-datas {\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\ttext-align: justify;\n}\n#printable .editor-datas p,\n#printable .editor-datas a,\n#printable .editor-datas li {\n\tfont-size: inherit;\n}\n#printable .end-page {\n\topacity: 1;\n\tmargin-top: 80px;\n\ttext-transform: uppercase;\n\tword-spacing: 0.3vw;\n}\n", ""]);
 
 // exports
 
@@ -1447,9 +1467,11 @@ var render = function() {
     {
       staticClass: "bg-white position-relative text-dark",
       style: {
-        minHeight: _vm.size.height + "px",
-        width: _vm.size.width + "px",
-        fontSize: _vm.getFontSize + "px"
+        minHeight: _vm.getSizes.height + "px",
+        width: _vm.getSizes.width + "px",
+        fontSize: _vm.getSizes.font + "px",
+        fontSize: _vm.getSizes.font + "px",
+        lineHeight: _vm.getSizes.lineHeight + "px"
       },
       attrs: { id: "paper-item" }
     },
@@ -1470,7 +1492,16 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "PI-content-text position-relative w-100 h-100" },
+        {
+          staticClass: "PI-content-text position-relative w-100 h-100",
+          style: {
+            padding:
+              _vm.getSizes.marginVertical +
+              "px " +
+              _vm.getSizes.marginHorizontal +
+              "px"
+          }
+        },
         [
           _vm.getConfig.header
             ? _c("div", { staticClass: "PI-header row" }, [
@@ -1560,7 +1591,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.getConfig.body.content
                   ? _c("div", {
-                      staticClass: "content text-justify w-100",
+                      staticClass: "content w-100",
                       domProps: {
                         innerHTML: _vm._s(_vm.getConfig.body.content)
                       }

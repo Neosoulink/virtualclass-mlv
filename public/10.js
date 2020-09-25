@@ -56,6 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardCreation",
@@ -65,10 +66,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       documentType: null,
-      fakeDimention: {
-        width: 920,
-        height: 1410
-      }
+      customWidth: 320
     };
   },
   computed: {
@@ -169,7 +167,7 @@ var render = function() {
     "div",
     { staticClass: "content", attrs: { id: "home-creation-section" } },
     [
-      _c("div", { staticClass: "row content-side" }, [
+      _c("div", { staticClass: "content-side row" }, [
         _c(
           "div",
           {
@@ -251,11 +249,8 @@ var render = function() {
             ]
           )
         ])
-      ]),
-      _vm._v(" "),
-      _c("Paper", { attrs: { size: _vm.fakeDimention } })
-    ],
-    1
+      ])
+    ]
   )
 }
 var staticRenderFns = []

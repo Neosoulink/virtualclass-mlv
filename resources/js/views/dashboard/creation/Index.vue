@@ -1,6 +1,6 @@
 <template>
 	<div class="content" id="home-creation-section">
-		<div class="row content-side">
+		<div class="content-side row">
 			<div
 				class="left-side col-5 d-flex align-items-center justify-content-center"
 			>
@@ -41,8 +41,9 @@
 			</div>
 			<!-- /.right-side -->
 		</div>
-		<Paper :size="fakeDimention"></Paper>
+		<!-- /.content-side -->
 	</div>
+	<!-- /#home-creation-section -->
 </template>
 <script>
 import { Paper } from "../../../components";
@@ -55,7 +56,7 @@ export default {
 	data() {
 		return {
 			documentType: null,
-			fakeDimention: { width: 920, height: 1410 },
+			customWidth: 320,
 		};
 	},
 	computed: {

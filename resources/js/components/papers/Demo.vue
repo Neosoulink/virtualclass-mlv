@@ -207,7 +207,7 @@ export default {
 }
 #printable * {
 	color: #171717;
-	font-family: serif;
+	font-family: Calibri, sans-serif;
 }
 #printable > .background-theme {
 	opacity: 0.1;

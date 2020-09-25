@@ -3,9 +3,11 @@
 		id="paper-item"
 		class="bg-white position-relative text-dark"
 		:style="{
-			minHeight: size.height + 'px',
-			width: size.width + 'px',
-			fontSize: getFontSize + 'px',
+			minHeight: getSizes.height + 'px',
+			width: getSizes.width + 'px',
+			fontSize: getSizes.font + 'px',
+			fontSize: getSizes.font + 'px',
+			lineHeight: getSizes.lineHeight + 'px',
 		}"
 	>
 		<div
@@ -19,7 +21,12 @@
 		</div>
 		<!-- /.container-PI-background-logo -->
 
-		<div class="PI-content-text position-relative w-100 h-100">
+		<div
+			class="PI-content-text position-relative w-100 h-100"
+			:style="{
+				padding: `${getSizes.marginVertical}px ${getSizes.marginHorizontal}px`,
+			}"
+		>
 			<div class="PI-header row" v-if="getConfig.header">
 				<div class="left-side col" v-if="getConfig.header.leftSide">
 					<div class="container-logo" v-if="getConfig.header.leftSide.logo">
@@ -67,7 +74,7 @@
 				<!-- /.container-title -->
 
 				<div
-					class="content text-justify w-100"
+					class="content w-100"
 					v-if="getConfig.body.content"
 					v-html="getConfig.body.content"
 				></div>
@@ -106,14 +113,9 @@ export default {
 			type: Object,
 			default: null,
 		},
-		size: {
-			type: Object,
-			default: () => {
-				return {
-					height: "410",
-					width: "320",
-				};
-			},
+		width: {
+			type: Number,
+			default: 320,
 		},
 	},
 	computed: {
@@ -132,9 +134,27 @@ export default {
 				};
 			}
 		},
-		getFontSize() {
-			const ratio = (this.size.height / this.size.width) * 100;
-			return ratio / 10;
+		getSizes() {
+			//Longeur = Largeur * 1.414
+			const width = this.width;
+			const height = width * 1.414;
+			const ratio = height / this.width;
+			const modulo = height % this.width;
+			const marginHorizontal = (width * 4) / 100;
+			const marginVertical = (height * 3) / 100;
+			const font = (width * 2.5) / 100;
+			const lineHeight = (width * 4) / 100;
+			console.log(font, marginHorizontal);
+			return {
+				height,
+				width,
+				ratio,
+				modulo,
+				marginHorizontal,
+				marginVertical,
+				font,
+				lineHeight,
+			};
 		},
 	},
 };
@@ -146,6 +166,7 @@ export default {
 	max-height: auto;
 	* {
 		font-size: inherit;
+		line-height: inherit;
 	}
 	h1 {
 		font-size: 200%;
@@ -165,7 +186,7 @@ export default {
 	> .PI-content-text {
 		z-index: 2;
 		background: transparent !important;
-		padding: 1vw;
+		padding: 0.5vw;
 		> .PI-header {
 			> .left-side {
 			}
@@ -175,6 +196,7 @@ export default {
 		> .PI-body {
 			width: 100%;
 			min-height: 50vh;
+			line-height: 200%;
 		}
 		> .PI-footer {
 			> .left-side {
