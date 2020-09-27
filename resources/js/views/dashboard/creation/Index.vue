@@ -42,6 +42,7 @@
 			<!-- /.right-side -->
 		</div>
 		<!-- /.content-side -->
+
 	</div>
 	<!-- /#home-creation-section -->
 </template>

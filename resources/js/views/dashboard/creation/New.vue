@@ -1,25 +1,32 @@
 <template>
 	<div class="content" id="new-creation-section">
 		<div class="row content-side">
-			<md-steppers :md-active-step.sync="steper.active" md-linear class="col-md-7 left-side">
+			<md-steppers
+				:md-active-step.sync="steper.active"
+				md-linear
+				class="col-md-7 left-side"
+			>
 				<md-step
 					id="first"
 					md-label="Content"
 					:md-error="steper.first.error.header"
 					:md-done.sync="steper.first.active"
 				>
-					<div class>
+					<div v-if="docConfig.body.content">
 						<ckeditor
 							:editor="steper.first.editor"
 							v-model="docConfig.body.content"
 							:config="steper.first.editorConfig"
 						></ckeditor>
 					</div>
+					<md-button class="md-raised md-primary" @click="$router.go(-1)"
+						>Go back</md-button
+					>
 					<md-button
 						class="md-raised md-primary"
-						@click="$router.go(-1)"
-					>Go back</md-button>
-					<md-button class="md-raised md-primary" @click="setDone('first', 'second')">Next</md-button>
+						@click="setDone('first', 'second')"
+						>Next</md-button
+					>
 				</md-step>
 				<!-- /md-step.first -->
 
@@ -29,14 +36,84 @@
 					:md-error="steper.second.error.header"
 					:md-done.sync="steper.second.active"
 				>
-					<p>Config here !</p>
-					<md-button class="md-raised md-primary" @click="setDone('second')">Continue</md-button>
+					<div class="md-subheading">Header</div>
+					<div class="md-layout mb-3">
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.header.leftSide.title"
+								:md-options="['République Démocratique du Congo']"
+							>
+								<label> Title </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
+
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.header.rightSide.date"
+								:md-options="getDates"
+							>
+								<label> Date </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
+
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.header.rightSide.subTitle"
+								:md-options="['Urgent', 'Important', 'Minor']"
+							>
+								<label> Subtitle </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
+					</div>
+					<!-- /.md-layout -->
+
+					<div class="md-subheading">Body</div>
+					<div class="md-layout mb-3">
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.body.title"
+								:md-options="['New letter exemple']"
+							>
+								<label> Title </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
+						<div class="md-layout-item md-xsmall-size-100 md-size-25">
+							<md-field>
+								<label for="">Select some persones</label>
+								<md-select
+									v-model="docConfig.body.personsCopyTransmitted"
+									multiple
+								>
+									<md-option
+										:value="item"
+										v-for="item in JSON.parse(
+											JSON.stringify(docConfig.body.personsCopyTransmitted)
+										)"
+										:key="item"
+										>{{ item }}</md-option
+									>
+								</md-select>
+							</md-field>
+						</div>
+						<!-- /.md-layout-item -->
+					</div>
+					<!-- /.md-layout -->
+
+					<md-button class="md-raised md-primary" @click="setDone('second')">
+						Continue
+					</md-button>
 				</md-step>
 				<!-- /md-step.second -->
 			</md-steppers>
 			<!-- /.left-side -->
 
-			<div class="right-side col-md-5 d-flex align-items-center justify-content-center">
+			<div
+				class="right-side col-md-5 d-flex align-items-center justify-content-center"
+			>
 				<Paper></Paper>
 			</div>
 			<!-- /.right-side -->
@@ -46,6 +123,7 @@
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Paper } from "../../../components";
+import moment from "moment";
 
 export default {
 	name: "DashboardCreationNew",
@@ -74,13 +152,16 @@ export default {
 				},
 			},
 		},
-		docConfig: {
-			body: {
-				title: "default Title",
-				content: "Body here",
-			},
-		},
+		docConfig: {},
 	}),
+	computed: {
+		getDates() {
+			return [
+				moment().format("DD/MM/YYYY HH:mm:ss"),
+				moment().format("DD/MM/YYYY"),
+			];
+		},
+	},
 	methods: {
 		setDone(id, index) {
 			if (id) {
@@ -130,6 +211,7 @@ export default {
 		this.docConfig = JSON.parse(
 			JSON.stringify(this.$store.getters["document/getDocSelected"].config)
 		);
+		console.log(moment().format("DD/MM/YYYY HH:mm:ss"));
 	},
 	watch: {
 		docConfig: {
@@ -137,7 +219,7 @@ export default {
 				this.setNewDocConfig(val);
 			},
 			deep: true,
-			immediate: false
+			immediate: false,
 		},
 	},
 };
