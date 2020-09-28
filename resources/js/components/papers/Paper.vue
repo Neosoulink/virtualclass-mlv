@@ -30,10 +30,7 @@
 				}"
 			>
 				<div class="PI-header row" v-if="getConfig.header">
-					<div
-						class="left-side col"
-						v-if="getConfig.header.leftSide"
-					>
+					<div class="left-side col" v-if="getConfig.header.leftSide">
 						<div
 							class="title text-uppercase"
 							v-if="getConfig.header.leftSide.title"
@@ -88,32 +85,51 @@
 					</div>
 					<!-- /.container-title -->
 
-					<div
-						class="content w-100 text-justify"
-						:style="{
-							minHeight: (getSizes.height * 70) / 100 + 'px',
-						}"
-						v-if="getConfig.body.content"
-						v-html="getConfig.body.content"
-					>
-						<div
-							class="container-person-copy row"
-							v-if="getConfig.body.personsCopyTransmitted"
-						>
-							<ul class="offset-6 col-6">
-								<h6>Title is here</h6>
+					<div class="row mb-4" v-if="getConfig.body.personsCopyTransmitted">
+						<div class="offset-6 col-6 container-persons-copy">
+							<h5 class="title p-0 m-0">
+								<b>N° CAB/MIN-UH/ {{ "date" }}</b>
+							</h5>
+							<!-- /.title -->
+							<h5
+								class="sub-title"
+								:style="{
+									paddingBottom: (getSizes.width * 2.5) / 100 + 'px',
+								}"
+							>
+								<b> <u>Transmis</u> copie pour information à : </b>
+							</h5>
+							<!-- /.sub-title -->
+							<ul
+								class="list-persons"
+								:style="{
+									marginLeft: (getSizes.width * 1.5) / 100 + 'px',
+									paddingLeft: (getSizes.width * 1.5) / 100 + 'px',
+									borderBottomWidth: (getSizes.width * 0.4) / 100 + 'px',
+								}"
+							>
 								<li
-									class=""
-									v-for="item in getConfig.body.personsCopyTransmitted"
-									:key="item"
+									class="list-item-person ml-0"
+									v-for="(item, index) in getConfig.body.personsCopyTransmitted"
+									:key="index"
+									:style="{
+										paddingLeft: (getSizes.width * 1.5) / 100 + 'px',
+										paddingBottom: (getSizes.width * 3.5) / 100 + 'px',
+									}"
 								>
-									{{ item }}
+									Son exelance {{ item }}
 								</li>
 							</ul>
-							<!-- /.title -->
 						</div>
-						<!-- /.container-title -->
+						<!-- /.container-persons-copy -->
 					</div>
+					<!-- /.row -->
+
+					<div
+						class="content w-100 text-justify"
+						v-if="getConfig.body.content"
+						v-html="getConfig.body.content"
+					></div>
 					<!-- /.content -->
 				</div>
 				<!-- /.PI-body-->
@@ -210,7 +226,10 @@ export default {
 	}
 	h1,
 	h2,
-	h3 {
+	h3,
+	h4,
+	h5,
+	h6 {
 		margin: 0;
 		padding: 0;
 	}
@@ -222,6 +241,15 @@ export default {
 	}
 	h3 {
 		font-size: 150%;
+	}
+	h4 {
+		font-size: 120%;
+	}
+	h5 {
+		font-size: 100%;
+	}
+	h6 {
+		font-size: 80%;
 	}
 	.marker {
 		background-color: yellow;
@@ -283,6 +311,29 @@ export default {
 		> .PI-body {
 			width: 100%;
 			line-height: 200%;
+			.container-persons-copy {
+				> .title,
+				> .sub-title {
+					font-size: 80%;
+					font-weight: 700;
+					line-height: 150%;
+				}
+				> .title {
+				}
+				> .sub-title {
+				}
+				> .list-persons {
+					margin-left: 0;
+					padding: 0;
+					margin: 0;
+					border-bottom-style: dashed;
+					line-height: 0;
+					> .list-item-person {
+						font-size: 80%;
+						padding-left: 0px;
+					}
+				}
+			}
 		}
 		> .PI-footer {
 			> .left-side {

@@ -81,9 +81,9 @@
 							</md-autocomplete>
 						</div>
 						<!-- /.md-layout-item -->
-						<div class="md-layout-item md-xsmall-size-100 md-size-25">
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
 							<md-field>
-								<label for="">Select some persones</label>
+								<label for="">Select some persons</label>
 								<md-select
 									v-model="docConfig.body.personsCopyTransmitted"
 									multiple

@@ -42,7 +42,7 @@
 			<!-- /.right-side -->
 		</div>
 		<!-- /.content-side -->
-
+	<Paper :width="900"></Paper>
 	</div>
 	<!-- /#home-creation-section -->
 </template>
