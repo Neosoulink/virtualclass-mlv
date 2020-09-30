@@ -6,7 +6,6 @@
 			minHeight: getSizes.height + 'px',
 			width: getSizes.width + 'px',
 			fontSize: getSizes.font + 'px',
-			fontSize: getSizes.font + 'px',
 			lineHeight: getSizes.lineHeight + 'px',
 		}"
 	>

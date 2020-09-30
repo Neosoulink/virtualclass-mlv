@@ -732,7 +732,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
@@ -1523,7 +1522,6 @@ var render = function() {
       style: {
         minHeight: _vm.getSizes.height + "px",
         width: _vm.getSizes.width + "px",
-        fontSize: _vm.getSizes.font + "px",
         fontSize: _vm.getSizes.font + "px",
         lineHeight: _vm.getSizes.lineHeight + "px"
       },
