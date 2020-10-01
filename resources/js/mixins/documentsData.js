@@ -56,7 +56,9 @@ export default () => {
 					personsCopyTransmitted : [
 						'Bernard',
 						'Luis',
-						'Emery'
+						'Emery',
+						'Chris',
+						'Jean'
 					],
 					title: 'im a letter',
 					content: 'lorem ipsum dem dolor'
