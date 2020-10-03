@@ -77320,7 +77320,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       body: {
-        personsCopyTransmitted: ['Bernard', 'Luis', 'Emery'],
+        personsCopyTransmitted: ['Bernard', 'Luis', 'Emery', 'Chris', 'Jean'],
         title: 'im a letter',
         content: 'lorem ipsum dem dolor'
       },
