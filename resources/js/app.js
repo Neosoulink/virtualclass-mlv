@@ -13,9 +13,11 @@ import Notifications from "./components/NotificationPlugin";
 //import CKEditor from '@ckeditor/ckeditor5-vue';
 import CKEditor from 'ckeditor4-vue';
 import Chartist from "chartist";
-
-// MaterialDashboard plugin
+import VueFileAgent from 'vue-file-agent';
 import MaterialDashboard from "./global/material-dashboard";
+
+// STyles
+import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
 
 
 Vue.prototype.$Chartist = Chartist;
@@ -25,6 +27,7 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(CKEditor);
+Vue.use(VueFileAgent);
 
 initialize(store, router);
 

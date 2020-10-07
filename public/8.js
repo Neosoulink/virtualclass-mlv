@@ -136,6 +136,130 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -146,6 +270,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      "boolean": false,
       steper: {
         active: "first",
         first: {
@@ -164,7 +289,12 @@ __webpack_require__.r(__webpack_exports__);
           error: {
             header: null,
             content: null
-          }
+          },
+          personsCC: [],
+          fileRecords: [],
+          fileRecordsForUpload: [],
+          confirmModal: null,
+          confirmModalFileRecord: null
         }
       },
       docConfig: {}
@@ -224,12 +354,39 @@ __webpack_require__.r(__webpack_exports__);
       return;
     },
     setNewDocConfig: function setNewDocConfig(config) {
+      console.log(config);
       this.$store.dispatch("document/set_config_doc_selected", config);
+    },
+    filesSelected: function filesSelected(fileRecordsNewlySelected) {
+      var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
+        return !fileRecord.error;
+      });
+      this.steper.second.fileRecordsForUpload = this.steper.second.fileRecordsForUpload.concat(validFileRecords);
+    },
+    onBeforeDelete: function onBeforeDelete(fileRecord) {
+      var i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+
+      if (i !== -1) {
+        this.steper.second.fileRecordsForUpload.splice(i, 1);
+      } else {
+        this.steper.second.confirmModal = true;
+      }
+    },
+    fileDeleted: function fileDeleted(fileRecord) {
+      var i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+
+      if (i !== -1) {
+        this.steper.second.fileRecordsForUpload.splice(i, 1);
+      } else {//this.deleteUploadedFile(fileRecord);
+      }
     }
   },
   mounted: function mounted() {
     this.docConfig = JSON.parse(JSON.stringify(this.$store.getters["document/getDocSelected"].config));
-    console.log(moment__WEBPACK_IMPORTED_MODULE_2___default()().format("DD/MM/YYYY HH:mm:ss"));
+
+    if (this.docConfig.body.cc != undefined) {
+      this.steper.second.personsCC = JSON.parse(JSON.stringify(this.docConfig.body.cc.persons));
+    }
   },
   watch: {
     docConfig: {
@@ -768,6 +925,37 @@ var render = function() {
                         _c(
                           "md-autocomplete",
                           {
+                            attrs: {
+                              "md-options": ["Ministère de l'Urbanisme"]
+                            },
+                            model: {
+                              value: _vm.docConfig.header.leftSide.subTitle,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.docConfig.header.leftSide,
+                                  "subTitle",
+                                  $$v
+                                )
+                              },
+                              expression: "docConfig.header.leftSide.subTitle"
+                            }
+                          },
+                          [_c("label", [_vm._v(" Subtitle ")])]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-xsmall-size-100 md-size-50"
+                      },
+                      [
+                        _c(
+                          "md-autocomplete",
+                          {
                             attrs: { "md-options": _vm.getDates },
                             model: {
                               value: _vm.docConfig.header.rightSide.date,
@@ -845,63 +1033,357 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "md-layout-item md-xsmall-size-100 md-size-50"
-                      },
-                      [
-                        _c(
-                          "md-field",
-                          [
-                            _c("label", { attrs: { for: "" } }, [
-                              _vm._v("Select some persons")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "md-select",
-                              {
-                                attrs: { multiple: "" },
-                                model: {
-                                  value:
-                                    _vm.docConfig.body.personsCopyTransmitted,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.docConfig.body,
-                                      "personsCopyTransmitted",
-                                      $$v
-                                    )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.docConfig.body.cc
+                    ? _c(
+                        "div",
+                        { staticClass: "md-layout mb-3" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "md-layout-item md-xsmall-size-100 md-size-50"
+                            },
+                            [
+                              _c(
+                                "md-field",
+                                [
+                                  _c("label", { attrs: { for: "" } }, [
+                                    _vm._v("Select some persons")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "md-select",
+                                    {
+                                      attrs: { multiple: "" },
+                                      model: {
+                                        value: _vm.docConfig.body.cc.persons,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.docConfig.body.cc,
+                                            "persons",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "docConfig.body.cc.persons"
+                                      }
+                                    },
+                                    _vm._l(
+                                      _vm.steper.second.personsCC,
+                                      function(item) {
+                                        return _c(
+                                          "md-option",
+                                          { key: item, attrs: { value: item } },
+                                          [_vm._v(_vm._s(item))]
+                                        )
+                                      }
+                                    ),
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.docConfig.body.cc.persons
+                            ? [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "md-layout-item md-xsmall-size-100 md-size-25"
                                   },
-                                  expression:
-                                    "docConfig.body.personsCopyTransmitted"
+                                  [
+                                    _c(
+                                      "md-autocomplete",
+                                      {
+                                        attrs: {
+                                          "md-options": ["Son exelance"]
+                                        },
+                                        model: {
+                                          value:
+                                            _vm.docConfig.body.cc.prePerson,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.docConfig.body.cc,
+                                              "prePerson",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "docConfig.body.cc.prePerson"
+                                        }
+                                      },
+                                      [_c("label", [_vm._v(" Prefix ")])]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "md-layout-item md-xsmall-size-100 md-size-50"
+                                  },
+                                  [
+                                    _c(
+                                      "md-autocomplete",
+                                      {
+                                        attrs: {
+                                          "md-options": [
+                                            "N° CAB/MIN-UH/ " + _vm.getDates[1]
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.docConfig.body.cc.title,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.docConfig.body.cc,
+                                              "title",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "docConfig.body.cc.title"
+                                        }
+                                      },
+                                      [_c("label", [_vm._v(" Title ")])]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.docConfig.body.for
+                    ? _c("div", { staticClass: "md-layout mb-3" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "md-layout-item md-xsmall-size-100 md-size-50"
+                          },
+                          [
+                            _c(
+                              "md-autocomplete",
+                              {
+                                attrs: { "md-options": ["Mr Someone"] },
+                                model: {
+                                  value: _vm.docConfig.body.for,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.docConfig.body, "for", $$v)
+                                  },
+                                  expression: "docConfig.body.for"
                                 }
                               },
-                              _vm._l(
-                                JSON.parse(
-                                  JSON.stringify(
-                                    _vm.docConfig.body.personsCopyTransmitted
-                                  )
-                                ),
-                                function(item) {
-                                  return _c(
-                                    "md-option",
-                                    { key: item, attrs: { value: item } },
-                                    [_vm._v(_vm._s(item))]
-                                  )
-                                }
-                              ),
-                              1
+                              [_c("label", [_vm._v(" For ")])]
                             )
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
-                  ]),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "md-layout mb-3" },
+                    [
+                      _vm.docConfig.image
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "md-layout-item md-xsmall-size-100 md-size-50"
+                            },
+                            [
+                              _c("label", [_vm._v(" Background image ")]),
+                              _vm._v(" "),
+                              _vm.docConfig.image.show
+                                ? _c("VueFileAgent", {
+                                    ref: "vueFileAgent",
+                                    attrs: {
+                                      multiple: false,
+                                      deletable: true,
+                                      meta: true,
+                                      accept: "image/*",
+                                      maxSize: "10MB",
+                                      maxFiles: 1,
+                                      helpText: "Choose only images",
+                                      errorText: {
+                                        type:
+                                          "Invalid file type. Only images Allowed",
+                                        size:
+                                          "Files should not exceed 10MB in size"
+                                      }
+                                    },
+                                    on: {
+                                      select: function($event) {
+                                        return _vm.filesSelected($event)
+                                      },
+                                      beforedelete: function($event) {
+                                        return _vm.onBeforeDelete($event)
+                                      },
+                                      delete: function($event) {
+                                        return _vm.fileDeleted($event)
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.docConfig.image.data,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.docConfig.image,
+                                          "data",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "docConfig.image.data"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-switch",
+                                {
+                                  model: {
+                                    value: _vm.docConfig.image.show,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.docConfig.image, "show", $$v)
+                                    },
+                                    expression: "docConfig.image.show"
+                                  }
+                                },
+                                [_vm._v("Show background image ?")]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.docConfig.header.leftSide.logo
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "md-layout-item md-xsmall-size-100 md-size-50"
+                            },
+                            [
+                              _c("label", [_vm._v(" Heasder logo ")]),
+                              _vm._v(" "),
+                              _vm.docConfig.header.leftSide.logo.show
+                                ? _c("VueFileAgent", {
+                                    ref: "vueFileAgent",
+                                    attrs: {
+                                      multiple: false,
+                                      deletable: true,
+                                      meta: true,
+                                      accept: "image/*",
+                                      maxSize: "10MB",
+                                      maxFiles: 1,
+                                      helpText: "Choose only images",
+                                      errorText: {
+                                        type:
+                                          "Invalid file type. Only images Allowed",
+                                        size:
+                                          "Files should not exceed 10MB in size"
+                                      }
+                                    },
+                                    on: {
+                                      select: function($event) {
+                                        return _vm.filesSelected($event)
+                                      },
+                                      beforedelete: function($event) {
+                                        return _vm.onBeforeDelete($event)
+                                      },
+                                      delete: function($event) {
+                                        return _vm.fileDeleted($event)
+                                      }
+                                    },
+                                    model: {
+                                      value:
+                                        _vm.docConfig.header.leftSide.logo.data,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.docConfig.header.leftSide.logo,
+                                          "data",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "docConfig.header.leftSide.logo.data"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "md-switch",
+                                {
+                                  model: {
+                                    value:
+                                      _vm.docConfig.header.leftSide.logo.show,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.docConfig.header.leftSide.logo,
+                                        "show",
+                                        $$v
+                                      )
+                                    },
+                                    expression:
+                                      "docConfig.header.leftSide.logo.show"
+                                  }
+                                },
+                                [_vm._v("Show background image ?")]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("md-dialog-confirm", {
+                        attrs: {
+                          "md-active": _vm.steper.second.confirmModal,
+                          "md-title": "Confirmation",
+                          "md-content": "'Are you sure you want to delete?'",
+                          "md-confirm-text": "Agree",
+                          "md-cancel-text": "Disagree"
+                        },
+                        on: {
+                          "update:mdActive": function($event) {
+                            return _vm.$set(
+                              _vm.steper.second,
+                              "confirmModal",
+                              $event
+                            )
+                          },
+                          "update:md-active": function($event) {
+                            return _vm.$set(
+                              _vm.steper.second,
+                              "confirmModal",
+                              $event
+                            )
+                          },
+                          "md-cancel": function($event) {
+                            _vm.steper.second.confirmModal = null
+                          },
+                          "md-confirm": function() {
+                            _vm.steper.second.confirmModal = true
+                            _vm.$refs.vueFileAgent.deleteFileRecord(
+                              _vm.steper.second.confirmModalFileRecord
+                            )
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "md-button",

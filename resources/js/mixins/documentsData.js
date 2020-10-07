@@ -4,9 +4,16 @@ export default () => {
 			name: 'Release',
 			description: "Release description",
 			config: {
+				image: {
+					data: null,
+					show: true
+				},
 				header: {
 					leftSide: {
-						logo: null,
+						logo: {
+							data: null,
+							show: true,
+						},
 						title: "Enterprise name",
 						subTitle: null
 					},
@@ -17,11 +24,6 @@ export default () => {
 					}
 				},
 				body: {
-					personsCopyTransmitted: [
-						'Bernard',
-						'Luis',
-						'Emery'
-					],
 					title: 'im a release',
 					content: 'lorem ipsum dem dolor'
 				},
@@ -40,9 +42,16 @@ export default () => {
 			name: 'Letter',
 			description: "Letter description",
 			config: {
+				image: {
+					data: null,
+					show: true
+				},
 				header: {
 					leftSide: {
-						logo: null,
+						logo: {
+							data: null,
+							show: true,
+						},
 						title: "Enterprise name",
 						subTitle: null
 					},
@@ -53,23 +62,28 @@ export default () => {
 					}
 				},
 				body: {
-					personsCopyTransmitted : [
-						'Bernard',
-						'Luis',
-						'Emery',
-						'Chris',
-						'Jean'
-					],
+					cc: {
+						title: "N° CAB/MIN-UH/ date",
+						prePerson: "Son excellence",
+						persons: [
+							'Mr Bernard',
+							'Mr Luis',
+							'Maitre Emery',
+							'Mr Emery',
+							'Mr Chris',
+							'Mr Jean'
+						],
+					},
 					title: 'im a letter',
+					for: "Mr Incognito",
 					content: 'lorem ipsum dem dolor'
 				},
 				footer: {
 					leftSide: {
-
 					},
 					rightSide: {
 						title: "Name of someone",
-						subTitle : "From somewhere"
+						subTitle: "From somewhere"
 					}
 				}
 			}

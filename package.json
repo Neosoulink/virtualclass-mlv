@@ -38,6 +38,7 @@
 		"print-js": "^1.0.63",
 		"validate.js": "^0.13.1",
 		"vue-clickaway": "^2.2.2",
+		"vue-file-agent": "^1.7.3",
 		"vue-github-buttons": "^3.1.0",
 		"vue-material": "^1.0.0-beta-14",
 		"vue-router": "^3.3.4",

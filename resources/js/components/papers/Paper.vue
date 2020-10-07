@@ -9,18 +9,26 @@
 			lineHeight: getSizes.lineHeight + 'px',
 		}"
 	>
-		<div
-			class="PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-		>
-			<img
-				:src="require('../../assets/img/vc_logo_0.jpg')"
-				class="PI-background-logo w-100"
-			/>
-			<!-- /.PI-background-logo -->
-		</div>
-		<!-- /.PI-container-background-logo -->
-
 		<template v-if="getConfig">
+			<div
+				class="PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+				v-if="getConfig.image && getConfig.image.show"
+			>
+				<img
+					v-if="getConfig.image && getConfig.image.data"
+					:src="getConfig.image.data.urlResized"
+					class="PI-background-logo w-100"
+				/>
+				<!-- /.PI-background-logo -->
+				<img
+					v-else
+					:src="require('../../assets/img/vc_logo_0.jpg')"
+					class="PI-background-logo w-100"
+				/>
+				<!-- /.PI-background-logo -->
+			</div>
+			<!-- /.PI-container-background-logo -->
+
 			<div
 				class="PI-container-text position-relative w-100 h-100 border"
 				:style="{
@@ -37,21 +45,37 @@
 							{{ getConfig.header.leftSide.title }}
 						</div>
 						<!-- /.title -->
-						<div class="sub-title" v-if="getConfig.header.leftSide.subTitle">
+						<div
+							class="sub-title text-uppercase"
+							v-if="getConfig.header.leftSide.subTitle"
+						>
 							{{ getConfig.header.leftSide.subTitle }}
 						</div>
 						<!-- /.sub-title -->
-						<div class="container-logo" v-if="getConfig.header.leftSide.logo">
-							<img class="logo" :src="getConfig.header.leftSide.logo" />
-							<!-- /.logo -->
-						</div>
-						<div class="container-logo" v-else>
-							<img
-								class="logo"
-								:src="require('../../assets/img/vc_logo_0.jpg')"
-							/>
-							<!-- /.logo -->
-						</div>
+						<template
+							v-if="
+								getConfig.header.leftSide.logo &&
+								getConfig.header.leftSide.logo.show
+							"
+						>
+							<div
+								class="container-logo"
+								v-if="getConfig.header.leftSide.logo.data"
+							>
+								<img
+									class="logo"
+									:src="getConfig.header.leftSide.logo.data.urlResized"
+								/>
+								<!-- /.logo -->
+							</div>
+							<div class="container-logo" v-else>
+								<img
+									class="logo"
+									:src="require('../../assets/img/vc_logo_0.jpg')"
+								/>
+								<!-- /.logo -->
+							</div>
+						</template>
 						<!-- /.container-logo -->
 					</div>
 					<!-- /.left-side -->
@@ -74,20 +98,27 @@
 				</div>
 				<!-- /.PI-header-->
 
-				<div class="PI-body" v-if="getConfig.body">
+				<div
+					class="PI-body"
+					v-if="getConfig.body"
+					:style="{ minHeight: (getSizes.height * 70) / 100 + 'px' }"
+				>
 					<div class="container-title" v-if="getConfig.body.title">
 						<h3
 							class="title text-center w-100"
 							v-html="getConfig.body.title"
+							:style="{
+								paddingBottom: (getSizes.width * 3.5) / 100 + 'px',
+							}"
 						></h3>
 						<!-- /.title -->
 					</div>
 					<!-- /.container-title -->
 
-					<div class="row mb-4" v-if="getConfig.body.personsCopyTransmitted">
-						<div class="offset-6 col-6 container-persons-copy">
+					<div class="row mb-4" v-if="getConfig.body.cc">
+						<div class="offset-6 col-6 container-cc">
 							<h5 class="title p-0 m-0">
-								<b>N° CAB/MIN-UH/ {{ "date" }}</b>
+								<b>{{ getConfig.body.cc.title }}</b>
 							</h5>
 							<!-- /.title -->
 							<h5
@@ -109,20 +140,27 @@
 							>
 								<li
 									class="list-item-person ml-0"
-									v-for="(item, index) in getConfig.body.personsCopyTransmitted"
+									v-for="(item, index) in getConfig.body.cc.persons"
 									:key="index"
 									:style="{
 										paddingLeft: (getSizes.width * 1.5) / 100 + 'px',
 										paddingBottom: (getSizes.width * 3.5) / 100 + 'px',
 									}"
 								>
-									Son exelance {{ item }}
+									{{ getConfig.body.cc.prePerson + " " + item }}
 								</li>
 							</ul>
 						</div>
-						<!-- /.container-persons-copy -->
+						<!-- /.container-cc -->
 					</div>
 					<!-- /.row -->
+
+					<p
+						class="for w-100 text-justify"
+						v-if="getConfig.body.for"
+						v-html="getConfig.body.for"
+					></p>
+					<!-- /.for -->
 
 					<div
 						class="content w-100 text-justify"
@@ -310,7 +348,7 @@ export default {
 		> .PI-body {
 			width: 100%;
 			line-height: 200%;
-			.container-persons-copy {
+			.container-cc {
 				> .title,
 				> .sub-title {
 					font-size: 80%;
@@ -332,6 +370,11 @@ export default {
 						padding-left: 0px;
 					}
 				}
+			}
+			> .for,
+			.content p {
+				padding: 0;
+				margin: 0;
 			}
 		}
 		> .PI-footer {

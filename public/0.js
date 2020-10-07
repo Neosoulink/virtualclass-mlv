@@ -732,6 +732,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
@@ -796,7 +834,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#paper-item {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\";\n  height: auto;\n  max-height: auto;\n}\n#paper-item * {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n#paper-item h1,\n#paper-item h2,\n#paper-item h3,\n#paper-item h4,\n#paper-item h5,\n#paper-item h6 {\n  margin: 0;\n  padding: 0;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item h4 {\n  font-size: 120%;\n}\n#paper-item h5 {\n  font-size: 100%;\n}\n#paper-item h6 {\n  font-size: 80%;\n}\n#paper-item .marker {\n  background-color: yellow;\n}\n#paper-item .overlay {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\", sans-serif;\n  font-weight: 900;\n  background-color: rgba(0, 0, 0, 0.4);\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 100;\n  color: white;\n}\n#paper-item .overlay > * {\n  line-height: 150%;\n}\n#paper-item > .PI-container-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-container-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 0.5vw;\n}\n#paper-item > .PI-container-text > .PI-header {\n  margin-bottom: 3%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > * {\n  width: auto;\n  text-align: center;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .sub-title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo {\n  margin: 4% auto;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo > .logo {\n  width: 35%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side {\n  text-align: right;\n  font-size: 80%;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side > .sub-title {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-body {\n  width: 100%;\n  line-height: 200%;\n}\n#paper-item > .PI-container-text > .PI-body .container-persons-copy > .title,\n#paper-item > .PI-container-text > .PI-body .container-persons-copy > .sub-title {\n  font-size: 80%;\n  font-weight: 700;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-body .container-persons-copy > .list-persons {\n  margin-left: 0;\n  padding: 0;\n  margin: 0;\n  border-bottom-style: dashed;\n  line-height: 0;\n}\n#paper-item > .PI-container-text > .PI-body .container-persons-copy > .list-persons > .list-item-person {\n  font-size: 80%;\n  padding-left: 0px;\n}", ""]);
+exports.push([module.i, "#paper-item {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\";\n  height: auto;\n  max-height: auto;\n}\n#paper-item * {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n#paper-item h1,\n#paper-item h2,\n#paper-item h3,\n#paper-item h4,\n#paper-item h5,\n#paper-item h6 {\n  margin: 0;\n  padding: 0;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item h4 {\n  font-size: 120%;\n}\n#paper-item h5 {\n  font-size: 100%;\n}\n#paper-item h6 {\n  font-size: 80%;\n}\n#paper-item .marker {\n  background-color: yellow;\n}\n#paper-item .overlay {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\", sans-serif;\n  font-weight: 900;\n  background-color: rgba(0, 0, 0, 0.4);\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 100;\n  color: white;\n}\n#paper-item .overlay > * {\n  line-height: 150%;\n}\n#paper-item > .PI-container-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-container-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 0.5vw;\n}\n#paper-item > .PI-container-text > .PI-header {\n  margin-bottom: 3%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > * {\n  width: auto;\n  text-align: center;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .sub-title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo {\n  margin: 4% auto;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo > .logo {\n  width: 35%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side {\n  text-align: right;\n  font-size: 80%;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side > .sub-title {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-body {\n  width: 100%;\n  line-height: 200%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .title,\n#paper-item > .PI-container-text > .PI-body .container-cc > .sub-title {\n  font-size: 80%;\n  font-weight: 700;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons {\n  margin-left: 0;\n  padding: 0;\n  margin: 0;\n  border-bottom-style: dashed;\n  line-height: 0;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons > .list-item-person {\n  font-size: 80%;\n  padding-left: 0px;\n}\n#paper-item > .PI-container-text > .PI-body > .for,\n#paper-item > .PI-container-text > .PI-body .content p {\n  padding: 0;\n  margin: 0;\n}", ""]);
 
 // exports
 
@@ -1528,22 +1566,31 @@ var render = function() {
       attrs: { id: "paper-item" }
     },
     [
-      _c(
-        "div",
-        {
-          staticClass:
-            "PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-        },
-        [
-          _c("img", {
-            staticClass: "PI-background-logo w-100",
-            attrs: { src: __webpack_require__(/*! ../../assets/img/vc_logo_0.jpg */ "./resources/js/assets/img/vc_logo_0.jpg") }
-          })
-        ]
-      ),
-      _vm._v(" "),
       _vm.getConfig
         ? [
+            _vm.getConfig.image && _vm.getConfig.image.show
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                  },
+                  [
+                    _vm.getConfig.image && _vm.getConfig.image.data
+                      ? _c("img", {
+                          staticClass: "PI-background-logo w-100",
+                          attrs: { src: _vm.getConfig.image.data.urlResized }
+                        })
+                      : _c("img", {
+                          staticClass: "PI-background-logo w-100",
+                          attrs: {
+                            src: __webpack_require__(/*! ../../assets/img/vc_logo_0.jpg */ "./resources/js/assets/img/vc_logo_0.jpg")
+                          }
+                        })
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "div",
               {
@@ -1562,53 +1609,78 @@ var render = function() {
                 _vm.getConfig.header
                   ? _c("div", { staticClass: "PI-header row" }, [
                       _vm.getConfig.header.leftSide
-                        ? _c("div", { staticClass: "left-side col" }, [
-                            _vm.getConfig.header.leftSide.title
-                              ? _c(
-                                  "div",
-                                  { staticClass: "title text-uppercase" },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t" +
-                                        _vm._s(
-                                          _vm.getConfig.header.leftSide.title
-                                        ) +
-                                        "\n\t\t\t\t\t"
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.getConfig.header.leftSide.subTitle
-                              ? _c("div", { staticClass: "sub-title" }, [
-                                  _vm._v(
-                                    "\n\t\t\t\t\t\t" +
-                                      _vm._s(
-                                        _vm.getConfig.header.leftSide.subTitle
-                                      ) +
-                                      "\n\t\t\t\t\t"
+                        ? _c(
+                            "div",
+                            { staticClass: "left-side col" },
+                            [
+                              _vm.getConfig.header.leftSide.title
+                                ? _c(
+                                    "div",
+                                    { staticClass: "title text-uppercase" },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t" +
+                                          _vm._s(
+                                            _vm.getConfig.header.leftSide.title
+                                          ) +
+                                          "\n\t\t\t\t\t"
+                                      )
+                                    ]
                                   )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.getConfig.header.leftSide.logo
-                              ? _c("div", { staticClass: "container-logo" }, [
-                                  _c("img", {
-                                    staticClass: "logo",
-                                    attrs: {
-                                      src: _vm.getConfig.header.leftSide.logo
-                                    }
-                                  })
-                                ])
-                              : _c("div", { staticClass: "container-logo" }, [
-                                  _c("img", {
-                                    staticClass: "logo",
-                                    attrs: {
-                                      src: __webpack_require__(/*! ../../assets/img/vc_logo_0.jpg */ "./resources/js/assets/img/vc_logo_0.jpg")
-                                    }
-                                  })
-                                ])
-                          ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.getConfig.header.leftSide.subTitle
+                                ? _c(
+                                    "div",
+                                    { staticClass: "sub-title text-uppercase" },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t" +
+                                          _vm._s(
+                                            _vm.getConfig.header.leftSide
+                                              .subTitle
+                                          ) +
+                                          "\n\t\t\t\t\t"
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.getConfig.header.leftSide.logo &&
+                              _vm.getConfig.header.leftSide.logo.show
+                                ? [
+                                    _vm.getConfig.header.leftSide.logo.data
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "container-logo" },
+                                          [
+                                            _c("img", {
+                                              staticClass: "logo",
+                                              attrs: {
+                                                src:
+                                                  _vm.getConfig.header.leftSide
+                                                    .logo.data.urlResized
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "container-logo" },
+                                          [
+                                            _c("img", {
+                                              staticClass: "logo",
+                                              attrs: {
+                                                src: __webpack_require__(/*! ../../assets/img/vc_logo_0.jpg */ "./resources/js/assets/img/vc_logo_0.jpg")
+                                              }
+                                            })
+                                          ]
+                                        )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.getConfig.header.rightSide
@@ -1654,101 +1726,134 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.getConfig.body
-                  ? _c("div", { staticClass: "PI-body" }, [
-                      _vm.getConfig.body.title
-                        ? _c("div", { staticClass: "container-title" }, [
-                            _c("h3", {
-                              staticClass: "title text-center w-100",
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "PI-body",
+                        style: {
+                          minHeight: (_vm.getSizes.height * 70) / 100 + "px"
+                        }
+                      },
+                      [
+                        _vm.getConfig.body.title
+                          ? _c("div", { staticClass: "container-title" }, [
+                              _c("h3", {
+                                staticClass: "title text-center w-100",
+                                style: {
+                                  paddingBottom:
+                                    (_vm.getSizes.width * 3.5) / 100 + "px"
+                                },
+                                domProps: {
+                                  innerHTML: _vm._s(_vm.getConfig.body.title)
+                                }
+                              })
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.getConfig.body.cc
+                          ? _c("div", { staticClass: "row mb-4" }, [
+                              _c(
+                                "div",
+                                { staticClass: "offset-6 col-6 container-cc" },
+                                [
+                                  _c("h5", { staticClass: "title p-0 m-0" }, [
+                                    _c("b", [
+                                      _vm._v(
+                                        _vm._s(_vm.getConfig.body.cc.title)
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h5",
+                                    {
+                                      staticClass: "sub-title",
+                                      style: {
+                                        paddingBottom:
+                                          (_vm.getSizes.width * 2.5) / 100 +
+                                          "px"
+                                      }
+                                    },
+                                    [_vm._m(0)]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "ul",
+                                    {
+                                      staticClass: "list-persons",
+                                      style: {
+                                        marginLeft:
+                                          (_vm.getSizes.width * 1.5) / 100 +
+                                          "px",
+                                        paddingLeft:
+                                          (_vm.getSizes.width * 1.5) / 100 +
+                                          "px",
+                                        borderBottomWidth:
+                                          (_vm.getSizes.width * 0.4) / 100 +
+                                          "px"
+                                      }
+                                    },
+                                    _vm._l(
+                                      _vm.getConfig.body.cc.persons,
+                                      function(item, index) {
+                                        return _c(
+                                          "li",
+                                          {
+                                            key: index,
+                                            staticClass:
+                                              "list-item-person ml-0",
+                                            style: {
+                                              paddingLeft:
+                                                (_vm.getSizes.width * 1.5) /
+                                                  100 +
+                                                "px",
+                                              paddingBottom:
+                                                (_vm.getSizes.width * 3.5) /
+                                                  100 +
+                                                "px"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t" +
+                                                _vm._s(
+                                                  _vm.getConfig.body.cc
+                                                    .prePerson +
+                                                    " " +
+                                                    item
+                                                ) +
+                                                "\n\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      }
+                                    ),
+                                    0
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.getConfig.body.for
+                          ? _c("p", {
+                              staticClass: "for w-100 text-justify",
                               domProps: {
-                                innerHTML: _vm._s(_vm.getConfig.body.title)
+                                innerHTML: _vm._s(_vm.getConfig.body.for)
                               }
                             })
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.getConfig.body.personsCopyTransmitted
-                        ? _c("div", { staticClass: "row mb-4" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "offset-6 col-6 container-persons-copy"
-                              },
-                              [
-                                _c("h5", { staticClass: "title p-0 m-0" }, [
-                                  _c("b", [
-                                    _vm._v("N° CAB/MIN-UH/ " + _vm._s("date"))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "h5",
-                                  {
-                                    staticClass: "sub-title",
-                                    style: {
-                                      paddingBottom:
-                                        (_vm.getSizes.width * 2.5) / 100 + "px"
-                                    }
-                                  },
-                                  [_vm._m(0)]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ul",
-                                  {
-                                    staticClass: "list-persons",
-                                    style: {
-                                      marginLeft:
-                                        (_vm.getSizes.width * 1.5) / 100 + "px",
-                                      paddingLeft:
-                                        (_vm.getSizes.width * 1.5) / 100 + "px",
-                                      borderBottomWidth:
-                                        (_vm.getSizes.width * 0.4) / 100 + "px"
-                                    }
-                                  },
-                                  _vm._l(
-                                    _vm.getConfig.body.personsCopyTransmitted,
-                                    function(item, index) {
-                                      return _c(
-                                        "li",
-                                        {
-                                          key: index,
-                                          staticClass: "list-item-person ml-0",
-                                          style: {
-                                            paddingLeft:
-                                              (_vm.getSizes.width * 1.5) / 100 +
-                                              "px",
-                                            paddingBottom:
-                                              (_vm.getSizes.width * 3.5) / 100 +
-                                              "px"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t\tSon exelance " +
-                                              _vm._s(item) +
-                                              "\n\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      )
-                                    }
-                                  ),
-                                  0
-                                )
-                              ]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.getConfig.body.content
-                        ? _c("div", {
-                            staticClass: "content w-100 text-justify",
-                            domProps: {
-                              innerHTML: _vm._s(_vm.getConfig.body.content)
-                            }
-                          })
-                        : _vm._e()
-                    ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.getConfig.body.content
+                          ? _c("div", {
+                              staticClass: "content w-100 text-justify",
+                              domProps: {
+                                innerHTML: _vm._s(_vm.getConfig.body.content)
+                              }
+                            })
+                          : _vm._e()
+                      ]
+                    )
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.getConfig.footer
