@@ -567,8 +567,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fitty */ "./node_modules/fitty/dist/fitty.module.js");
-/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fitty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! print-js */ "./node_modules/print-js/dist/print.js");
+/* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fitty */ "./node_modules/fitty/dist/fitty.module.js");
+/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fitty__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -770,6 +772,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paper",
@@ -816,6 +819,16 @@ __webpack_require__.r(__webpack_exports__);
         font: font,
         lineHeight: lineHeight
       };
+    }
+  },
+  methods: {
+    launchPrint: function launchPrint() {
+      print_js__WEBPACK_IMPORTED_MODULE_0___default()({
+        printable: "paper-item",
+        type: "html",
+        maxWidth: 900,
+        targetStyles: ["*"]
+      });
     }
   }
 });

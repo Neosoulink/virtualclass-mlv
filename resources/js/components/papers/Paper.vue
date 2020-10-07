@@ -200,6 +200,7 @@
 </template>
 
 <script>
+import Print from "print-js";
 import Fitty from "fitty";
 
 export default {
@@ -246,6 +247,16 @@ export default {
 				font,
 				lineHeight,
 			};
+		},
+	},
+	methods: {
+		launchPrint() {
+			Print({
+				printable: "paper-item",
+				type: "html",
+				maxWidth: 900,
+				targetStyles: ["*"],
+			});
 		},
 	},
 };

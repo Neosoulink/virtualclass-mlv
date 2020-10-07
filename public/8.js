@@ -260,6 +260,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -291,10 +338,18 @@ __webpack_require__.r(__webpack_exports__);
             content: null
           },
           personsCC: [],
-          fileRecords: [],
-          fileRecordsForUpload: [],
-          confirmModal: null,
-          confirmModalFileRecord: null
+          bgImage: {
+            fileRecords: [],
+            fileRecordsForUpload: [],
+            confirmModal: null,
+            confirmModalFileRecord: null
+          },
+          headerLogo: {
+            fileRecords: [],
+            fileRecordsForUpload: [],
+            confirmModal: null,
+            confirmModalFileRecord: null
+          }
         }
       },
       docConfig: {}
@@ -354,31 +409,33 @@ __webpack_require__.r(__webpack_exports__);
       return;
     },
     setNewDocConfig: function setNewDocConfig(config) {
-      console.log(config);
       this.$store.dispatch("document/set_config_doc_selected", config);
     },
-    filesSelected: function filesSelected(fileRecordsNewlySelected) {
+    filesSelected: function filesSelected(fileRecordsNewlySelected, dataFile) {
       var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
         return !fileRecord.error;
       });
-      this.steper.second.fileRecordsForUpload = this.steper.second.fileRecordsForUpload.concat(validFileRecords);
+      dataFile.fileRecordsForUpload = dataFile.fileRecordsForUpload.concat(validFileRecords);
     },
-    onBeforeDelete: function onBeforeDelete(fileRecord) {
-      var i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+    onBeforeDelete: function onBeforeDelete(fileRecord, dataFile) {
+      var i = dataFile.fileRecordsForUpload.indexOf(fileRecord);
 
       if (i !== -1) {
-        this.steper.second.fileRecordsForUpload.splice(i, 1);
+        dataFile.fileRecordsForUpload.splice(i, 1);
       } else {
-        this.steper.second.confirmModal = true;
+        dataFile.confirmModal = true;
       }
     },
-    fileDeleted: function fileDeleted(fileRecord) {
-      var i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+    fileDeleted: function fileDeleted(fileRecord, dataFile) {
+      var i = dataFile.fileRecordsForUpload.indexOf(fileRecord);
 
       if (i !== -1) {
-        this.steper.second.fileRecordsForUpload.splice(i, 1);
+        dataFile.fileRecordsForUpload.splice(i, 1);
       } else {//this.deleteUploadedFile(fileRecord);
       }
+    },
+    launchPrint: function launchPrint() {
+      this.$refs.PaperItem.launchPrint();
     }
   },
   mounted: function mounted() {
@@ -1164,7 +1221,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.docConfig.body.for
+                  _vm.docConfig.body.for != undefined
                     ? _c("div", { staticClass: "md-layout mb-3" }, [
                         _c(
                           "div",
@@ -1186,6 +1243,80 @@ var render = function() {
                                 }
                               },
                               [_c("label", [_vm._v(" For ")])]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "md-subheading" }, [
+                    _vm._v("Footer")
+                  ]),
+                  _vm._v(" "),
+                  _vm.docConfig.footer.rightSide != undefined
+                    ? _c("div", { staticClass: "md-layout mb-3" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "md-layout-item md-xsmall-size-100 md-size-50"
+                          },
+                          [
+                            _c(
+                              "md-autocomplete",
+                              {
+                                attrs: {
+                                  "md-options": ["" + _vm.docConfig.body.for]
+                                },
+                                model: {
+                                  value: _vm.docConfig.footer.rightSide.title,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.docConfig.footer.rightSide,
+                                      "title",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "docConfig.footer.rightSide.title"
+                                }
+                              },
+                              [_c("label", [_vm._v(" Title ")])]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "md-layout-item md-xsmall-size-100 md-size-50"
+                          },
+                          [
+                            _c(
+                              "md-autocomplete",
+                              {
+                                attrs: {
+                                  "md-options": [
+                                    "Fais à kinshasa le " + _vm.getDates[1]
+                                  ]
+                                },
+                                model: {
+                                  value:
+                                    _vm.docConfig.footer.rightSide.subTitle,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.docConfig.footer.rightSide,
+                                      "subTitle",
+                                      $$v
+                                    )
+                                  },
+                                  expression:
+                                    "docConfig.footer.rightSide.subTitle"
+                                }
+                              },
+                              [_c("label", [_vm._v(" Subtitle ")])]
                             )
                           ],
                           1
@@ -1227,13 +1358,22 @@ var render = function() {
                                     },
                                     on: {
                                       select: function($event) {
-                                        return _vm.filesSelected($event)
+                                        return _vm.filesSelected(
+                                          $event,
+                                          _vm.steper.second.bgImage
+                                        )
                                       },
                                       beforedelete: function($event) {
-                                        return _vm.onBeforeDelete($event)
+                                        return _vm.onBeforeDelete(
+                                          $event,
+                                          _vm.steper.second.bgImage
+                                        )
                                       },
                                       delete: function($event) {
-                                        return _vm.fileDeleted($event)
+                                        return _vm.fileDeleted(
+                                          $event,
+                                          _vm.steper.second.bgImage
+                                        )
                                       }
                                     },
                                     model: {
@@ -1249,6 +1389,44 @@ var render = function() {
                                     }
                                   })
                                 : _vm._e(),
+                              _vm._v(" "),
+                              _c("md-dialog-confirm", {
+                                attrs: {
+                                  "md-active":
+                                    _vm.steper.second.bgImage.confirmModal,
+                                  "md-title": "Confirmation",
+                                  "md-content":
+                                    "'Are you sure you want to delete?'",
+                                  "md-confirm-text": "Agree",
+                                  "md-cancel-text": "Disagree"
+                                },
+                                on: {
+                                  "update:mdActive": function($event) {
+                                    return _vm.$set(
+                                      _vm.steper.second.bgImage,
+                                      "confirmModal",
+                                      $event
+                                    )
+                                  },
+                                  "update:md-active": function($event) {
+                                    return _vm.$set(
+                                      _vm.steper.second.bgImage,
+                                      "confirmModal",
+                                      $event
+                                    )
+                                  },
+                                  "md-cancel": function($event) {
+                                    _vm.steper.second.bgImage.confirmModal = null
+                                  },
+                                  "md-confirm": function() {
+                                    _vm.steper.second.bgImage.confirmModal = true
+                                    _vm.$refs.vueFileAgent.deleteFileRecord(
+                                      _vm.steper.second.bgImage
+                                        .confirmModalFileRecord
+                                    )
+                                  }
+                                }
+                              }),
                               _vm._v(" "),
                               _c(
                                 "md-switch",
@@ -1298,13 +1476,22 @@ var render = function() {
                                     },
                                     on: {
                                       select: function($event) {
-                                        return _vm.filesSelected($event)
+                                        return _vm.filesSelected(
+                                          $event,
+                                          _vm.steper.second.headerLogo
+                                        )
                                       },
                                       beforedelete: function($event) {
-                                        return _vm.onBeforeDelete($event)
+                                        return _vm.onBeforeDelete(
+                                          $event,
+                                          _vm.steper.second.headerLogo
+                                        )
                                       },
                                       delete: function($event) {
-                                        return _vm.fileDeleted($event)
+                                        return _vm.fileDeleted(
+                                          $event,
+                                          _vm.steper.second.headerLogo
+                                        )
                                       }
                                     },
                                     model: {
@@ -1349,7 +1536,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("md-dialog-confirm", {
                         attrs: {
-                          "md-active": _vm.steper.second.confirmModal,
+                          "md-active":
+                            _vm.steper.second.headerLogo.confirmModal,
                           "md-title": "Confirmation",
                           "md-content": "'Are you sure you want to delete?'",
                           "md-confirm-text": "Agree",
@@ -1358,25 +1546,26 @@ var render = function() {
                         on: {
                           "update:mdActive": function($event) {
                             return _vm.$set(
-                              _vm.steper.second,
+                              _vm.steper.second.headerLogo,
                               "confirmModal",
                               $event
                             )
                           },
                           "update:md-active": function($event) {
                             return _vm.$set(
-                              _vm.steper.second,
+                              _vm.steper.second.headerLogo,
                               "confirmModal",
                               $event
                             )
                           },
                           "md-cancel": function($event) {
-                            _vm.steper.second.confirmModal = null
+                            _vm.steper.second.headerLogo.confirmModal = null
                           },
                           "md-confirm": function() {
-                            _vm.steper.second.confirmModal = true
+                            _vm.steper.second.headerLogo.confirmModal = true
                             _vm.$refs.vueFileAgent.deleteFileRecord(
-                              _vm.steper.second.confirmModalFileRecord
+                              _vm.steper.second.headerLogo
+                                .confirmModalFileRecord
                             )
                           }
                         }
@@ -1396,6 +1585,19 @@ var render = function() {
                       }
                     },
                     [_vm._v("\n\t\t\t\t\tContinue\n\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-button",
+                    {
+                      staticClass: "md-raised md-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.launchPrint()
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\t\tLaunch Print\n\t\t\t\t")]
                   )
                 ],
                 1
@@ -1410,7 +1612,7 @@ var render = function() {
               staticClass:
                 "right-side col-md-5 d-flex align-items-center justify-content-center"
             },
-            [_c("Paper")],
+            [_c("Paper", { ref: "PaperItem" })],
             1
           )
         ],

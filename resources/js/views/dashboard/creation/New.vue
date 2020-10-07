@@ -134,7 +134,7 @@
 					</div>
 					<!-- /.md-layout -->
 
-					<div class="md-layout mb-3" v-if="docConfig.body.for">
+					<div class="md-layout mb-3" v-if="docConfig.body.for != undefined">
 						<div class="md-layout-item md-xsmall-size-100 md-size-50">
 							<md-autocomplete
 								v-model="docConfig.body.for"
@@ -143,6 +143,33 @@
 								<label> For </label>
 							</md-autocomplete>
 						</div>
+					</div>
+					<!-- /.md-layout -->
+
+					<div class="md-subheading">Footer</div>
+					<div
+						class="md-layout mb-3"
+						v-if="docConfig.footer.rightSide != undefined"
+					>
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.footer.rightSide.title"
+								:md-options="[`${docConfig.body.for}`]"
+							>
+								<label> Title </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
+
+						<div class="md-layout-item md-xsmall-size-100 md-size-50">
+							<md-autocomplete
+								v-model="docConfig.footer.rightSide.subTitle"
+								:md-options="[`Fais à kinshasa le ${getDates[1]}`]"
+							>
+								<label> Subtitle </label>
+							</md-autocomplete>
+						</div>
+						<!-- /.md-layout-item -->
 					</div>
 					<!-- /.md-layout -->
 
@@ -166,12 +193,28 @@
 									type: 'Invalid file type. Only images Allowed',
 									size: 'Files should not exceed 10MB in size',
 								}"
-								@select="filesSelected($event)"
-								@beforedelete="onBeforeDelete($event)"
-								@delete="fileDeleted($event)"
+								@select="filesSelected($event, steper.second.bgImage)"
+								@beforedelete="onBeforeDelete($event, steper.second.bgImage)"
+								@delete="fileDeleted($event, steper.second.bgImage)"
 								v-model="docConfig.image.data"
 							></VueFileAgent>
 
+							<md-dialog-confirm
+								:md-active.sync="steper.second.bgImage.confirmModal"
+								md-title="Confirmation"
+								md-content="'Are you sure you want to delete?'"
+								md-confirm-text="Agree"
+								md-cancel-text="Disagree"
+								@md-cancel="steper.second.bgImage.confirmModal = null"
+								@md-confirm="
+									() => {
+										steper.second.bgImage.confirmModal = true;
+										$refs.vueFileAgent.deleteFileRecord(
+											steper.second.bgImage.confirmModalFileRecord
+										);
+									}
+								"
+							/>
 							<md-switch v-model="docConfig.image.show"
 								>Show background image ?</md-switch
 							>
@@ -197,9 +240,9 @@
 									type: 'Invalid file type. Only images Allowed',
 									size: 'Files should not exceed 10MB in size',
 								}"
-								@select="filesSelected($event)"
-								@beforedelete="onBeforeDelete($event)"
-								@delete="fileDeleted($event)"
+								@select="filesSelected($event, steper.second.headerLogo)"
+								@beforedelete="onBeforeDelete($event, steper.second.headerLogo)"
+								@delete="fileDeleted($event, steper.second.headerLogo)"
 								v-model="docConfig.header.leftSide.logo.data"
 							></VueFileAgent>
 							<md-switch v-model="docConfig.header.leftSide.logo.show"
@@ -209,17 +252,17 @@
 						<!-- /.md-layout-item -->
 
 						<md-dialog-confirm
-							:md-active.sync="steper.second.confirmModal"
+							:md-active.sync="steper.second.headerLogo.confirmModal"
 							md-title="Confirmation"
 							md-content="'Are you sure you want to delete?'"
 							md-confirm-text="Agree"
 							md-cancel-text="Disagree"
-							@md-cancel="steper.second.confirmModal = null"
+							@md-cancel="steper.second.headerLogo.confirmModal = null"
 							@md-confirm="
 								() => {
-									steper.second.confirmModal = true;
+									steper.second.headerLogo.confirmModal = true;
 									$refs.vueFileAgent.deleteFileRecord(
-										steper.second.confirmModalFileRecord
+										steper.second.headerLogo.confirmModalFileRecord
 									);
 								}
 							"
@@ -230,6 +273,10 @@
 					<md-button class="md-raised md-primary" @click="setDone('second')">
 						Continue
 					</md-button>
+
+					<md-button class="md-raised md-primary" @click="launchPrint()">
+						Launch Print
+					</md-button>
 				</md-step>
 				<!-- /md-step.second -->
 			</md-steppers>
@@ -238,7 +285,7 @@
 			<div
 				class="right-side col-md-5 d-flex align-items-center justify-content-center"
 			>
-				<Paper></Paper>
+				<Paper ref="PaperItem"></Paper>
 			</div>
 			<!-- /.right-side -->
 		</div>
@@ -276,10 +323,18 @@ export default {
 					content: null,
 				},
 				personsCC: [],
-				fileRecords: [],
-				fileRecordsForUpload: [],
-				confirmModal: null,
-				confirmModalFileRecord: null,
+				bgImage: {
+					fileRecords: [],
+					fileRecordsForUpload: [],
+					confirmModal: null,
+					confirmModalFileRecord: null,
+				},
+				headerLogo: {
+					fileRecords: [],
+					fileRecordsForUpload: [],
+					confirmModal: null,
+					confirmModalFileRecord: null,
+				},
 			},
 		},
 		docConfig: {},
@@ -334,32 +389,34 @@ export default {
 			return;
 		},
 		setNewDocConfig(config) {
-			console.log(config);
 			this.$store.dispatch("document/set_config_doc_selected", config);
 		},
-		filesSelected: function (fileRecordsNewlySelected) {
+		filesSelected: function (fileRecordsNewlySelected, dataFile) {
 			let validFileRecords = fileRecordsNewlySelected.filter(
 				(fileRecord) => !fileRecord.error
 			);
-			this.steper.second.fileRecordsForUpload = this.steper.second.fileRecordsForUpload.concat(
+			dataFile.fileRecordsForUpload = dataFile.fileRecordsForUpload.concat(
 				validFileRecords
 			);
 		},
-		onBeforeDelete: function (fileRecord) {
-			let i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+		onBeforeDelete: function (fileRecord, dataFile) {
+			let i = dataFile.fileRecordsForUpload.indexOf(fileRecord);
 			if (i !== -1) {
-				this.steper.second.fileRecordsForUpload.splice(i, 1);
+				dataFile.fileRecordsForUpload.splice(i, 1);
 			} else {
-				this.steper.second.confirmModal = true;
+				dataFile.confirmModal = true;
 			}
 		},
-		fileDeleted: function (fileRecord) {
-			let i = this.steper.second.fileRecordsForUpload.indexOf(fileRecord);
+		fileDeleted: function (fileRecord, dataFile) {
+			let i = dataFile.fileRecordsForUpload.indexOf(fileRecord);
 			if (i !== -1) {
-				this.steper.second.fileRecordsForUpload.splice(i, 1);
+				dataFile.fileRecordsForUpload.splice(i, 1);
 			} else {
 				//this.deleteUploadedFile(fileRecord);
 			}
+		},
+		launchPrint() {
+			this.$refs.PaperItem.launchPrint();
 		},
 	},
 	mounted() {
