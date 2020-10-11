@@ -1,6 +1,7 @@
 <template>
 	<div
 		id="paper-item"
+		ref="itemPaper"
 		class="bg-white position-relative text-dark"
 		:style="{
 			minHeight: getSizes.height + 'px',
@@ -202,6 +203,7 @@
 <script>
 import Print from "print-js";
 import Fitty from "fitty";
+import { jsPDF } from "jspdf";
 
 export default {
 	name: "Paper",
@@ -249,6 +251,7 @@ export default {
 			};
 		},
 	},
+	mounted() {},
 	methods: {
 		launchPrint() {
 			Print({
@@ -256,6 +259,39 @@ export default {
 				type: "html",
 				maxWidth: 900,
 				targetStyles: ["*"],
+			});
+		},
+		exportToWord() {
+			let paperItem = document.getElementById("paper-item").innerHTML,
+				word = `<html
+					xmlns:o='urn:schemas-microsoft-com:office:office xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+					<head>
+						<meta charset='utf-8'>
+						<title>VirtualClass Document</title>
+					</head>
+					<body>${paperItem}</body>
+				</html>`;
+
+			let source =
+				"data:application/vnd.ms-word;charset=utf-8," +
+				encodeURIComponent(word);
+			let fileDownload = document.createElement("a");
+			document.body.appendChild(fileDownload);
+			fileDownload.href = source;
+			fileDownload.download = "vr_doc.doc";
+			fileDownload.click();
+			document.body.removeChild(fileDownload);
+		},
+		exportToPDF() {
+			const doc = new jsPDF();
+			let paperItem = document.getElementById("paper-item");
+
+			doc.html(paperItem, {
+				callback: function (doc) {
+					doc.save();
+				},
+				x: 1,
+				y: 1,
 			});
 		},
 	},

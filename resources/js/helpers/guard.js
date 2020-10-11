@@ -2,6 +2,7 @@ export function initialize(store, router) {
 
 	router.beforeEach((to, from, next) => {
 		const requireAuth = to.matched.some(record => record.meta.requireAuth);
+		const requireSelectedDoc = to.matched.some(record => record.meta.requireSelectedDoc);
 		const currentUser = store.state.user.currentUser;
 
 		if (requireAuth && !currentUser) {
@@ -10,8 +11,8 @@ export function initialize(store, router) {
 			return next('/dashboard');
 		}
 
-		if (to.name == "dashboard-creation-new" && !store.getters['document/getDocSelected']) {
-			return next({ name: 'dashboard-creation'});
+		if (requireSelectedDoc && !store.getters['document/getDocSelected']) {
+			return next({ name: 'dashboard-creation' });
 		}
 
 		next();

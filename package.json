@@ -35,6 +35,7 @@
 		"ckeditor4-vue": "^1.0.1",
 		"es6-promise": "^4.2.8",
 		"fitty": "^2.3.2",
+		"jspdf": "^2.1.1",
 		"print-js": "^1.0.63",
 		"validate.js": "^0.13.1",
 		"vue-clickaway": "^2.2.2",

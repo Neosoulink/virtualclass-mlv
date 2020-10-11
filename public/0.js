@@ -571,6 +571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fitty */ "./node_modules/fitty/dist/fitty.module.js");
 /* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fitty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
 //
 //
 //
@@ -772,6 +773,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -821,6 +824,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     }
   },
+  mounted: function mounted() {},
   methods: {
     launchPrint: function launchPrint() {
       print_js__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -828,6 +832,28 @@ __webpack_require__.r(__webpack_exports__);
         type: "html",
         maxWidth: 900,
         targetStyles: ["*"]
+      });
+    },
+    exportToWord: function exportToWord() {
+      var paperItem = document.getElementById("paper-item").innerHTML,
+          word = "<html\n\t\t\t\t\txmlns:o='urn:schemas-microsoft-com:office:office xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n\t\t\t\t\t<head>\n\t\t\t\t\t\t<meta charset='utf-8'>\n\t\t\t\t\t\t<title>VirtualClass Document</title>\n\t\t\t\t\t</head>\n\t\t\t\t\t<body>".concat(paperItem, "</body>\n\t\t\t\t</html>");
+      var source = "data:application/vnd.ms-word;charset=utf-8," + encodeURIComponent(word);
+      var fileDownload = document.createElement("a");
+      document.body.appendChild(fileDownload);
+      fileDownload.href = source;
+      fileDownload.download = "vr_doc.doc";
+      fileDownload.click();
+      document.body.removeChild(fileDownload);
+    },
+    exportToPDF: function exportToPDF() {
+      var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2__["jsPDF"]();
+      var paperItem = document.getElementById("paper-item");
+      doc.html(paperItem, {
+        callback: function callback(doc) {
+          doc.save();
+        },
+        x: 1,
+        y: 1
       });
     }
   }
@@ -1569,6 +1595,7 @@ var render = function() {
   return _c(
     "div",
     {
+      ref: "itemPaper",
       staticClass: "bg-white position-relative text-dark",
       style: {
         minHeight: _vm.getSizes.height + "px",

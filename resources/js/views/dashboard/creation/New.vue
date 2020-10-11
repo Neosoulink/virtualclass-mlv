@@ -270,22 +270,27 @@
 					</div>
 					<!-- /.md-layout -->
 
-					<md-button class="md-raised md-primary" @click="setDone('second')">
-						Continue
+					<md-button
+						class="md-raised md-primary"
+						@click="setDone('first', 'first')"
+					>
+						Back
 					</md-button>
 
-					<md-button class="md-raised md-primary" @click="launchPrint()">
-						Launch Print
+					<md-button class="md-raised md-primary" @click="launchPreview()">
+						Launch preview
 					</md-button>
 				</md-step>
 				<!-- /md-step.second -->
 			</md-steppers>
 			<!-- /.left-side -->
 
+			<router-view></router-view>
+
 			<div
-				class="right-side col-md-5 d-flex align-items-center justify-content-center"
+				class="right-side col-md-5 d-flex align-items-start justify-content-center"
 			>
-				<Paper ref="PaperItem"></Paper>
+				<Paper></Paper>
 			</div>
 			<!-- /.right-side -->
 		</div>
@@ -415,8 +420,9 @@ export default {
 				//this.deleteUploadedFile(fileRecord);
 			}
 		},
-		launchPrint() {
-			this.$refs.PaperItem.launchPrint();
+		launchPreview() {
+			this.setDone("second");
+			this.$router.push({ name: "dashboard-creation-new-preview" });
 		},
 	},
 	mounted() {
@@ -442,6 +448,21 @@ export default {
 </script>
 
 <style lang="scss">
-.content#new-creation-section {
+#new-creation-section {
+	> .left-side {
+		overflow: auto;
+		min-height: 100%;
+		max-height: calc(100vh - 123px);
+
+		> :first-child {
+			overflow: auto;
+			height: 100%;
+
+			.list-group {
+				overflow: auto;
+				height: 100%;
+			}
+		}
+	}
 }
 </style>

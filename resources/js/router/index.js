@@ -40,11 +40,16 @@ const routes = [
 				path: 'creation/new',
 				name: 'dashboard-creation-new',
 				component: resolve => require(['../views/dashboard/creation/New.vue'], resolve),
-			},
-			{
-				path: 'creation/new/preview',
-				name: 'dashboard-creation-new-preview',
-				component: resolve => require(['../views/dashboard/creation/Preview.vue'], resolve),
+				meta: {
+					requireSelectedDoc: true,
+				},
+				children: [
+					{
+						path: 'preview',
+						name: 'dashboard-creation-new-preview',
+						component: resolve => require(['../views/dashboard/creation/Preview.vue'], resolve),
+					},
+				]
 			},
 
 			{
@@ -63,7 +68,7 @@ const routes = [
 const router = new VueRouter({
 	routes,
 	mode: 'history',
-	linkExactActiveClass: "nav-item active",
+	linkActiveClass: "nav-item active",
 });
 
 export default router;

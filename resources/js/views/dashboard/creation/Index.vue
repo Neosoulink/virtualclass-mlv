@@ -2,7 +2,7 @@
 	<div class="content" id="home-creation-section">
 		<div class="content-side row">
 			<div
-				class="left-side col-5 d-flex align-items-center justify-content-center"
+				class="left-side col-5 d-flex align-items-start justify-content-center"
 			>
 				<Paper></Paper>
 			</div>
@@ -42,7 +42,6 @@
 			<!-- /.right-side -->
 		</div>
 		<!-- /.content-side -->
-	<Paper :width="900"></Paper>
 	</div>
 	<!-- /#home-creation-section -->
 </template>
@@ -105,15 +104,15 @@ export default {
 			overflow: auto;
 			min-height: 100%;
 			max-height: calc(100vh - 123px);
-		}
 
-		> .right-side > :first-child {
-			overflow: auto;
-			height: 100%;
-
-			.list-group {
+			> :first-child {
 				overflow: auto;
 				height: 100%;
+
+				.list-group {
+					overflow: auto;
+					height: 100%;
+				}
 			}
 		}
 	}

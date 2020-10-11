@@ -307,6 +307,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -434,8 +439,11 @@ __webpack_require__.r(__webpack_exports__);
       } else {//this.deleteUploadedFile(fileRecord);
       }
     },
-    launchPrint: function launchPrint() {
-      this.$refs.PaperItem.launchPrint();
+    launchPreview: function launchPreview() {
+      this.setDone("second");
+      this.$router.push({
+        name: "dashboard-creation-new-preview"
+      });
     }
   },
   mounted: function mounted() {
@@ -470,7 +478,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#new-creation-section > .left-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n#new-creation-section > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n#new-creation-section > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -1580,11 +1588,11 @@ var render = function() {
                       staticClass: "md-raised md-primary",
                       on: {
                         click: function($event) {
-                          return _vm.setDone("second")
+                          return _vm.setDone("first", "first")
                         }
                       }
                     },
-                    [_vm._v("\n\t\t\t\t\tContinue\n\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\tBack\n\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -1593,11 +1601,11 @@ var render = function() {
                       staticClass: "md-raised md-primary",
                       on: {
                         click: function($event) {
-                          return _vm.launchPrint()
+                          return _vm.launchPreview()
                         }
                       }
                     },
-                    [_vm._v("\n\t\t\t\t\tLaunch Print\n\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\tLaunch preview\n\t\t\t\t")]
                   )
                 ],
                 1
@@ -1606,13 +1614,15 @@ var render = function() {
             1
           ),
           _vm._v(" "),
+          _c("router-view"),
+          _vm._v(" "),
           _c(
             "div",
             {
               staticClass:
-                "right-side col-md-5 d-flex align-items-center justify-content-center"
+                "right-side col-md-5 d-flex align-items-start justify-content-center"
             },
-            [_c("Paper", { ref: "PaperItem" })],
+            [_c("Paper")],
             1
           )
         ],

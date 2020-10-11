@@ -80481,6 +80481,9 @@ function initialize(store, router) {
     var requireAuth = to.matched.some(function (record) {
       return record.meta.requireAuth;
     });
+    var requireSelectedDoc = to.matched.some(function (record) {
+      return record.meta.requireSelectedDoc;
+    });
     var currentUser = store.state.user.currentUser;
 
     if (requireAuth && !currentUser) {
@@ -80489,7 +80492,7 @@ function initialize(store, router) {
       return next('/dashboard');
     }
 
-    if (to.name == "dashboard-creation-new" && !store.getters['document/getDocSelected']) {
+    if (requireSelectedDoc && !store.getters['document/getDocSelected']) {
       return next({
         name: 'dashboard-creation'
       });
@@ -80648,7 +80651,7 @@ var routes = [{
 }, {
   path: '/dashboard',
   component: function component(resolve) {
-    return Promise.all(/*! AMD require */[__webpack_require__.e(13), __webpack_require__.e(6)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Layout/DashboardLayout.vue */ "./resources/js/views/dashboard/Layout/DashboardLayout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return Promise.all(/*! AMD require */[__webpack_require__.e(14), __webpack_require__.e(6)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/Layout/DashboardLayout.vue */ "./resources/js/views/dashboard/Layout/DashboardLayout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
     requireAuth: true
@@ -80670,30 +80673,34 @@ var routes = [{
     name: 'dashboard-creation-new',
     component: function component(resolve) {
       return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(5), __webpack_require__.e(0), __webpack_require__.e(8)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/New.vue */ "./resources/js/views/dashboard/creation/New.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
-    }
-  }, {
-    path: 'creation/new/preview',
-    name: 'dashboard-creation-new-preview',
-    component: function component(resolve) {
-      return __webpack_require__.e(/*! AMD require */ 16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/Preview.vue */ "./resources/js/views/dashboard/creation/Preview.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
-    }
+    },
+    meta: {
+      requireSelectedDoc: true
+    },
+    children: [{
+      path: 'preview',
+      name: 'dashboard-creation-new-preview',
+      component: function component(resolve) {
+        return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(0), __webpack_require__.e(13)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/creation/Preview.vue */ "./resources/js/views/dashboard/creation/Preview.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      }
+    }]
   }, {
     path: 'demo',
     name: 'dashboard-demo',
     component: function component(resolve) {
-      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(0), __webpack_require__.e(15)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Index.vue */ "./resources/js/views/dashboard/demo/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+      return Promise.all(/*! AMD require */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(0), __webpack_require__.e(16)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/demo/Index.vue */ "./resources/js/views/dashboard/demo/Index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     }
   }]
 }, {
   path: '*',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 14).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/404.vue */ "./resources/js/views/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/404.vue */ "./resources/js/views/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
   mode: 'history',
-  linkExactActiveClass: "nav-item active"
+  linkActiveClass: "nav-item active"
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
