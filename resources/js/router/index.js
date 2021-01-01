@@ -51,7 +51,6 @@ const routes = [
 					},
 				]
 			},
-
 			{
 				path: 'demo',
 				name: 'dashboard-demo',
