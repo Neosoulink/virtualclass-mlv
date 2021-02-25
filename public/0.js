@@ -792,10 +792,10 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     getConfig: function getConfig() {
       if (this.config) return this.config;
+      var doc = this.$store.getters["document/getDocSelected"];
 
       if (doc) {
-        var _doc = this.$store.getters["document/getDocSelected"];
-        return _doc.config;
+        return doc.config;
       }
 
       return false;

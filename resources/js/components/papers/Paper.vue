@@ -221,8 +221,8 @@ export default {
 		getConfig() {
 			if (this.config) return this.config;
 
+			const doc = this.$store.getters["document/getDocSelected"];
 			if (doc) {
-				const doc = this.$store.getters["document/getDocSelected"];
 				return doc.config;
 			}
 
