@@ -219,14 +219,14 @@ export default {
 	},
 	computed: {
 		getConfig() {
-			const doc = this.$store.getters["document/getDocSelected"];
-			if (this.config) {
-				return this.config;
-			} else if (doc) {
+			if (this.config) return this.config;
+
+			if (doc) {
+				const doc = this.$store.getters["document/getDocSelected"];
 				return doc.config;
-			} else {
-				return false;
 			}
+
+			return false;
 		},
 		getSizes() {
 			//Longeur = Largeur * 1.414

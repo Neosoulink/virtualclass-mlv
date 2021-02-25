@@ -791,15 +791,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getConfig: function getConfig() {
-      var doc = this.$store.getters["document/getDocSelected"];
+      if (this.config) return this.config;
 
-      if (this.config) {
-        return this.config;
-      } else if (doc) {
-        return doc.config;
-      } else {
-        return false;
+      if (doc) {
+        var _doc = this.$store.getters["document/getDocSelected"];
+        return _doc.config;
       }
+
+      return false;
     },
     getSizes: function getSizes() {
       //Longeur = Largeur * 1.414

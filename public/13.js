@@ -65,34 +65,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      documentType: null,
-      customWidth: 320
+      selectedDoc: undefined
     };
   },
   computed: {
-    isSelected: function isSelected() {
-      if (this.documentType) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     getDocs: function getDocs() {
-      return this.$store.getters["document/getDocs"];
-    },
-    docSelected: function docSelected() {
-      var docSelected = this.$store.getters["document/getDocSelected"];
-
-      if (docSelected) {
-        return docSelected;
-      } else {
-        return false;
-      }
+      return JSON.parse(JSON.stringify(this.$store.getters["document/getDocs"]));
     }
   },
   methods: {
-    selectDoc: function selectDoc(dataDoc) {
-      this.$store.dispatch("document/select_doc", dataDoc);
+    selectConfig: function selectConfig() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Object;
+      this.selectedDoc = JSON.parse(JSON.stringify(config));
+    },
+    nextBtn: function nextBtn() {
+      if (!this.selectedDoc) return;
+      this.$store.dispatch("document/select_doc", JSON.parse(JSON.stringify(this.selectedDoc)));
+      this.$router.push({
+        name: "dashboard-creation-new"
+      });
     }
   }
 });
@@ -111,7 +102,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".content#home-creation-section > .content-side {\n  /*>.left-side {\n  \toverflow: auto;\n  \theight: 100%;\n  }\n\n  >.left-side > :first-child {\n  \toverflow: auto;\n  \theight: 100%;\n  }*/\n}\n.content#home-creation-section > .content-side > .right-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n.content#home-creation-section > .content-side > .right-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n.content#home-creation-section > .content-side > .right-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".content#home-creation-section > .content-side > .left-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n.content#home-creation-section > .content-side > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n.content#home-creation-section > .content-side > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -168,17 +159,7 @@ var render = function() {
     { staticClass: "content", attrs: { id: "home-creation-section" } },
     [
       _c("div", { staticClass: "content-side row" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "left-side col-5 d-flex align-items-start justify-content-center"
-          },
-          [_c("Paper")],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "right-side col-7" }, [
+        _c("div", { staticClass: "left-side col-7" }, [
           _c(
             "div",
             { staticClass: "d-flex flex-column bg-white h-100 w-100" },
@@ -198,9 +179,11 @@ var render = function() {
                     "md-button",
                     {
                       staticClass: "md-primary",
-                      attrs: {
-                        disabled: !_vm.docSelected,
-                        to: { name: "dashboard-creation-new" }
+                      attrs: { disabled: !_vm.selectedDoc },
+                      on: {
+                        click: function($event) {
+                          return _vm.nextBtn()
+                        }
                       }
                     },
                     [_vm._v("Next")]
@@ -212,16 +195,16 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "list-group" },
-                _vm._l(_vm.getDocs, function(item, index) {
+                _vm._l(_vm.getDocs, function(doc, index) {
                   return _c(
                     "button",
                     {
                       key: index,
                       staticClass: "list-group-item list-group-item-action",
-                      class: { active: _vm.docSelected == item },
+                      class: { active: _vm.selectedDoc == doc },
                       on: {
                         click: function($event) {
-                          return _vm.selectDoc(item)
+                          return _vm.selectConfig(doc)
                         }
                       }
                     },
@@ -231,13 +214,13 @@ var render = function() {
                         { staticClass: "d-flex w-100 justify-content-between" },
                         [
                           _c("h5", { staticClass: "mb-1" }, [
-                            _vm._v(_vm._s(item.name))
+                            _vm._v(_vm._s(doc.name))
                           ])
                         ]
                       ),
                       _vm._v(" "),
                       _c("p", { staticClass: "mb-1" }, [
-                        _vm._v(_vm._s(item.description))
+                        _vm._v(_vm._s(doc.description))
                       ]),
                       _vm._v(" "),
                       _c("small", [_vm._v("Donec id elit non mi porta.")])
@@ -248,7 +231,23 @@ var render = function() {
               )
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "right-side col-5 d-flex align-items-start justify-content-center"
+          },
+          [
+            _c("Paper", {
+              attrs: {
+                config: _vm.selectedDoc ? _vm.selectedDoc.config : undefined
+              }
+            })
+          ],
+          1
+        )
       ])
     ]
   )

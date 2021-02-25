@@ -264,8 +264,7 @@
 									$refs.vueFileAgent.deleteFileRecord(
 										steper.second.headerLogo.confirmModalFileRecord
 									);
-								}
-							"
+								}"
 						/>
 					</div>
 					<!-- /.md-layout -->
@@ -290,7 +289,7 @@
 			<div
 				class="right-side col-md-5 d-flex align-items-start justify-content-center"
 			>
-				<Paper></Paper>
+				<Paper :config="docConfig"></Paper>
 			</div>
 			<!-- /.right-side -->
 		</div>
@@ -307,7 +306,6 @@ export default {
 		Paper,
 	},
 	data: () => ({
-		boolean: false,
 		steper: {
 			active: "first",
 			first: {
@@ -342,7 +340,9 @@ export default {
 				},
 			},
 		},
-		docConfig: {},
+		docConfig: {
+			body: {}
+		},
 	}),
 	computed: {
 		getDates() {
@@ -394,7 +394,7 @@ export default {
 			return;
 		},
 		setNewDocConfig(config) {
-			this.$store.dispatch("document/set_config_doc_selected", config);
+			this.docConfig.config = config;
 		},
 		filesSelected: function (fileRecordsNewlySelected, dataFile) {
 			let validFileRecords = fileRecordsNewlySelected.filter(

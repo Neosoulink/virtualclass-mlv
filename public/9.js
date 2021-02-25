@@ -311,7 +311,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -322,7 +321,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      "boolean": false,
       steper: {
         active: "first",
         first: {
@@ -357,7 +355,9 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       },
-      docConfig: {}
+      docConfig: {
+        body: {}
+      }
     };
   },
   computed: {
@@ -414,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
       return;
     },
     setNewDocConfig: function setNewDocConfig(config) {
-      this.$store.dispatch("document/set_config_doc_selected", config);
+      this.docConfig.config = config;
     },
     filesSelected: function filesSelected(fileRecordsNewlySelected, dataFile) {
       var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
@@ -1622,7 +1622,7 @@ var render = function() {
               staticClass:
                 "right-side col-md-5 d-flex align-items-start justify-content-center"
             },
-            [_c("Paper")],
+            [_c("Paper", { attrs: { config: _vm.docConfig } })],
             1
           )
         ],
