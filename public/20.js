@@ -311,6 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -358,7 +359,10 @@ __webpack_require__.r(__webpack_exports__);
       docConfig: {
         body: {},
         header: {
-          leftSide: {},
+          leftSide: {
+            title: null,
+            subTitle: null
+          },
           rightSide: {}
         },
         footer: {
@@ -456,12 +460,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var selectedDoc = JSON.parse(JSON.stringify(this.$store.getters["document/getSelectedDoc"]));
     this.docConfig = selectedDoc.config;
-
-    if (this.docConfig.body.cc != undefined) {
-      this.steper.second.personsCC = JSON.parse(JSON.stringify(this.docConfig.body.cc.persons));
-    }
-
-    ;
+    if (this.docConfig && this.docConfig.body && this.docConfig.body.cc) this.steper.second.personsCC = JSON.parse(JSON.stringify(this.docConfig.body.cc.persons));
   },
   watch: {
     docConfig: {

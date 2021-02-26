@@ -344,7 +344,10 @@ export default {
 		docConfig: {
 			body: {},
 			header: {
-				leftSide: {},
+				leftSide: {
+					title: null,
+					subTitle: null,
+				},
 				rightSide: {},
 			},
 			footer: {
