@@ -19,7 +19,7 @@
 							:key="index"
 							class="list-group-item list-group-item-action"
 							:class="{ active: selectedDoc == doc }"
-							@click="selectTemplate(doc)"
+							@click="selectDoc(doc)"
 						>
 							<div class="d-flex w-100 justify-content-between">
 								<h5 class="mb-1">{{ doc.name }}</h5>

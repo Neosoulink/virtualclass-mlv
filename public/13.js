@@ -200,7 +200,7 @@ var render = function() {
                     class: { active: _vm.selectedDoc == doc },
                     on: {
                       click: function($event) {
-                        return _vm.selectTemplate(doc)
+                        return _vm.selectDoc(doc)
                       }
                     }
                   },
