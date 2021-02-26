@@ -80796,8 +80796,8 @@ var state = function state() {
 };
 
 var getters = {
-  getDocs: function getDocs(state) {
-    return state.documents;
+  getDocList: function getDocList(state) {
+    return state.docList;
   },
   getSelectedDoc: function getSelectedDoc(state) {
     return state.selectedDoc;

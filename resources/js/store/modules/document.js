@@ -9,8 +9,8 @@ const state = () => ({
 });
 
 const getters = {
-	getDocs(state) {
-		return state.documents;
+	getDocList(state) {
+		return state.docList;
 	},
 	getSelectedDoc(state) {
 		return state.selectedDoc;

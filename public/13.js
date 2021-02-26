@@ -77,14 +77,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextBtn: function nextBtn() {
       if (!this.selectedDoc) return this.error = "Please selecte a document template";
-      this.$store.dispatch("document/setSelectdDoc", JSON.parse(JSON.stringify(this.selectedDoc)));
+      this.$store.dispatch("document/setSelectedDoc", JSON.parse(JSON.stringify(this.selectedDoc)));
       this.$router.push({
         name: "dashboard-creation-new"
       });
     }
   },
   mounted: function mounted() {
-    this.docList = JSON.parse(JSON.stringify(this.$store.getters["document/getDocs"]));
+    this.docList = JSON.parse(JSON.stringify(this.$store.getters["document/getDocList"]));
   }
 });
 
