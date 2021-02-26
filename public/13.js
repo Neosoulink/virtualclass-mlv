@@ -65,14 +65,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      docList: [],
       selectedDoc: undefined,
       error: null
     };
-  },
-  computed: {
-    docList: function docList() {
-      return JSON.parse(JSON.stringify(this.$store.getters["document/getDocs"]));
-    }
   },
   methods: {
     selectDoc: function selectDoc() {
@@ -80,12 +76,15 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedDoc = JSON.parse(JSON.stringify(config));
     },
     nextBtn: function nextBtn() {
-      if (!this.selectedDoc) return this.error = "Please selecte a Document template";
-      this.$store.dispatch("document/currentEditableDoc", JSON.parse(JSON.stringify(this.selectedDoc)));
+      if (!this.selectedDoc) return this.error = "Please selecte a document template";
+      this.$store.dispatch("document/setSelectdDoc", JSON.parse(JSON.stringify(this.selectedDoc)));
       this.$router.push({
         name: "dashboard-creation-new"
       });
     }
+  },
+  mounted: function mounted() {
+    this.docList = JSON.parse(JSON.stringify(this.$store.getters["document/getDocs"]));
   }
 });
 

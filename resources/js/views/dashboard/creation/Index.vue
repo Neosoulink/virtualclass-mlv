@@ -55,30 +55,31 @@ export default {
 	},
 	data() {
 		return {
+			docList: [],
 			selectedDoc: undefined,
 			error: null,
 		};
-	},
-	computed: {
-		docList() {
-			return JSON.parse(
-				JSON.stringify(this.$store.getters["document/getDocs"])
-			);
-		},
 	},
 	methods: {
 		selectDoc(config = Object) {
 			this.selectedDoc = JSON.parse(JSON.stringify(config));
 		},
 		nextBtn() {
-			if (!this.selectedDoc) return this.error = "Please selecte a Document template";
+			if (!this.selectedDoc)
+				return (this.error = "Please selecte a document template");
 
 			this.$store.dispatch(
-				"document/currentEditableDoc",
+				"document/setSelectdDoc",
 				JSON.parse(JSON.stringify(this.selectedDoc))
 			);
+
 			this.$router.push({ name: "dashboard-creation-new" });
 		},
+	},
+	mounted() {
+		this.docList = JSON.parse(
+			JSON.stringify(this.$store.getters["document/getDocs"])
+		);
 	},
 };
 </script>
