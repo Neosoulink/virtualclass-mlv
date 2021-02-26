@@ -45,7 +45,7 @@ const actions = {
 
 		context.commit('SELECT_DOCUMENT', data);
 	},
-	setConfigSelectedDoc(context, data) {
+	setSelectedDocConfig(context, data) {
 		context.commit('SET_CONFIG_SELECTED_DOCUMENT', data);
 	}
 };

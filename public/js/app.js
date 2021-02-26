@@ -80832,7 +80832,7 @@ var actions = {
     if (_typeof(data) != 'object' || !Object.keys(data).length) return context.commit('SET_ERROR', "This document it's not available");
     context.commit('SELECT_DOCUMENT', data);
   },
-  setConfigSelectedDoc: function setConfigSelectedDoc(context, data) {
+  setSelectedDocConfig: function setSelectedDocConfig(context, data) {
     context.commit('SET_CONFIG_SELECTED_DOCUMENT', data);
   }
 };
