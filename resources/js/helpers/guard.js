@@ -1,18 +1,22 @@
-export function initialize(store, router) {
+import { isEmpty } from "../helpers/Functions";
 
+export function initialize(store, router) {
 	router.beforeEach((to, from, next) => {
 		const requireAuth = to.matched.some(record => record.meta.requireAuth);
 		const requireSelectedDoc = to.matched.some(record => record.meta.requireSelectedDoc);
 		const currentUser = store.state.user.currentUser;
 
-		if (requireAuth && !currentUser) {
+		if (requireAuth && !currentUser)
 			return next('/login');
-		} else if (to.path == '/login' && currentUser) {
-			return next('/dashboard');
-		}
 
-		if (requireSelectedDoc && !store.getters['document/getDocSelected']) {
-			return next({ name: 'dashboard-creation' });
+		if (to.path == '/login' && currentUser)
+			return next('/dashboard');
+
+		if (requireSelectedDoc) {
+			const selectedDoc = store.getters['document/getSelectedDoc'];
+
+			if (isEmpty(selectedDoc))
+				return next({ name: 'dashboard-creation' });
 		}
 
 		next();
