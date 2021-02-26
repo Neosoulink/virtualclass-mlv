@@ -12,16 +12,16 @@ const getters = {
 	getDocs(state) {
 		return state.documents
 	},
-	getDocSelected(state) {
+	getSelectedDoc(state) {
 		return state.selectedDoc
 	}
 };
 
 const mutations = {
-	SELECT_DOCUMENT(state, payload) {
+	SET_SELECTED_DOC(state, payload) {
 		state.selectedDoc = payload
 	},
-	SET_CONFIG_SELECTED_DOCUMENT(state, payload) {
+	SET_SELECTED_DOC_CONFIG(state, payload) {
 		state.docSelected.config = payload
 	},
 	CLEAR_SELECTED_DOC(state) {

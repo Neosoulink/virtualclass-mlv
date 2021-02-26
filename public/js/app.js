@@ -80799,15 +80799,15 @@ var getters = {
   getDocs: function getDocs(state) {
     return state.documents;
   },
-  getDocSelected: function getDocSelected(state) {
+  getSelectedDoc: function getSelectedDoc(state) {
     return state.selectedDoc;
   }
 };
 var mutations = {
-  SELECT_DOCUMENT: function SELECT_DOCUMENT(state, payload) {
+  SET_SELECTED_DOC: function SET_SELECTED_DOC(state, payload) {
     state.selectedDoc = payload;
   },
-  SET_CONFIG_SELECTED_DOCUMENT: function SET_CONFIG_SELECTED_DOCUMENT(state, payload) {
+  SET_SELECTED_DOC_CONFIG: function SET_SELECTED_DOC_CONFIG(state, payload) {
     state.docSelected.config = payload;
   },
   CLEAR_SELECTED_DOC: function CLEAR_SELECTED_DOC(state) {
