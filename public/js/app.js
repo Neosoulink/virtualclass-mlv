@@ -80524,10 +80524,10 @@ function initialize(store, router) {
 
 /***/ }),
 
-/***/ "./resources/js/mixins/documentsData.js":
-/*!**********************************************!*\
-  !*** ./resources/js/mixins/documentsData.js ***!
-  \**********************************************/
+/***/ "./resources/js/mixins/defaultDocTemplates.js":
+/*!****************************************************!*\
+  !*** ./resources/js/mixins/defaultDocTemplates.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80775,14 +80775,22 @@ webpackContext.id = "./resources/js/store/modules sync \\.js$";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mixins_documentsData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/documentsData */ "./resources/js/mixins/documentsData.js");
+/* harmony import */ var _mixins_defaultDocTemplates__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/defaultDocTemplates */ "./resources/js/mixins/defaultDocTemplates.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var docs = Object(_mixins_documentsData__WEBPACK_IMPORTED_MODULE_0__["default"])();
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var docs = Object(_mixins_defaultDocTemplates__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 var state = function state() {
   return {
-    documents: docs,
-    docSelected: null,
+    docList: docs,
+    selectedDoc: {},
     error: null
   };
 };
@@ -80792,22 +80800,39 @@ var getters = {
     return state.documents;
   },
   getDocSelected: function getDocSelected(state) {
-    return state.docSelected;
+    return state.selectedDoc;
   }
 };
 var mutations = {
   SELECT_DOCUMENT: function SELECT_DOCUMENT(state, payload) {
-    state.docSelected = payload;
+    state.selectedDoc = payload;
   },
   SET_CONFIG_DOCUMENT_SELECTED: function SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
     state.docSelected.config = payload;
+  },
+  CLEAR_SELECTED_DOC: function CLEAR_SELECTED_DOC(state) {
+    state.docSelected = {};
+  },
+  ADD_TO_DOC_LIST: function ADD_TO_DOC_LIST(state, payload) {
+    state.docList = _objectSpread(_objectSpread({}, state.docList), {}, {
+      payload: payload
+    });
+  },
+  REMOVE_TO_DOC_LIST: function REMOVE_TO_DOC_LIST(state, payload) {
+    state.docList = state.docList.filter(function (doc) {
+      return doc.name != payload.name;
+    });
+  },
+  SET_ERROR: function SET_ERROR(state, payload) {
+    state.error = payload;
   }
 };
 var actions = {
-  select_doc: function select_doc(context, data) {
+  selectDoc: function selectDoc(context, data) {
+    if (_typeof(data) != 'object' || !Object.keys(data).length) return context.commit('SET_ERROR', "This document it's not available");
     context.commit('SELECT_DOCUMENT', data);
   },
-  set_config_doc_selected: function set_config_doc_selected(context, data) {
+  setConfigSelectedDoc: function setConfigSelectedDoc(context, data) {
     context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
   }
 };

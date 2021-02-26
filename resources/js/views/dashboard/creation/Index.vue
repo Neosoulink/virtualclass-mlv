@@ -15,11 +15,11 @@
 
 					<div class="list-group">
 						<button
-							v-for="(doc, index) in getDocs"
+							v-for="(doc, index) in docList"
 							:key="index"
 							class="list-group-item list-group-item-action"
 							:class="{ active: selectedDoc == doc }"
-							@click="selectConfig(doc)"
+							@click="selectTemplate(doc)"
 						>
 							<div class="d-flex w-100 justify-content-between">
 								<h5 class="mb-1">{{ doc.name }}</h5>
@@ -56,23 +56,25 @@ export default {
 	data() {
 		return {
 			selectedDoc: undefined,
+			error: null,
 		};
 	},
 	computed: {
-		getDocs() {
+		docList() {
 			return JSON.parse(
 				JSON.stringify(this.$store.getters["document/getDocs"])
 			);
 		},
 	},
 	methods: {
-		selectConfig(config = Object) {
+		selectDoc(config = Object) {
 			this.selectedDoc = JSON.parse(JSON.stringify(config));
 		},
 		nextBtn() {
-			if (!this.selectedDoc) return;
+			if (!this.selectedDoc) return this.error = "Please selecte a Document template";
+
 			this.$store.dispatch(
-				"document/select_doc",
+				"document/currentEditableDoc",
 				JSON.parse(JSON.stringify(this.selectedDoc))
 			);
 			this.$router.push({ name: "dashboard-creation-new" });

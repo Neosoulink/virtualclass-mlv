@@ -65,22 +65,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      selectedDoc: undefined
+      selectedDoc: undefined,
+      error: null
     };
   },
   computed: {
-    getDocs: function getDocs() {
+    docList: function docList() {
       return JSON.parse(JSON.stringify(this.$store.getters["document/getDocs"]));
     }
   },
   methods: {
-    selectConfig: function selectConfig() {
+    selectDoc: function selectDoc() {
       var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Object;
       this.selectedDoc = JSON.parse(JSON.stringify(config));
     },
     nextBtn: function nextBtn() {
-      if (!this.selectedDoc) return;
-      this.$store.dispatch("document/select_doc", JSON.parse(JSON.stringify(this.selectedDoc)));
+      if (!this.selectedDoc) return this.error = "Please selecte a Document template";
+      this.$store.dispatch("document/currentEditableDoc", JSON.parse(JSON.stringify(this.selectedDoc)));
       this.$router.push({
         name: "dashboard-creation-new"
       });
@@ -191,7 +192,7 @@ var render = function() {
             _c(
               "div",
               { staticClass: "list-group" },
-              _vm._l(_vm.getDocs, function(doc, index) {
+              _vm._l(_vm.docList, function(doc, index) {
                 return _c(
                   "button",
                   {
@@ -200,7 +201,7 @@ var render = function() {
                     class: { active: _vm.selectedDoc == doc },
                     on: {
                       click: function($event) {
-                        return _vm.selectConfig(doc)
+                        return _vm.selectTemplate(doc)
                       }
                     }
                   },

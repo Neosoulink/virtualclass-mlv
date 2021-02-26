@@ -1,10 +1,10 @@
-import DocsData from '../../mixins/documentsData';
+import docTemplates from '../../mixins/defaultDocTemplates';
 
-const docs = DocsData();
+const docs = docTemplates();
 
 const state = () => ({
-	documents: docs,
-	docSelected: null,
+	docList: docs,
+	selectedDoc: {},
 	error: null,
 });
 
@@ -13,24 +13,39 @@ const getters = {
 		return state.documents
 	},
 	getDocSelected(state) {
-		return state.docSelected
+		return state.selectedDoc
 	}
 };
 
 const mutations = {
 	SELECT_DOCUMENT(state, payload) {
-		state.docSelected = payload
+		state.selectedDoc = payload
 	},
 	SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
 		state.docSelected.config = payload
+	},
+	CLEAR_SELECTED_DOC(state) {
+		state.docSelected = {};
+	},
+	ADD_TO_DOC_LIST(state, payload) {
+		state.docList = { ...state.docList, payload };
+	},
+	REMOVE_TO_DOC_LIST(state, payload) {
+		state.docList = state.docList.filter(doc => doc.name != payload.name);
+	},
+	SET_ERROR(state, payload) {
+		state.error = payload;
 	}
 };
 
 const actions = {
-	select_doc(context, data) {
+	selectDoc(context, data) {
+		if (typeof data != 'object' || !Object.keys(data).length)
+			return context.commit('SET_ERROR', "This document it's not available")
+
 		context.commit('SELECT_DOCUMENT', data);
 	},
-	set_config_doc_selected(context, data) {
+	setConfigSelectedDoc(context, data) {
 		context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
 	}
 };
