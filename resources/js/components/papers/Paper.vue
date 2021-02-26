@@ -1,7 +1,6 @@
 <template>
 	<div
 		id="paper-item"
-		ref="itemPaper"
 		class="bg-white position-relative text-dark"
 		:style="{
 			minHeight: getSizes.height + 'px',
@@ -10,14 +9,14 @@
 			lineHeight: getSizes.lineHeight + 'px',
 		}"
 	>
-		<template v-if="getConfig">
+		<template v-if="isEmpty(config)">
 			<div
 				class="PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-				v-if="getConfig.image && getConfig.image.show"
+				v-if="config.image && config.image.show"
 			>
 				<img
-					v-if="getConfig.image && getConfig.image.data"
-					:src="getConfig.image.data.urlResized"
+					v-if="config.image.data"
+					:src="config.image.data.urlResized"
 					class="PI-background-logo w-100"
 				/>
 				<!-- /.PI-background-logo -->
@@ -37,39 +36,38 @@
 					minHeight: getSizes.height + 'px',
 				}"
 			>
-				<div class="PI-header row" v-if="getConfig.header">
-					<div class="left-side col" v-if="getConfig.header.leftSide">
+				<div class="PI-header row" v-if="config.header">
+					<div class="left-side col" v-if="config.header.leftSide">
 						<div
 							class="title text-uppercase"
-							v-if="getConfig.header.leftSide.title"
+							v-if="config.header.leftSide.title"
 						>
-							{{ getConfig.header.leftSide.title }}
+							{{ config.header.leftSide.title }}
 						</div>
 						<!-- /.title -->
 						<div
 							class="sub-title text-uppercase"
-							v-if="getConfig.header.leftSide.subTitle"
+							v-if="config.header.leftSide.subTitle"
 						>
-							{{ getConfig.header.leftSide.subTitle }}
+							{{ config.header.leftSide.subTitle }}
 						</div>
 						<!-- /.sub-title -->
 						<template
 							v-if="
-								getConfig.header.leftSide.logo &&
-								getConfig.header.leftSide.logo.show
+								config.header.leftSide.logo && config.header.leftSide.logo.show
 							"
 						>
 							<div
+								v-if="config.header.leftSide.logo.data"
 								class="container-logo"
-								v-if="getConfig.header.leftSide.logo.data"
 							>
 								<img
 									class="logo"
-									:src="getConfig.header.leftSide.logo.data.urlResized"
+									:src="config.header.leftSide.logo.data.urlResized"
 								/>
 								<!-- /.logo -->
 							</div>
-							<div class="container-logo" v-else>
+							<div v-else class="container-logo">
 								<img
 									class="logo"
 									:src="require('../../assets/img/vc_logo_0.jpg')"
@@ -81,17 +79,17 @@
 					</div>
 					<!-- /.left-side -->
 
-					<div class="right-side col" v-if="getConfig.header.rightSide">
-						<div class="date" v-if="getConfig.header.rightSide.date">
-							{{ getConfig.header.rightSide.date }}
+					<div class="right-side col" v-if="config.header.rightSide">
+						<div class="date" v-if="config.header.rightSide.date">
+							{{ config.header.rightSide.date }}
 						</div>
 						<!-- /.date -->
-						<div class="title" v-if="getConfig.header.rightSide.title">
-							{{ getConfig.header.rightSide.title }}
+						<div class="title" v-if="config.header.rightSide.title">
+							{{ config.header.rightSide.title }}
 						</div>
 						<!-- /.title -->
-						<div class="sub-title" v-if="getConfig.header.rightSide.subTitle">
-							{{ getConfig.header.rightSide.subTitle }}
+						<div class="sub-title" v-if="config.header.rightSide.subTitle">
+							{{ config.header.rightSide.subTitle }}
 						</div>
 						<!-- /.sub-title -->
 					</div>
@@ -101,13 +99,13 @@
 
 				<div
 					class="PI-body"
-					v-if="getConfig.body"
+					v-if="config.body"
 					:style="{ minHeight: (getSizes.height * 70) / 100 + 'px' }"
 				>
-					<div class="container-title" v-if="getConfig.body.title">
+					<div class="container-title" v-if="config.body.title">
 						<h3
+							v-html="config.body.title"
 							class="title text-center w-100"
-							v-html="getConfig.body.title"
 							:style="{
 								paddingBottom: (getSizes.width * 3.5) / 100 + 'px',
 							}"
@@ -116,10 +114,10 @@
 					</div>
 					<!-- /.container-title -->
 
-					<div class="row mb-4" v-if="getConfig.body.cc">
+					<div class="row mb-4" v-if="config.body.cc">
 						<div class="offset-6 col-6 container-cc">
 							<h5 class="title p-0 m-0">
-								<b>{{ getConfig.body.cc.title }}</b>
+								<b>{{ config.body.cc.title }}</b>
 							</h5>
 							<!-- /.title -->
 							<h5
@@ -141,14 +139,14 @@
 							>
 								<li
 									class="list-item-person ml-0"
-									v-for="(item, index) in getConfig.body.cc.persons"
+									v-for="(item, index) in config.body.cc.persons"
 									:key="index"
 									:style="{
 										paddingLeft: (getSizes.width * 1.5) / 100 + 'px',
 										paddingBottom: (getSizes.width * 3.5) / 100 + 'px',
 									}"
 								>
-									{{ getConfig.body.cc.prePerson + " " + item }}
+									{{ config.body.cc.prePerson + " " + item }}
 								</li>
 							</ul>
 						</div>
@@ -158,29 +156,29 @@
 
 					<p
 						class="for w-100 text-justify"
-						v-if="getConfig.body.for"
-						v-html="getConfig.body.for"
+						v-if="config.body.for"
+						v-html="config.body.for"
 					></p>
 					<!-- /.for -->
 
 					<div
 						class="content w-100 text-justify"
-						v-if="getConfig.body.content"
-						v-html="getConfig.body.content"
+						v-if="config.body.content"
+						v-html="config.body.content"
 					></div>
 					<!-- /.content -->
 				</div>
 				<!-- /.PI-body-->
 
-				<div class="PI-footer row" v-if="getConfig.footer">
-					<div class="left-side col" v-if="getConfig.footer.leftSide"></div>
-					<div class="right-side col" v-if="getConfig.footer.rightSide">
-						<div class="title" v-if="getConfig.footer.rightSide.title">
-							{{ getConfig.footer.rightSide.title }}
+				<div class="PI-footer row" v-if="config.footer">
+					<div class="left-side col" v-if="config.footer.leftSide"></div>
+					<div class="right-side col" v-if="config.footer.rightSide">
+						<div class="title" v-if="config.footer.rightSide.title">
+							{{ config.footer.rightSide.title }}
 						</div>
 						<!-- /.title -->
-						<div class="sub-title" v-if="getConfig.footer.rightSide.subTitle">
-							{{ getConfig.footer.rightSide.subTitle }}
+						<div class="sub-title" v-if="config.footer.rightSide.subTitle">
+							{{ config.footer.rightSide.subTitle }}
 						</div>
 						<!-- /.sub-title -->
 					</div>
@@ -202,8 +200,8 @@
 
 <script>
 import Print from "print-js";
-import Fitty from "fitty";
 import { jsPDF } from "jspdf";
+import { isEmpty } from "../../helpers/Functions";
 
 export default {
 	name: "Paper",
@@ -219,14 +217,7 @@ export default {
 	},
 	computed: {
 		getConfig() {
-			if (this.config) return this.config;
-
-			//const doc = this.$store.getters["document/getDocSelected"];
-			//if (doc) {
-			//	return doc.config;
-			//}
-
-			return false;
+			return !isEmpty(this.config) ? this.config : {};
 		},
 		getSizes() {
 			//Longeur = Largeur * 1.414
@@ -238,7 +229,7 @@ export default {
 			const marginVertical = (height * 3) / 100;
 			const font = (width * 2.56) / 100;
 			const lineHeight = (width * 3.51) / 100;
-			console.log(font, marginHorizontal);
+
 			return {
 				height,
 				width,
@@ -251,8 +242,8 @@ export default {
 			};
 		},
 	},
-	mounted() {},
 	methods: {
+		...isEmpty,
 		launchPrint() {
 			Print({
 				printable: "paper-item",
