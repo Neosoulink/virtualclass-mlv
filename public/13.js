@@ -160,77 +160,72 @@ var render = function() {
     [
       _c("div", { staticClass: "content-side row" }, [
         _c("div", { staticClass: "left-side col-7" }, [
-          _c(
-            "div",
-            { staticClass: "d-flex flex-column bg-white h-100 w-100" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "d-flex align-items-center justify-content-between"
-                },
-                [
-                  _c("md-subheader", [
-                    _vm._v("which document do you want to create?")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "md-button",
-                    {
-                      staticClass: "md-primary",
-                      attrs: { disabled: !_vm.selectedDoc },
-                      on: {
-                        click: function($event) {
-                          return _vm.nextBtn()
-                        }
+          _c("div", { staticClass: "d-flex flex-column bg-white" }, [
+            _c(
+              "div",
+              {
+                staticClass: "d-flex align-items-center justify-content-between"
+              },
+              [
+                _c("md-subheader", [
+                  _vm._v("which document do you want to create?")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "md-button",
+                  {
+                    staticClass: "md-primary",
+                    attrs: { disabled: !_vm.selectedDoc },
+                    on: {
+                      click: function($event) {
+                        return _vm.nextBtn()
                       }
-                    },
-                    [_vm._v("Next")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "list-group" },
-                _vm._l(_vm.getDocs, function(doc, index) {
-                  return _c(
-                    "button",
-                    {
-                      key: index,
-                      staticClass: "list-group-item list-group-item-action",
-                      class: { active: _vm.selectedDoc == doc },
-                      on: {
-                        click: function($event) {
-                          return _vm.selectConfig(doc)
-                        }
+                    }
+                  },
+                  [_vm._v("Next")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "list-group" },
+              _vm._l(_vm.getDocs, function(doc, index) {
+                return _c(
+                  "button",
+                  {
+                    key: index,
+                    staticClass: "list-group-item list-group-item-action",
+                    class: { active: _vm.selectedDoc == doc },
+                    on: {
+                      click: function($event) {
+                        return _vm.selectConfig(doc)
                       }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "d-flex w-100 justify-content-between" },
-                        [
-                          _c("h5", { staticClass: "mb-1" }, [
-                            _vm._v(_vm._s(doc.name))
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "mb-1" }, [
-                        _vm._v(_vm._s(doc.description))
-                      ]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("Donec id elit non mi porta.")])
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          )
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "d-flex w-100 justify-content-between" },
+                      [
+                        _c("h5", { staticClass: "mb-1" }, [
+                          _vm._v(_vm._s(doc.name))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-1" }, [
+                      _vm._v(_vm._s(doc.description))
+                    ]),
+                    _vm._v(" "),
+                    _c("small", [_vm._v("Donec id elit non mi porta.")])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
         ]),
         _vm._v(" "),
         _c(

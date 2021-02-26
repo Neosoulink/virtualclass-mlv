@@ -2,7 +2,7 @@
 	<div class="content" id="home-creation-section">
 		<div class="content-side row">
 			<div class="left-side col-7">
-				<div class="d-flex flex-column bg-white h-100 w-100">
+				<div class="d-flex flex-column bg-white">
 					<div class="d-flex align-items-center justify-content-between">
 						<md-subheader>which document do you want to create?</md-subheader>
 						<md-button

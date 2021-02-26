@@ -356,7 +356,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       docConfig: {
-        body: {}
+        body: {},
+        header: {
+          leftSide: {},
+          rightSide: {}
+        },
+        footer: {
+          rightSide: {}
+        }
       }
     };
   },
@@ -874,27 +881,25 @@ var render = function() {
                   }
                 },
                 [
-                  _vm.docConfig.body.content
-                    ? _c(
-                        "div",
-                        [
-                          _c("ckeditor", {
-                            attrs: {
-                              editor: _vm.steper.first.editor,
-                              config: _vm.steper.first.editorConfig
-                            },
-                            model: {
-                              value: _vm.docConfig.body.content,
-                              callback: function($$v) {
-                                _vm.$set(_vm.docConfig.body, "content", $$v)
-                              },
-                              expression: "docConfig.body.content"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
+                  _c(
+                    "div",
+                    [
+                      _c("ckeditor", {
+                        attrs: {
+                          editor: _vm.steper.first.editor,
+                          config: _vm.steper.first.editorConfig
+                        },
+                        model: {
+                          value: _vm.docConfig.body.content,
+                          callback: function($$v) {
+                            _vm.$set(_vm.docConfig.body, "content", $$v)
+                          },
+                          expression: "docConfig.body.content"
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "md-button",

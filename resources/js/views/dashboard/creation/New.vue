@@ -12,7 +12,7 @@
 					:md-error="steper.first.error.header"
 					:md-done.sync="steper.first.active"
 				>
-					<div v-if="docConfig.body.content">
+					<div>
 						<ckeditor
 							:editor="steper.first.editor"
 							v-model="docConfig.body.content"
@@ -341,7 +341,14 @@ export default {
 			},
 		},
 		docConfig: {
-			body: {}
+			body: {},
+			header: {
+				leftSide: {},
+				rightSide: {}
+			},
+			footer: {
+				rightSide: {}
+			}
 		},
 	}),
 	computed: {

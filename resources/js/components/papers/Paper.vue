@@ -221,10 +221,10 @@ export default {
 		getConfig() {
 			if (this.config) return this.config;
 
-			const doc = this.$store.getters["document/getDocSelected"];
-			if (doc) {
-				return doc.config;
-			}
+			//const doc = this.$store.getters["document/getDocSelected"];
+			//if (doc) {
+			//	return doc.config;
+			//}
 
 			return false;
 		},

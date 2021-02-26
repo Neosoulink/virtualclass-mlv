@@ -791,12 +791,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getConfig: function getConfig() {
-      if (this.config) return this.config;
-      var doc = this.$store.getters["document/getDocSelected"];
-
-      if (doc) {
-        return doc.config;
-      }
+      if (this.config) return this.config; //const doc = this.$store.getters["document/getDocSelected"];
+      //if (doc) {
+      //	return doc.config;
+      //}
 
       return false;
     },
