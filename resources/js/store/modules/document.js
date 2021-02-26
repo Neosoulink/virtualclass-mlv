@@ -10,10 +10,10 @@ const state = () => ({
 
 const getters = {
 	getDocs(state) {
-		return state.documents
+		return state.documents;
 	},
 	getSelectedDoc(state) {
-		return state.selectedDoc
+		return state.selectedDoc;
 	}
 };
 
