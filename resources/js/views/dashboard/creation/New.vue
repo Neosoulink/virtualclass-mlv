@@ -264,7 +264,8 @@
 									$refs.vueFileAgent.deleteFileRecord(
 										steper.second.headerLogo.confirmModalFileRecord
 									);
-								}"
+								}
+							"
 						/>
 					</div>
 					<!-- /.md-layout -->
@@ -344,11 +345,11 @@ export default {
 			body: {},
 			header: {
 				leftSide: {},
-				rightSide: {}
+				rightSide: {},
 			},
 			footer: {
-				rightSide: {}
-			}
+				rightSide: {},
+			},
 		},
 	}),
 	computed: {
@@ -433,14 +434,16 @@ export default {
 		},
 	},
 	mounted() {
-		this.docConfig = JSON.parse(
-			JSON.stringify(this.$store.getters["document/getDocSelected"].config)
+		const selectedDoc = JSON.parse(
+			JSON.stringify(this.$store.getters["document/getSelectedDoc"])
 		);
-		if (this.docConfig.body.cc != undefined) {
+
+		this.docConfig = selectedDoc.config;
+
+		if (this.docConfig && this.docConfig.body && this.docConfig.body.cc)
 			this.steper.second.personsCC = JSON.parse(
 				JSON.stringify(this.docConfig.body.cc.persons)
 			);
-		}
 	},
 	watch: {
 		docConfig: {
