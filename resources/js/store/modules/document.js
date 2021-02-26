@@ -21,7 +21,7 @@ const mutations = {
 	SELECT_DOCUMENT(state, payload) {
 		state.selectedDoc = payload
 	},
-	SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
+	SET_CONFIG_SELECTED_DOCUMENT(state, payload) {
 		state.docSelected.config = payload
 	},
 	CLEAR_SELECTED_DOC(state) {
@@ -46,7 +46,7 @@ const actions = {
 		context.commit('SELECT_DOCUMENT', data);
 	},
 	setConfigSelectedDoc(context, data) {
-		context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
+		context.commit('SET_CONFIG_SELECTED_DOCUMENT', data);
 	}
 };
 

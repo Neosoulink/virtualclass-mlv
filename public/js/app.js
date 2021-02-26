@@ -80807,7 +80807,7 @@ var mutations = {
   SELECT_DOCUMENT: function SELECT_DOCUMENT(state, payload) {
     state.selectedDoc = payload;
   },
-  SET_CONFIG_DOCUMENT_SELECTED: function SET_CONFIG_DOCUMENT_SELECTED(state, payload) {
+  SET_CONFIG_SELECTED_DOCUMENT: function SET_CONFIG_SELECTED_DOCUMENT(state, payload) {
     state.docSelected.config = payload;
   },
   CLEAR_SELECTED_DOC: function CLEAR_SELECTED_DOC(state) {
@@ -80833,7 +80833,7 @@ var actions = {
     context.commit('SELECT_DOCUMENT', data);
   },
   setConfigSelectedDoc: function setConfigSelectedDoc(context, data) {
-    context.commit('SET_CONFIG_DOCUMENT_SELECTED', data);
+    context.commit('SET_CONFIG_SELECTED_DOCUMENT', data);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
