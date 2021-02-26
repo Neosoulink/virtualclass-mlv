@@ -69,7 +69,7 @@ export default {
 				return (this.error = "Please selecte a document template");
 
 			this.$store.dispatch(
-				"document/setSelectdDoc",
+				"document/setSelectedDoc",
 				JSON.parse(JSON.stringify(this.selectedDoc))
 			);
 
