@@ -55,7 +55,7 @@ export default {
 	},
 	data() {
 		return {
-			docList: [],
+			docList : [],
 			selectedDoc: undefined,
 			error: null,
 		};
@@ -69,7 +69,7 @@ export default {
 				return (this.error = "Please selecte a document template");
 
 			this.$store.dispatch(
-				"document/setSelectedDoc",
+				"document/setSelectdDoc",
 				JSON.parse(JSON.stringify(this.selectedDoc))
 			);
 
@@ -77,9 +77,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.docList = JSON.parse(
-			JSON.stringify(this.$store.getters["document/getDocList"])
-		);
+		this.docList = this.$store.getters["document/getDocList"];
 	},
 };
 </script>
