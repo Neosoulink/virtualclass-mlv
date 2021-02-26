@@ -424,7 +424,7 @@ __webpack_require__.r(__webpack_exports__);
 
       return;
     },
-    setNewDocConfig: function setNewDocConfig(config) {
+    updateDocConfig: function updateDocConfig(config) {
       this.docConfig.config = config;
     },
     filesSelected: function filesSelected(fileRecordsNewlySelected, dataFile) {
@@ -458,14 +458,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var selectedDoc = JSON.parse(JSON.stringify(this.$store.getters["document/getSelectedDoc"]));
+    var selectedDoc = this.$store.getters["document/getSelectedDoc"];
     this.docConfig = selectedDoc.config;
     if (this.docConfig && this.docConfig.body && this.docConfig.body.cc) this.steper.second.personsCC = JSON.parse(JSON.stringify(this.docConfig.body.cc.persons));
   },
   watch: {
     docConfig: {
       handler: function handler(val) {
-        this.setNewDocConfig(val);
+        this.updateDocConfig(val);
       },
       deep: true,
       immediate: false

@@ -404,7 +404,7 @@ export default {
 			}
 			return;
 		},
-		setNewDocConfig(config) {
+		updateDocConfig(config) {
 			this.docConfig.config = config;
 		},
 		filesSelected: function (fileRecordsNewlySelected, dataFile) {
@@ -437,9 +437,7 @@ export default {
 		},
 	},
 	mounted() {
-		const selectedDoc = JSON.parse(
-			JSON.stringify(this.$store.getters["document/getSelectedDoc"])
-		);
+		const selectedDoc = this.$store.getters["document/getSelectedDoc"];
 
 		this.docConfig = selectedDoc.config;
 
@@ -451,7 +449,7 @@ export default {
 	watch: {
 		docConfig: {
 			handler: function (val) {
-				this.setNewDocConfig(val);
+				this.updateDocConfig(val);
 			},
 			deep: true,
 			immediate: false,
