@@ -80828,12 +80828,12 @@ var mutations = {
   }
 };
 var actions = {
-  selectDoc: function selectDoc(context, data) {
+  setSelectedDoc: function setSelectedDoc(context, data) {
     if (_typeof(data) != 'object' || !Object.keys(data).length) return context.commit('SET_ERROR', "This document it's not available");
-    context.commit('SELECT_DOCUMENT', data);
+    context.commit('SET_SELECTED_DOC', data);
   },
   setSelectedDocConfig: function setSelectedDocConfig(context, data) {
-    context.commit('SET_CONFIG_SELECTED_DOCUMENT', data);
+    context.commit('SET_SELECTED_DOC_CONFIG', data);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
