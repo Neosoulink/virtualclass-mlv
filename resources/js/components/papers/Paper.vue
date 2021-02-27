@@ -9,7 +9,7 @@
 			lineHeight: getSizes.lineHeight + 'px',
 		}"
 	>
-		<template v-if="isEmpty(config)">
+		<template v-if="!isEmpty(config)">
 			<div
 				class="PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
 				v-if="config.image && config.image.show"
@@ -208,7 +208,7 @@ export default {
 	props: {
 		config: {
 			type: Object,
-			default: null,
+			default: Object,
 		},
 		width: {
 			type: Number,
@@ -217,7 +217,7 @@ export default {
 	},
 	computed: {
 		getConfig() {
-			return !isEmpty(this.config) ? this.config : {};
+			return !this.isEmpty(this.config) ? this.config : {};
 		},
 		getSizes() {
 			//Longeur = Largeur * 1.414
@@ -243,7 +243,9 @@ export default {
 		},
 	},
 	methods: {
-		...isEmpty,
+		isEmpty(data) {
+			return isEmpty(data);
+		},
 		launchPrint() {
 			Print({
 				printable: "paper-item",

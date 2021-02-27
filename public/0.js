@@ -569,11 +569,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! print-js */ "./node_modules/print-js/dist/print.js");
 /* harmony import */ var print_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(print_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fitty */ "./node_modules/fitty/dist/fitty.module.js");
-/* harmony import */ var fitty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fitty__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
-//
-//
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
+/* harmony import */ var _helpers_Functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/Functions */ "./resources/js/helpers/Functions.js");
 //
 //
 //
@@ -782,7 +779,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     config: {
       type: Object,
-      "default": null
+      "default": Object
     },
     width: {
       type: Number,
@@ -791,12 +788,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getConfig: function getConfig() {
-      if (this.config) return this.config; //const doc = this.$store.getters["document/getDocSelected"];
-      //if (doc) {
-      //	return doc.config;
-      //}
-
-      return false;
+      return !this.isEmpty(this.config) ? this.config : {};
     },
     getSizes: function getSizes() {
       //Longeur = Largeur * 1.414
@@ -808,7 +800,6 @@ __webpack_require__.r(__webpack_exports__);
       var marginVertical = height * 3 / 100;
       var font = width * 2.56 / 100;
       var lineHeight = width * 3.51 / 100;
-      console.log(font, marginHorizontal);
       return {
         height: height,
         width: width,
@@ -821,8 +812,10 @@ __webpack_require__.r(__webpack_exports__);
       };
     }
   },
-  mounted: function mounted() {},
   methods: {
+    isEmpty: function isEmpty(data) {
+      return Object(_helpers_Functions__WEBPACK_IMPORTED_MODULE_2__["isEmpty"])(data);
+    },
     launchPrint: function launchPrint() {
       print_js__WEBPACK_IMPORTED_MODULE_0___default()({
         printable: "paper-item",
@@ -843,7 +836,7 @@ __webpack_require__.r(__webpack_exports__);
       document.body.removeChild(fileDownload);
     },
     exportToPDF: function exportToPDF() {
-      var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2__["jsPDF"]();
+      var doc = new jspdf__WEBPACK_IMPORTED_MODULE_1__["jsPDF"]();
       var paperItem = document.getElementById("paper-item");
       doc.html(paperItem, {
         callback: function callback(doc) {
@@ -1592,7 +1585,6 @@ var render = function() {
   return _c(
     "div",
     {
-      ref: "itemPaper",
       staticClass: "bg-white position-relative text-dark",
       style: {
         minHeight: _vm.getSizes.height + "px",
@@ -1603,9 +1595,9 @@ var render = function() {
       attrs: { id: "paper-item" }
     },
     [
-      _vm.getConfig
+      !_vm.isEmpty(_vm.config)
         ? [
-            _vm.getConfig.image && _vm.getConfig.image.show
+            _vm.config.image && _vm.config.image.show
               ? _c(
                   "div",
                   {
@@ -1613,10 +1605,10 @@ var render = function() {
                       "PI-container-background-logo position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
                   },
                   [
-                    _vm.getConfig.image && _vm.getConfig.image.data
+                    _vm.config.image.data
                       ? _c("img", {
                           staticClass: "PI-background-logo w-100",
-                          attrs: { src: _vm.getConfig.image.data.urlResized }
+                          attrs: { src: _vm.config.image.data.urlResized }
                         })
                       : _c("img", {
                           staticClass: "PI-background-logo w-100",
@@ -1643,14 +1635,14 @@ var render = function() {
                 }
               },
               [
-                _vm.getConfig.header
+                _vm.config.header
                   ? _c("div", { staticClass: "PI-header row" }, [
-                      _vm.getConfig.header.leftSide
+                      _vm.config.header.leftSide
                         ? _c(
                             "div",
                             { staticClass: "left-side col" },
                             [
-                              _vm.getConfig.header.leftSide.title
+                              _vm.config.header.leftSide.title
                                 ? _c(
                                     "div",
                                     { staticClass: "title text-uppercase" },
@@ -1658,7 +1650,7 @@ var render = function() {
                                       _vm._v(
                                         "\n\t\t\t\t\t\t" +
                                           _vm._s(
-                                            _vm.getConfig.header.leftSide.title
+                                            _vm.config.header.leftSide.title
                                           ) +
                                           "\n\t\t\t\t\t"
                                       )
@@ -1666,7 +1658,7 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.getConfig.header.leftSide.subTitle
+                              _vm.config.header.leftSide.subTitle
                                 ? _c(
                                     "div",
                                     { staticClass: "sub-title text-uppercase" },
@@ -1674,8 +1666,7 @@ var render = function() {
                                       _vm._v(
                                         "\n\t\t\t\t\t\t" +
                                           _vm._s(
-                                            _vm.getConfig.header.leftSide
-                                              .subTitle
+                                            _vm.config.header.leftSide.subTitle
                                           ) +
                                           "\n\t\t\t\t\t"
                                       )
@@ -1683,10 +1674,10 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.getConfig.header.leftSide.logo &&
-                              _vm.getConfig.header.leftSide.logo.show
+                              _vm.config.header.leftSide.logo &&
+                              _vm.config.header.leftSide.logo.show
                                 ? [
-                                    _vm.getConfig.header.leftSide.logo.data
+                                    _vm.config.header.leftSide.logo.data
                                       ? _c(
                                           "div",
                                           { staticClass: "container-logo" },
@@ -1695,7 +1686,7 @@ var render = function() {
                                               staticClass: "logo",
                                               attrs: {
                                                 src:
-                                                  _vm.getConfig.header.leftSide
+                                                  _vm.config.header.leftSide
                                                     .logo.data.urlResized
                                               }
                                             })
@@ -1720,38 +1711,36 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.getConfig.header.rightSide
+                      _vm.config.header.rightSide
                         ? _c("div", { staticClass: "right-side col" }, [
-                            _vm.getConfig.header.rightSide.date
+                            _vm.config.header.rightSide.date
                               ? _c("div", { staticClass: "date" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
-                                      _vm._s(
-                                        _vm.getConfig.header.rightSide.date
-                                      ) +
+                                      _vm._s(_vm.config.header.rightSide.date) +
                                       "\n\t\t\t\t\t"
                                   )
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.getConfig.header.rightSide.title
+                            _vm.config.header.rightSide.title
                               ? _c("div", { staticClass: "title" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
                                       _vm._s(
-                                        _vm.getConfig.header.rightSide.title
+                                        _vm.config.header.rightSide.title
                                       ) +
                                       "\n\t\t\t\t\t"
                                   )
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.getConfig.header.rightSide.subTitle
+                            _vm.config.header.rightSide.subTitle
                               ? _c("div", { staticClass: "sub-title" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
                                       _vm._s(
-                                        _vm.getConfig.header.rightSide.subTitle
+                                        _vm.config.header.rightSide.subTitle
                                       ) +
                                       "\n\t\t\t\t\t"
                                   )
@@ -1762,7 +1751,7 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.getConfig.body
+                _vm.config.body
                   ? _c(
                       "div",
                       {
@@ -1772,7 +1761,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm.getConfig.body.title
+                        _vm.config.body.title
                           ? _c("div", { staticClass: "container-title" }, [
                               _c("h3", {
                                 staticClass: "title text-center w-100",
@@ -1781,13 +1770,13 @@ var render = function() {
                                     (_vm.getSizes.width * 3.5) / 100 + "px"
                                 },
                                 domProps: {
-                                  innerHTML: _vm._s(_vm.getConfig.body.title)
+                                  innerHTML: _vm._s(_vm.config.body.title)
                                 }
                               })
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.getConfig.body.cc
+                        _vm.config.body.cc
                           ? _c("div", { staticClass: "row mb-4" }, [
                               _c(
                                 "div",
@@ -1795,9 +1784,7 @@ var render = function() {
                                 [
                                   _c("h5", { staticClass: "title p-0 m-0" }, [
                                     _c("b", [
-                                      _vm._v(
-                                        _vm._s(_vm.getConfig.body.cc.title)
-                                      )
+                                      _vm._v(_vm._s(_vm.config.body.cc.title))
                                     ])
                                   ]),
                                   _vm._v(" "),
@@ -1830,41 +1817,37 @@ var render = function() {
                                           "px"
                                       }
                                     },
-                                    _vm._l(
-                                      _vm.getConfig.body.cc.persons,
-                                      function(item, index) {
-                                        return _c(
-                                          "li",
-                                          {
-                                            key: index,
-                                            staticClass:
-                                              "list-item-person ml-0",
-                                            style: {
-                                              paddingLeft:
-                                                (_vm.getSizes.width * 1.5) /
-                                                  100 +
-                                                "px",
-                                              paddingBottom:
-                                                (_vm.getSizes.width * 3.5) /
-                                                  100 +
-                                                "px"
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t" +
-                                                _vm._s(
-                                                  _vm.getConfig.body.cc
-                                                    .prePerson +
-                                                    " " +
-                                                    item
-                                                ) +
-                                                "\n\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      }
-                                    ),
+                                    _vm._l(_vm.config.body.cc.persons, function(
+                                      item,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "li",
+                                        {
+                                          key: index,
+                                          staticClass: "list-item-person ml-0",
+                                          style: {
+                                            paddingLeft:
+                                              (_vm.getSizes.width * 1.5) / 100 +
+                                              "px",
+                                            paddingBottom:
+                                              (_vm.getSizes.width * 3.5) / 100 +
+                                              "px"
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t" +
+                                              _vm._s(
+                                                _vm.config.body.cc.prePerson +
+                                                  " " +
+                                                  item
+                                              ) +
+                                              "\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      )
+                                    }),
                                     0
                                   )
                                 ]
@@ -1872,20 +1855,20 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.getConfig.body.for
+                        _vm.config.body.for
                           ? _c("p", {
                               staticClass: "for w-100 text-justify",
                               domProps: {
-                                innerHTML: _vm._s(_vm.getConfig.body.for)
+                                innerHTML: _vm._s(_vm.config.body.for)
                               }
                             })
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.getConfig.body.content
+                        _vm.config.body.content
                           ? _c("div", {
                               staticClass: "content w-100 text-justify",
                               domProps: {
-                                innerHTML: _vm._s(_vm.getConfig.body.content)
+                                innerHTML: _vm._s(_vm.config.body.content)
                               }
                             })
                           : _vm._e()
@@ -1893,32 +1876,32 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.getConfig.footer
+                _vm.config.footer
                   ? _c("div", { staticClass: "PI-footer row" }, [
-                      _vm.getConfig.footer.leftSide
+                      _vm.config.footer.leftSide
                         ? _c("div", { staticClass: "left-side col" })
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.getConfig.footer.rightSide
+                      _vm.config.footer.rightSide
                         ? _c("div", { staticClass: "right-side col" }, [
-                            _vm.getConfig.footer.rightSide.title
+                            _vm.config.footer.rightSide.title
                               ? _c("div", { staticClass: "title" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
                                       _vm._s(
-                                        _vm.getConfig.footer.rightSide.title
+                                        _vm.config.footer.rightSide.title
                                       ) +
                                       "\n\t\t\t\t\t"
                                   )
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.getConfig.footer.rightSide.subTitle
+                            _vm.config.footer.rightSide.subTitle
                               ? _c("div", { staticClass: "sub-title" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
                                       _vm._s(
-                                        _vm.getConfig.footer.rightSide.subTitle
+                                        _vm.config.footer.rightSide.subTitle
                                       ) +
                                       "\n\t\t\t\t\t"
                                   )
