@@ -67,11 +67,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Paper: _components__WEBPACK_IMPORTED_MODULE_0__["Paper"]
+  },
   data: function data() {
     return {};
   },
-  components: {
-    Paper: _components__WEBPACK_IMPORTED_MODULE_0__["Paper"]
+  computed: {
+    config: function config() {
+      return this.$store.getters['documents/getSelectedDoc'];
+    }
   },
   methods: {
     launchPrint: function launchPrint() {
@@ -166,7 +171,12 @@ var render = function() {
           staticClass:
             "paper-container flex-grow-1 d-flex justify-content-center"
         },
-        [_c("Paper", { ref: "PaperItem", attrs: { width: 800 } })],
+        [
+          _c("Paper", {
+            ref: "PaperItem",
+            attrs: { config: _vm.config, width: 800 }
+          })
+        ],
         1
       ),
       _vm._v(" "),

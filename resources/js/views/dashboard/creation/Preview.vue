@@ -4,7 +4,7 @@
 		class="position-fixed d-flex justify-content-center align-items-stretch p-2"
 	>
 		<div class="paper-container flex-grow-1 d-flex justify-content-center">
-			<Paper ref="PaperItem" :width="800"></Paper>
+			<Paper :config="config" ref="PaperItem" :width="800"></Paper>
 		</div>
 		<!-- /.paper-container -->
 
@@ -57,11 +57,16 @@
 import { Paper } from "../../../components";
 
 export default {
+	components: {
+		Paper,
+	},
 	data() {
 		return {};
 	},
-	components: {
-		Paper,
+	computed: {
+		config() {
+			return this.$store.getters['documents/getSelectedDoc'];
+		}
 	},
 	methods: {
 		launchPrint() {
