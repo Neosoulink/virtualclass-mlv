@@ -1,52 +1,36 @@
 <template>
-	<div
-		id="paper-preview-arrea"
-		class="position-fixed d-flex justify-content-center align-items-stretch p-2"
-	>
-		<div class="paper-container flex-grow-1 d-flex justify-content-center">
-			<Paper :config="config" ref="PaperItem" :width="800"></Paper>
+	<div id="paper-preview-arrea" class="position-fixed p-2">
+		<div class="d-flex justify-content-center align-items-center">
+			<div class="paper-container">
+				<Paper :config="config" ref="PaperItem" :width="800"></Paper>
+			</div>
+			<!-- /.paper-container -->
 		</div>
-		<!-- /.paper-container -->
 
-		<div class="config-container px-4">
-			<div class="header w-100 d-flex justify-content-end">
-				<md-button
-					class="md-icon-button md-simple"
-					@click="$router.replace({ name: 'dashboard' })"
-				>
-					<md-icon>home</md-icon>
+		<div
+			class="config-container d-flex flex-row align-items-center justify-content-center position-fixed"
+		>
+			<md-menu md-size="auto">
+				<md-button class="md-icon-button md-primary" md-menu-trigger>
+					<md-icon>menu</md-icon>
 				</md-button>
 
-				<md-button class="md-icon-button md-danger" @click="$router.back()">
-					<md-icon>clear</md-icon>
-				</md-button>
-			</div>
-			<!-- /.header -->
+				<md-menu-content>
+					<md-menu-item @click="launchPrint()">
+						Launch print <md-icon>print</md-icon>
+					</md-menu-item>
+					<md-menu-item @click="exportToWord()">
+						Export to Word <md-icon>description</md-icon>
+					</md-menu-item>
+					<md-menu-item @click="exportToPDF()">
+						Export to pdf <md-icon>picture_as_pdf</md-icon>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
 
-			<h2 class="md-display-1 mb-4 text-white">Config & Exportation</h2>
-			<div class="md-layout flex-column">
-				<span class="md-caption text-light"
-					>Launch the defaut web printing:</span
-				>
-				<md-button class="md-raised md-primary mx-0 mb-3" @click="launchPrint()"
-					>Launch print <md-icon>print</md-icon></md-button
-				>
-
-				<span class="md-caption text-light">Lorem ipsum dolor sit amet:</span>
-				<md-button
-				class="md-raised md-primary mx-0 mb-3"
-				@click="exportToWord()"
-					>Export to Word <i class="fas fa-file-word ml-2"></i
-				></md-button>
-
-				<span class="md-caption text-light">Lorem ipsum dolor sit amet:</span>
-				<md-button
-					class="md-raised md-primary mx-0 mb-3"
-					@click="exportToPDF()"
-					>Export to pdf <md-icon>picture_as_pdf</md-icon></md-button
-				>
-			</div>
-			<div></div>
+			<md-button class="md-icon-button md-danger" @click="$router.back()">
+				<md-icon>clear</md-icon>
+			</md-button>
 		</div>
 		<!-- /.config-container -->
 	</div>
@@ -65,8 +49,8 @@ export default {
 	},
 	computed: {
 		config() {
-			return this.$store.getters['documents/getSelectedDoc'];
-		}
+			return this.$store.getters["document/getSelectedDoc"].config;
+		},
 	},
 	methods: {
 		launchPrint() {
@@ -75,9 +59,9 @@ export default {
 		exportToWord() {
 			this.$refs.PaperItem.exportToWord();
 		},
-		exportToPDF(){
+		exportToPDF() {
 			this.$refs.PaperItem.exportToPDF();
-		}
+		},
 	},
 };
 </script>
@@ -85,13 +69,20 @@ export default {
 <style lang="scss">
 #paper-preview-arrea {
 	background-color: rgba($color: #000000, $alpha: 0.7);
-	z-index: 500;
+	z-index: 6;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	> .paper-container {
-		overflow: auto;
+	overflow: auto;
+
+	.paper-container {
+	}
+
+	.config-container {
+		z-index: 7;
+		top: 50px;
+		right: 50px;
 	}
 }
 </style>

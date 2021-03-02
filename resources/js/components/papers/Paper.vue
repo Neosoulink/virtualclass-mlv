@@ -1,12 +1,14 @@
 <template>
 	<div
 		id="paper-item"
-		class="bg-white position-relative text-dark"
+		class=""
 		:style="{
-			minHeight: getSizes.height + 'px',
-			width: getSizes.width + 'px',
-			fontSize: getSizes.font + 'px',
-			lineHeight: getSizes.lineHeight + 'px',
+			minHeight: getSizes.height + 'px !important',
+			width: getSizes.width + 'px !important',
+			minWidth: getSizes.width + 'px !important',
+			maxWidth: getSizes.width + 'px !important',
+			fontSize: getSizes.font + 'px !important',
+			lineHeight: getSizes.lineHeight + 'px !important',
 		}"
 	>
 		<template v-if="!isEmpty(config)">
@@ -294,8 +296,12 @@ export default {
 <style lang="scss">
 #paper-item {
 	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+	position: relative;
 	height: auto;
 	max-height: auto;
+	background-color: #fff;
+	color: black;
+	overflow: hidden;
 	* {
 		font-family: inherit;
 		font-size: inherit;
@@ -339,7 +345,7 @@ export default {
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		z-index: 100;
+		z-index: 5;
 		color: white;
 		> * {
 			line-height: 150%;

@@ -13,10 +13,10 @@ export function initialize(store, router) {
 			return next('/dashboard');
 
 		if (requireSelectedDoc) {
-			const selectedDoc = store.getters['document/getSelectedDoc'];
+			//const selectedDoc = store.getters['document/getSelectedDoc'];
 
-			if (isEmpty(selectedDoc))
-				return next({ name: 'dashboard-creation' });
+			//if (isEmpty(selectedDoc))
+			//	return next({ name: 'dashboard-creation' });
 		}
 
 		next();

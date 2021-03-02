@@ -102156,11 +102156,9 @@ function initialize(store, router) {
     if (requireAuth && !currentUser) return next('/login');
     if (to.path == '/login' && currentUser) return next('/dashboard');
 
-    if (requireSelectedDoc) {
-      var selectedDoc = store.getters['document/getSelectedDoc'];
-      if (Object(_helpers_Functions__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(selectedDoc)) return next({
-        name: 'dashboard-creation'
-      });
+    if (requireSelectedDoc) {//const selectedDoc = store.getters['document/getSelectedDoc'];
+      //if (isEmpty(selectedDoc))
+      //	return next({ name: 'dashboard-creation' });
     }
 
     next();

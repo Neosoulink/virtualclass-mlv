@@ -49,22 +49,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -75,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     config: function config() {
-      return this.$store.getters['documents/getSelectedDoc'];
+      return this.$store.getters["document/getSelectedDoc"].config;
     }
   },
   methods: {
@@ -105,7 +89,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#paper-preview-arrea {\n  background-color: rgba(0, 0, 0, 0.7);\n  z-index: 500;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n#paper-preview-arrea > .paper-container {\n  overflow: auto;\n}", ""]);
+exports.push([module.i, "#paper-preview-arrea {\n  background-color: rgba(0, 0, 0, 0.7);\n  z-index: 6;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: auto;\n}\n#paper-preview-arrea .config-container {\n  z-index: 7;\n  top: 50px;\n  right: 50px;\n}", ""]);
 
 // exports
 
@@ -159,135 +143,120 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass:
-        "position-fixed d-flex justify-content-center align-items-stretch p-2",
-      attrs: { id: "paper-preview-arrea" }
-    },
+    { staticClass: "position-fixed p-2", attrs: { id: "paper-preview-arrea" } },
     [
+      _c(
+        "div",
+        { staticClass: "d-flex justify-content-center align-items-center" },
+        [
+          _c(
+            "div",
+            { staticClass: "paper-container" },
+            [
+              _c("Paper", {
+                ref: "PaperItem",
+                attrs: { config: _vm.config, width: 800 }
+              })
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
       _c(
         "div",
         {
           staticClass:
-            "paper-container flex-grow-1 d-flex justify-content-center"
+            "config-container d-flex flex-row align-items-center justify-content-center position-fixed"
         },
         [
-          _c("Paper", {
-            ref: "PaperItem",
-            attrs: { config: _vm.config, width: 800 }
-          })
+          _c(
+            "md-menu",
+            { attrs: { "md-size": "auto" } },
+            [
+              _c(
+                "md-button",
+                {
+                  staticClass: "md-icon-button md-primary",
+                  attrs: { "md-menu-trigger": "" }
+                },
+                [_c("md-icon", [_vm._v("menu")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "md-menu-content",
+                [
+                  _c(
+                    "md-menu-item",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.launchPrint()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n\t\t\t\t\tLaunch print "),
+                      _c("md-icon", [_vm._v("print")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-menu-item",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.exportToWord()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n\t\t\t\t\tExport to Word "),
+                      _c("md-icon", [_vm._v("description")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-menu-item",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.exportToPDF()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n\t\t\t\t\tExport to pdf "),
+                      _c("md-icon", [_vm._v("picture_as_pdf")])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            {
+              staticClass: "md-icon-button md-danger",
+              on: {
+                click: function($event) {
+                  return _vm.$router.back()
+                }
+              }
+            },
+            [_c("md-icon", [_vm._v("clear")])],
+            1
+          )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "config-container px-4" }, [
-        _c(
-          "div",
-          { staticClass: "header w-100 d-flex justify-content-end" },
-          [
-            _c(
-              "md-button",
-              {
-                staticClass: "md-icon-button md-simple",
-                on: {
-                  click: function($event) {
-                    return _vm.$router.replace({ name: "dashboard" })
-                  }
-                }
-              },
-              [_c("md-icon", [_vm._v("home")])],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "md-button",
-              {
-                staticClass: "md-icon-button md-danger",
-                on: {
-                  click: function($event) {
-                    return _vm.$router.back()
-                  }
-                }
-              },
-              [_c("md-icon", [_vm._v("clear")])],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("h2", { staticClass: "md-display-1 mb-4 text-white" }, [
-          _vm._v("Config & Exportation")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "md-layout flex-column" },
-          [
-            _c("span", { staticClass: "md-caption text-light" }, [
-              _vm._v("Launch the defaut web printing:")
-            ]),
-            _vm._v(" "),
-            _c(
-              "md-button",
-              {
-                staticClass: "md-raised md-primary mx-0 mb-3",
-                on: {
-                  click: function($event) {
-                    return _vm.launchPrint()
-                  }
-                }
-              },
-              [_vm._v("Launch print "), _c("md-icon", [_vm._v("print")])],
-              1
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "md-caption text-light" }, [
-              _vm._v("Lorem ipsum dolor sit amet:")
-            ]),
-            _vm._v(" "),
-            _c(
-              "md-button",
-              {
-                staticClass: "md-raised md-primary mx-0 mb-3",
-                on: {
-                  click: function($event) {
-                    return _vm.exportToWord()
-                  }
-                }
-              },
-              [
-                _vm._v("Export to Word "),
-                _c("i", { staticClass: "fas fa-file-word ml-2" })
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "md-caption text-light" }, [
-              _vm._v("Lorem ipsum dolor sit amet:")
-            ]),
-            _vm._v(" "),
-            _c(
-              "md-button",
-              {
-                staticClass: "md-raised md-primary mx-0 mb-3",
-                on: {
-                  click: function($event) {
-                    return _vm.exportToPDF()
-                  }
-                }
-              },
-              [
-                _vm._v("Export to pdf "),
-                _c("md-icon", [_vm._v("picture_as_pdf")])
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div")
-      ])
+      )
     ]
   )
 }
