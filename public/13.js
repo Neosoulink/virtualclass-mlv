@@ -172,7 +172,7 @@ var render = function() {
         [
           _c(
             "md-menu",
-            { attrs: { "md-size": "auto" } },
+            { attrs: { "md-size": "auto", "md-direction": "bottom-end" } },
             [
               _c(
                 "md-button",

@@ -10,7 +10,7 @@
 		<div
 			class="config-container d-flex flex-row align-items-center justify-content-center position-fixed"
 		>
-			<md-menu md-size="auto">
+			<md-menu md-size="auto" md-direction="bottom-end">
 				<md-button class="md-icon-button md-primary" md-menu-trigger>
 					<md-icon>menu</md-icon>
 				</md-button>
