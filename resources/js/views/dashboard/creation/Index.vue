@@ -1,6 +1,6 @@
 <template>
 	<div class="content" id="home-creation-section">
-		<div class="content-side row">
+		<div class="sides-container row">
 			<div class="left-side col-7">
 				<div class="d-flex flex-column bg-white">
 					<div class="d-flex align-items-center justify-content-between">
@@ -33,16 +33,16 @@
 				</div>
 				<!-- /.d-flex -->
 			</div>
-			<!-- /.right-side -->
+			<!-- /.left-side -->
 
 			<div
 				class="right-side col-5 d-flex align-items-start justify-content-center"
 			>
 				<Paper :config="selectedDoc ? selectedDoc.config : undefined"></Paper>
 			</div>
-			<!-- /.left-side -->
+			<!-- /.right-side -->
 		</div>
-		<!-- /.content-side -->
+		<!-- /.sides-container -->
 	</div>
 	<!-- /#home-creation-section -->
 </template>
@@ -85,21 +85,11 @@ export default {
 
 <style lang="scss">
 .content#home-creation-section {
-	> .content-side {
-		> .left-side {
-			overflow: auto;
-			min-height: 100%;
+	> .sides-container {
+		> .left-side,
+		.right-side {
+			overflow-y: auto;
 			max-height: calc(100vh - 123px);
-
-			> :first-child {
-				overflow: auto;
-				height: 100%;
-
-				.list-group {
-					overflow: auto;
-					height: 100%;
-				}
-			}
 		}
 	}
 }

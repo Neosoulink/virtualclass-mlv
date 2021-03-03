@@ -103,7 +103,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".content#home-creation-section > .content-side > .left-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n.content#home-creation-section > .content-side > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n.content#home-creation-section > .content-side > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".content#home-creation-section > .sides-container > .left-side,\n.content#home-creation-section > .sides-container .right-side {\n  overflow-y: auto;\n  max-height: calc(100vh - 123px);\n}", ""]);
 
 // exports
 
@@ -159,7 +159,7 @@ var render = function() {
     "div",
     { staticClass: "content", attrs: { id: "home-creation-section" } },
     [
-      _c("div", { staticClass: "content-side row" }, [
+      _c("div", { staticClass: "sides-container row" }, [
         _c("div", { staticClass: "left-side col-7" }, [
           _c("div", { staticClass: "d-flex flex-column bg-white" }, [
             _c(
