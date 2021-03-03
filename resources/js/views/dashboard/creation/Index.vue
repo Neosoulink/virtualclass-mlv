@@ -4,7 +4,7 @@
 			<div class="left-side col-7">
 				<div class="d-flex flex-column bg-white">
 					<div class="d-flex align-items-center justify-content-between">
-						<md-subheader>which document do you want to create?</md-subheader>
+						<md-subheader>Which template do you want to use?</md-subheader>
 						<md-button
 							class="md-primary"
 							:disabled="!selectedDoc"
@@ -22,10 +22,11 @@
 							@click="selectDoc(doc)"
 						>
 							<div class="d-flex w-100 justify-content-between">
-								<h5 class="mb-1">{{ doc.name }}</h5>
+								<h5 class="mb-1">
+									<md-icon>description</md-icon> {{ doc.name }}
+								</h5>
 							</div>
 							<p class="mb-1">{{ doc.description }}</p>
-							<small>Donec id elit non mi porta.</small>
 						</button>
 					</div>
 					<!-- /.list-group -->
@@ -55,7 +56,7 @@ export default {
 	},
 	data() {
 		return {
-			docList : [],
+			docList: [],
 			selectedDoc: undefined,
 			error: null,
 		};

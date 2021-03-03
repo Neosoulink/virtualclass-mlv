@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardCreation",
@@ -168,7 +169,7 @@ var render = function() {
               },
               [
                 _c("md-subheader", [
-                  _vm._v("which document do you want to create?")
+                  _vm._v("Which template do you want to use?")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -209,17 +210,21 @@ var render = function() {
                       "div",
                       { staticClass: "d-flex w-100 justify-content-between" },
                       [
-                        _c("h5", { staticClass: "mb-1" }, [
-                          _vm._v(_vm._s(doc.name))
-                        ])
+                        _c(
+                          "h5",
+                          { staticClass: "mb-1" },
+                          [
+                            _c("md-icon", [_vm._v("description")]),
+                            _vm._v(" " + _vm._s(doc.name) + "\n\t\t\t\t\t\t\t")
+                          ],
+                          1
+                        )
                       ]
                     ),
                     _vm._v(" "),
                     _c("p", { staticClass: "mb-1" }, [
                       _vm._v(_vm._s(doc.description))
-                    ]),
-                    _vm._v(" "),
-                    _c("small", [_vm._v("Donec id elit non mi porta.")])
+                    ])
                   ]
                 )
               }),
