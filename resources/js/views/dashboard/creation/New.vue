@@ -12,21 +12,24 @@
 					:md-error="steper.first.error.header"
 					:md-done.sync="steper.first.active"
 				>
-					<div>
+					<div class="mb-4">
 						<ckeditor
 							:editor="steper.first.editor"
 							v-model="docConfig.body.content"
 							:config="steper.first.editorConfig"
 						></ckeditor>
 					</div>
-					<md-button class="md-raised md-primary" @click="$router.go(-1)"
-						>Go back</md-button
-					>
-					<md-button
-						class="md-raised md-primary"
-						@click="setDone('first', 'second')"
-						>Next</md-button
-					>
+
+					<div class="">
+						<md-button class="md-raised md-primary" @click="$router.go(-1)"
+							>Go back</md-button
+						>
+						<md-button
+							class="md-raised md-primary"
+							@click="setDone('first', 'second')"
+							>Next</md-button
+						>
+					</div>
 				</md-step>
 				<!-- /md-step.first -->
 
@@ -462,8 +465,6 @@ export default {
 #new-creation-section {
 	> .left-side {
 		overflow: auto;
-		min-height: 100%;
-		max-height: calc(100vh - 123px);
 
 		> :first-child {
 			overflow: auto;

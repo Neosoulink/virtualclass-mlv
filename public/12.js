@@ -312,6 +312,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -487,7 +490,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#new-creation-section > .left-side {\n  overflow: auto;\n  min-height: 100%;\n  max-height: calc(100vh - 123px);\n}\n#new-creation-section > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n#new-creation-section > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
+exports.push([module.i, "#new-creation-section > .left-side {\n  overflow: auto;\n}\n#new-creation-section > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n#new-creation-section > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -583,6 +586,7 @@ var render = function() {
                 [
                   _c(
                     "div",
+                    { staticClass: "mb-4" },
                     [
                       _c("ckeditor", {
                         attrs: {
@@ -602,32 +606,38 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
-                    "md-button",
-                    {
-                      staticClass: "md-raised md-primary",
-                      on: {
-                        click: function($event) {
-                          return _vm.$router.go(-1)
-                        }
-                      }
-                    },
-                    [_vm._v("Go back")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-button",
-                    {
-                      staticClass: "md-raised md-primary",
-                      on: {
-                        click: function($event) {
-                          return _vm.setDone("first", "second")
-                        }
-                      }
-                    },
-                    [_vm._v("Next")]
+                    "div",
+                    {},
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-raised md-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.go(-1)
+                            }
+                          }
+                        },
+                        [_vm._v("Go back")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-raised md-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.setDone("first", "second")
+                            }
+                          }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
+                ]
               ),
               _vm._v(" "),
               _c(
