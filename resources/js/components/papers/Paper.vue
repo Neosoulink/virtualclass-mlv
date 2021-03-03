@@ -225,12 +225,13 @@ export default {
 			//Longeur = Largeur * 1.414
 			const width = this.width;
 			const height = width * 1.414;
-			const ratio = height / this.width;
-			const modulo = height % this.width;
+			const ratio = height / width;
+			const modulo = height % width;
 			const marginHorizontal = (width * 4) / 100;
 			const marginVertical = (height * 3) / 100;
-			const font = (width * 2.56) / 100;
+			const font = (width * 2.55) / 100;
 			const lineHeight = (width * 3.51) / 100;
+			console.log(font)
 
 			return {
 				height,
@@ -306,13 +307,6 @@ export default {
 		font-family: inherit;
 		font-size: inherit;
 		line-height: inherit;
-	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
 		margin: 0;
 		padding: 0;
 	}

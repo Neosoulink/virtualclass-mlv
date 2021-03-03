@@ -1,5 +1,5 @@
 <template>
-	<div id="paper-preview-arrea" class="position-fixed p-2">
+	<div id="paper-preview-arrea" class="position-fixed p-2" >
 		<div class="d-flex justify-content-center align-items-center">
 			<div class="paper-container">
 				<Paper :config="config" ref="PaperItem" :width="800"></Paper>
