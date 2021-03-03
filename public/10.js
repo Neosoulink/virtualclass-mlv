@@ -23,6 +23,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardHome",
@@ -45,7 +78,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#home-dashboard {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#home-dashboard .title {\n  font-weight: 500;\n  text-transform: uppercase;\n  font-size: 40px;\n}\n#home-dashboard .actions {\n  display: flex;\n  width: 15vw;\n  flex-direction: row;\n  justify-content: space-between;\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -101,29 +134,107 @@ var render = function() {
     "div",
     { staticClass: "content", attrs: { id: "home-dashboard" } },
     [
-      _c("h1", { staticClass: "title" }, [
-        _vm._v("Quick and secure creation of documents")
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "md-layout md-gutter md-alignment-center" },
-        [
-          _c(
-            "md-button",
-            {
-              staticClass: "md-raised md-primary",
-              attrs: { to: { name: "dashboard-creation" } }
-            },
-            [_vm._v("Get started")]
-          ),
-          _vm._v(" "),
-          _c("md-button", { attrs: { to: { name: "dashboard-demo" } } }, [
-            _c("span", { staticClass: "text-dark" }, [_vm._v("Demo")])
-          ])
-        ],
-        1
-      )
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-sm-4" },
+          [
+            _c(
+              "stats-card",
+              {
+                staticClass: "rounded",
+                attrs: { "data-background-color": "green" }
+              },
+              [
+                _c(
+                  "template",
+                  { slot: "header" },
+                  [_c("md-icon", [_vm._v("description")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c("template", { slot: "content" }, [
+                  _c("h3", { staticClass: "card-subtitle m-0" }, [
+                    _vm._v("Creation")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "template",
+                  { slot: "footer" },
+                  [
+                    _c(
+                      "routerLink",
+                      {
+                        staticClass: "stats",
+                        attrs: { to: { name: "dashboard-creation" } }
+                      },
+                      [
+                        _c("md-icon", [_vm._v("description")]),
+                        _vm._v("\n\t\t\t\t\t\tCreate new doc\n\t\t\t\t\t")
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              2
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-sm-4" },
+          [
+            _c(
+              "stats-card",
+              {
+                staticClass: "rounded",
+                attrs: { "data-background-color": "green" }
+              },
+              [
+                _c(
+                  "template",
+                  { slot: "header" },
+                  [_c("md-icon", [_vm._v("star")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c("template", { slot: "content" }, [
+                  _c("h3", { staticClass: "card-subtitle m-0" }, [
+                    _vm._v("Demo")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "template",
+                  { slot: "footer" },
+                  [
+                    _c(
+                      "routerLink",
+                      {
+                        staticClass: "stats",
+                        attrs: { to: { name: "dashboard-demo" } }
+                      },
+                      [
+                        _c("md-icon", [_vm._v("description")]),
+                        _vm._v("\n\t\t\t\t\t\tPreview demo version\n\t\t\t\t\t")
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              2
+            )
+          ],
+          1
+        )
+      ])
     ]
   )
 }

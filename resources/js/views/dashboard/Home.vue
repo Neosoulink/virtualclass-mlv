@@ -1,12 +1,45 @@
 <template>
-	<div class="content" id="home-dashboard">
-		<h1 class="title">Quick and secure creation of documents</h1>
-		<div class="md-layout md-gutter md-alignment-center">
-			<md-button :to="{name: 'dashboard-creation'}" class="md-raised md-primary">Get started</md-button>
+	<div id="home-dashboard" class="content">
+		<div class="row">
+			<div class="col-sm-4">
+				<stats-card data-background-color="green" class="rounded">
+					<template slot="header">
+						<md-icon>description</md-icon>
+					</template>
 
-			<md-button :to="{name: 'dashboard-demo'}">
-				<span class="text-dark">Demo</span>
-			</md-button>
+					<template slot="content">
+						<h3 class="card-subtitle m-0">Creation</h3>
+					</template>
+
+					<template slot="footer">
+						<routerLink :to="{ name: 'dashboard-creation' }" class="stats">
+							<md-icon>description</md-icon>
+							Create new doc
+						</routerLink>
+					</template>
+				</stats-card>
+			</div>
+			<!-- /.col-sm-4 -->
+
+			<div class="col-sm-4">
+				<stats-card data-background-color="green" class="rounded">
+					<template slot="header">
+						<md-icon>star</md-icon>
+					</template>
+
+					<template slot="content">
+						<h3 class="card-subtitle m-0">Demo</h3>
+					</template>
+
+					<template slot="footer">
+						<routerLink :to="{ name: 'dashboard-demo' }" class="stats">
+							<md-icon>description</md-icon>
+							Preview demo version
+						</routerLink>
+					</template>
+				</stats-card>
+			</div>
+			<!-- /.col-sm-4 -->
 		</div>
 	</div>
 	<!-- /.content -->
@@ -24,20 +57,5 @@ export default {
 
 <style lang="scss">
 #home-dashboard {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	.title {
-		font-weight: 500;
-		text-transform: uppercase;
-		font-size: 40px;
-	}
-	.actions {
-		display: flex;
-		width: 15vw;
-		flex-direction: row;
-		justify-content: space-between;
-	}
 }
 </style>
