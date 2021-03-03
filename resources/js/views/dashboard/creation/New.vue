@@ -1,10 +1,10 @@
 <template>
 	<div class="content" id="new-creation-section">
-		<div class="row content-side">
+		<div class="row sides-container">
 			<md-steppers
 				:md-active-step.sync="steper.active"
 				md-linear
-				class="col-md-7 left-side"
+				class="left-side col-md-7"
 			>
 				<md-step
 					id="first"
@@ -31,7 +31,7 @@
 						>
 					</div>
 				</md-step>
-				<!-- /md-step.first -->
+				<!-- /md-step#first -->
 
 				<md-step
 					id="second"
@@ -284,7 +284,7 @@
 						Launch preview
 					</md-button>
 				</md-step>
-				<!-- /md-step.second -->
+				<!-- /md-step#second -->
 			</md-steppers>
 			<!-- /.left-side -->
 
@@ -463,17 +463,12 @@ export default {
 
 <style lang="scss">
 #new-creation-section {
-	> .left-side {
-		overflow: auto;
-
-		> :first-child {
-			overflow: auto;
-			height: 100%;
-
-			.list-group {
-				overflow: auto;
-				height: 100%;
-			}
+	> .sides-container {
+		>
+		.left-side,
+		.right-side {
+			overflow-y: auto;
+			max-height: calc(100vh - 123px);
 		}
 	}
 }

@@ -490,7 +490,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#new-creation-section > .left-side {\n  overflow: auto;\n}\n#new-creation-section > .left-side > :first-child {\n  overflow: auto;\n  height: 100%;\n}\n#new-creation-section > .left-side > :first-child .list-group {\n  overflow: auto;\n  height: 100%;\n}", ""]);
+exports.push([module.i, "#new-creation-section > .sides-container > .left-side,\n#new-creation-section > .sides-container .right-side {\n  overflow-y: auto;\n  max-height: calc(100vh - 123px);\n}", ""]);
 
 // exports
 
@@ -548,12 +548,12 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "row content-side" },
+        { staticClass: "row sides-container" },
         [
           _c(
             "md-steppers",
             {
-              staticClass: "col-md-7 left-side",
+              staticClass: "left-side col-md-7",
               attrs: { "md-active-step": _vm.steper.active, "md-linear": "" },
               on: {
                 "update:mdActiveStep": function($event) {
