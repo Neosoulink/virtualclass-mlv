@@ -157,7 +157,7 @@ var render = function() {
                 _c(
                   "template",
                   { slot: "header" },
-                  [_c("md-icon", [_vm._v("description")])],
+                  [_c("md-icon", [_vm._v("note_add")])],
                   1
                 ),
                 _vm._v(" "),

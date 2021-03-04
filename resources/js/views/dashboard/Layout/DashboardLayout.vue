@@ -13,7 +13,7 @@
 				<p>Dashboard</p>
 			</sidebar-link>
 			<sidebar-link :to="{name: 'dashboard-creation'}">
-				<md-icon>create_new_folder</md-icon>
+				<md-icon>note_add</md-icon>
 				<p>Creation</p>
 			</sidebar-link>
 			<sidebar-link to="chart">

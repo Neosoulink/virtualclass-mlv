@@ -674,7 +674,7 @@ var render = function() {
             "sidebar-link",
             { attrs: { to: { name: "dashboard-creation" } } },
             [
-              _c("md-icon", [_vm._v("create_new_folder")]),
+              _c("md-icon", [_vm._v("note_add")]),
               _vm._v(" "),
               _c("p", [_vm._v("Creation")])
             ],
