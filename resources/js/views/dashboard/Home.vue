@@ -2,20 +2,24 @@
 	<div id="home-dashboard" class="content">
 		<div class="row">
 			<div class="col-sm-4">
-				<stats-card data-background-color="green" class="rounded">
+				<stats-card
+					:to="{ name: 'dashboard-creation' }"
+					data-background-color="green"
+					class="rounded stats-card"
+				>
 					<template slot="header">
-						<md-icon>description</md-icon>
+						<md-icon>note_add</md-icon>
 					</template>
 
 					<template slot="content">
-						<h3 class="card-subtitle m-0">Creation</h3>
+						<h3 class="card-subtitle py-2">Creation</h3>
 					</template>
 
 					<template slot="footer">
-						<routerLink :to="{ name: 'dashboard-creation' }" class="stats">
-							<md-icon>description</md-icon>
-							Create new doc
-						</routerLink>
+						<router-link :to="{ name: 'dashboard-creation' }" class="stats pb-2">
+							<md-icon>open_in_browser</md-icon>
+							Create new document
+						</router-link>
 					</template>
 				</stats-card>
 			</div>
@@ -28,18 +32,19 @@
 					</template>
 
 					<template slot="content">
-						<h3 class="card-subtitle m-0">Demo</h3>
+						<h3 class="card-subtitle py-2">Demo</h3>
 					</template>
 
 					<template slot="footer">
-						<routerLink :to="{ name: 'dashboard-demo' }" class="stats">
-							<md-icon>description</md-icon>
-							Preview demo version
+						<routerLink :to="{ name: 'dashboard-demo' }" class="stats pb-2">
+							<md-icon>open_in_browser</md-icon>
+							Checkout Demo
 						</routerLink>
 					</template>
 				</stats-card>
 			</div>
 			<!-- /.col-sm-4 -->
+
 		</div>
 	</div>
 	<!-- /.content -->

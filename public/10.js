@@ -56,6 +56,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardHome",
@@ -142,8 +147,11 @@ var render = function() {
             _c(
               "stats-card",
               {
-                staticClass: "rounded",
-                attrs: { "data-background-color": "green" }
+                staticClass: "rounded stats-card",
+                attrs: {
+                  to: { name: "dashboard-creation" },
+                  "data-background-color": "green"
+                }
               },
               [
                 _c(
@@ -154,7 +162,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("template", { slot: "content" }, [
-                  _c("h3", { staticClass: "card-subtitle m-0" }, [
+                  _c("h3", { staticClass: "card-subtitle py-2" }, [
                     _vm._v("Creation")
                   ])
                 ]),
@@ -164,14 +172,14 @@ var render = function() {
                   { slot: "footer" },
                   [
                     _c(
-                      "routerLink",
+                      "router-link",
                       {
-                        staticClass: "stats",
+                        staticClass: "stats pb-2",
                         attrs: { to: { name: "dashboard-creation" } }
                       },
                       [
-                        _c("md-icon", [_vm._v("description")]),
-                        _vm._v("\n\t\t\t\t\t\tCreate new doc\n\t\t\t\t\t")
+                        _c("md-icon", [_vm._v("open_in_browser")]),
+                        _vm._v("\n\t\t\t\t\t\tCreate new document\n\t\t\t\t\t")
                       ],
                       1
                     )
@@ -204,7 +212,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("template", { slot: "content" }, [
-                  _c("h3", { staticClass: "card-subtitle m-0" }, [
+                  _c("h3", { staticClass: "card-subtitle py-2" }, [
                     _vm._v("Demo")
                   ])
                 ]),
@@ -216,12 +224,12 @@ var render = function() {
                     _c(
                       "routerLink",
                       {
-                        staticClass: "stats",
+                        staticClass: "stats pb-2",
                         attrs: { to: { name: "dashboard-demo" } }
                       },
                       [
-                        _c("md-icon", [_vm._v("description")]),
-                        _vm._v("\n\t\t\t\t\t\tPreview demo version\n\t\t\t\t\t")
+                        _c("md-icon", [_vm._v("open_in_browser")]),
+                        _vm._v("\n\t\t\t\t\t\tCheckout Demo\n\t\t\t\t\t")
                       ],
                       1
                     )
