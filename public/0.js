@@ -802,7 +802,6 @@ __webpack_require__.r(__webpack_exports__);
       var marginVertical = height * 3 / 100;
       var font = width * 2.55 / 100;
       var lineHeight = width * 3.51 / 100;
-      console.log(font);
       return {
         height: height,
         width: width,
@@ -1627,8 +1626,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass:
-                  "PI-container-text position-relative w-100 h-100 border",
+                staticClass: "PI-container-text position-relative w-100 h-100",
                 style: {
                   padding:
                     _vm.getSizes.marginVertical +

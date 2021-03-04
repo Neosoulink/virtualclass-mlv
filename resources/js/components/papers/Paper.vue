@@ -32,7 +32,7 @@
 			<!-- /.PI-container-background-logo -->
 
 			<div
-				class="PI-container-text position-relative w-100 h-100 border"
+				class="PI-container-text position-relative w-100 h-100"
 				:style="{
 					padding: `${getSizes.marginVertical}px ${getSizes.marginHorizontal}px`,
 					minHeight: getSizes.height + 'px',
@@ -231,7 +231,6 @@ export default {
 			const marginVertical = (height * 3) / 100;
 			const font = (width * 2.55) / 100;
 			const lineHeight = (width * 3.51) / 100;
-			console.log(font)
 
 			return {
 				height,
