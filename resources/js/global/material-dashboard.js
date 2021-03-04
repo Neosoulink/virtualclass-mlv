@@ -1,13 +1,13 @@
-// Sidebar on the right. Used as a local plugin in DashboardLayout.vue
-import SideBar from "../components/SidebarPlugin";
-
-// asset imports
-import "../assets/scss/material-dashboard.scss";
-import VueMaterial from "vue-material";
-import "vue-material/dist/vue-material.css";
-
 // library auto imports
 import "es6-promise/auto";
+
+// Sidebar on the right. Used as a local plugin in DashboardLayout.vue
+import SideBar from "../components/SidebarPlugin";
+import VueMaterial from "vue-material";
+
+// asset imports
+import "vue-material/dist/vue-material.css";
+import "../assets/scss/material-dashboard.scss";
 
 /**
  * This is the main Light Bootstrap Dashboard Vue plugin where dashboard related plugins are registerd.

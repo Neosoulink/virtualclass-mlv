@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.updateChartId();
-    Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! chartist */ "./node_modules/chartist/dist/chartist.js", 7)).then(function (Chartist) {
+    __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.t.bind(null, /*! chartist */ "./node_modules/chartist/dist/chartist.js", 7)).then(function (Chartist) {
       var ChartistLib = Chartist["default"] || Chartist;
 
       _this.$nextTick(function () {
