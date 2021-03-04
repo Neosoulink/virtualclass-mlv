@@ -11,7 +11,7 @@
 			class="config-container d-flex flex-row align-items-center justify-content-center position-fixed"
 		>
 			<md-menu md-size="auto" md-direction="bottom-end">
-				<md-button class="md-icon-button md-primary" md-menu-trigger>
+				<md-button class="md-just-icon md-primary mr-2" md-menu-trigger>
 					<md-icon>menu</md-icon>
 				</md-button>
 
@@ -28,7 +28,7 @@
 				</md-menu-content>
 			</md-menu>
 
-			<md-button class="md-icon-button md-danger" @click="$router.back()">
+			<md-button class="md-just-icon md-danger" @click="$router.back()">
 				<md-icon>clear</md-icon>
 			</md-button>
 		</div>

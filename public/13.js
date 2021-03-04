@@ -177,7 +177,7 @@ var render = function() {
               _c(
                 "md-button",
                 {
-                  staticClass: "md-icon-button md-primary",
+                  staticClass: "md-just-icon md-primary mr-2",
                   attrs: { "md-menu-trigger": "" }
                 },
                 [_c("md-icon", [_vm._v("menu")])],
@@ -244,7 +244,7 @@ var render = function() {
           _c(
             "md-button",
             {
-              staticClass: "md-icon-button md-danger",
+              staticClass: "md-just-icon md-danger",
               on: {
                 click: function($event) {
                   return _vm.$router.back()
