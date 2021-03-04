@@ -17,7 +17,7 @@ import VueFileAgent from 'vue-file-agent';
 import MaterialDashboard from "./global/material-dashboard";
 
 // Styles
-// import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
+ import 'vue-file-agent/dist/vue-file-agent.css';
 
 //Vue.prototype.$Chartist = Chartist;
 
