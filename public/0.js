@@ -773,6 +773,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -823,7 +826,8 @@ __webpack_require__.r(__webpack_exports__);
         printable: "paper-item",
         type: "html",
         maxWidth: 900,
-        targetStyles: ["*"]
+        targetStyles: ["*"],
+        style: "background:red"
       });
     },
     exportToWord: function exportToWord() {
@@ -865,7 +869,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#paper-item {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\";\n  position: relative;\n  height: auto;\n  max-height: auto;\n  background-color: #fff;\n  color: black;\n  overflow: hidden;\n}\n#paper-item * {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n  margin: 0;\n  padding: 0;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item h4 {\n  font-size: 120%;\n}\n#paper-item h5 {\n  font-size: 100%;\n}\n#paper-item h6 {\n  font-size: 80%;\n}\n#paper-item .marker {\n  background-color: yellow;\n}\n#paper-item .overlay {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\", sans-serif;\n  font-weight: 900;\n  background-color: rgba(0, 0, 0, 0.4);\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 5;\n  color: white;\n}\n#paper-item .overlay > * {\n  line-height: 150%;\n}\n#paper-item > .PI-container-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-container-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 5%;\n}\n#paper-item > .PI-container-text > .PI-header {\n  margin-bottom: 3%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > * {\n  width: auto;\n  text-align: center;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .sub-title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo {\n  margin: 4% auto;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo > .logo {\n  width: 35%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side {\n  text-align: right;\n  font-size: 80%;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side > .sub-title {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-body {\n  width: 100%;\n  line-height: 200%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .title,\n#paper-item > .PI-container-text > .PI-body .container-cc > .sub-title {\n  font-size: 80%;\n  font-weight: 700;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons {\n  margin-left: 0;\n  padding: 0;\n  margin: 0;\n  border-bottom-style: dashed;\n  line-height: 0;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons > .list-item-person {\n  font-size: 80%;\n  padding-left: 0;\n}\n#paper-item > .PI-container-text > .PI-body > .for,\n#paper-item > .PI-container-text > .PI-body .content p {\n  padding: 0;\n  margin: 0;\n}", ""]);
+exports.push([module.i, "#paper-item {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\";\n  position: relative;\n  height: auto;\n  max-height: auto;\n  background-color: #fff;\n  color: black;\n  overflow: hidden;\n}\n#paper-item * {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n#paper-item h1 {\n  font-size: 200%;\n}\n#paper-item h2 {\n  font-size: 180%;\n}\n#paper-item h3 {\n  font-size: 150%;\n}\n#paper-item h4 {\n  font-size: 120%;\n}\n#paper-item h5 {\n  font-size: 100%;\n}\n#paper-item h6 {\n  font-size: 80%;\n}\n#paper-item .marker {\n  background-color: yellow;\n}\n#paper-item .overlay {\n  font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, \"Trebuchet MS\", sans-serif;\n  font-weight: 900;\n  background-color: rgba(0, 0, 0, 0.4);\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 5;\n  color: white;\n}\n#paper-item .overlay > * {\n  line-height: 150%;\n}\n#paper-item > .PI-container-background-logo {\n  z-index: 1;\n  opacity: 0.03;\n}\n#paper-item > .PI-container-text {\n  z-index: 2;\n  background: transparent !important;\n  padding: 5%;\n}\n#paper-item > .PI-container-text > .PI-header {\n  margin-bottom: 3%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > * {\n  width: auto;\n  text-align: center;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .sub-title {\n  font-size: 70%;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo {\n  margin: 4% auto;\n}\n#paper-item > .PI-container-text > .PI-header > .left-side > .container-logo > .logo {\n  width: 35%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side {\n  text-align: right;\n  font-size: 80%;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-header > .right-side > .sub-title {\n  font-weight: 800;\n}\n#paper-item > .PI-container-text > .PI-body {\n  width: 100%;\n  line-height: 200%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .title,\n#paper-item > .PI-container-text > .PI-body .container-cc > .sub-title {\n  font-size: 80%;\n  font-weight: 700;\n  line-height: 150%;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons {\n  margin-left: 0;\n  padding: 0;\n  margin: 0;\n  border-bottom-style: dashed;\n  line-height: 0;\n}\n#paper-item > .PI-container-text > .PI-body .container-cc > .list-persons > .list-item-person {\n  font-size: 80%;\n  padding-left: 0;\n}\n#paper-item > .PI-container-text > .PI-body > .for,\n#paper-item > .PI-container-text > .PI-body .content p {\n  padding: 0;\n  margin: 0;\n}", ""]);
 
 // exports
 
@@ -1593,7 +1597,8 @@ var render = function() {
         minWidth: _vm.getSizes.width + "px !important",
         maxWidth: _vm.getSizes.width + "px !important",
         fontSize: _vm.getSizes.font + "px !important",
-        lineHeight: _vm.getSizes.lineHeight + "px !important"
+        lineHeight: _vm.getSizes.lineHeight + "px !important",
+        margin: 0
       },
       attrs: { id: "paper-item" }
     },
@@ -1630,6 +1635,10 @@ var render = function() {
                 style: {
                   padding:
                     _vm.getSizes.marginVertical +
+                    "px " +
+                    _vm.getSizes.marginHorizontal +
+                    "px " +
+                    0 +
                     "px " +
                     _vm.getSizes.marginHorizontal +
                     "px",
@@ -1779,82 +1788,98 @@ var render = function() {
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.config.body.cc
-                          ? _c("div", { staticClass: "row mb-4" }, [
-                              _c(
-                                "div",
-                                { staticClass: "offset-6 col-6 container-cc" },
-                                [
-                                  _c("h5", { staticClass: "title p-0 m-0" }, [
-                                    _c("b", [
-                                      _vm._v(_vm._s(_vm.config.body.cc.title))
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "h5",
-                                    {
-                                      staticClass: "sub-title",
-                                      style: {
-                                        paddingBottom:
-                                          (_vm.getSizes.width * 2.5) / 100 +
-                                          "px"
-                                      }
-                                    },
-                                    [_vm._m(0)]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "ul",
-                                    {
-                                      staticClass: "list-persons",
-                                      style: {
-                                        marginLeft:
-                                          (_vm.getSizes.width * 1.5) / 100 +
-                                          "px",
-                                        paddingLeft:
-                                          (_vm.getSizes.width * 1.5) / 100 +
-                                          "px",
-                                        borderBottomWidth:
-                                          (_vm.getSizes.width * 0.4) / 100 +
-                                          "px"
-                                      }
-                                    },
-                                    _vm._l(_vm.config.body.cc.persons, function(
-                                      item,
-                                      index
-                                    ) {
-                                      return _c(
-                                        "li",
-                                        {
-                                          key: index,
-                                          staticClass: "list-item-person ml-0",
-                                          style: {
-                                            paddingLeft:
-                                              (_vm.getSizes.width * 1.5) / 100 +
-                                              "px",
-                                            paddingBottom:
-                                              (_vm.getSizes.width * 3.5) / 100 +
-                                              "px"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t" +
-                                              _vm._s(
-                                                _vm.config.body.cc.prePerson +
-                                                  " " +
-                                                  item
-                                              ) +
-                                              "\n\t\t\t\t\t\t\t"
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "row",
+                                style: {
+                                  marginBottom:
+                                    (_vm.getSizes.width * 5) / 100 + "px"
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "offset-6 col-6 container-cc"
+                                  },
+                                  [
+                                    _c("h5", { staticClass: "title p-0 m-0" }, [
+                                      _c("b", [
+                                        _vm._v(_vm._s(_vm.config.body.cc.title))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "h5",
+                                      {
+                                        staticClass: "sub-title",
+                                        style: {
+                                          paddingBottom:
+                                            (_vm.getSizes.width * 2.5) / 100 +
+                                            "px"
+                                        }
+                                      },
+                                      [_vm._m(0)]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "ul",
+                                      {
+                                        staticClass: "list-persons",
+                                        style: {
+                                          marginLeft:
+                                            (_vm.getSizes.width * 1.5) / 100 +
+                                            "px",
+                                          paddingLeft:
+                                            (_vm.getSizes.width * 1.5) / 100 +
+                                            "px",
+                                          borderBottomWidth:
+                                            (_vm.getSizes.width * 0.4) / 100 +
+                                            "px"
+                                        }
+                                      },
+                                      _vm._l(
+                                        _vm.config.body.cc.persons,
+                                        function(item, index) {
+                                          return _c(
+                                            "li",
+                                            {
+                                              key: index,
+                                              staticClass:
+                                                "list-item-person ml-0",
+                                              style: {
+                                                paddingLeft:
+                                                  (_vm.getSizes.width * 1.5) /
+                                                    100 +
+                                                  "px",
+                                                paddingBottom:
+                                                  (_vm.getSizes.width * 3.5) /
+                                                    100 +
+                                                  "px"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    _vm.config.body.cc
+                                                      .prePerson +
+                                                      " " +
+                                                      item
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t"
+                                              )
+                                            ]
                                           )
-                                        ]
-                                      )
-                                    }),
-                                    0
-                                  )
-                                ]
-                              )
-                            ])
+                                        }
+                                      ),
+                                      0
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.config.body.for
@@ -1879,7 +1904,7 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.config.footer
-                  ? _c("div", { staticClass: "PI-footer row" }, [
+                  ? _c("div", { staticClass: "PI-footer row pb-4" }, [
                       _vm.config.footer.leftSide
                         ? _c("div", { staticClass: "left-side col" })
                         : _vm._e(),
@@ -1887,7 +1912,7 @@ var render = function() {
                       _vm.config.footer.rightSide
                         ? _c("div", { staticClass: "right-side col" }, [
                             _vm.config.footer.rightSide.title
-                              ? _c("div", { staticClass: "title" }, [
+                              ? _c("div", { staticClass: "title pb-2" }, [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t" +
                                       _vm._s(

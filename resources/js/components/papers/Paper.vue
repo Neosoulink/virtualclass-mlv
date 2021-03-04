@@ -9,6 +9,7 @@
 			maxWidth: getSizes.width + 'px !important',
 			fontSize: getSizes.font + 'px !important',
 			lineHeight: getSizes.lineHeight + 'px !important',
+			margin: 0,
 		}"
 	>
 		<template v-if="!isEmpty(config)">
@@ -34,7 +35,7 @@
 			<div
 				class="PI-container-text position-relative w-100 h-100"
 				:style="{
-					padding: `${getSizes.marginVertical}px ${getSizes.marginHorizontal}px`,
+					padding: `${getSizes.marginVertical}px ${getSizes.marginHorizontal}px ${0}px ${getSizes.marginHorizontal}px`,
 					minHeight: getSizes.height + 'px',
 				}"
 			>
@@ -116,7 +117,9 @@
 					</div>
 					<!-- /.container-title -->
 
-					<div class="row mb-4" v-if="config.body.cc">
+					<div class="row" v-if="config.body.cc" :style="{
+						marginBottom: (getSizes.width * 5) / 100 + 'px'
+					}">
 						<div class="offset-6 col-6 container-cc">
 							<h5 class="title p-0 m-0">
 								<b>{{ config.body.cc.title }}</b>
@@ -172,10 +175,10 @@
 				</div>
 				<!-- /.PI-body-->
 
-				<div class="PI-footer row" v-if="config.footer">
+				<div class="PI-footer row pb-4" v-if="config.footer">
 					<div class="left-side col" v-if="config.footer.leftSide"></div>
 					<div class="right-side col" v-if="config.footer.rightSide">
-						<div class="title" v-if="config.footer.rightSide.title">
+						<div class="title pb-2" v-if="config.footer.rightSide.title">
 							{{ config.footer.rightSide.title }}
 						</div>
 						<!-- /.title -->
@@ -254,6 +257,7 @@ export default {
 				type: "html",
 				maxWidth: 900,
 				targetStyles: ["*"],
+				style: `background:red`,
 			});
 		},
 		exportToWord() {
@@ -306,8 +310,6 @@ export default {
 		font-family: inherit;
 		font-size: inherit;
 		line-height: inherit;
-		margin: 0;
-		padding: 0;
 	}
 	h1 {
 		font-size: 200%;
