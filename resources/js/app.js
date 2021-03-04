@@ -12,15 +12,14 @@ import GlobalDirectives from "./global/globalDirectives";
 import Notifications from "./components/NotificationPlugin";
 //import CKEditor from '@ckeditor/ckeditor5-vue';
 import CKEditor from 'ckeditor4-vue';
-import Chartist from "chartist";
+//import Chartist from "chartist";
 import VueFileAgent from 'vue-file-agent';
 import MaterialDashboard from "./global/material-dashboard";
 
-// STyles
-import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
+// Styles
+// import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
 
-
-Vue.prototype.$Chartist = Chartist;
+//Vue.prototype.$Chartist = Chartist;
 
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
