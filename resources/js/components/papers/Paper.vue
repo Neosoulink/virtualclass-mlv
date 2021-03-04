@@ -354,7 +354,7 @@ export default {
 	> .PI-container-text {
 		z-index: 2;
 		background: transparent !important;
-		padding: 0.5vw;
+		padding: 5%;
 		> .PI-header {
 			margin-bottom: 3%;
 			> .left-side {
@@ -407,7 +407,7 @@ export default {
 					line-height: 0;
 					> .list-item-person {
 						font-size: 80%;
-						padding-left: 0px;
+						padding-left: 0;
 					}
 				}
 			}
