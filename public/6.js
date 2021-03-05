@@ -694,7 +694,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "sidebar-link",
-            { attrs: { to: "users" } },
+            { attrs: { to: { name: "dashboard-users" } } },
             [
               _c("md-icon", [_vm._v("group")]),
               _vm._v(" "),

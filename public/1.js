@@ -230,7 +230,7 @@ function(t){t.loadFile=function(t,e,n){return function(t,e,n){e=!1!==e,n="functi
  * Licensed under the MIT License.
  * http://opensource.org/licenses/mit-license
  */
-function(e){function n(){return(t.html2canvas?Promise.resolve(t.html2canvas):__webpack_require__.e(/*! import() */ 18).then(__webpack_require__.t.bind(null, /*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js", 7))).catch((function(t){return Promise.reject(new Error("Could not load dompurify: "+t))})).then((function(t){return t.default?t.default:t}))}function r(){return(t.DOMPurify?Promise.resolve(t.DOMPurify):__webpack_require__.e(/*! import() */ 17).then(__webpack_require__.t.bind(null, /*! dompurify */ "./node_modules/dompurify/dist/purify.js", 7))).catch((function(t){return Promise.reject(new Error("Could not load dompurify: "+t))})).then((function(t){return t.default?t.default:t}))}var i=function(t){var e=typeof t;return"undefined"===e?"undefined":"string"===e||t instanceof String?"string":"number"===e||t instanceof Number?"number":"function"===e||t instanceof Function?"function":t&&t.constructor===Array?"array":t&&1===t.nodeType?"element":"object"===e?"object":"unknown"},a=function(t,e){var n=document.createElement(t);for(var r in e.className&&(n.className=e.className),e.innerHTML&&e.dompurify&&(n.innerHTML=e.dompurify.sanitize(e.innerHTML)),e.style)n.style[r]=e.style[r];return n},o=function(t,e){for(var n=3===t.nodeType?document.createTextNode(t.nodeValue):t.cloneNode(!1),r=t.firstChild;r;r=r.nextSibling)!0!==e&&1===r.nodeType&&"SCRIPT"===r.nodeName||n.appendChild(o(r,e));return 1===t.nodeType&&("CANVAS"===t.nodeName?(n.width=t.width,n.height=t.height,n.getContext("2d").drawImage(t,0,0)):"TEXTAREA"!==t.nodeName&&"SELECT"!==t.nodeName||(n.value=t.value),n.addEventListener("load",(function(){n.scrollTop=t.scrollTop,n.scrollLeft=t.scrollLeft}),!0)),n},s=function t(e){var n=Object.assign(t.convert(Promise.resolve()),JSON.parse(JSON.stringify(t.template))),r=t.convert(Promise.resolve(),n);return r=(r=r.setProgress(1,t,1,[t])).set(e)};(s.prototype=Object.create(Promise.prototype)).constructor=s,s.convert=function(t,e){return t.__proto__=e||s.prototype,t},s.template={prop:{src:null,container:null,overlay:null,canvas:null,img:null,pdf:null,pageSize:null,callback:function(){}},progress:{val:0,state:null,n:0,stack:[]},opt:{filename:"file.pdf",margin:[0,0,0,0],enableLinks:!0,x:0,y:0,html2canvas:{},jsPDF:{},backgroundColor:"transparent"}},s.prototype.from=function(t,e){return this.then((function(){switch(e=e||function(t){switch(i(t)){case"string":return"string";case"element":return"canvas"===t.nodeName.toLowerCase?"canvas":"element";default:return"unknown"}}(t)){case"string":return this.then(r).then((function(e){return this.set({src:a("div",{innerHTML:t,dompurify:e})})}));case"element":return this.set({src:t});case"canvas":return this.set({canvas:t});case"img":return this.set({img:t});default:return this.error("Unknown source type.")}}))},s.prototype.to=function(t){switch(t){case"container":return this.toContainer();case"canvas":return this.toCanvas();case"img":return this.toImg();case"pdf":return this.toPdf();default:return this.error("Invalid target.")}},s.prototype.toContainer=function(){return this.thenList([function(){return this.prop.src||this.error("Cannot duplicate - no source HTML.")},function(){return this.prop.pageSize||this.setPageSize()}]).then((function(){var t={position:"relative",display:"inline-block",width:Math.max(this.prop.src.clientWidth,this.prop.src.scrollWidth,this.prop.src.offsetWidth)+"px",left:0,right:0,top:0,margin:"auto",backgroundColor:this.opt.backgroundColor},e=o(this.prop.src,this.opt.html2canvas.javascriptEnabled);"BODY"===e.tagName&&(t.height=Math.max(document.body.scrollHeight,document.body.offsetHeight,document.documentElement.clientHeight,document.documentElement.scrollHeight,document.documentElement.offsetHeight)+"px"),this.prop.overlay=a("div",{className:"html2pdf__overlay",style:{position:"fixed",overflow:"hidden",zIndex:1e3,left:"-100000px",right:0,bottom:0,top:0}}),this.prop.container=a("div",{className:"html2pdf__container",style:t}),this.prop.container.appendChild(e),this.prop.container.firstChild.appendChild(a("div",{style:{clear:"both",border:"0 none transparent",margin:0,padding:0,height:0}})),this.prop.container.style.float="none",this.prop.overlay.appendChild(this.prop.container),document.body.appendChild(this.prop.overlay),this.prop.container.firstChild.style.position="relative",this.prop.container.height=Math.max(this.prop.container.firstChild.clientHeight,this.prop.container.firstChild.scrollHeight,this.prop.container.firstChild.offsetHeight)+"px"}))},s.prototype.toCanvas=function(){var t=[function(){return document.body.contains(this.prop.container)||this.toContainer()}];return this.thenList(t).then(n).then((function(t){var e=Object.assign({},this.opt.html2canvas);return delete e.onrendered,t(this.prop.container,e)})).then((function(t){(this.opt.html2canvas.onrendered||function(){})(t),this.prop.canvas=t,document.body.removeChild(this.prop.overlay)}))},s.prototype.toContext2d=function(){var t=[function(){return document.body.contains(this.prop.container)||this.toContainer()}];return this.thenList(t).then(n).then((function(t){var e=this.opt.jsPDF,n=Object.assign({async:!0,allowTaint:!0,scale:1,scrollX:this.opt.scrollX||0,scrollY:this.opt.scrollY||0,backgroundColor:"#ffffff",imageTimeout:15e3,logging:!0,proxy:null,removeContainer:!0,foreignObjectRendering:!1,useCORS:!1},this.opt.html2canvas);return delete n.onrendered,e.context2d.autoPaging=!0,e.context2d.posX=this.opt.x,e.context2d.posY=this.opt.y,n.windowHeight=n.windowHeight||0,n.windowHeight=0==n.windowHeight?Math.max(this.prop.container.clientHeight,this.prop.container.scrollHeight,this.prop.container.offsetHeight):n.windowHeight,t(this.prop.container,n)})).then((function(t){(this.opt.html2canvas.onrendered||function(){})(t),this.prop.canvas=t,document.body.removeChild(this.prop.overlay)}))},s.prototype.toImg=function(){return this.thenList([function(){return this.prop.canvas||this.toCanvas()}]).then((function(){var t=this.prop.canvas.toDataURL("image/"+this.opt.image.type,this.opt.image.quality);this.prop.img=document.createElement("img"),this.prop.img.src=t}))},s.prototype.toPdf=function(){return this.thenList([function(){return this.toContext2d()}]).then((function(){this.prop.pdf=this.prop.pdf||this.opt.jsPDF}))},s.prototype.output=function(t,e,n){return"img"===(n=n||"pdf").toLowerCase()||"image"===n.toLowerCase()?this.outputImg(t,e):this.outputPdf(t,e)},s.prototype.outputPdf=function(t,e){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).then((function(){return this.prop.pdf.output(t,e)}))},s.prototype.outputImg=function(t){return this.thenList([function(){return this.prop.img||this.toImg()}]).then((function(){switch(t){case void 0:case"img":return this.prop.img;case"datauristring":case"dataurlstring":return this.prop.img.src;case"datauri":case"dataurl":return document.location.href=this.prop.img.src;default:throw'Image output type "'+t+'" is not supported.'}}))},s.prototype.save=function(t){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).set(t?{filename:t}:null).then((function(){this.prop.pdf.save(this.opt.filename)}))},s.prototype.doCallback=function(){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).then((function(){this.prop.callback(this.prop.pdf)}))},s.prototype.set=function(t){if("object"!==i(t))return this;var e=Object.keys(t||{}).map((function(e){if(e in s.template.prop)return function(){this.prop[e]=t[e]};switch(e){case"margin":return this.setMargin.bind(this,t.margin);case"jsPDF":return function(){return this.opt.jsPDF=t.jsPDF,this.setPageSize()};case"pageSize":return this.setPageSize.bind(this,t.pageSize);default:return function(){this.opt[e]=t[e]}}}),this);return this.then((function(){return this.thenList(e)}))},s.prototype.get=function(t,e){return this.then((function(){var n=t in s.template.prop?this.prop[t]:this.opt[t];return e?e(n):n}))},s.prototype.setMargin=function(t){return this.then((function(){switch(i(t)){case"number":t=[t,t,t,t];case"array":if(2===t.length&&(t=[t[0],t[1],t[0],t[1]]),4===t.length)break;default:return this.error("Invalid margin array.")}this.opt.margin=t})).then(this.setPageSize)},s.prototype.setPageSize=function(t){function e(t,e){return Math.floor(t*e/72*96)}return this.then((function(){(t=t||g.getPageSize(this.opt.jsPDF)).hasOwnProperty("inner")||(t.inner={width:t.width-this.opt.margin[1]-this.opt.margin[3],height:t.height-this.opt.margin[0]-this.opt.margin[2]},t.inner.px={width:e(t.inner.width,t.k),height:e(t.inner.height,t.k)},t.inner.ratio=t.inner.height/t.inner.width),this.prop.pageSize=t}))},s.prototype.setProgress=function(t,e,n,r){return null!=t&&(this.progress.val=t),null!=e&&(this.progress.state=e),null!=n&&(this.progress.n=n),null!=r&&(this.progress.stack=r),this.progress.ratio=this.progress.val/this.progress.state,this},s.prototype.updateProgress=function(t,e,n,r){return this.setProgress(t?this.progress.val+t:null,e||null,n?this.progress.n+n:null,r?this.progress.stack.concat(r):null)},s.prototype.then=function(t,e){var n=this;return this.thenCore(t,e,(function(t,e){return n.updateProgress(null,null,1,[t]),Promise.prototype.then.call(this,(function(e){return n.updateProgress(null,t),e})).then(t,e).then((function(t){return n.updateProgress(1),t}))}))},s.prototype.thenCore=function(t,e,n){n=n||Promise.prototype.then;t&&(t=t.bind(this)),e&&(e=e.bind(this));var r=-1!==Promise.toString().indexOf("[native code]")&&"Promise"===Promise.name?this:s.convert(Object.assign({},this),Promise.prototype),i=n.call(r,t,e);return s.convert(i,this.__proto__)},s.prototype.thenExternal=function(t,e){return Promise.prototype.then.call(this,t,e)},s.prototype.thenList=function(t){var e=this;return t.forEach((function(t){e=e.thenCore(t)})),e},s.prototype.catch=function(t){t&&(t=t.bind(this));var e=Promise.prototype.catch.call(this,t);return s.convert(e,this)},s.prototype.catchExternal=function(t){return Promise.prototype.catch.call(this,t)},s.prototype.error=function(t){return this.then((function(){throw new Error(t)}))},s.prototype.using=s.prototype.set,s.prototype.saveAs=s.prototype.save,s.prototype.export=s.prototype.output,s.prototype.run=s.prototype.then,g.getPageSize=function(t,e,n){if("object"==typeof t){var r=t;t=r.orientation,e=r.unit||e,n=r.format||n}e=e||"mm",n=n||"a4",t=(""+(t||"P")).toLowerCase();var i,a=(""+n).toLowerCase(),o={a0:[2383.94,3370.39],a1:[1683.78,2383.94],a2:[1190.55,1683.78],a3:[841.89,1190.55],a4:[595.28,841.89],a5:[419.53,595.28],a6:[297.64,419.53],a7:[209.76,297.64],a8:[147.4,209.76],a9:[104.88,147.4],a10:[73.7,104.88],b0:[2834.65,4008.19],b1:[2004.09,2834.65],b2:[1417.32,2004.09],b3:[1000.63,1417.32],b4:[708.66,1000.63],b5:[498.9,708.66],b6:[354.33,498.9],b7:[249.45,354.33],b8:[175.75,249.45],b9:[124.72,175.75],b10:[87.87,124.72],c0:[2599.37,3676.54],c1:[1836.85,2599.37],c2:[1298.27,1836.85],c3:[918.43,1298.27],c4:[649.13,918.43],c5:[459.21,649.13],c6:[323.15,459.21],c7:[229.61,323.15],c8:[161.57,229.61],c9:[113.39,161.57],c10:[79.37,113.39],dl:[311.81,623.62],letter:[612,792],"government-letter":[576,756],legal:[612,1008],"junior-legal":[576,360],ledger:[1224,792],tabloid:[792,1224],"credit-card":[153,243]};switch(e){case"pt":i=1;break;case"mm":i=72/25.4;break;case"cm":i=72/2.54;break;case"in":i=72;break;case"px":i=.75;break;case"pc":case"em":i=12;break;case"ex":i=6;break;default:throw"Invalid unit: "+e}var s,u=0,c=0;if(o.hasOwnProperty(a))u=o[a][1]/i,c=o[a][0]/i;else try{u=n[1],c=n[0]}catch(t){throw new Error("Invalid format: "+n)}if("p"===t||"portrait"===t)t="p",c>u&&(s=c,c=u,u=s);else{if("l"!==t&&"landscape"!==t)throw"Invalid orientation: "+t;t="l",u>c&&(s=c,c=u,u=s)}return{width:c,height:u,unit:e,k:i,orientation:t}},e.html=function(t,e){(e=e||{}).callback=e.callback||function(){},e.html2canvas=e.html2canvas||{},e.html2canvas.canvas=e.html2canvas.canvas||this.canvas,e.jsPDF=e.jsPDF||this;var n=new s(e);return e.worker?n:n.from(t).doCallback()}}(g.API),g.API.addJS=function(t){return vt=t,this.internal.events.subscribe("postPutResources",(function(){gt=this.internal.newObject(),this.internal.out("<<"),this.internal.out("/Names [(EmbeddedJS) "+(gt+1)+" 0 R]"),this.internal.out(">>"),this.internal.out("endobj"),mt=this.internal.newObject(),this.internal.out("<<"),this.internal.out("/S /JavaScript"),this.internal.out("/JS ("+vt+")"),this.internal.out(">>"),this.internal.out("endobj")})),this.internal.events.subscribe("putCatalog",(function(){void 0!==gt&&void 0!==mt&&this.internal.out("/Names <</JavaScript "+gt+" 0 R>>")})),this},
+function(e){function n(){return(t.html2canvas?Promise.resolve(t.html2canvas):__webpack_require__.e(/*! import() */ 21).then(__webpack_require__.t.bind(null, /*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js", 7))).catch((function(t){return Promise.reject(new Error("Could not load dompurify: "+t))})).then((function(t){return t.default?t.default:t}))}function r(){return(t.DOMPurify?Promise.resolve(t.DOMPurify):__webpack_require__.e(/*! import() */ 20).then(__webpack_require__.t.bind(null, /*! dompurify */ "./node_modules/dompurify/dist/purify.js", 7))).catch((function(t){return Promise.reject(new Error("Could not load dompurify: "+t))})).then((function(t){return t.default?t.default:t}))}var i=function(t){var e=typeof t;return"undefined"===e?"undefined":"string"===e||t instanceof String?"string":"number"===e||t instanceof Number?"number":"function"===e||t instanceof Function?"function":t&&t.constructor===Array?"array":t&&1===t.nodeType?"element":"object"===e?"object":"unknown"},a=function(t,e){var n=document.createElement(t);for(var r in e.className&&(n.className=e.className),e.innerHTML&&e.dompurify&&(n.innerHTML=e.dompurify.sanitize(e.innerHTML)),e.style)n.style[r]=e.style[r];return n},o=function(t,e){for(var n=3===t.nodeType?document.createTextNode(t.nodeValue):t.cloneNode(!1),r=t.firstChild;r;r=r.nextSibling)!0!==e&&1===r.nodeType&&"SCRIPT"===r.nodeName||n.appendChild(o(r,e));return 1===t.nodeType&&("CANVAS"===t.nodeName?(n.width=t.width,n.height=t.height,n.getContext("2d").drawImage(t,0,0)):"TEXTAREA"!==t.nodeName&&"SELECT"!==t.nodeName||(n.value=t.value),n.addEventListener("load",(function(){n.scrollTop=t.scrollTop,n.scrollLeft=t.scrollLeft}),!0)),n},s=function t(e){var n=Object.assign(t.convert(Promise.resolve()),JSON.parse(JSON.stringify(t.template))),r=t.convert(Promise.resolve(),n);return r=(r=r.setProgress(1,t,1,[t])).set(e)};(s.prototype=Object.create(Promise.prototype)).constructor=s,s.convert=function(t,e){return t.__proto__=e||s.prototype,t},s.template={prop:{src:null,container:null,overlay:null,canvas:null,img:null,pdf:null,pageSize:null,callback:function(){}},progress:{val:0,state:null,n:0,stack:[]},opt:{filename:"file.pdf",margin:[0,0,0,0],enableLinks:!0,x:0,y:0,html2canvas:{},jsPDF:{},backgroundColor:"transparent"}},s.prototype.from=function(t,e){return this.then((function(){switch(e=e||function(t){switch(i(t)){case"string":return"string";case"element":return"canvas"===t.nodeName.toLowerCase?"canvas":"element";default:return"unknown"}}(t)){case"string":return this.then(r).then((function(e){return this.set({src:a("div",{innerHTML:t,dompurify:e})})}));case"element":return this.set({src:t});case"canvas":return this.set({canvas:t});case"img":return this.set({img:t});default:return this.error("Unknown source type.")}}))},s.prototype.to=function(t){switch(t){case"container":return this.toContainer();case"canvas":return this.toCanvas();case"img":return this.toImg();case"pdf":return this.toPdf();default:return this.error("Invalid target.")}},s.prototype.toContainer=function(){return this.thenList([function(){return this.prop.src||this.error("Cannot duplicate - no source HTML.")},function(){return this.prop.pageSize||this.setPageSize()}]).then((function(){var t={position:"relative",display:"inline-block",width:Math.max(this.prop.src.clientWidth,this.prop.src.scrollWidth,this.prop.src.offsetWidth)+"px",left:0,right:0,top:0,margin:"auto",backgroundColor:this.opt.backgroundColor},e=o(this.prop.src,this.opt.html2canvas.javascriptEnabled);"BODY"===e.tagName&&(t.height=Math.max(document.body.scrollHeight,document.body.offsetHeight,document.documentElement.clientHeight,document.documentElement.scrollHeight,document.documentElement.offsetHeight)+"px"),this.prop.overlay=a("div",{className:"html2pdf__overlay",style:{position:"fixed",overflow:"hidden",zIndex:1e3,left:"-100000px",right:0,bottom:0,top:0}}),this.prop.container=a("div",{className:"html2pdf__container",style:t}),this.prop.container.appendChild(e),this.prop.container.firstChild.appendChild(a("div",{style:{clear:"both",border:"0 none transparent",margin:0,padding:0,height:0}})),this.prop.container.style.float="none",this.prop.overlay.appendChild(this.prop.container),document.body.appendChild(this.prop.overlay),this.prop.container.firstChild.style.position="relative",this.prop.container.height=Math.max(this.prop.container.firstChild.clientHeight,this.prop.container.firstChild.scrollHeight,this.prop.container.firstChild.offsetHeight)+"px"}))},s.prototype.toCanvas=function(){var t=[function(){return document.body.contains(this.prop.container)||this.toContainer()}];return this.thenList(t).then(n).then((function(t){var e=Object.assign({},this.opt.html2canvas);return delete e.onrendered,t(this.prop.container,e)})).then((function(t){(this.opt.html2canvas.onrendered||function(){})(t),this.prop.canvas=t,document.body.removeChild(this.prop.overlay)}))},s.prototype.toContext2d=function(){var t=[function(){return document.body.contains(this.prop.container)||this.toContainer()}];return this.thenList(t).then(n).then((function(t){var e=this.opt.jsPDF,n=Object.assign({async:!0,allowTaint:!0,scale:1,scrollX:this.opt.scrollX||0,scrollY:this.opt.scrollY||0,backgroundColor:"#ffffff",imageTimeout:15e3,logging:!0,proxy:null,removeContainer:!0,foreignObjectRendering:!1,useCORS:!1},this.opt.html2canvas);return delete n.onrendered,e.context2d.autoPaging=!0,e.context2d.posX=this.opt.x,e.context2d.posY=this.opt.y,n.windowHeight=n.windowHeight||0,n.windowHeight=0==n.windowHeight?Math.max(this.prop.container.clientHeight,this.prop.container.scrollHeight,this.prop.container.offsetHeight):n.windowHeight,t(this.prop.container,n)})).then((function(t){(this.opt.html2canvas.onrendered||function(){})(t),this.prop.canvas=t,document.body.removeChild(this.prop.overlay)}))},s.prototype.toImg=function(){return this.thenList([function(){return this.prop.canvas||this.toCanvas()}]).then((function(){var t=this.prop.canvas.toDataURL("image/"+this.opt.image.type,this.opt.image.quality);this.prop.img=document.createElement("img"),this.prop.img.src=t}))},s.prototype.toPdf=function(){return this.thenList([function(){return this.toContext2d()}]).then((function(){this.prop.pdf=this.prop.pdf||this.opt.jsPDF}))},s.prototype.output=function(t,e,n){return"img"===(n=n||"pdf").toLowerCase()||"image"===n.toLowerCase()?this.outputImg(t,e):this.outputPdf(t,e)},s.prototype.outputPdf=function(t,e){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).then((function(){return this.prop.pdf.output(t,e)}))},s.prototype.outputImg=function(t){return this.thenList([function(){return this.prop.img||this.toImg()}]).then((function(){switch(t){case void 0:case"img":return this.prop.img;case"datauristring":case"dataurlstring":return this.prop.img.src;case"datauri":case"dataurl":return document.location.href=this.prop.img.src;default:throw'Image output type "'+t+'" is not supported.'}}))},s.prototype.save=function(t){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).set(t?{filename:t}:null).then((function(){this.prop.pdf.save(this.opt.filename)}))},s.prototype.doCallback=function(){return this.thenList([function(){return this.prop.pdf||this.toPdf()}]).then((function(){this.prop.callback(this.prop.pdf)}))},s.prototype.set=function(t){if("object"!==i(t))return this;var e=Object.keys(t||{}).map((function(e){if(e in s.template.prop)return function(){this.prop[e]=t[e]};switch(e){case"margin":return this.setMargin.bind(this,t.margin);case"jsPDF":return function(){return this.opt.jsPDF=t.jsPDF,this.setPageSize()};case"pageSize":return this.setPageSize.bind(this,t.pageSize);default:return function(){this.opt[e]=t[e]}}}),this);return this.then((function(){return this.thenList(e)}))},s.prototype.get=function(t,e){return this.then((function(){var n=t in s.template.prop?this.prop[t]:this.opt[t];return e?e(n):n}))},s.prototype.setMargin=function(t){return this.then((function(){switch(i(t)){case"number":t=[t,t,t,t];case"array":if(2===t.length&&(t=[t[0],t[1],t[0],t[1]]),4===t.length)break;default:return this.error("Invalid margin array.")}this.opt.margin=t})).then(this.setPageSize)},s.prototype.setPageSize=function(t){function e(t,e){return Math.floor(t*e/72*96)}return this.then((function(){(t=t||g.getPageSize(this.opt.jsPDF)).hasOwnProperty("inner")||(t.inner={width:t.width-this.opt.margin[1]-this.opt.margin[3],height:t.height-this.opt.margin[0]-this.opt.margin[2]},t.inner.px={width:e(t.inner.width,t.k),height:e(t.inner.height,t.k)},t.inner.ratio=t.inner.height/t.inner.width),this.prop.pageSize=t}))},s.prototype.setProgress=function(t,e,n,r){return null!=t&&(this.progress.val=t),null!=e&&(this.progress.state=e),null!=n&&(this.progress.n=n),null!=r&&(this.progress.stack=r),this.progress.ratio=this.progress.val/this.progress.state,this},s.prototype.updateProgress=function(t,e,n,r){return this.setProgress(t?this.progress.val+t:null,e||null,n?this.progress.n+n:null,r?this.progress.stack.concat(r):null)},s.prototype.then=function(t,e){var n=this;return this.thenCore(t,e,(function(t,e){return n.updateProgress(null,null,1,[t]),Promise.prototype.then.call(this,(function(e){return n.updateProgress(null,t),e})).then(t,e).then((function(t){return n.updateProgress(1),t}))}))},s.prototype.thenCore=function(t,e,n){n=n||Promise.prototype.then;t&&(t=t.bind(this)),e&&(e=e.bind(this));var r=-1!==Promise.toString().indexOf("[native code]")&&"Promise"===Promise.name?this:s.convert(Object.assign({},this),Promise.prototype),i=n.call(r,t,e);return s.convert(i,this.__proto__)},s.prototype.thenExternal=function(t,e){return Promise.prototype.then.call(this,t,e)},s.prototype.thenList=function(t){var e=this;return t.forEach((function(t){e=e.thenCore(t)})),e},s.prototype.catch=function(t){t&&(t=t.bind(this));var e=Promise.prototype.catch.call(this,t);return s.convert(e,this)},s.prototype.catchExternal=function(t){return Promise.prototype.catch.call(this,t)},s.prototype.error=function(t){return this.then((function(){throw new Error(t)}))},s.prototype.using=s.prototype.set,s.prototype.saveAs=s.prototype.save,s.prototype.export=s.prototype.output,s.prototype.run=s.prototype.then,g.getPageSize=function(t,e,n){if("object"==typeof t){var r=t;t=r.orientation,e=r.unit||e,n=r.format||n}e=e||"mm",n=n||"a4",t=(""+(t||"P")).toLowerCase();var i,a=(""+n).toLowerCase(),o={a0:[2383.94,3370.39],a1:[1683.78,2383.94],a2:[1190.55,1683.78],a3:[841.89,1190.55],a4:[595.28,841.89],a5:[419.53,595.28],a6:[297.64,419.53],a7:[209.76,297.64],a8:[147.4,209.76],a9:[104.88,147.4],a10:[73.7,104.88],b0:[2834.65,4008.19],b1:[2004.09,2834.65],b2:[1417.32,2004.09],b3:[1000.63,1417.32],b4:[708.66,1000.63],b5:[498.9,708.66],b6:[354.33,498.9],b7:[249.45,354.33],b8:[175.75,249.45],b9:[124.72,175.75],b10:[87.87,124.72],c0:[2599.37,3676.54],c1:[1836.85,2599.37],c2:[1298.27,1836.85],c3:[918.43,1298.27],c4:[649.13,918.43],c5:[459.21,649.13],c6:[323.15,459.21],c7:[229.61,323.15],c8:[161.57,229.61],c9:[113.39,161.57],c10:[79.37,113.39],dl:[311.81,623.62],letter:[612,792],"government-letter":[576,756],legal:[612,1008],"junior-legal":[576,360],ledger:[1224,792],tabloid:[792,1224],"credit-card":[153,243]};switch(e){case"pt":i=1;break;case"mm":i=72/25.4;break;case"cm":i=72/2.54;break;case"in":i=72;break;case"px":i=.75;break;case"pc":case"em":i=12;break;case"ex":i=6;break;default:throw"Invalid unit: "+e}var s,u=0,c=0;if(o.hasOwnProperty(a))u=o[a][1]/i,c=o[a][0]/i;else try{u=n[1],c=n[0]}catch(t){throw new Error("Invalid format: "+n)}if("p"===t||"portrait"===t)t="p",c>u&&(s=c,c=u,u=s);else{if("l"!==t&&"landscape"!==t)throw"Invalid orientation: "+t;t="l",u>c&&(s=c,c=u,u=s)}return{width:c,height:u,unit:e,k:i,orientation:t}},e.html=function(t,e){(e=e||{}).callback=e.callback||function(){},e.html2canvas=e.html2canvas||{},e.html2canvas.canvas=e.html2canvas.canvas||this.canvas,e.jsPDF=e.jsPDF||this;var n=new s(e);return e.worker?n:n.from(t).doCallback()}}(g.API),g.API.addJS=function(t){return vt=t,this.internal.events.subscribe("postPutResources",(function(){gt=this.internal.newObject(),this.internal.out("<<"),this.internal.out("/Names [(EmbeddedJS) "+(gt+1)+" 0 R]"),this.internal.out(">>"),this.internal.out("endobj"),mt=this.internal.newObject(),this.internal.out("<<"),this.internal.out("/S /JavaScript"),this.internal.out("/JS ("+vt+")"),this.internal.out(">>"),this.internal.out("endobj")})),this.internal.events.subscribe("putCatalog",(function(){void 0!==gt&&void 0!==mt&&this.internal.out("/Names <</JavaScript "+gt+" 0 R>>")})),this},
 /**
  * @license
  * Copyright (c) 2014 Steven Spungin (TwelveTone LLC)  steven@twelvetone.tv
@@ -641,11 +641,23 @@ return /******/ (function(modules) { // webpackBootstrap
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\n__webpack_require__(/*! ./sass/index.scss */ \"./src/sass/index.scss\");\n\nvar _init = __webpack_require__(/*! ./js/init */ \"./src/js/init.js\");\n\nvar _init2 = _interopRequireDefault(_init);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar printJS = _init2.default.init;\n\nif (typeof window !== 'undefined') {\n  window.printJS = printJS;\n}\n\nexports.default = printJS;\n\n//# sourceURL=webpack://printJS/./src/index.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _sass_index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sass/index.scss */ "./src/sass/index.scss");
+/* harmony import */ var _sass_index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _js_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/init */ "./src/js/init.js");
+
+
+var printJS = _js_init__WEBPACK_IMPORTED_MODULE_1__["default"].init;
+
+if (typeof window !== 'undefined') {
+  window.printJS = printJS;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (printJS);
 
 /***/ }),
 
@@ -653,11 +665,39 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!***************************!*\
   !*** ./src/js/browser.js ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar Browser = {\n  // Firefox 1.0+\n  isFirefox: function isFirefox() {\n    return typeof InstallTrigger !== 'undefined';\n  },\n  // Internet Explorer 6-11\n  isIE: function isIE() {\n    return navigator.userAgent.indexOf('MSIE') !== -1 || !!document.documentMode;\n  },\n  // Edge 20+\n  isEdge: function isEdge() {\n    return !Browser.isIE() && !!window.StyleMedia;\n  },\n  // Chrome 1+\n  isChrome: function isChrome() {\n    var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;\n\n    return !!context.chrome;\n  },\n  // At least Safari 3+: \"[object HTMLElementConstructor]\"\n  isSafari: function isSafari() {\n    return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || navigator.userAgent.toLowerCase().indexOf('safari') !== -1;\n  },\n  // IOS Chrome\n  isIOSChrome: function isIOSChrome() {\n    return navigator.userAgent.toLowerCase().indexOf('crios') !== -1;\n  }\n};\n\nexports.default = Browser;\n\n//# sourceURL=webpack://printJS/./src/js/browser.js?");
+__webpack_require__.r(__webpack_exports__);
+var Browser = {
+  // Firefox 1.0+
+  isFirefox: function isFirefox() {
+    return typeof InstallTrigger !== 'undefined';
+  },
+  // Internet Explorer 6-11
+  isIE: function isIE() {
+    return navigator.userAgent.indexOf('MSIE') !== -1 || !!document.documentMode;
+  },
+  // Edge 20+
+  isEdge: function isEdge() {
+    return !Browser.isIE() && !!window.StyleMedia;
+  },
+  // Chrome 1+
+  isChrome: function isChrome() {
+    var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
+    return !!context.chrome;
+  },
+  // At least Safari 3+: "[object HTMLElementConstructor]"
+  isSafari: function isSafari() {
+    return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || navigator.userAgent.toLowerCase().indexOf('safari') !== -1;
+  },
+  // IOS Chrome
+  isIOSChrome: function isIOSChrome() {
+    return navigator.userAgent.toLowerCase().indexOf('crios') !== -1;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (Browser);
 
 /***/ }),
 
@@ -665,11 +705,109 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!*****************************!*\
   !*** ./src/js/functions.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: addWrapper, capitalizePrint, collectStyles, addHeader, cleanUp, isRawHTML */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nexports.addWrapper = addWrapper;\nexports.capitalizePrint = capitalizePrint;\nexports.collectStyles = collectStyles;\nexports.addHeader = addHeader;\nexports.cleanUp = cleanUp;\nexports.isRawHTML = isRawHTML;\n\nvar _modal = __webpack_require__(/*! ./modal */ \"./src/js/modal.js\");\n\nvar _modal2 = _interopRequireDefault(_modal);\n\nvar _browser = __webpack_require__(/*! ./browser */ \"./src/js/browser.js\");\n\nvar _browser2 = _interopRequireDefault(_browser);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction addWrapper(htmlData, params) {\n  var bodyStyle = 'font-family:' + params.font + ' !important; font-size: ' + params.font_size + ' !important; width:100%;';\n  return '<div style=\"' + bodyStyle + '\">' + htmlData + '</div>';\n}\n\nfunction capitalizePrint(obj) {\n  return obj.charAt(0).toUpperCase() + obj.slice(1);\n}\n\nfunction collectStyles(element, params) {\n  var win = document.defaultView || window;\n\n  // String variable to hold styling for each element\n  var elementStyle = '';\n\n  // Loop over computed styles\n  var styles = win.getComputedStyle(element, '');\n\n  Object.keys(styles).map(function (key) {\n    // Check if style should be processed\n    if (params.targetStyles.indexOf('*') !== -1 || params.targetStyle.indexOf(styles[key]) !== -1 || targetStylesMatch(params.targetStyles, styles[key])) {\n      if (styles.getPropertyValue(styles[key])) elementStyle += styles[key] + ':' + styles.getPropertyValue(styles[key]) + ';';\n    }\n  });\n\n  // Print friendly defaults (deprecated)\n  elementStyle += 'max-width: ' + params.maxWidth + 'px !important;' + params.font_size + ' !important;';\n\n  return elementStyle;\n}\n\nfunction targetStylesMatch(styles, value) {\n  for (var i = 0; i < styles.length; i++) {\n    if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.indexOf(styles[i]) !== -1) return true;\n  }\n  return false;\n}\n\nfunction addHeader(printElement, params) {\n  // Create the header container div\n  var headerContainer = document.createElement('div');\n\n  // Check if the header is text or raw html\n  if (isRawHTML(params.header)) {\n    headerContainer.innerHTML = params.header;\n  } else {\n    // Create header element\n    var headerElement = document.createElement('h1');\n\n    // Create header text node\n    var headerNode = document.createTextNode(params.header);\n\n    // Build and style\n    headerElement.appendChild(headerNode);\n    headerElement.setAttribute('style', params.headerStyle);\n    headerContainer.appendChild(headerElement);\n  }\n\n  printElement.insertBefore(headerContainer, printElement.childNodes[0]);\n}\n\nfunction cleanUp(params) {\n  // If we are showing a feedback message to user, remove it\n  if (params.showModal) _modal2.default.close();\n\n  // Check for a finished loading hook function\n  if (params.onLoadingEnd) params.onLoadingEnd();\n\n  // If preloading pdf files, clean blob url\n  if (params.showModal || params.onLoadingStart) window.URL.revokeObjectURL(params.printable);\n\n  // If a onPrintDialogClose callback is given, execute it\n  if (params.onPrintDialogClose) {\n    var event = 'mouseover';\n\n    if (_browser2.default.isChrome() || _browser2.default.isFirefox()) {\n      // Ps.: Firefox will require an extra click in the document to fire the focus event.\n      event = 'focus';\n    }\n    var handler = function handler() {\n      // Make sure the event only happens once.\n      window.removeEventListener(event, handler);\n\n      params.onPrintDialogClose();\n    };\n\n    window.addEventListener(event, handler);\n  }\n}\n\nfunction isRawHTML(raw) {\n  var regexHtml = new RegExp('<([A-Za-z][A-Za-z0-9]*)\\\\b[^>]*>(.*?)</\\\\1>');\n  return regexHtml.test(raw);\n}\n\n//# sourceURL=webpack://printJS/./src/js/functions.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addWrapper", function() { return addWrapper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizePrint", function() { return capitalizePrint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "collectStyles", function() { return collectStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addHeader", function() { return addHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUp", function() { return cleanUp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isRawHTML", function() { return isRawHTML; });
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ "./src/js/modal.js");
+/* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./browser */ "./src/js/browser.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+function addWrapper(htmlData, params) {
+  var bodyStyle = 'font-family:' + params.font + ' !important; font-size: ' + params.font_size + ' !important; width:100%;';
+  return '<div style="' + bodyStyle + '">' + htmlData + '</div>';
+}
+function capitalizePrint(obj) {
+  return obj.charAt(0).toUpperCase() + obj.slice(1);
+}
+function collectStyles(element, params) {
+  var win = document.defaultView || window; // String variable to hold styling for each element
+
+  var elementStyle = ''; // Loop over computed styles
+
+  var styles = win.getComputedStyle(element, '');
+
+  for (var key = 0; key < styles.length; key++) {
+    // Check if style should be processed
+    if (params.targetStyles.indexOf('*') !== -1 || params.targetStyle.indexOf(styles[key]) !== -1 || targetStylesMatch(params.targetStyles, styles[key])) {
+      if (styles.getPropertyValue(styles[key])) elementStyle += styles[key] + ':' + styles.getPropertyValue(styles[key]) + ';';
+    }
+  } // Print friendly defaults (deprecated)
+
+
+  elementStyle += 'max-width: ' + params.maxWidth + 'px !important; font-size: ' + params.font_size + ' !important;';
+  return elementStyle;
+}
+
+function targetStylesMatch(styles, value) {
+  for (var i = 0; i < styles.length; i++) {
+    if (_typeof(value) === 'object' && value.indexOf(styles[i]) !== -1) return true;
+  }
+
+  return false;
+}
+
+function addHeader(printElement, params) {
+  // Create the header container div
+  var headerContainer = document.createElement('div'); // Check if the header is text or raw html
+
+  if (isRawHTML(params.header)) {
+    headerContainer.innerHTML = params.header;
+  } else {
+    // Create header element
+    var headerElement = document.createElement('h1'); // Create header text node
+
+    var headerNode = document.createTextNode(params.header); // Build and style
+
+    headerElement.appendChild(headerNode);
+    headerElement.setAttribute('style', params.headerStyle);
+    headerContainer.appendChild(headerElement);
+  }
+
+  printElement.insertBefore(headerContainer, printElement.childNodes[0]);
+}
+function cleanUp(params) {
+  // If we are showing a feedback message to user, remove it
+  if (params.showModal) _modal__WEBPACK_IMPORTED_MODULE_0__["default"].close(); // Check for a finished loading hook function
+
+  if (params.onLoadingEnd) params.onLoadingEnd(); // If preloading pdf files, clean blob url
+
+  if (params.showModal || params.onLoadingStart) window.URL.revokeObjectURL(params.printable); // Run onPrintDialogClose callback
+
+  var event = 'mouseover';
+
+  if (_browser__WEBPACK_IMPORTED_MODULE_1__["default"].isChrome() || _browser__WEBPACK_IMPORTED_MODULE_1__["default"].isFirefox()) {
+    // Ps.: Firefox will require an extra click in the document to fire the focus event.
+    event = 'focus';
+  }
+
+  var handler = function handler() {
+    // Make sure the event only happens once.
+    window.removeEventListener(event, handler);
+    params.onPrintDialogClose(); // Remove iframe from the DOM
+
+    var iframe = document.getElementById(params.frameId);
+
+    if (iframe) {
+      iframe.remove();
+    }
+  };
+
+  window.addEventListener(event, handler);
+}
+function isRawHTML(raw) {
+  var regexHtml = new RegExp('<([A-Za-z][A-Za-z0-9]*)\\b[^>]*>(.*?)</\\1>');
+  return regexHtml.test(raw);
+}
 
 /***/ }),
 
@@ -677,11 +815,82 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!************************!*\
   !*** ./src/js/html.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _functions = __webpack_require__(/*! ./functions */ \"./src/js/functions.js\");\n\nvar _print = __webpack_require__(/*! ./print */ \"./src/js/print.js\");\n\nvar _print2 = _interopRequireDefault(_print);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n  print: function print(params, printFrame) {\n    // Get the DOM printable element\n    var printElement = document.getElementById(params.printable);\n\n    // Check if the element exists\n    if (!printElement) {\n      window.console.error('Invalid HTML element id: ' + params.printable);\n      return;\n    }\n\n    // Clone the target element including its children (if available)\n    params.printableElement = cloneElement(printElement, params);\n\n    // Add header\n    if (params.header) {\n      (0, _functions.addHeader)(params.printableElement, params);\n    }\n\n    // Print html element contents\n    _print2.default.send(params, printFrame);\n  }\n};\n\n\nfunction cloneElement(element, params) {\n  // Clone the main node (if not already inside the recursion process)\n  var clone = element.cloneNode();\n\n  // Loop over and process the children elements / nodes (including text nodes)\n  var _iteratorNormalCompletion = true;\n  var _didIteratorError = false;\n  var _iteratorError = undefined;\n\n  try {\n    for (var _iterator = element.childNodes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {\n      var child = _step.value;\n\n      // Check if we are skiping the current element\n      if (params.ignoreElements.indexOf(child.id) !== -1) {\n        continue;\n      }\n\n      // Clone the child element\n      var clonedChild = cloneElement(child, params);\n\n      // Attach the cloned child to the cloned parent node\n      clone.appendChild(clonedChild);\n    }\n  } catch (err) {\n    _didIteratorError = true;\n    _iteratorError = err;\n  } finally {\n    try {\n      if (!_iteratorNormalCompletion && _iterator.return) {\n        _iterator.return();\n      }\n    } finally {\n      if (_didIteratorError) {\n        throw _iteratorError;\n      }\n    }\n  }\n\n  console.log(element.nodeType);\n  // Get all styling for print element (for nodes of type element only)\n  if (params.scanStyles && element.nodeType === 1) {\n    clone.setAttribute('style', (0, _functions.collectStyles)(element, params));\n  }\n\n  // Check if the element needs any state processing (copy user input data)\n  switch (element.tagName) {\n    case 'SELECT':\n      // Copy the current selection value to its clone\n      clone.value = element.value;\n      break;\n    case 'CANVAS':\n      // Copy the canvas content to its clone\n      clone.getContext('2d').drawImage(element, 0, 0);\n      break;\n  }\n\n  return clone;\n}\n\n//# sourceURL=webpack://printJS/./src/js/html.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./functions */ "./src/js/functions.js");
+/* harmony import */ var _print__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./print */ "./src/js/print.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  print: function print(params, printFrame) {
+    // Get the DOM printable element
+    var printElement = isHtmlElement(params.printable) ? params.printable : document.getElementById(params.printable); // Check if the element exists
+
+    if (!printElement) {
+      window.console.error('Invalid HTML element id: ' + params.printable);
+      return;
+    } // Clone the target element including its children (if available)
+
+
+    params.printableElement = cloneElement(printElement, params); // Add header
+
+    if (params.header) {
+      Object(_functions__WEBPACK_IMPORTED_MODULE_0__["addHeader"])(params.printableElement, params);
+    } // Print html element contents
+
+
+    _print__WEBPACK_IMPORTED_MODULE_1__["default"].send(params, printFrame);
+  }
+});
+
+function cloneElement(element, params) {
+  // Clone the main node (if not already inside the recursion process)
+  var clone = element.cloneNode(); // Loop over and process the children elements / nodes (including text nodes)
+
+  var childNodesArray = Array.prototype.slice.call(element.childNodes);
+
+  for (var i = 0; i < childNodesArray.length; i++) {
+    // Check if we are skipping the current element
+    if (params.ignoreElements.indexOf(childNodesArray[i].id) !== -1) {
+      continue;
+    } // Clone the child element
+
+
+    var clonedChild = cloneElement(childNodesArray[i], params); // Attach the cloned child to the cloned parent node
+
+    clone.appendChild(clonedChild);
+  } // Get all styling for print element (for nodes of type element only)
+
+
+  if (params.scanStyles && element.nodeType === 1) {
+    clone.setAttribute('style', Object(_functions__WEBPACK_IMPORTED_MODULE_0__["collectStyles"])(element, params));
+  } // Check if the element needs any state processing (copy user input data)
+
+
+  switch (element.tagName) {
+    case 'SELECT':
+      // Copy the current selection value to its clone
+      clone.value = element.value;
+      break;
+
+    case 'CANVAS':
+      // Copy the canvas content to its clone
+      clone.getContext('2d').drawImage(element, 0, 0);
+      break;
+  }
+
+  return clone;
+}
+
+function isHtmlElement(printable) {
+  // Check if element is instance of HTMLElement or has nodeType === 1 (for elements in iframe)
+  return _typeof(printable) === 'object' && printable && (printable instanceof HTMLElement || printable.nodeType === 1);
+}
 
 /***/ }),
 
@@ -689,11 +898,54 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!*************************!*\
   !*** ./src/js/image.js ***!
   \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _functions = __webpack_require__(/*! ./functions */ \"./src/js/functions.js\");\n\nvar _print = __webpack_require__(/*! ./print */ \"./src/js/print.js\");\n\nvar _print2 = _interopRequireDefault(_print);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n  print: function print(params, printFrame) {\n    // Check if we are printing one image or multiple images\n    if (params.printable.constructor !== Array) {\n      // Create array with one image\n      params.printable = [params.printable];\n    }\n\n    // Create printable element (container)\n    params.printableElement = document.createElement('div');\n\n    // Create all image elements and append them to the printable container\n    params.printable.forEach(function (src) {\n      // Create the image element\n      var img = document.createElement('img');\n      img.setAttribute('style', params.imageStyle);\n\n      // Set image src with the file url\n      img.src = src;\n\n      // Create the image wrapper\n      var imageWrapper = document.createElement('div');\n\n      // Append image to the wrapper element\n      imageWrapper.appendChild(img);\n\n      // Append wrapper to the printable element\n      params.printableElement.appendChild(imageWrapper);\n    });\n\n    // Check if we are adding a print header\n    if (params.header) (0, _functions.addHeader)(params.printableElement, params);\n\n    // Print image\n    _print2.default.send(params, printFrame);\n  }\n};\n\n//# sourceURL=webpack://printJS/./src/js/image.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./functions */ "./src/js/functions.js");
+/* harmony import */ var _print__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./print */ "./src/js/print.js");
+/* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./browser */ "./src/js/browser.js");
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  print: function print(params, printFrame) {
+    // Check if we are printing one image or multiple images
+    if (params.printable.constructor !== Array) {
+      // Create array with one image
+      params.printable = [params.printable];
+    } // Create printable element (container)
+
+
+    params.printableElement = document.createElement('div'); // Create all image elements and append them to the printable container
+
+    params.printable.forEach(function (src) {
+      // Create the image element
+      var img = document.createElement('img');
+      img.setAttribute('style', params.imageStyle); // Set image src with the file url
+
+      img.src = src; // The following block is for Firefox, which for some reason requires the image's src to be fully qualified in
+      // order to print it
+
+      if (_browser__WEBPACK_IMPORTED_MODULE_2__["default"].isFirefox()) {
+        var fullyQualifiedSrc = img.src;
+        img.src = fullyQualifiedSrc;
+      } // Create the image wrapper
+
+
+      var imageWrapper = document.createElement('div'); // Append image to the wrapper element
+
+      imageWrapper.appendChild(img); // Append wrapper to the printable element
+
+      params.printableElement.appendChild(imageWrapper);
+    }); // Check if we are adding a print header
+
+    if (params.header) Object(_functions__WEBPACK_IMPORTED_MODULE_0__["addHeader"])(params.printableElement, params); // Print image
+
+    _print__WEBPACK_IMPORTED_MODULE_1__["default"].send(params, printFrame);
+  }
+});
 
 /***/ }),
 
@@ -701,11 +953,187 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!************************!*\
   !*** ./src/js/init.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _browser = __webpack_require__(/*! ./browser */ \"./src/js/browser.js\");\n\nvar _browser2 = _interopRequireDefault(_browser);\n\nvar _modal = __webpack_require__(/*! ./modal */ \"./src/js/modal.js\");\n\nvar _modal2 = _interopRequireDefault(_modal);\n\nvar _pdf = __webpack_require__(/*! ./pdf */ \"./src/js/pdf.js\");\n\nvar _pdf2 = _interopRequireDefault(_pdf);\n\nvar _html = __webpack_require__(/*! ./html */ \"./src/js/html.js\");\n\nvar _html2 = _interopRequireDefault(_html);\n\nvar _rawHtml = __webpack_require__(/*! ./raw-html */ \"./src/js/raw-html.js\");\n\nvar _rawHtml2 = _interopRequireDefault(_rawHtml);\n\nvar _image = __webpack_require__(/*! ./image */ \"./src/js/image.js\");\n\nvar _image2 = _interopRequireDefault(_image);\n\nvar _json = __webpack_require__(/*! ./json */ \"./src/js/json.js\");\n\nvar _json2 = _interopRequireDefault(_json);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar printTypes = ['pdf', 'html', 'image', 'json', 'raw-html'];\n\nexports.default = {\n  init: function init() {\n    var params = {\n      printable: null,\n      fallbackPrintable: null,\n      type: 'pdf',\n      header: null,\n      headerStyle: 'font-weight: 300;',\n      maxWidth: 800,\n      font: 'TimesNewRoman',\n      font_size: '12pt',\n      honorMarginPadding: true,\n      honorColor: false,\n      properties: null,\n      gridHeaderStyle: 'font-weight: bold; padding: 5px; border: 1px solid #dddddd;',\n      gridStyle: 'border: 1px solid lightgray; margin-bottom: -1px;',\n      showModal: false,\n      onError: function onError(error) {\n        throw error;\n      },\n      onLoadingStart: null,\n      onLoadingEnd: null,\n      onPrintDialogClose: null,\n      onPdfOpen: null,\n      onBrowserIncompatible: function onBrowserIncompatible() {\n        return true;\n      },\n      modalMessage: 'Retrieving Document...',\n      frameId: 'printJS',\n      printableElement: null,\n      documentTitle: 'Document',\n      targetStyle: ['clear', 'display', 'width', 'min-width', 'height', 'min-height', 'max-height'],\n      targetStyles: ['border', 'box', 'break', 'text-decoration'],\n      ignoreElements: [],\n      imageStyle: 'max-width: 100%;',\n      repeatTableHeader: true,\n      css: null,\n      style: null,\n      scanStyles: true,\n      base64: false\n\n      // Check if a printable document or object was supplied\n    };var args = arguments[0];\n    if (args === undefined) throw new Error('printJS expects at least 1 attribute.');\n\n    // Process parameters\n    switch (typeof args === 'undefined' ? 'undefined' : _typeof(args)) {\n      case 'string':\n        params.printable = encodeURI(args);\n        params.fallbackPrintable = params.printable;\n        params.type = arguments[1] || params.type;\n        break;\n      case 'object':\n        params.printable = args.printable;\n        params.base64 = typeof args.base64 !== 'undefined';\n        params.fallbackPrintable = typeof args.fallbackPrintable !== 'undefined' ? args.fallbackPrintable : params.printable;\n        params.fallbackPrintable = params.base64 ? 'data:application/pdf;base64,' + params.fallbackPrintable : params.fallbackPrintable;\n        for (var k in params) {\n          if (k === 'printable' || k === 'fallbackPrintable' || k === 'base64') continue;\n\n          params[k] = typeof args[k] !== 'undefined' ? args[k] : params[k];\n        }\n        break;\n      default:\n        throw new Error('Unexpected argument type! Expected \"string\" or \"object\", got ' + (typeof args === 'undefined' ? 'undefined' : _typeof(args)));\n    }\n\n    // Validate printable\n    if (!params.printable) throw new Error('Missing printable information.');\n\n    // Validate type\n    if (!params.type || typeof params.type !== 'string' || printTypes.indexOf(params.type.toLowerCase()) === -1) {\n      throw new Error('Invalid print type. Available types are: pdf, html, image and json.');\n    }\n\n    // Check if we are showing a feedback message to the user (useful for large files)\n    if (params.showModal) _modal2.default.show(params);\n\n    // Check for a print start hook function\n    if (params.onLoadingStart) params.onLoadingStart();\n\n    // To prevent duplication and issues, remove any used printFrame from the DOM\n    var usedFrame = document.getElementById(params.frameId);\n\n    if (usedFrame) usedFrame.parentNode.removeChild(usedFrame);\n\n    // Create a new iframe or embed element (IE prints blank pdf's if we use iframe)\n    var printFrame = void 0;\n\n    // Create iframe element\n    printFrame = document.createElement('iframe');\n\n    // Hide iframe\n    printFrame.setAttribute('style', 'visibility: hidden; height: 0; width: 0; position: absolute;');\n\n    // Set iframe element id\n    printFrame.setAttribute('id', params.frameId);\n\n    // For non pdf printing, pass an html document string to srcdoc (force onload callback)\n    if (params.type !== 'pdf') {\n      printFrame.srcdoc = '<html><head><title>' + params.documentTitle + '</title>';\n\n      // Attach css files\n      if (params.css) {\n        // Add support for single file\n        if (!Array.isArray(params.css)) params.css = [params.css];\n\n        // Create link tags for each css file\n        params.css.forEach(function (file) {\n          printFrame.srcdoc += '<link rel=\"stylesheet\" href=\"' + file + '\">';\n        });\n      }\n\n      printFrame.srcdoc += '</head><body></body></html>';\n    }\n\n    // Check printable type\n    switch (params.type) {\n      case 'pdf':\n        // Check browser support for pdf and if not supported we will just open the pdf file instead\n        if (_browser2.default.isFirefox() || _browser2.default.isEdge() || _browser2.default.isIE()) {\n          try {\n            console.info('PrintJS currently doesn\\'t support PDF printing in Firefox, Internet Explorer and Edge.');\n            if (params.onBrowserIncompatible() === true) {\n              var win = window.open(params.fallbackPrintable, '_blank');\n              win.focus();\n              if (params.onPdfOpen) params.onPdfOpen();\n            }\n          } catch (e) {\n            params.onError(e);\n          } finally {\n            // Make sure there is no loading modal opened\n            if (params.showModal) _modal2.default.close();\n            if (params.onLoadingEnd) params.onLoadingEnd();\n          }\n        } else {\n          _pdf2.default.print(params, printFrame);\n        }\n        break;\n      case 'image':\n        _image2.default.print(params, printFrame);\n        break;\n      case 'html':\n        _html2.default.print(params, printFrame);\n        break;\n      case 'raw-html':\n        _rawHtml2.default.print(params, printFrame);\n        break;\n      case 'json':\n        _json2.default.print(params, printFrame);\n        break;\n    }\n  }\n};\n\n//# sourceURL=webpack://printJS/./src/js/init.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./browser */ "./src/js/browser.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal */ "./src/js/modal.js");
+/* harmony import */ var _pdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pdf */ "./src/js/pdf.js");
+/* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./html */ "./src/js/html.js");
+/* harmony import */ var _raw_html__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./raw-html */ "./src/js/raw-html.js");
+/* harmony import */ var _image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./image */ "./src/js/image.js");
+/* harmony import */ var _json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./json */ "./src/js/json.js");
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+
+
+
+
+
+var printTypes = ['pdf', 'html', 'image', 'json', 'raw-html'];
+/* harmony default export */ __webpack_exports__["default"] = ({
+  init: function init() {
+    var params = {
+      printable: null,
+      fallbackPrintable: null,
+      type: 'pdf',
+      header: null,
+      headerStyle: 'font-weight: 300;',
+      maxWidth: 800,
+      properties: null,
+      gridHeaderStyle: 'font-weight: bold; padding: 5px; border: 1px solid #dddddd;',
+      gridStyle: 'border: 1px solid lightgray; margin-bottom: -1px;',
+      showModal: false,
+      onError: function onError(error) {
+        throw error;
+      },
+      onLoadingStart: null,
+      onLoadingEnd: null,
+      onPrintDialogClose: function onPrintDialogClose() {},
+      onIncompatibleBrowser: function onIncompatibleBrowser() {},
+      modalMessage: 'Retrieving Document...',
+      frameId: 'printJS',
+      printableElement: null,
+      documentTitle: 'Document',
+      targetStyle: ['clear', 'display', 'width', 'min-width', 'height', 'min-height', 'max-height'],
+      targetStyles: ['border', 'box', 'break', 'text-decoration'],
+      ignoreElements: [],
+      repeatTableHeader: true,
+      css: null,
+      style: null,
+      scanStyles: true,
+      base64: false,
+      // Deprecated
+      onPdfOpen: null,
+      font: 'TimesNewRoman',
+      font_size: '12pt',
+      honorMarginPadding: true,
+      honorColor: false,
+      imageStyle: 'max-width: 100%;'
+    }; // Check if a printable document or object was supplied
+
+    var args = arguments[0];
+
+    if (args === undefined) {
+      throw new Error('printJS expects at least 1 attribute.');
+    } // Process parameters
+
+
+    switch (_typeof(args)) {
+      case 'string':
+        params.printable = encodeURI(args);
+        params.fallbackPrintable = params.printable;
+        params.type = arguments[1] || params.type;
+        break;
+
+      case 'object':
+        params.printable = args.printable;
+        params.fallbackPrintable = typeof args.fallbackPrintable !== 'undefined' ? args.fallbackPrintable : params.printable;
+        params.fallbackPrintable = params.base64 ? "data:application/pdf;base64,".concat(params.fallbackPrintable) : params.fallbackPrintable;
+
+        for (var k in params) {
+          if (k === 'printable' || k === 'fallbackPrintable') continue;
+          params[k] = typeof args[k] !== 'undefined' ? args[k] : params[k];
+        }
+
+        break;
+
+      default:
+        throw new Error('Unexpected argument type! Expected "string" or "object", got ' + _typeof(args));
+    } // Validate printable
+
+
+    if (!params.printable) throw new Error('Missing printable information.'); // Validate type
+
+    if (!params.type || typeof params.type !== 'string' || printTypes.indexOf(params.type.toLowerCase()) === -1) {
+      throw new Error('Invalid print type. Available types are: pdf, html, image and json.');
+    } // Check if we are showing a feedback message to the user (useful for large files)
+
+
+    if (params.showModal) _modal__WEBPACK_IMPORTED_MODULE_1__["default"].show(params); // Check for a print start hook function
+
+    if (params.onLoadingStart) params.onLoadingStart(); // To prevent duplication and issues, remove any used printFrame from the DOM
+
+    var usedFrame = document.getElementById(params.frameId);
+    if (usedFrame) usedFrame.parentNode.removeChild(usedFrame); // Create a new iframe for the print job
+
+    var printFrame = document.createElement('iframe');
+
+    if (_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isFirefox()) {
+      // Set the iframe to be is visible on the page (guaranteed by fixed position) but hidden using opacity 0, because
+      // this works in Firefox. The height needs to be sufficient for some part of the document other than the PDF
+      // viewer's toolbar to be visible in the page
+      printFrame.setAttribute('style', 'width: 1px; height: 100px; position: fixed; left: 0; top: 0; opacity: 0; border-width: 0; margin: 0; padding: 0');
+    } else {
+      // Hide the iframe in other browsers
+      printFrame.setAttribute('style', 'visibility: hidden; height: 0; width: 0; position: absolute; border: 0');
+    } // Set iframe element id
+
+
+    printFrame.setAttribute('id', params.frameId); // For non pdf printing, pass an html document string to srcdoc (force onload callback)
+
+    if (params.type !== 'pdf') {
+      printFrame.srcdoc = '<html><head><title>' + params.documentTitle + '</title>'; // Attach css files
+
+      if (params.css) {
+        // Add support for single file
+        if (!Array.isArray(params.css)) params.css = [params.css]; // Create link tags for each css file
+
+        params.css.forEach(function (file) {
+          printFrame.srcdoc += '<link rel="stylesheet" href="' + file + '">';
+        });
+      }
+
+      printFrame.srcdoc += '</head><body></body></html>';
+    } // Check printable type
+
+
+    switch (params.type) {
+      case 'pdf':
+        // Check browser support for pdf and if not supported we will just open the pdf file instead
+        if (_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isIE()) {
+          try {
+            console.info('Print.js doesn\'t support PDF printing in Internet Explorer.');
+            var win = window.open(params.fallbackPrintable, '_blank');
+            win.focus();
+            params.onIncompatibleBrowser();
+          } catch (error) {
+            params.onError(error);
+          } finally {
+            // Make sure there is no loading modal opened
+            if (params.showModal) _modal__WEBPACK_IMPORTED_MODULE_1__["default"].close();
+            if (params.onLoadingEnd) params.onLoadingEnd();
+          }
+        } else {
+          _pdf__WEBPACK_IMPORTED_MODULE_2__["default"].print(params, printFrame);
+        }
+
+        break;
+
+      case 'image':
+        _image__WEBPACK_IMPORTED_MODULE_5__["default"].print(params, printFrame);
+        break;
+
+      case 'html':
+        _html__WEBPACK_IMPORTED_MODULE_3__["default"].print(params, printFrame);
+        break;
+
+      case 'raw-html':
+        _raw_html__WEBPACK_IMPORTED_MODULE_4__["default"].print(params, printFrame);
+        break;
+
+      case 'json':
+        _json__WEBPACK_IMPORTED_MODULE_6__["default"].print(params, printFrame);
+        break;
+    }
+  }
+});
 
 /***/ }),
 
@@ -713,11 +1141,113 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!************************!*\
   !*** ./src/js/json.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _functions = __webpack_require__(/*! ./functions */ \"./src/js/functions.js\");\n\nvar _print = __webpack_require__(/*! ./print */ \"./src/js/print.js\");\n\nvar _print2 = _interopRequireDefault(_print);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n  print: function print(params, printFrame) {\n    // Check if we received proper data\n    if (_typeof(params.printable) !== 'object') {\n      throw new Error('Invalid javascript data object (JSON).');\n    }\n\n    // Validate repeatTableHeader\n    if (typeof params.repeatTableHeader !== 'boolean') {\n      throw new Error('Invalid value for repeatTableHeader attribute (JSON).');\n    }\n\n    // Validate properties\n    if (!params.properties || !Array.isArray(params.properties)) {\n      throw new Error('Invalid properties array for your JSON data.');\n    }\n\n    // We will format the property objects to keep the JSON api compatible with older releases\n    params.properties = params.properties.map(function (property) {\n      return {\n        field: (typeof property === 'undefined' ? 'undefined' : _typeof(property)) === 'object' ? property.field : property,\n        displayName: (typeof property === 'undefined' ? 'undefined' : _typeof(property)) === 'object' ? property.displayName : property,\n        columnSize: (typeof property === 'undefined' ? 'undefined' : _typeof(property)) === 'object' && property.columnSize ? property.columnSize + ';' : 100 / params.properties.length + '%;'\n      };\n    });\n\n    // Create a print container element\n    params.printableElement = document.createElement('div');\n\n    // Check if we are adding a print header\n    if (params.header) {\n      (0, _functions.addHeader)(params.printableElement, params);\n    }\n\n    // Build the printable html data\n    params.printableElement.innerHTML += jsonToHTML(params);\n\n    // Print the json data\n    _print2.default.send(params, printFrame);\n  }\n};\n\n\nfunction jsonToHTML(params) {\n  // Get the row and column data\n  var data = params.printable;\n  var properties = params.properties;\n\n  // Create a html table\n  var htmlData = '<table style=\"border-collapse: collapse; width: 100%;\">';\n\n  // Check if the header should be repeated\n  if (params.repeatTableHeader) {\n    htmlData += '<thead>';\n  }\n\n  // Add the table header row\n  htmlData += '<tr>';\n\n  // Add the table header columns\n  for (var a = 0; a < properties.length; a++) {\n    htmlData += '<th style=\"width:' + properties[a].columnSize + ';' + params.gridHeaderStyle + '\">' + (0, _functions.capitalizePrint)(properties[a].displayName) + '</th>';\n  }\n\n  // Add the closing tag for the table header row\n  htmlData += '</tr>';\n\n  // If the table header is marked as repeated, add the closing tag\n  if (params.repeatTableHeader) {\n    htmlData += '</thead>';\n  }\n\n  // Create the table body\n  htmlData += '<tbody>';\n\n  // Add the table data rows\n  for (var i = 0; i < data.length; i++) {\n    // Add the row starting tag\n    htmlData += '<tr>';\n\n    // Print selected properties only\n    for (var n = 0; n < properties.length; n++) {\n      var stringData = data[i];\n\n      // Support nested objects\n      var property = properties[n].field.split('.');\n      if (property.length > 1) {\n        for (var p = 0; p < property.length; p++) {\n          stringData = stringData[property[p]];\n        }\n      } else {\n        stringData = stringData[properties[n].field];\n      }\n\n      // Add the row contents and styles\n      htmlData += '<td style=\"width:' + properties[n].columnSize + params.gridStyle + '\">' + stringData + '</td>';\n    }\n\n    // Add the row closing tag\n    htmlData += '</tr>';\n  }\n\n  // Add the table and body closing tags\n  htmlData += '</tbody></table>';\n\n  return htmlData;\n}\n\n//# sourceURL=webpack://printJS/./src/js/json.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./functions */ "./src/js/functions.js");
+/* harmony import */ var _print__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./print */ "./src/js/print.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  print: function print(params, printFrame) {
+    // Check if we received proper data
+    if (_typeof(params.printable) !== 'object') {
+      throw new Error('Invalid javascript data object (JSON).');
+    } // Validate repeatTableHeader
+
+
+    if (typeof params.repeatTableHeader !== 'boolean') {
+      throw new Error('Invalid value for repeatTableHeader attribute (JSON).');
+    } // Validate properties
+
+
+    if (!params.properties || !Array.isArray(params.properties)) {
+      throw new Error('Invalid properties array for your JSON data.');
+    } // We will format the property objects to keep the JSON api compatible with older releases
+
+
+    params.properties = params.properties.map(function (property) {
+      return {
+        field: _typeof(property) === 'object' ? property.field : property,
+        displayName: _typeof(property) === 'object' ? property.displayName : property,
+        columnSize: _typeof(property) === 'object' && property.columnSize ? property.columnSize + ';' : 100 / params.properties.length + '%;'
+      };
+    }); // Create a print container element
+
+    params.printableElement = document.createElement('div'); // Check if we are adding a print header
+
+    if (params.header) {
+      Object(_functions__WEBPACK_IMPORTED_MODULE_0__["addHeader"])(params.printableElement, params);
+    } // Build the printable html data
+
+
+    params.printableElement.innerHTML += jsonToHTML(params); // Print the json data
+
+    _print__WEBPACK_IMPORTED_MODULE_1__["default"].send(params, printFrame);
+  }
+});
+
+function jsonToHTML(params) {
+  // Get the row and column data
+  var data = params.printable;
+  var properties = params.properties; // Create a html table
+
+  var htmlData = '<table style="border-collapse: collapse; width: 100%;">'; // Check if the header should be repeated
+
+  if (params.repeatTableHeader) {
+    htmlData += '<thead>';
+  } // Add the table header row
+
+
+  htmlData += '<tr>'; // Add the table header columns
+
+  for (var a = 0; a < properties.length; a++) {
+    htmlData += '<th style="width:' + properties[a].columnSize + ';' + params.gridHeaderStyle + '">' + Object(_functions__WEBPACK_IMPORTED_MODULE_0__["capitalizePrint"])(properties[a].displayName) + '</th>';
+  } // Add the closing tag for the table header row
+
+
+  htmlData += '</tr>'; // If the table header is marked as repeated, add the closing tag
+
+  if (params.repeatTableHeader) {
+    htmlData += '</thead>';
+  } // Create the table body
+
+
+  htmlData += '<tbody>'; // Add the table data rows
+
+  for (var i = 0; i < data.length; i++) {
+    // Add the row starting tag
+    htmlData += '<tr>'; // Print selected properties only
+
+    for (var n = 0; n < properties.length; n++) {
+      var stringData = data[i]; // Support nested objects
+
+      var property = properties[n].field.split('.');
+
+      if (property.length > 1) {
+        for (var p = 0; p < property.length; p++) {
+          stringData = stringData[property[p]];
+        }
+      } else {
+        stringData = stringData[properties[n].field];
+      } // Add the row contents and styles
+
+
+      htmlData += '<td style="width:' + properties[n].columnSize + params.gridStyle + '">' + stringData + '</td>';
+    } // Add the row closing tag
+
+
+    htmlData += '</tr>';
+  } // Add the table and body closing tags
+
+
+  htmlData += '</tbody></table>';
+  return htmlData;
+}
 
 /***/ }),
 
@@ -725,11 +1255,52 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!*************************!*\
   !*** ./src/js/modal.js ***!
   \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar Modal = {\n  show: function show(params) {\n    // Build modal\n    var modalStyle = 'font-family:sans-serif; ' + 'display:table; ' + 'text-align:center; ' + 'font-weight:300; ' + 'font-size:30px; ' + 'left:0; top:0;' + 'position:fixed; ' + 'z-index: 9990;' + 'color: #0460B5; ' + 'width: 100%; ' + 'height: 100%; ' + 'background-color:rgba(255,255,255,.9);' + 'transition: opacity .3s ease;';\n\n    // Create wrapper\n    var printModal = document.createElement('div');\n    printModal.setAttribute('style', modalStyle);\n    printModal.setAttribute('id', 'printJS-Modal');\n\n    // Create content div\n    var contentDiv = document.createElement('div');\n    contentDiv.setAttribute('style', 'display:table-cell; vertical-align:middle; padding-bottom:100px;');\n\n    // Add close button (requires print.css)\n    var closeButton = document.createElement('div');\n    closeButton.setAttribute('class', 'printClose');\n    closeButton.setAttribute('id', 'printClose');\n    contentDiv.appendChild(closeButton);\n\n    // Add spinner (requires print.css)\n    var spinner = document.createElement('span');\n    spinner.setAttribute('class', 'printSpinner');\n    contentDiv.appendChild(spinner);\n\n    // Add message\n    var messageNode = document.createTextNode(params.modalMessage);\n    contentDiv.appendChild(messageNode);\n\n    // Add contentDiv to printModal\n    printModal.appendChild(contentDiv);\n\n    // Append print modal element to document body\n    document.getElementsByTagName('body')[0].appendChild(printModal);\n\n    // Add event listener to close button\n    document.getElementById('printClose').addEventListener('click', function () {\n      Modal.close();\n    });\n  },\n  close: function close() {\n    var printFrame = document.getElementById('printJS-Modal');\n\n    printFrame.parentNode.removeChild(printFrame);\n  }\n};\n\nexports.default = Modal;\n\n//# sourceURL=webpack://printJS/./src/js/modal.js?");
+__webpack_require__.r(__webpack_exports__);
+var Modal = {
+  show: function show(params) {
+    // Build modal
+    var modalStyle = 'font-family:sans-serif; ' + 'display:table; ' + 'text-align:center; ' + 'font-weight:300; ' + 'font-size:30px; ' + 'left:0; top:0;' + 'position:fixed; ' + 'z-index: 9990;' + 'color: #0460B5; ' + 'width: 100%; ' + 'height: 100%; ' + 'background-color:rgba(255,255,255,.9);' + 'transition: opacity .3s ease;'; // Create wrapper
+
+    var printModal = document.createElement('div');
+    printModal.setAttribute('style', modalStyle);
+    printModal.setAttribute('id', 'printJS-Modal'); // Create content div
+
+    var contentDiv = document.createElement('div');
+    contentDiv.setAttribute('style', 'display:table-cell; vertical-align:middle; padding-bottom:100px;'); // Add close button (requires print.css)
+
+    var closeButton = document.createElement('div');
+    closeButton.setAttribute('class', 'printClose');
+    closeButton.setAttribute('id', 'printClose');
+    contentDiv.appendChild(closeButton); // Add spinner (requires print.css)
+
+    var spinner = document.createElement('span');
+    spinner.setAttribute('class', 'printSpinner');
+    contentDiv.appendChild(spinner); // Add message
+
+    var messageNode = document.createTextNode(params.modalMessage);
+    contentDiv.appendChild(messageNode); // Add contentDiv to printModal
+
+    printModal.appendChild(contentDiv); // Append print modal element to document body
+
+    document.getElementsByTagName('body')[0].appendChild(printModal); // Add event listener to close button
+
+    document.getElementById('printClose').addEventListener('click', function () {
+      Modal.close();
+    });
+  },
+  close: function close() {
+    var printModal = document.getElementById('printJS-Modal');
+
+    if (printModal) {
+      printModal.parentNode.removeChild(printModal);
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (Modal);
 
 /***/ }),
 
@@ -737,11 +1308,62 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!***********************!*\
   !*** ./src/js/pdf.js ***!
   \***********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _print = __webpack_require__(/*! ./print */ \"./src/js/print.js\");\n\nvar _print2 = _interopRequireDefault(_print);\n\nvar _functions = __webpack_require__(/*! ./functions */ \"./src/js/functions.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n  print: function print(params, printFrame) {\n    // Check if we have base64 data\n    if (params.base64) {\n      var bytesArray = Uint8Array.from(atob(params.printable), function (c) {\n        return c.charCodeAt(0);\n      });\n      createBlobAndPrint(params, printFrame, bytesArray);\n      return;\n    }\n\n    // Format pdf url\n    params.printable = /^(blob|http)/i.test(params.printable) ? params.printable : window.location.origin + (params.printable.charAt(0) !== '/' ? '/' + params.printable : params.printable);\n\n    // Get the file through a http request (Preload)\n    var req = new window.XMLHttpRequest();\n    req.responseType = 'arraybuffer';\n\n    req.addEventListener('load', function () {\n      // Check for errors\n      if ([200, 201].indexOf(req.status) === -1) {\n        (0, _functions.cleanUp)(params);\n        params.onError(req.statusText);\n\n        // Since we don't have a pdf document available, we will stop the print job\n        return;\n      }\n\n      // Print requested document\n      createBlobAndPrint(params, printFrame, req.response);\n    });\n\n    req.open('GET', params.printable, true);\n    req.send();\n  }\n};\n\n\nfunction createBlobAndPrint(params, printFrame, data) {\n  // Pass response or base64 data to a blob and create a local object url\n  var localPdf = new window.Blob([data], { type: 'application/pdf' });\n  localPdf = window.URL.createObjectURL(localPdf);\n\n  // Set iframe src with pdf document url\n  printFrame.setAttribute('src', localPdf);\n\n  _print2.default.send(params, printFrame);\n}\n\n//# sourceURL=webpack://printJS/./src/js/pdf.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _print__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./print */ "./src/js/print.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/js/functions.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  print: function print(params, printFrame) {
+    // Check if we have base64 data
+    if (params.base64) {
+      var bytesArray = Uint8Array.from(atob(params.printable), function (c) {
+        return c.charCodeAt(0);
+      });
+      createBlobAndPrint(params, printFrame, bytesArray);
+      return;
+    } // Format pdf url
+
+
+    params.printable = /^(blob|http|\/\/)/i.test(params.printable) ? params.printable : window.location.origin + (params.printable.charAt(0) !== '/' ? '/' + params.printable : params.printable); // Get the file through a http request (Preload)
+
+    var req = new window.XMLHttpRequest();
+    req.responseType = 'arraybuffer';
+    req.addEventListener('error', function () {
+      Object(_functions__WEBPACK_IMPORTED_MODULE_1__["cleanUp"])(params);
+      params.onError(req.statusText, req); // Since we don't have a pdf document available, we will stop the print job
+    });
+    req.addEventListener('load', function () {
+      // Check for errors
+      if ([200, 201].indexOf(req.status) === -1) {
+        Object(_functions__WEBPACK_IMPORTED_MODULE_1__["cleanUp"])(params);
+        params.onError(req.statusText, req); // Since we don't have a pdf document available, we will stop the print job
+
+        return;
+      } // Print requested document
+
+
+      createBlobAndPrint(params, printFrame, req.response);
+    });
+    req.open('GET', params.printable, true);
+    req.send();
+  }
+});
+
+function createBlobAndPrint(params, printFrame, data) {
+  // Pass response or base64 data to a blob and create a local object url
+  var localPdf = new window.Blob([data], {
+    type: 'application/pdf'
+  });
+  localPdf = window.URL.createObjectURL(localPdf); // Set iframe src with pdf document url
+
+  printFrame.setAttribute('src', localPdf);
+  _print__WEBPACK_IMPORTED_MODULE_0__["default"].send(params, printFrame);
+}
 
 /***/ }),
 
@@ -749,11 +1371,111 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!*************************!*\
   !*** ./src/js/print.js ***!
   \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _browser = __webpack_require__(/*! ./browser */ \"./src/js/browser.js\");\n\nvar _browser2 = _interopRequireDefault(_browser);\n\nvar _functions = __webpack_require__(/*! ./functions */ \"./src/js/functions.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Print = {\n  send: function send(params, printFrame) {\n    // Append iframe element to document body\n    document.getElementsByTagName('body')[0].appendChild(printFrame);\n\n    // Get iframe element\n    var iframeElement = document.getElementById(params.frameId);\n\n    // Wait for iframe to load all content\n    iframeElement.onload = function () {\n      if (params.type === 'pdf') {\n        performPrint(iframeElement, params);\n        return;\n      }\n\n      // Get iframe element document\n      var printDocument = iframeElement.contentWindow || iframeElement.contentDocument;\n      if (printDocument.document) printDocument = printDocument.document;\n\n      // Append printable element to the iframe body\n      printDocument.body.appendChild(params.printableElement);\n\n      // Add custom style\n      if (params.type !== 'pdf' && params.style) {\n        // Create style element\n        var style = document.createElement('style');\n        style.innerHTML = params.style;\n\n        // Append style element to iframe's head\n        printDocument.head.appendChild(style);\n      }\n\n      // If printing images, wait for them to load inside the iframe\n      var images = printDocument.getElementsByTagName('img');\n\n      if (images.length > 0) {\n        loadIframeImages(images).then(function () {\n          return performPrint(iframeElement, params);\n        });\n      } else {\n        performPrint(iframeElement, params);\n      }\n    };\n  }\n};\n\nfunction performPrint(iframeElement, params) {\n  try {\n    iframeElement.focus();\n\n    // If Edge or IE, try catch with execCommand\n    if (_browser2.default.isEdge() || _browser2.default.isIE()) {\n      try {\n        iframeElement.contentWindow.document.execCommand('print', false, null);\n      } catch (e) {\n        iframeElement.contentWindow.print();\n      }\n    } else {\n      // Other browsers\n      iframeElement.contentWindow.print();\n    }\n  } catch (error) {\n    params.onError(error);\n  } finally {\n    (0, _functions.cleanUp)(params);\n  }\n}\n\nfunction loadIframeImages(images) {\n  var promises = [];\n\n  var _iteratorNormalCompletion = true;\n  var _didIteratorError = false;\n  var _iteratorError = undefined;\n\n  try {\n    for (var _iterator = images[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {\n      var image = _step.value;\n\n      promises.push(loadIframeImage(image));\n    }\n  } catch (err) {\n    _didIteratorError = true;\n    _iteratorError = err;\n  } finally {\n    try {\n      if (!_iteratorNormalCompletion && _iterator.return) {\n        _iterator.return();\n      }\n    } finally {\n      if (_didIteratorError) {\n        throw _iteratorError;\n      }\n    }\n  }\n\n  return Promise.all(promises);\n}\n\nfunction loadIframeImage(image) {\n  return new Promise(function (resolve) {\n    var pollImage = function pollImage() {\n      !image || typeof image.naturalWidth === 'undefined' || image.naturalWidth === 0 || !image.complete ? setTimeout(pollImage, 500) : resolve();\n    };\n    pollImage();\n  });\n}\n\nexports.default = Print;\n\n//# sourceURL=webpack://printJS/./src/js/print.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./browser */ "./src/js/browser.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/js/functions.js");
+
+
+var Print = {
+  send: function send(params, printFrame) {
+    // Append iframe element to document body
+    document.getElementsByTagName('body')[0].appendChild(printFrame); // Get iframe element
+
+    var iframeElement = document.getElementById(params.frameId); // Wait for iframe to load all content
+
+    iframeElement.onload = function () {
+      if (params.type === 'pdf') {
+        // Add a delay for Firefox. In my tests, 1000ms was sufficient but 100ms was not
+        if (_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isFirefox()) {
+          setTimeout(function () {
+            return performPrint(iframeElement, params);
+          }, 1000);
+        } else {
+          performPrint(iframeElement, params);
+        }
+
+        return;
+      } // Get iframe element document
+
+
+      var printDocument = iframeElement.contentWindow || iframeElement.contentDocument;
+      if (printDocument.document) printDocument = printDocument.document; // Append printable element to the iframe body
+
+      printDocument.body.appendChild(params.printableElement); // Add custom style
+
+      if (params.type !== 'pdf' && params.style) {
+        // Create style element
+        var style = document.createElement('style');
+        style.innerHTML = params.style; // Append style element to iframe's head
+
+        printDocument.head.appendChild(style);
+      } // If printing images, wait for them to load inside the iframe
+
+
+      var images = printDocument.getElementsByTagName('img');
+
+      if (images.length > 0) {
+        loadIframeImages(Array.from(images)).then(function () {
+          return performPrint(iframeElement, params);
+        });
+      } else {
+        performPrint(iframeElement, params);
+      }
+    };
+  }
+};
+
+function performPrint(iframeElement, params) {
+  try {
+    iframeElement.focus(); // If Edge or IE, try catch with execCommand
+
+    if (_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isEdge() || _browser__WEBPACK_IMPORTED_MODULE_0__["default"].isIE()) {
+      try {
+        iframeElement.contentWindow.document.execCommand('print', false, null);
+      } catch (e) {
+        iframeElement.contentWindow.print();
+      }
+    } else {
+      // Other browsers
+      iframeElement.contentWindow.print();
+    }
+  } catch (error) {
+    params.onError(error);
+  } finally {
+    if (_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isFirefox()) {
+      // Move the iframe element off-screen and make it invisible
+      iframeElement.style.visibility = 'hidden';
+      iframeElement.style.left = '-1px';
+    }
+
+    Object(_functions__WEBPACK_IMPORTED_MODULE_1__["cleanUp"])(params);
+  }
+}
+
+function loadIframeImages(images) {
+  var promises = images.map(function (image) {
+    if (image.src && image.src !== window.location.href) {
+      return loadIframeImage(image);
+    }
+  });
+  return Promise.all(promises);
+}
+
+function loadIframeImage(image) {
+  return new Promise(function (resolve) {
+    var pollImage = function pollImage() {
+      !image || typeof image.naturalWidth === 'undefined' || image.naturalWidth === 0 || !image.complete ? setTimeout(pollImage, 500) : resolve();
+    };
+
+    pollImage();
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Print);
 
 /***/ }),
 
@@ -761,11 +1483,24 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!****************************!*\
   !*** ./src/js/raw-html.js ***!
   \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _print = __webpack_require__(/*! ./print */ \"./src/js/print.js\");\n\nvar _print2 = _interopRequireDefault(_print);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n  print: function print(params, printFrame) {\n    // Create printable element (container)\n    params.printableElement = document.createElement('div');\n    params.printableElement.setAttribute('style', 'width:100%');\n\n    // Set our raw html as the printable element inner html content\n    params.printableElement.innerHTML = params.printable;\n\n    // Print html contents\n    _print2.default.send(params, printFrame);\n  }\n};\n\n//# sourceURL=webpack://printJS/./src/js/raw-html.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _print__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./print */ "./src/js/print.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  print: function print(params, printFrame) {
+    // Create printable element (container)
+    params.printableElement = document.createElement('div');
+    params.printableElement.setAttribute('style', 'width:100%'); // Set our raw html as the printable element inner html content
+
+    params.printableElement.innerHTML = params.printable; // Print html contents
+
+    _print__WEBPACK_IMPORTED_MODULE_0__["default"].send(params, printFrame);
+  }
+});
 
 /***/ }),
 
@@ -776,7 +1511,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack://printJS/./src/sass/index.scss?");
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -787,12 +1522,14 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack://printJS
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! ./src/index.js */\"./src/index.js\");\n\n\n//# sourceURL=webpack://printJS/multi_./src/index.js?");
+module.exports = __webpack_require__(/*! ./src/index.js */"./src/index.js");
+
 
 /***/ })
 
 /******/ })["default"];
 });
+//# sourceMappingURL=print.map
 
 /***/ })
 

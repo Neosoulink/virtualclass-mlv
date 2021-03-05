@@ -8,11 +8,11 @@
 			:icon="sidebarBackgroundImage"
 		>
 			<mobile-menu slot="content"></mobile-menu>
-			<sidebar-link :to="{name: 'dashboard'}">
+			<sidebar-link :to="{ name: 'dashboard' }">
 				<md-icon>dashboard</md-icon>
 				<p>Dashboard</p>
 			</sidebar-link>
-			<sidebar-link :to="{name: 'dashboard-creation'}">
+			<sidebar-link :to="{ name: 'dashboard-creation' }">
 				<md-icon>note_add</md-icon>
 				<p>Creation</p>
 			</sidebar-link>
@@ -20,15 +20,15 @@
 				<md-icon>poll</md-icon>
 				<p>Management</p>
 			</sidebar-link>
-			<sidebar-link to="users">
+			<sidebar-link :to="{ name: 'dashboard-users' }">
 				<md-icon>group</md-icon>
 				<p>Users</p>
 			</sidebar-link>
-				<sidebar-link :to="{name : 'dashboard-demo'}">
+			<sidebar-link :to="{ name: 'dashboard-demo' }">
 				<md-icon>star</md-icon>
 				<p>Demo</p>
 			</sidebar-link>
-			<sidebar-link :to="{name: 'home'}">
+			<sidebar-link :to="{ name: 'home' }">
 				<md-icon>arrow_back</md-icon>
 				<p>Go Home</p>
 			</sidebar-link>
@@ -63,13 +63,13 @@ export default {
 		DashboardContent,
 		ContentFooter,
 		MobileMenu,
-		FixedPlugin
+		FixedPlugin,
 	},
 	data() {
 		return {
 			sidebarBackground: "green",
-			sidebarBackgroundImage: require("../../../assets/img/vc_logo_0.jpg")
+			sidebarBackgroundImage: require("../../../assets/img/vc_logo_0.jpg"),
 		};
-	}
+	},
 };
 </script>
