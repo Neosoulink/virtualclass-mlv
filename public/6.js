@@ -696,9 +696,9 @@ var render = function() {
             "sidebar-link",
             { attrs: { to: "user" } },
             [
-              _c("md-icon", [_vm._v("person")]),
+              _c("md-icon", [_vm._v("group")]),
               _vm._v(" "),
-              _c("p", [_vm._v("My Profile")])
+              _c("p", [_vm._v("Users")])
             ],
             1
           ),

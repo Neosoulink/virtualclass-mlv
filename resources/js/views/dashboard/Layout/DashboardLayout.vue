@@ -21,8 +21,8 @@
 				<p>Management</p>
 			</sidebar-link>
 			<sidebar-link to="user">
-				<md-icon>person</md-icon>
-				<p>My Profile</p>
+				<md-icon>group</md-icon>
+				<p>Users</p>
 			</sidebar-link>
 				<sidebar-link :to="{name : 'dashboard-demo'}">
 				<md-icon>star</md-icon>
