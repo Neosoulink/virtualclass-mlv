@@ -17,7 +17,7 @@
 				<p>Creation</p>
 			</sidebar-link>
 			<sidebar-link to="chart">
-				<md-icon>pie_chart</md-icon>
+				<md-icon>poll</md-icon>
 				<p>Management</p>
 			</sidebar-link>
 			<sidebar-link to="user">

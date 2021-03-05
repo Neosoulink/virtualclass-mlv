@@ -61,6 +61,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardHome",
@@ -139,10 +143,10 @@ var render = function() {
     "div",
     { staticClass: "content", attrs: { id: "home-dashboard" } },
     [
-      _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "md-layout md-gutter" }, [
         _c(
           "div",
-          { staticClass: "col-sm-4" },
+          { staticClass: "md-layout-item" },
           [
             _c(
               "stats-card",
@@ -195,7 +199,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-sm-4" },
+          { staticClass: "md-layout-item" },
           [
             _c(
               "stats-card",

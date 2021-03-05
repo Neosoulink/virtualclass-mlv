@@ -1,7 +1,8 @@
 <template>
 	<div id="home-dashboard" class="content">
-		<div class="row">
-			<div class="col-sm-4">
+
+		<div class="md-layout md-gutter">
+			<div class="md-layout-item">
 				<stats-card
 					:to="{ name: 'dashboard-creation' }"
 					data-background-color="green"
@@ -16,16 +17,19 @@
 					</template>
 
 					<template slot="footer">
-						<router-link :to="{ name: 'dashboard-creation' }" class="stats pb-2">
+						<router-link
+							:to="{ name: 'dashboard-creation' }"
+							class="stats pb-2"
+						>
 							<md-icon>open_in_browser</md-icon>
 							Create new document
 						</router-link>
 					</template>
 				</stats-card>
 			</div>
-			<!-- /.col-sm-4 -->
+			<!-- /.md-layout-item -->
 
-			<div class="col-sm-4">
+			<div class="md-layout-item">
 				<stats-card data-background-color="green" class="rounded">
 					<template slot="header">
 						<md-icon>star</md-icon>
@@ -43,9 +47,9 @@
 					</template>
 				</stats-card>
 			</div>
-			<!-- /.col-sm-4 -->
-
+			<!-- /.md-layout-item -->
 		</div>
+		<!-- /.md-layout -->
 	</div>
 	<!-- /.content -->
 </template>

@@ -685,7 +685,7 @@ var render = function() {
             "sidebar-link",
             { attrs: { to: "chart" } },
             [
-              _c("md-icon", [_vm._v("pie_chart")]),
+              _c("md-icon", [_vm._v("poll")]),
               _vm._v(" "),
               _c("p", [_vm._v("Management")])
             ],
