@@ -20,7 +20,7 @@
 				<md-icon>poll</md-icon>
 				<p>Management</p>
 			</sidebar-link>
-			<sidebar-link to="user">
+			<sidebar-link to="users">
 				<md-icon>group</md-icon>
 				<p>Users</p>
 			</sidebar-link>
