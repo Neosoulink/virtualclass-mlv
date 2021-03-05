@@ -52,6 +52,16 @@ const routes = [
 				]
 			},
 			{
+				path: 'users',
+				name: 'dashboard-users',
+				component: resolve => require(['../views/dashboard/users/'], resolve),
+			},
+			{
+				path: 'users/:user',
+				name: 'dashboard-users-profile',
+				component: resolve => require(['../views/dashboard/users/Profile.vue'], resolve),
+			},
+			{
 				path: 'demo',
 				name: 'dashboard-demo',
 				component: resolve => require(['../views/dashboard/demo/Index.vue'], resolve),

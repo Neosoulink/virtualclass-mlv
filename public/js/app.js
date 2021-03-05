@@ -97824,6 +97824,18 @@ var routes = [{
       }
     }]
   }, {
+    path: 'users',
+    name: 'dashboard-users',
+    component: function component(resolve) {
+      return __webpack_require__.e(/*! AMD require */ 21).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/users/ */ "./resources/js/views/dashboard/users/index.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    }
+  }, {
+    path: 'users/:user',
+    name: 'dashboard-users-profile',
+    component: function component(resolve) {
+      return __webpack_require__.e(/*! AMD require */ 20).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ../views/dashboard/users/Profile.vue */ "./resources/js/views/dashboard/users/Profile.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    }
+  }, {
     path: 'demo',
     name: 'dashboard-demo',
     component: function component(resolve) {
