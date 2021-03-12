@@ -1,5 +1,6 @@
 <?php
 
+use Faker\Guesser\Name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -20,17 +21,18 @@ Route::group(['prefix' => 'auth'], function () {
 	Route::post('refresh', 'AuthController@refresh');
 	Route::post('me', 'AuthController@me');
 
-	// User
-	Route::get('getAllUsers', 'UserController@getAll');
-
-});
-
-Route::middleware('auth:api')->group(function () {
-	Route::get('/user', function (Request $request) {
-		return $request->user();
-	});
-
 	Route::group(['prefix' => 'demo'], function () {
 		Route::get('/logo-themes', 'DashboardDemoController@getLogoThemesPath');
 	});
 });
+
+Route::middleware('auth:api')
+	->name('user.')
+	->prefix('user')
+	->group(function () {
+		Route::get('/', 'UserController@index')->name('index');
+		Route::post('/', 'UserController@store')->name('store');
+		Route::get('/{user}', 'UserController@show')->name('show');
+		Route::put('/{user}', 'UserController@update')->name('update');
+		Route::delete('/{user}', 'UserController@delete')->name('delete');
+	});
