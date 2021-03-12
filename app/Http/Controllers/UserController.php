@@ -10,4 +10,29 @@ class UserController extends Controller
 	{
 		$this->middleware('auth:api');
 	}
+
+	public function index()
+	{
+		return 'Hello';
+	}
+
+	public function store()
+	{
+		return 'Hello';
+	}
+
+	public function show()
+	{
+		return 'Hello';
+	}
+
+	public function update()
+	{
+		return 'Hello';
+	}
+
+	public function delete()
+	{
+		return 'Hello';
+	}
 }
