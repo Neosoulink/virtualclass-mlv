@@ -1,7 +1,5 @@
 <?php
 
-use Faker\Guesser\Name;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
