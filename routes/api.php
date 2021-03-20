@@ -24,13 +24,4 @@ Route::middleware('auth:api')->prefix('demo')->group(function () {
 	Route::get('/logo-themes', 'DashboardDemoController@getLogoThemesPath');
 });
 
-Route::middleware('auth:api')
-	->name('user.')
-	->prefix('user')
-	->group(function () {
-		Route::get('/', 'UserController@index')->name('index');
-		Route::post('/', 'UserController@store')->name('store');
-		Route::get('/{user}', 'UserController@show')->name('show');
-		Route::put('/{user}', 'UserController@update')->name('update');
-		Route::delete('/{user}', 'UserController@delete')->name('delete');
-	});
+Route::apiResource('users', 'UserController')->middleware('auth:api');
