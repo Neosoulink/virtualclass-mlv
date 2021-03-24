@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnterpriseAccountInvitationsTable extends Migration
+class CreateUserDocumentsTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEnterpriseAccountInvitationsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('enterprise_account_invitations', function (Blueprint $collection) {
-			$collection->name('user_sender');
-			$collection->string('email_invited');
-			$collection->timestamps();
+		Schema::create('user_documents', function (Blueprint $table) {
+			$table->id();
+			$table->name('document');
+			$table->name('user');
+			$table->name('access_role');
+			$table->timestamps();
 		});
 	}
 
@@ -27,6 +29,6 @@ class CreateEnterpriseAccountInvitationsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('enterprise_account_invitations');
+		Schema::dropIfExists('user_documents');
 	}
 }

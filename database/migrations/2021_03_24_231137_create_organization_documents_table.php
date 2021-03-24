@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserEnterpriseAccountsTable extends Migration
+class CreateOrganizationDocumentsTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,11 +13,12 @@ class CreateUserEnterpriseAccountsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('user_enterprise_accounts', function (Blueprint $collection) {
-			$collection->name('user');
-			$collection->name('enterprise');
-			$collection->name('role');
-			$collection->timestamps();
+		Schema::create('organization_documents', function (Blueprint $table) {
+			$table->id();
+			$table->name('organization');
+			$table->name('user');
+			$table->name('access_role');
+			$table->timestamps();
 		});
 	}
 
@@ -28,6 +29,6 @@ class CreateUserEnterpriseAccountsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('user_enterprise_accounts');
+		Schema::dropIfExists('organization_documents');
 	}
 }

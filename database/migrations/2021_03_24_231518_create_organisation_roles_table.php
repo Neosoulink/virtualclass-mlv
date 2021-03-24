@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateOrganisationRolesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,10 +13,11 @@ class CreateDocumentsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('documents', function (Blueprint $collection) {
-			$collection->string('name');
-			$collection->name('config');
-			$collection->timestamps();
+		Schema::create('organisation_roles', function (Blueprint $table) {
+			$table->id();
+			$table->name('name');
+			$table->name('description');
+			$table->timestamps();
 		});
 	}
 
@@ -27,6 +28,6 @@ class CreateDocumentsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('documents');
+		Schema::dropIfExists('organisation_roles');
 	}
 }
