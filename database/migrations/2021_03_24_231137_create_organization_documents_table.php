@@ -15,9 +15,9 @@ class CreateOrganizationDocumentsTable extends Migration
 	{
 		Schema::create('organization_documents', function (Blueprint $table) {
 			$table->id();
-			$table->foreign('organization_id');
-			$table->foreign('user_id');
-			$table->foreign('role_id');
+			$table->foreignId('organization_id')->constrained('organizations');
+			$table->foreignId('user_id')->constrained('users');
+			$table->foreignId('role_id')->constrained('roles');
 			$table->timestamps();
 		});
 	}

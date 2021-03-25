@@ -15,8 +15,8 @@ class CreateOrganizationInvitationsTable extends Migration
 	{
 		Schema::create('organization_invitations', function (Blueprint $table) {
 			$table->id();
-			$table->foreign('organization_id');
-			$table->foreign('user_id');
+			$table->foreignId('organization_id')->constrained('organizations');
+			$table->foreignId('users_id')->constrained('users');
 			$table->string('email_invited');
 			$table->timestamp('accepted_at');
 			$table->timestamp('declined_at');
