@@ -11,22 +11,22 @@ class OrganizationRoleSeeder extends Seeder
 	 */
 	public function run()
 	{
-		DB::table('organization_seeder')->insert([
+		DB::table('organization_roles')->insert([
 			'name' => 'owner',
 			'description' => 'Owner of organization'
 		]);
 
-		DB::table('organization_seeder')->insert([
+		DB::table('organization_roles')->insert([
 			'name' => 'admin',
 			'description' => 'editor of organization'
 		]);
 
-		DB::table('organization_seeder')->insert([
+		DB::table('organization_roles')->insert([
 			'name' => 'member',
 			'description' => 'Viewer of organization'
 		]);
 
-		DB::table('organization_seeder')->insert([
+		DB::table('organization_roles')->insert([
 			'name' => 'viewer',
 			'description' => 'Viewer of organization'
 		]);
