@@ -18,12 +18,22 @@ class Document extends Model
 	];
 
 	/**
-	 * Return a list document users.
+	 * Document users ORM many to many relationship.
 	 *
-	 * @return array
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function documents()
+	public function users()
 	{
 		return $this->belongsToMany('App\User', 'user_documents');
+	}
+
+	/**
+	 * Document users ORM many to many relationship.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function organizations()
+	{
+		return $this->belongsToMany('App\Organization', 'organization_documents');
 	}
 }

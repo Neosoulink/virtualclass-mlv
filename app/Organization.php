@@ -26,4 +26,14 @@ class Organization extends Model
 	{
 		return $this->belongsToMany('App\User', 'organization_users');
 	}
+
+	/**
+	 * Organization documents many to many ORM relationship.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function documents()
+	{
+		return $this->belongsToMany('App\Document', 'organization_documents');
+	}
 }
