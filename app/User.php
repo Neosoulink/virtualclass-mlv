@@ -7,12 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 //use Jenssegers\Mongodb\Auth\User as Authenticatable;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+//use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-	use Notifiable, SoftDeletes;
+	use Notifiable;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -54,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
 	 *
 	 * @var string
 	 */
-	protected $dates = ['deleted_at'];
+	protected $dates = [];
 
 	/**
 	 * Get the identifier that will be stored in the subject claim of the JWT.
