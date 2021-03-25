@@ -18,7 +18,8 @@ class CreateOrganizationDocumentsTable extends Migration
 			$table->foreignId('organization_id')->constrained('organizations');
 			$table->foreignId('user_id')->constrained('users');
 			$table->string('role_id');
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 		});
 	}
 
