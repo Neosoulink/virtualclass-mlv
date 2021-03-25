@@ -85,4 +85,14 @@ class User extends Authenticatable implements JWTSubject
 	{
 		return $this->belongsToMany('App\Document', 'user_documents');
 	}
+
+	/**
+	 * Organization users many to many ORM relationship.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function organizations()
+	{
+		return $this->belongsToMany('App\Organization', 'organization_users');
+	}
 }

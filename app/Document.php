@@ -28,7 +28,7 @@ class Document extends Model
 	}
 
 	/**
-	 * Document users ORM many to many relationship.
+	 * Organization documents many to many ORM relationship.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
