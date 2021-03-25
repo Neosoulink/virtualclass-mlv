@@ -13,10 +13,11 @@ class CreateDocumentsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('documents', function (Blueprint $collection) {
-			$collection->string('name');
-			$collection->name('config');
-			$collection->timestamps();
+		Schema::create('documents', function (Blueprint $table) {
+			$table->id();
+			$table->string('name');
+			$table->name('config');
+			$table->timestamps();
 		});
 	}
 
