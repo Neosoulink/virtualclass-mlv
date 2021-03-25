@@ -17,6 +17,7 @@ class CreateDocumentsTable extends Migration
 			$table->id();
 			$table->string('name');
 			$table->string('config');
+			$table->string('description');
 			$table->timestamps();
 		});
 	}
