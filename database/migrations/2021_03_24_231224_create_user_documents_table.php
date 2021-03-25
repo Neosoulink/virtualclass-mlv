@@ -15,9 +15,9 @@ class CreateUserDocumentsTable extends Migration
 	{
 		Schema::create('user_documents', function (Blueprint $table) {
 			$table->id();
-			$table->string('document');
-			$table->string('user');
-			$table->string('access_role');
+			$table->foreign('document_id');
+			$table->foreign('user_id');
+			$table->foreign('role_id');
 			$table->timestamps();
 		});
 	}

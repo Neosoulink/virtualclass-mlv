@@ -15,9 +15,9 @@ class CreateOrganizationDocumentsTable extends Migration
 	{
 		Schema::create('organization_documents', function (Blueprint $table) {
 			$table->id();
-			$table->string('organization');
-			$table->string('user');
-			$table->string('access_role');
+			$table->foreign('organization_id');
+			$table->foreign('user_id');
+			$table->foreign('role_id');
 			$table->timestamps();
 		});
 	}
