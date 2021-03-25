@@ -12,7 +12,7 @@ class DocumentSeeder extends Seeder
 	public function run()
 	{
 
-		DB::table('organization_seeder')->insert([
+		DB::table('documents')->insert([
 			'name' => 'Release',
 			'description' => 'Viewer of organization',
 			'config' => json_encode(
@@ -51,7 +51,7 @@ class DocumentSeeder extends Seeder
 			)
 		]);
 
-		DB::table('organization_seeder')->insert([
+		DB::table('documents')->insert([
 			'name' => 'Letter',
 			'description' => 'Letter description',
 			'config' => json_encode(
