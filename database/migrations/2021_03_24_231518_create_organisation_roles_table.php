@@ -15,8 +15,8 @@ class CreateOrganisationRolesTable extends Migration
 	{
 		Schema::create('organisation_roles', function (Blueprint $table) {
 			$table->id();
-			$table->name('name');
-			$table->name('description');
+			$table->string('name');
+			$table->string('description');
 			$table->timestamps();
 		});
 	}

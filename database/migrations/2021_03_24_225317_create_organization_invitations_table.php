@@ -15,12 +15,12 @@ class CreateOrganizationInvitationsTable extends Migration
 	{
 		Schema::create('organization_invitations', function (Blueprint $table) {
 			$table->id();
-			$table->name('organization');
-			$table->name('sender_user');
-			$table->name('email_invited');
-			$table->name('accepted_at');
-			$table->name('declined_at');
-			$table->timestamps('expiration_date');
+			$table->string('organization');
+			$table->string('sender_user');
+			$table->string('email_invited');
+			$table->timestamp('accepted_at');
+			$table->timestamp('declined_at');
+			$table->timestamp('expiration_date');
 			$table->timestamps();
 		});
 	}
