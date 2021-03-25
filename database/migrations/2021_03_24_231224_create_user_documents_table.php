@@ -17,7 +17,7 @@ class CreateUserDocumentsTable extends Migration
 			$table->id();
 			$table->foreignId('document_id')->constrained('documents');
 			$table->foreignId('user_id')->constrained('users');
-			$table->foreignId('role_id')->constrained('roles');
+			$table->string('role_id');
 			$table->timestamps();
 		});
 	}

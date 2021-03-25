@@ -17,7 +17,7 @@ class CreateOrganizationDocumentsTable extends Migration
 			$table->id();
 			$table->foreignId('organization_id')->constrained('organizations');
 			$table->foreignId('user_id')->constrained('users');
-			$table->foreignId('role_id')->constrained('roles');
+			$table->string('role_id');
 			$table->timestamps();
 		});
 	}
