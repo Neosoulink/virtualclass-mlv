@@ -13,18 +13,9 @@ class UserController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
-		return Response()->json(User::all());
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
+	public function index()
 	{
-		//
+		return Response()->json(User::all());
 	}
 
 	/**
@@ -35,7 +26,27 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+
+		$validator = validator(
+			$request->all(),
+			[
+				"email" => "email|string|required",
+				"password" => "password|string|required",
+				"phone_number" => "string",
+				"first_name" => "string|max:50",
+				"last_name" => "string|max:50",
+				"country" => "string",
+				"full_address" => "string",
+				"genre" => "string|max:1",
+			]
+		);
+
+		if ($validator->fails()) {
+			return response($validator->messages(), 402);
+		}else {
+			return response(User::create($request->all()));
+		}
+
 	}
 
 	/**
