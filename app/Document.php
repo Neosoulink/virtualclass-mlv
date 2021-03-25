@@ -16,4 +16,14 @@ class Document extends Model
 		'description',
 		'config'
 	];
+
+	/**
+	 * Return a list document users.
+	 *
+	 * @return array
+	 */
+	public function documents()
+	{
+		return $this->belongsToMany('App\User', 'user_documents');
+	}
 }

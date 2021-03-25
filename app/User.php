@@ -52,7 +52,7 @@ class User extends Authenticatable implements JWTSubject
 	/**
 	 * The attributes that should be retrieve deleting date of user.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $dates = [];
 
@@ -74,5 +74,15 @@ class User extends Authenticatable implements JWTSubject
 	public function getJWTCustomClaims()
 	{
 		return [];
+	}
+
+	/**
+	 * Return a list of user documents.
+	 *
+	 * @return array
+	 */
+	public function documents()
+	{
+		return $this->belongsToMany('App\Document', 'user_documents');
 	}
 }
