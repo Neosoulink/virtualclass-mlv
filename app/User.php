@@ -95,4 +95,14 @@ class User extends Authenticatable implements JWTSubject
 	{
 		return $this->belongsToMany('App\Organization', 'organization_users');
 	}
+
+	/**
+	 * Return a list of user roles.
+	 *
+	 * @return array
+	 */
+	public function roles()
+	{
+		return $this->belongsToMany('App\Role', 'user_roles');
+	}
 }
