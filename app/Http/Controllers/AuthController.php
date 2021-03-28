@@ -53,6 +53,8 @@ class AuthController extends Controller
 				'name' =>  $credentials['email']
 			]);
 
+			$credentials = $validator->validate();
+
 			if (!$token = auth('api')->attempt($credentials)) {
 				return response([
 					"message" => ['Unauthorized'],
