@@ -12,7 +12,7 @@ class UserPolicy
 
 	public function before(User $user, $ability)
 	{
-		if ($user->is_admin) return true;
+		if ($user->is_admin) return Response::allow();
 	}
 
 	/**
@@ -23,18 +23,21 @@ class UserPolicy
 	 */
 	public function viewAny(User $user)
 	{
-		return Response::deny('You do not have right access to do this action!', 403);
+		return Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
 	 * Determine whether the user can view the model.
 	 *
+	 * @param  \App\User  $currentUser
 	 * @param  \App\User  $user
 	 * @return mixed
 	 */
-	public function view(User $user)
+	public function view(User $currentUser, User $user)
 	{
-		return Response::allow();
+		return $currentUser->id == $user->id
+			? Response::allow()
+			: Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
@@ -45,7 +48,7 @@ class UserPolicy
 	 */
 	public function create(User $user)
 	{
-		return Response::deny('You do not have right access to do this action!', 404);
+		return Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
@@ -59,7 +62,7 @@ class UserPolicy
 	{
 		return $currentUser->id == $user->id
 			? Response::allow()
-			: Response::deny('You do not have right access to do this action!', 403);
+			: Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
@@ -81,7 +84,7 @@ class UserPolicy
 	 */
 	public function delete(User $user)
 	{
-		return Response::deny('You do not have right access to do this action!', 403);
+		return Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
