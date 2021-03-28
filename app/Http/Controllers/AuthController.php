@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\CustomFileSystem;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -30,8 +30,8 @@ class AuthController extends Controller
 		$validator = validator(
 			$request->all(),
 			[
-				"email" => "email|string|required",
-				"password" => "password|string|required",
+				"email" => "email|unique:App\User,email|string|required",
+				"password" => "string|min:8|required",
 				"phone_number" => "string",
 				"first_name" => "string|max:50",
 				"last_name" => "string|max:50",
@@ -63,7 +63,7 @@ class AuthController extends Controller
 				"data" => [],
 				"messages" => $validator->messages(),
 				"message" => "Can't sign up!"
-			]);
+			], 402);
 		}
 	}
 
@@ -77,8 +77,8 @@ class AuthController extends Controller
 		$validator = validator(
 			$request->all(),
 			[
-				'email' => "email|unique:users|required",
-				'password' => 'min:8|confirmed|required'
+				'email' => "email|string|required",
+				'password' => 'string|min:8|required'
 			]
 		);
 
@@ -86,7 +86,9 @@ class AuthController extends Controller
 			$credentials = $validator->validate();
 
 			if (!$token = auth('api')->attempt($credentials)) {
-				return response()->json(['error' => 'Unauthorized'], 401);
+				return response([
+					"message" => ['Unauthorized'],
+				], 401);
 			}
 
 			return $this->respondWithToken($token);
@@ -95,7 +97,7 @@ class AuthController extends Controller
 				"data" => [],
 				"messages" => $validator->messages(),
 				"message" => "Can't login!"
-			]);
+			], 402);
 		}
 	}
 
@@ -144,7 +146,7 @@ class AuthController extends Controller
 			'access_token' => $token,
 			'user' => $this->guard()->user(),
 			'token_type' => 'bearer',
-			'expires_in' => auth('api')->factory()->getTTL() * 180
+			'expires_in' => auth('api')->factory()->getTTL() * 60
 		]);
 	}
 
