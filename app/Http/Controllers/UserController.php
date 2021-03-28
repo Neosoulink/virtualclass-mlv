@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
+	public function __construct()
+	{
+		$this->authorizeResource(User::class, 'user');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -26,7 +31,6 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
-
 		$validator = validator(
 			$request->all(),
 			[
@@ -44,7 +48,10 @@ class UserController extends Controller
 		if ($validator->fails()) {
 			return response($validator->messages(), 402);
 		} else {
-			return response(User::create($request->all()));
+			return response([
+				"data" => User::create($request->all()),
+				"message" => "User created!"
+			]);
 		}
 	}
 
@@ -68,10 +75,11 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, User $user)
 	{
+		// The action is authorized...
 		$validator = validator(
 			$request->all(),
 			[
-				"email" => "email|string",
+				"email" => "email|string|",
 				"password" => "password|string",
 				"phone_number" => "string",
 				"first_name" => "string|max:50",
@@ -83,10 +91,52 @@ class UserController extends Controller
 		);
 
 		if ($validator->fails()) {
-			return response($validator->messages(), 402);
+			return response([
+				"data" => [],
+				"messages" => $validator->messages()
+			], 402);
 		} else {
-			$user->update($request->all());
-			return response('User updated');
+			$user->update($validator->validate());
+			return response([
+				"data" => $validator->validate(),
+				"message" => 'User updated!',
+			]);
+		}
+	}
+
+	/**
+	 * Update the user admin in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\User  $user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateIsAdminField(Request $request, User $user)
+	{
+		if ($user->can('updateIsAdminField', $user)) {
+			$validator = validator(
+				$request->all(),
+				[
+					"is_admin" => "boolean|required",
+				]
+			);
+
+			if (!$validator->fails()) {
+				$user->update($validator->validate());
+				return response([
+					"data" => $validator->validate(),
+					"message" => 'Admin user grade updated!'
+				]);
+			} else {
+				return response([
+					"data" => [],
+					"messages" => $validator->messages()
+				], 402);
+			}
+		} else {
+			return response([
+				"message" => 'Not right access to do this action!'
+			], 403);
 		}
 	}
 
@@ -99,6 +149,8 @@ class UserController extends Controller
 	public function destroy(User $user)
 	{
 		$user->delete();
-		return response('User deleted');
+		return response([
+			"message" => 'User deleted!'
+		]);
 	}
 }

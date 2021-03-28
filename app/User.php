@@ -14,6 +14,8 @@ class User extends Authenticatable implements JWTSubject
 {
 	use Notifiable;
 
+	protected $guarded = [];
+
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -29,6 +31,7 @@ class User extends Authenticatable implements JWTSubject
 		'last_name',
 		'full_address',
 		'genre',
+		'is_admin'
 	];
 
 	/**

@@ -25,5 +25,6 @@ Route::middleware('auth:api')->prefix('demo')->group(function () {
 });
 
 Route::apiResource('users', 'UserController')->middleware('auth:api');
+Route::put('/admin_user/{user}', 'UserController@updateIsAdminField')->name('admin.user.updateIsAdminField')->middleware('auth:api');
 Route::apiResource('organizations', 'OrganizationController')->middleware('auth:api');
 Route::apiResource('documents', 'DocumentController')->middleware('auth:api');

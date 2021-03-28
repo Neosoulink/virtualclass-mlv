@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
 			UserDocumentRoleSeeder::class,
 			OrganizationRoleSeeder::class,
 			DocumentSeeder::class,
-			RolesSeeder::class
 		]);
 	}
 }

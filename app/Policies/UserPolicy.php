@@ -3,11 +3,17 @@
 namespace App\Policies;
 
 use App\User;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
 	use HandlesAuthorization;
+
+	public function before(User $user, $ability)
+	{
+		if ($user->is_admin) return true;
+	}
 
 	/**
 	 * Determine whether the user can view any models.
@@ -17,7 +23,7 @@ class UserPolicy
 	 */
 	public function viewAny(User $user)
 	{
-		//
+		return Response::deny('You do not have right access to do this action!', 403);
 	}
 
 	/**
@@ -28,7 +34,7 @@ class UserPolicy
 	 */
 	public function view(User $user)
 	{
-		//
+		return Response::allow();
 	}
 
 	/**
@@ -39,18 +45,32 @@ class UserPolicy
 	 */
 	public function create(User $user)
 	{
-		//
+		return Response::deny('You do not have right access to do this action!', 404);
 	}
 
 	/**
 	 * Determine whether the user can update the model.
 	 *
+	 * @param  \App\User  $currentUser
 	 * @param  \App\User  $user
 	 * @return mixed
 	 */
-	public function update(User $user)
+	public function update(User $currentUser, User $user)
 	{
-		//
+		return $currentUser->id == $user->id
+			? Response::allow()
+			: Response::deny('You do not have right access to do this action!', 403);
+	}
+
+	/**
+	 * Determine whether the user can update is_admin field .
+	 *
+	 * @param  \App\User  $user
+	 * @return mixed
+	 */
+	public function updateIsAdminField(User $user)
+	{
+		return boolval($user->is_admin);
 	}
 
 	/**
@@ -61,7 +81,7 @@ class UserPolicy
 	 */
 	public function delete(User $user)
 	{
-		//
+		return Response::deny('You do not have right access to do this action!', 403);
 	}
 
 	/**
