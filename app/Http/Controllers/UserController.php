@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -20,7 +18,7 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		return Response()->json(User::all());
+		return response()->json(User::all());
 	}
 
 	/**
@@ -56,7 +54,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display user.
 	 *
 	 * @param  \App\User  $user
 	 * @return \Illuminate\Http\Response
@@ -67,7 +65,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update user in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \App\User  $user
@@ -79,7 +77,7 @@ class UserController extends Controller
 		$validator = validator(
 			$request->all(),
 			[
-				"email" => "email|string|",
+				"email" => "email|string",
 				"password" => "password|string",
 				"phone_number" => "string",
 				"first_name" => "string|max:50",
@@ -105,7 +103,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Update the user admin in storage.
+	 * Update user admin in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \App\User  $user
@@ -141,7 +139,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove user from storage.
 	 *
 	 * @param  \App\User  $user
 	 * @return \Illuminate\Http\Response
