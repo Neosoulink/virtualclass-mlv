@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
 			$table->string('country')->nullable();
 			$table->string('full_address')->nullable();
 			$table->char('genre')->nullable();
-			$table->boolean('is_admin');
+			$table->boolean('is_admin')->default(false);
 			$table->rememberToken();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

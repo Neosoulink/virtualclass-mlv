@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
 			'last_name' => 'Mandemvo',
 			'full_address' => 'P - RDC C -  	Kinshasa',
 			'genre' => 'M',
+			'is_admin' => true,
 		]);
 	}
 }
