@@ -25,33 +25,46 @@ class AuthController extends Controller
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function signup()
+	public function signup(Request $request)
 	{
-		$credentials = request()->validate(
+		$validator = validator(
+			$request->all(),
 			[
-				'email' => "email|unique:users|required",
-				'username' => 'string|min:5|required',
-				'password' => 'min:8|confirmed|required'
+				"email" => "email|string|required",
+				"password" => "password|string|required",
+				"phone_number" => "string",
+				"first_name" => "string|max:50",
+				"last_name" => "string|max:50",
+				"country" => "string",
+				"full_address" => "string",
+				"genre" => "string|max:1",
 			]
 		);
 
-		$credentials['password'] = Hash::make($credentials['password']);
+		if (!$validator->fails()) {
+			$credentials = $validator->validate();
+			$credentials['password'] = Hash::make($credentials['password']);
 
-		User::create($credentials);
+			User::create($credentials);
 
-		CustomFileSystem::createDirectory([
-			'disk' => 'users',
-			'path' => '/',
-			'name' =>  $credentials['email']
-		]);
+			CustomFileSystem::createDirectory([
+				'disk' => 'users',
+				'path' => '/',
+				'name' =>  $credentials['email']
+			]);
 
-		$credentials = request(['email', 'password']);
+			if (!$token = auth('api')->attempt($credentials)) {
+				return response()->json(['error' => 'Unauthorized'], 401);
+			}
 
-		if (!$token = auth('api')->attempt($credentials)) {
-			return response()->json(['error' => 'Unauthorized'], 401);
+			return $this->respondWithToken($token);
+		} else {
+			return response([
+				"data" => [],
+				"messages" => $validator->messages(),
+				"message" => "Can't sign up!"
+			]);
 		}
-
-		return $this->respondWithToken($token);
 	}
 
 	/**
@@ -59,15 +72,31 @@ class AuthController extends Controller
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function login()
+	public function login(Request $request)
 	{
-		$credentials = request(['email', 'password']);
+		$validator = validator(
+			$request->all(),
+			[
+				'email' => "email|unique:users|required",
+				'password' => 'min:8|confirmed|required'
+			]
+		);
 
-		if (!$token = auth('api')->attempt($credentials)) {
-			return response()->json(['error' => 'Unauthorized'], 401);
+		if (!$validator->fails()) {
+			$credentials = $validator->validate();
+
+			if (!$token = auth('api')->attempt($credentials)) {
+				return response()->json(['error' => 'Unauthorized'], 401);
+			}
+
+			return $this->respondWithToken($token);
+		} else {
+			return response([
+				"data" => [],
+				"messages" => $validator->messages(),
+				"message" => "Can't login!"
+			]);
 		}
-
-		return $this->respondWithToken($token);
 	}
 
 	/**
@@ -115,7 +144,7 @@ class AuthController extends Controller
 			'access_token' => $token,
 			'user' => $this->guard()->user(),
 			'token_type' => 'bearer',
-			'expires_in' => auth('api')->factory()->getTTL() * 60
+			'expires_in' => auth('api')->factory()->getTTL() * 180
 		]);
 	}
 
