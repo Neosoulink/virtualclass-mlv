@@ -20,7 +20,7 @@ class OrganizationController extends Controller
 	 */
 	public function index()
 	{
-		//
+		return response()->json(Organization::all());
 	}
 
 	/**
@@ -31,7 +31,27 @@ class OrganizationController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$validator = validator(
+			$request->all(),
+			[
+				"name" => "string|required",
+				"description" => "string",
+				"owner" => "required",
+			]
+		);
+
+		if (!$validator->fails()) {
+			Organization::create($validator->validate());
+			return response([
+				"data" =>  $validator->validate(),
+				"message" => "The organization " . $validator->validate()["name"] . " has been created!"
+			]);
+		} else {
+			return response([
+				"data" =>  $validator->validate(),
+				"messages" => $validator->messages()
+			], 402);
+		}
 	}
 
 	/**
@@ -42,7 +62,7 @@ class OrganizationController extends Controller
 	 */
 	public function show(Organization $organization)
 	{
-		//
+		return response()->json($organization);
 	}
 
 	/**
@@ -54,7 +74,27 @@ class OrganizationController extends Controller
 	 */
 	public function update(Request $request, Organization $organization)
 	{
-		//
+		$validator = validator(
+			$request->all(),
+			[
+				"name" => "string",
+				"description" => "string",
+				"owner" => "",
+			]
+		);
+
+		if (!$validator->fails()) {
+			$organization->update($validator->validate());
+			return response([
+				"data" =>  $validator->validate(),
+				"message" => "The organization " . $validator->validate()["name"] . " has been updated!"
+			]);
+		} else {
+			return response([
+				"data" =>  $validator->validate(),
+				"messages" => $validator->messages()
+			], 402);
+		}
 	}
 
 	/**
@@ -65,6 +105,12 @@ class OrganizationController extends Controller
 	 */
 	public function destroy(Organization $organization)
 	{
-		//
+		$org = $organization;
+		$organization->delete();
+
+		return response([
+			"data" =>  $org,
+			"message" => "The organization " . $org->name . " has been deleted!"
+		]);
 	}
 }
