@@ -19,7 +19,7 @@ class OrganizationPolicy
 	 */
 	public function before(User $user)
 	{
-		//if ($user->is_admin) return Response::allow();
+		if ($user->is_admin) return Response::allow();
 	}
 
 	/**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -20,7 +21,26 @@ class OrganizationController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json(Organization::all());
+		$validator = validator(
+			request()->all(),
+			[
+				"forUser" => "int",
+			]
+		);
+
+		if (!$validator->fails()) {
+			if ($forUser = intval($validator->validate()["forUser"])) {
+				$user = User::find($forUser);
+				return response($user != null ? $user->organizations()->get() : []);
+			} else {
+				return response(Organization::all());
+			}
+		} else {
+			return response()->json([
+				"data" =>  [],
+				"messages" => $validator->messages()
+			], 402);
+		}
 	}
 
 	/**
