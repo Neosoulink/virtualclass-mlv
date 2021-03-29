@@ -56,11 +56,17 @@ class UserController extends Controller
 	/**
 	 * Display user.
 	 *
+	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \App\User  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(User $user)
+	public function show(User $user, ?Request $request)
 	{
+		if ($request->input('withDocuments', false)) {
+			return response($user->with('documents')->get());
+		} else if ($request->input('onlyDocuments', false)) {
+			return $user->documents()->get();
+		}
 		return $user;
 	}
 

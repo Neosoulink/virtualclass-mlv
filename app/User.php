@@ -82,7 +82,7 @@ class User extends Authenticatable implements JWTSubject
 	/**
 	 * Return a list of user documents.
 	 *
-	 * @return array
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function documents()
 	{
