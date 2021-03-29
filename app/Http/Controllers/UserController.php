@@ -64,8 +64,12 @@ class UserController extends Controller
 	{
 		if ($request->input('withDocuments', false)) {
 			return response($user->with('documents')->get());
+		} else if ($request->input('withOrganizations', false)) {
+			return response($user->with('organizations')->get());
 		} else if ($request->input('onlyDocuments', false)) {
 			return $user->documents()->get();
+		} else if ($request->input('onlyOrganizations', false)) {
+			return $user->organizations()->get();
 		}
 		return $user;
 	}
