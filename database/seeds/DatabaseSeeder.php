@@ -12,10 +12,14 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		$this->call([
+			// Principals
 			UserSeeder::class,
+			DocumentSeeder::class,
+			OrganizationSeeder::class,
+
+			// Pivots
 			UserDocumentRoleSeeder::class,
 			OrganizationRoleSeeder::class,
-			DocumentSeeder::class,
 			UserOrganizationSeeder::class,
 		]);
 	}

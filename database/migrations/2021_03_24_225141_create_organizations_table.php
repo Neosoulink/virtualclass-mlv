@@ -16,11 +16,10 @@ class CreateOrganizationsTable extends Migration
 		Schema::create('organizations', function (Blueprint $table) {
 			$table->id();
 			$table->string('name');
-			$table->string('description');
-			$table->string('owner');
+			$table->string('description')->nullable();
+			$table->foreignId('owner')->constrained('users');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-
 		});
 	}
 
