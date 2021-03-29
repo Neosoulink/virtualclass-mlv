@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->authorizeResource(Document::class, 'document');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
