@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Organization;
 use App\User;
+use App\Organization;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrganizationPolicy
@@ -18,7 +19,7 @@ class OrganizationPolicy
 	 */
 	public function before(User $user)
 	{
-		if ($user->is_admin) return Response::allow();
+		//if ($user->is_admin) return Response::allow();
 	}
 
 	/**
@@ -29,7 +30,9 @@ class OrganizationPolicy
 	 */
 	public function viewAny(User $user)
 	{
-		Response::deny("You don't have right access to do this action!", 403);
+		return (request('forUser', false) == $user->id)
+			? Response::allow()
+			: Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
