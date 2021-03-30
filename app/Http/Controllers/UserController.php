@@ -71,7 +71,7 @@ class UserController extends Controller
 			$request->all(),
 			[
 				"email" => "email|string|required",
-				"password" => "password|string|required",
+				"password" => "password|confirm|string|required",
 				"phone_number" => "string",
 				"first_name" => "string|max:50",
 				"last_name" => "string|max:50",
