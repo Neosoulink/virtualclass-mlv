@@ -178,7 +178,7 @@ class UserController extends Controller
 				"message" => "User updated!",
 				"messages" => [
 					...$adminValidator->messages(),
-					...(!$canUpdateAdmin) ? ["The current user can't update is_admin field!"] : [],
+					...(!$canUpdateAdmin && boolval($request->input("isAdmin", false))) ? ["The current user can't update is_admin field!"] : [],
 				]
 			], 402);
 		} else {
