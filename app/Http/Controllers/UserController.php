@@ -83,9 +83,9 @@ class UserController extends Controller
 
 
 		$adminValidator = validator(
-			$request->all('is_admin'),
+			$request->all('isAdmin'),
 			[
-				"is_admin" => "boolean",
+				"isAdmin" => "boolean",
 			]
 		);
 
@@ -100,8 +100,9 @@ class UserController extends Controller
 				"data" => User::create($data),
 				"message" => "User created!",
 				"messages" => [
+					...$validator->messages(),
 					...$adminValidator->messages(),
-					...(!$canBeAdmin) ? ["this user can't be admin!"] : [],
+					...(!$canBeAdmin && boolval($request->input("isAdmin", false))) ? ["this user can't be admin!"] : [],
 				]
 			]);
 		} else {
@@ -159,7 +160,7 @@ class UserController extends Controller
 		$adminValidator = validator(
 			$request->all(),
 			[
-				"is_admin" => "boolean",
+				"isAdmin" => "boolean",
 			]
 		);
 
@@ -201,7 +202,7 @@ class UserController extends Controller
 			$validator = validator(
 				$request->all(),
 				[
-					"is_admin" => "boolean|required",
+					"isAdmin" => "boolean|required",
 				]
 			);
 
