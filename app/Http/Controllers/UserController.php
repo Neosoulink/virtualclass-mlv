@@ -70,8 +70,8 @@ class UserController extends Controller
 		$validator = validator(
 			$request->all(),
 			[
-				"email" => "email|string|required",
-				"password" => "password|confirm|string|required",
+				"email" => "email|unique:users|string|required",
+				"password" => "password|confirmed|required",
 				"phone_number" => "string",
 				"first_name" => "string|max:50",
 				"last_name" => "string|max:50",
@@ -83,32 +83,32 @@ class UserController extends Controller
 
 
 		$adminValidator = validator(
-			$request->all('isAdmin'),
+			$request->all('is_admin'),
 			[
-				"isAdmin" => "boolean",
+				"is_admin" => "boolean",
 			]
 		);
 
 		if (!$validator->fails()) {
 			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('isAdmin');
 
-			$data = [
-				...$validator->validate(),
-				...($canBeAdmin) ? $adminValidator : [],
-			];
+			$data = $validator->validate();
+
+			if ($canBeAdmin) $data["is_admin"] = $adminValidator->validate()["is_admin"];
+
 			return response([
 				"data" => User::create($data),
 				"message" => "User created!",
 				"messages" => [
-					...$validator->messages(),
-					...$adminValidator->messages(),
-					...(!$canBeAdmin && boolval($request->input("isAdmin", false))) ? ["this user can't be admin!"] : [],
+					...[$validator->messages()],
+					...[$adminValidator->messages()],
+					...(!$canBeAdmin && boolval($request->input("is_admin", false))) ? ["this user can't be admin!"] : [],
 				]
 			]);
 		} else {
 			return response([
 				"data" => [],
-				"messages" => [...$validator->messages()]
+				"messages" => [...[$validator->messages()]]
 			], 402);
 		}
 	}
@@ -160,12 +160,12 @@ class UserController extends Controller
 		$adminValidator = validator(
 			$request->all(),
 			[
-				"isAdmin" => "boolean",
+				"is_admin" => "boolean",
 			]
 		);
 
 		if (!$validator->fails()) {
-			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('isAdmin');
+			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('is_admin');
 
 			$data = [
 				...$validator->validate(),
@@ -178,7 +178,7 @@ class UserController extends Controller
 				"message" => "User updated!",
 				"messages" => [
 					...$adminValidator->messages(),
-					...(!$canUpdateAdmin && boolval($request->input("isAdmin", false))) ? ["The current user can't update is_admin field!"] : [],
+					...(!$canUpdateAdmin && boolval($request->input("is_admin", false))) ? ["The current user can't update administration field!"] : [],
 				]
 			], 402);
 		} else {
