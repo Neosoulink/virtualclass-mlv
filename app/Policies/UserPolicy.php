@@ -71,7 +71,7 @@ class UserPolicy
 	 * @param  \App\User  $user
 	 * @return mixed
 	 */
-	public function canAddAdmin(User $user)
+	public function canAdmin(User $user)
 	{
 		return boolval($user->is_admin);
 	}

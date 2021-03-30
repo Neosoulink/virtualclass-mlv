@@ -90,7 +90,7 @@ class UserController extends Controller
 		);
 
 		if (!$validator->fails()) {
-			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAddAdmin')->allowed();
+			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAdmin')->allowed();
 
 			$data = [
 				...$validator->validate(),
@@ -142,7 +142,6 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, User $user)
 	{
-		// The action is authorized...
 		$validator = validator(
 			$request->all(),
 			[
@@ -157,16 +156,34 @@ class UserController extends Controller
 			]
 		);
 
-		if ($validator->fails()) {
+		$adminValidator = validator(
+			$request->all(),
+			[
+				"is_admin" => "boolean",
+			]
+		);
+
+		if (!$validator->fails()) {
+			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAdmin')->allowed();
+
+			$data = [
+				...$validator->validate(),
+				...($canUpdateAdmin) ? $adminValidator : [],
+			];
+
+			$user->update($data);
 			return response([
-				"data" => [],
-				"messages" => $validator->messages()
+				"data" => $data,
+				"message" => "User updated!",
+				"messages" => [
+					...$adminValidator->messages(),
+					...(!$canUpdateAdmin) ? ["The current user can't update is_admin field!"] : [],
+				]
 			], 402);
 		} else {
-			$user->update($validator->validate());
 			return response([
-				"data" => $validator->validate(),
-				"message" => 'User updated!',
+				"data" => [],
+				"messages" => [...$validator->messages()]
 			]);
 		}
 	}
