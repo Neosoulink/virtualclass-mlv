@@ -102,7 +102,7 @@ class UserController extends Controller
 				"messages" => [
 					...[$validator->messages()],
 					...[$adminValidator->messages()],
-					...(!$canBeAdmin && boolval($request->input("is_admin", false))) ? ["this user can't be admin!"] : [],
+					...(!$canBeAdmin && null !== $request->input("is_admin")) ? ["this user can't be admin!"] : [],
 				]
 			]);
 		} else {
@@ -167,18 +167,18 @@ class UserController extends Controller
 		if (!$validator->fails()) {
 			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('is_admin');
 
-			$data = [
-				...$validator->validate(),
-				...($canUpdateAdmin) ? $adminValidator : [],
-			];
+			$data = $validator->validate();
+
+			if ($canUpdateAdmin) $data["is_admin"] = $adminValidator->validate()["is_admin"];
 
 			$user->update($data);
 			return response([
 				"data" => $data,
 				"message" => "User updated!",
 				"messages" => [
-					...$adminValidator->messages(),
-					...(!$canUpdateAdmin && boolval($request->input("is_admin", false))) ? ["The current user can't update administration field!"] : [],
+					...[$validator->messages()],
+					...[$adminValidator->messages()],
+					...(!$canUpdateAdmin && null !== $request->input("is_admin")) ? ["The current user can't update administration field!"] : [],
 				]
 			], 402);
 		} else {
