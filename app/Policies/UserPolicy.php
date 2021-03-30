@@ -66,17 +66,6 @@ class UserPolicy
 	}
 
 	/**
-	 * Determine whether the user can update is_admin field .
-	 *
-	 * @param  \App\User  $user
-	 * @return mixed
-	 */
-	public function canAdmin(User $user)
-	{
-		return boolval($user->is_admin);
-	}
-
-	/**
 	 * Determine whether the user can delete the model.
 	 *
 	 * @param  \App\User  $user
@@ -107,5 +96,16 @@ class UserPolicy
 	public function forceDelete(User $user)
 	{
 		//
+	}
+
+	/**
+	 * Determine whether the user is admin.
+	 *
+	 * @param  \App\User  $user
+	 * @return mixed
+	 */
+	public function isAdmin(User $user)
+	{
+		return boolval($user->is_admin);
 	}
 }
