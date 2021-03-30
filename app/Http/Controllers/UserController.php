@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Document;
+use App\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -18,6 +21,41 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
+		$validator = validator(
+			request()->all(),
+			[
+				"forDocument" => "int",
+				"forOrganization" => "int",
+			]
+		);
+
+		if (!$validator->fails()) {
+			if ($forDocument = intval($validator->validate()["forDocument"])) {
+				$document = Document::find($forDocument);
+
+				return response(
+					$document != null
+						? $document->organizations()->get()
+						: []
+				);
+			} else if ($forOrganization = intval($validator->validate()["forOrganization"])) {
+				$organization = Organization::find($forOrganization);
+
+				return response(
+					$organization != null
+						? $organization->organizations()->get()
+						: []
+				);
+			} else {
+				return response(Organization::all());
+			}
+		} else {
+			return response()->json([
+				"data" =>  [],
+				"messages" => $validator->messages()
+			], 402);
+		}
+
 		return response()->json(User::all());
 	}
 
@@ -43,13 +81,34 @@ class UserController extends Controller
 			]
 		);
 
-		if ($validator->fails()) {
-			return response($validator->messages(), 402);
+
+		$adminValidator = validator(
+			$request->all('is_admin'),
+			[
+				"is_admin" => "boolean",
+			]
+		);
+
+		if (!$validator->fails()) {
+			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAddAdmin')->allowed();
+
+			$data = [
+				...$validator->validate(),
+				...($canBeAdmin) ? $adminValidator : [],
+			];
+			return response([
+				"data" => User::create($data),
+				"message" => "User created!",
+				"messages" => [
+					...$adminValidator->messages(),
+					...(!$canBeAdmin) ? ["this user can't be admin!"] : [],
+				]
+			]);
 		} else {
 			return response([
-				"data" => User::create($request->all()),
-				"message" => "User created!"
-			]);
+				"data" => [],
+				"messages" => [...$validator->messages()]
+			], 402);
 		}
 	}
 
