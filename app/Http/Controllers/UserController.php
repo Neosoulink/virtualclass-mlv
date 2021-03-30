@@ -90,7 +90,7 @@ class UserController extends Controller
 		);
 
 		if (!$validator->fails()) {
-			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAdmin')->allowed();
+			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('canAdmin');
 
 			$data = [
 				...$validator->validate(),
@@ -164,7 +164,7 @@ class UserController extends Controller
 		);
 
 		if (!$validator->fails()) {
-			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::inspect('canAdmin')->allowed();
+			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('canAdmin');
 
 			$data = [
 				...$validator->validate(),
