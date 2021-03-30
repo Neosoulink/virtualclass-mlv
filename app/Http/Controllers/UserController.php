@@ -190,42 +190,6 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Update user admin in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\User  $user
-	 * @return \Illuminate\Http\Response
-	 */
-	public function updateIsAdminField(Request $request, User $user)
-	{
-		if ($user->can('updateIsAdminField', $user)) {
-			$validator = validator(
-				$request->all(),
-				[
-					"isAdmin" => "boolean|required",
-				]
-			);
-
-			if (!$validator->fails()) {
-				$user->update($validator->validate());
-				return response([
-					"data" => $validator->validate(),
-					"message" => 'Admin user grade updated!'
-				]);
-			} else {
-				return response([
-					"data" => [],
-					"messages" => $validator->messages()
-				], 402);
-			}
-		} else {
-			return response([
-				"message" => 'Not right access to do this action!'
-			], 403);
-		}
-	}
-
-	/**
 	 * Remove user from storage.
 	 *
 	 * @param  \App\User  $user
