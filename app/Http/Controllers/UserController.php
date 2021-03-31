@@ -126,8 +126,8 @@ class UserController extends Controller
 		$validator = validator(
 			request()->all(),
 			[
-				"forDocument" => "int",
-				"forOrganization" => "int",
+				"withDocuments" => "boolean",
+				"withOrganizations" => "boolean",
 			]
 		);
 
