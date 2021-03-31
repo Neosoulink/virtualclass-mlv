@@ -26,37 +26,38 @@ class UserController extends Controller
 			[
 				"forDocument" => "int",
 				"forOrganization" => "int",
+				"withDocuments" => "boolean",
+				"withOrganizations" => "boolean",
 			]
 		);
 
+
 		if (!$validator->fails()) {
+			$users = User::all();
+
 			if ($forDocument = request()->input("forDocument", false)) {
 				$document = Document::find($forDocument);
 
-				return response(
-					$document != null
-						? $document->users()->get()
-						: []
-				);
+				$users = $document != null
+					? $document->users()->get()
+					: [];
 			} else if ($forOrganization = request()->input("forOrganization", false)) {
 				$organization = Organization::find($forOrganization);
 
-				return response(
-					$organization != null
-						? $organization->organizations()->get()
-						: []
-				);
-			} else {
-				return response(Organization::all());
+				$users = $organization != null
+					? $organization->users()->get()
+					: [];
 			}
+
+			return $users;
+
+			return response($users);
 		} else {
 			return response()->json([
 				"data" =>  [],
 				"messages" => $validator->messages()
 			], 402);
 		}
-
-		return response()->json(User::all());
 	}
 
 	/**
@@ -67,48 +68,39 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		$validationRules = [
+			"email" => "email|unique:users|string|required",
+			"password" => "password|confirmed|required",
+			"phone_number" => [
+				"string",
+				"regex:/^(\+| )?\(?[0-9]{1,4}\)?[0-9]{4,12}$/",
+				"required"
+			],
+			"first_name" => "string|max:50|required",
+			"last_name" => "string|max:50",
+			"country" => "string",
+			"full_address" => "string",
+			"genre" => "string|max:1",
+			"is_admin" => "boolean"
+		];
+
 		$validator = validator(
 			$request->all(),
-			[
-				"email" => "email|unique:users|string|required",
-				"password" => "password|confirmed|required",
-				"phone_number" => "string",
-				"first_name" => "string|max:50",
-				"last_name" => "string|max:50",
-				"country" => "string",
-				"full_address" => "string",
-				"genre" => "string|max:1",
-			]
-		);
-
-
-		$adminValidator = validator(
-			$request->all('is_admin'),
-			[
-				"is_admin" => "boolean",
-			]
+			$validationRules
 		);
 
 		if (!$validator->fails()) {
-			$canBeAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('isAdmin');
-
 			$data = $validator->validate();
-
-			if ($canBeAdmin) $data["is_admin"] = $adminValidator->validate()["is_admin"];
 
 			return response([
 				"data" => User::create($data),
 				"message" => "User created!",
-				"messages" => [
-					...[$validator->messages()],
-					...[$adminValidator->messages()],
-					...(!$canBeAdmin && boolval($request->input("is_admin", false))) ? ["this user can't be admin!"] : [],
-				]
+				"messages" => $validator->messages()
 			]);
 		} else {
 			return response([
 				"data" => [],
-				"messages" => [...[$validator->messages()]]
+				"messages" => $validator->messages()
 			], 402);
 		}
 	}
@@ -122,7 +114,6 @@ class UserController extends Controller
 	 */
 	public function show(User $user, ?Request $request)
 	{
-
 		$validator = validator(
 			request()->all(),
 			[
@@ -132,13 +123,13 @@ class UserController extends Controller
 		);
 
 		if (!$validator->fails()) {
-			if ($request->input('withDocuments', false)) {
-				return response($user->with('documents')->get());
-			} else if ($request->input('withOrganizations', false)) {
-				return response($user->with('organizations')->get());
-			}
+			$user_ = $user;
+			$params = $validator->validate();
 
-			return $user;
+			if ($request->input('withDocuments', false))  $user_ = $user_->with('documents');
+			if ($request->input('withOrganizations', false)) $user_ = $user_->with('organizations');
+
+			return response()->json(!!count($params) ? $user_->find($user->id) : $user);
 		} else {
 			return response()->json([
 				"data" =>  [],
@@ -156,48 +147,46 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, User $user)
 	{
+		$validationRules = [
+			"email" => "email|string",
+			"password" => "password|string",
+			"phone_number" => [
+				"string",
+				"regex:/^(\+| )?\(?[0-9]{1,4}\)?[0-9]{4,12}$/"
+			],
+			"first_name" => "string|max:50",
+			"last_name" => "string|max:50",
+			"country" => "string",
+			"full_address" => "string",
+			"genre" => "string|max:1",
+		];
+
+		$canUpdateAdmin = false;
+		if ($request->input("is_admin") !== null && Gate::allows('isAdmin')) {
+			$validationRules["is_admin"] =  "boolean";
+			$canUpdateAdmin = true;
+		};
+
 		$validator = validator(
 			$request->all(),
-			[
-				"email" => "email|string",
-				"password" => "password|string",
-				"phone_number" => "string",
-				"first_name" => "string|max:50",
-				"last_name" => "string|max:50",
-				"country" => "string",
-				"full_address" => "string",
-				"genre" => "string|max:1",
-			]
-		);
-
-		$adminValidator = validator(
-			$request->all(),
-			[
-				"is_admin" => "boolean",
-			]
+			$validationRules
 		);
 
 		if (!$validator->fails()) {
-			$canUpdateAdmin = !$adminValidator->fails() && !!count($adminValidator->validate()) && Gate::allows('is_admin');
-
 			$data = $validator->validate();
-
-			if ($canUpdateAdmin) $data["is_admin"] = $adminValidator->validate()["is_admin"];
 
 			$user->update($data);
 			return response([
 				"data" => $data,
 				"message" => "User updated!",
 				"messages" => [
-					...[$validator->messages()],
-					...[$adminValidator->messages()],
-					...(!$canUpdateAdmin && null !== $request->input("is_admin")) ? ["The current user can't update administration field!"] : [],
+					...(!$canUpdateAdmin) ? ["The current user can't update administration field!"] : [],
 				]
 			], 402);
 		} else {
 			return response([
 				"data" => [],
-				"messages" => [...$validator->messages()]
+				"messages" => $validator->messages()
 			]);
 		}
 	}
@@ -210,9 +199,12 @@ class UserController extends Controller
 	 */
 	public function destroy(User $user)
 	{
+		$user_ = $user;
 		$user->delete();
+
 		return response([
-			"message" => 'User deleted!'
+			"data" =>  $user_,
+			"message" => "The user " . $user_->first_name . " has been deleted!"
 		]);
 	}
 }
