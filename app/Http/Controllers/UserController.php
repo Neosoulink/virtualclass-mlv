@@ -56,7 +56,7 @@ class UserController extends Controller
 			return response()->json([
 				"data" =>  [],
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -101,7 +101,7 @@ class UserController extends Controller
 			return response([
 				"data" => [],
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -134,7 +134,7 @@ class UserController extends Controller
 			return response()->json([
 				"data" =>  [],
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -182,7 +182,7 @@ class UserController extends Controller
 				"messages" => [
 					...(!$canUpdateAdmin) ? ["The current user can't update administration field!"] : [],
 				]
-			], 402);
+			], 400);
 		} else {
 			return response([
 				"data" => [],

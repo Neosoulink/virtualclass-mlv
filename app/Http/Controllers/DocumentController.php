@@ -50,7 +50,7 @@ class DocumentController extends Controller
 			return response([
 				"data" =>  $validator->validate(),
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -93,7 +93,7 @@ class DocumentController extends Controller
 			return response([
 				"data" =>  $validator->validate(),
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 

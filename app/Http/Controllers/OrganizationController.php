@@ -39,7 +39,7 @@ class OrganizationController extends Controller
 			return response()->json([
 				"data" =>  [],
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -70,7 +70,7 @@ class OrganizationController extends Controller
 			return response([
 				"data" =>  $validator->validate(),
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
@@ -113,7 +113,7 @@ class OrganizationController extends Controller
 			return response([
 				"data" =>  $validator->validate(),
 				"messages" => $validator->messages()
-			], 402);
+			], 400);
 		}
 	}
 
