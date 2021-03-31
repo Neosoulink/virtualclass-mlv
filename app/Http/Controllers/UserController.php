@@ -30,15 +30,15 @@ class UserController extends Controller
 		);
 
 		if (!$validator->fails()) {
-			if ($forDocument = intval($validator->validate()["forDocument"])) {
+			if ($forDocument = request()->input("forDocument", false)) {
 				$document = Document::find($forDocument);
 
 				return response(
 					$document != null
-						? $document->organizations()->get()
+						? $document->users()->get()
 						: []
 				);
-			} else if ($forOrganization = intval($validator->validate()["forOrganization"])) {
+			} else if ($forOrganization = request()->input("forOrganization", false)) {
 				$organization = Organization::find($forOrganization);
 
 				return response(
@@ -102,7 +102,7 @@ class UserController extends Controller
 				"messages" => [
 					...[$validator->messages()],
 					...[$adminValidator->messages()],
-					...(!$canBeAdmin && null !== $request->input("is_admin")) ? ["this user can't be admin!"] : [],
+					...(!$canBeAdmin && boolval($request->input("is_admin", false))) ? ["this user can't be admin!"] : [],
 				]
 			]);
 		} else {
@@ -122,16 +122,29 @@ class UserController extends Controller
 	 */
 	public function show(User $user, ?Request $request)
 	{
-		if ($request->input('withDocuments', false)) {
-			return response($user->with('documents')->get());
-		} else if ($request->input('withOrganizations', false)) {
-			return response($user->with('organizations')->get());
-		} else if ($request->input('onlyDocuments', false)) {
-			return $user->documents()->get();
-		} else if ($request->input('onlyOrganizations', false)) {
-			return $user->organizations()->get();
+
+		$validator = validator(
+			request()->all(),
+			[
+				"forDocument" => "int",
+				"forOrganization" => "int",
+			]
+		);
+
+		if (!$validator->fails()) {
+			if ($request->input('withDocuments', false)) {
+				return response($user->with('documents')->get());
+			} else if ($request->input('withOrganizations', false)) {
+				return response($user->with('organizations')->get());
+			}
+
+			return $user;
+		} else {
+			return response()->json([
+				"data" =>  [],
+				"messages" => $validator->messages()
+			], 402);
 		}
-		return $user;
 	}
 
 	/**

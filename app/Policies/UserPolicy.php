@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,7 +13,7 @@ class UserPolicy
 
 	public function before(User $user, $ability)
 	{
-		if (!$user->is_admin) return Response::allow();
+		if ($user->is_admin) return Response::allow();
 	}
 
 	/**
@@ -23,7 +24,11 @@ class UserPolicy
 	 */
 	public function viewAny(User $user)
 	{
-		return Response::deny("You don't have right access to do this action!", 403);
+		if (request()->input('forDocument', false)) return Response::allow();
+		if (request()->input('forOrganization', false)) return Response::allow();
+
+		return
+			Response::deny("You don't have right access to do this action!", 403);
 	}
 
 	/**
