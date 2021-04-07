@@ -67,7 +67,7 @@ class AuthController extends Controller
 				"data" => [],
 				"messages" => $validator->messages(),
 				"message" => "Can't sign up!"
-			], 402);
+			], 400);
 		}
 	}
 
@@ -101,7 +101,7 @@ class AuthController extends Controller
 				"data" => [],
 				"messages" => $validator->messages(),
 				"message" => "Can't login!"
-			], 402);
+			], 400);
 		}
 	}
 
