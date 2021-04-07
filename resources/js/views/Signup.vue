@@ -8,7 +8,13 @@
 			<div class="form">
 				<md-field>
 					<label>E-mail</label>
-					<md-input v-model="form.email" type="email" name="email" autocomplete="email" autofocus></md-input>
+					<md-input
+						v-model="form.email"
+						type="email"
+						name="email"
+						autocomplete="email"
+						autofocus
+					></md-input>
 				</md-field>
 
 				<md-field>
@@ -23,12 +29,20 @@
 
 				<md-field md-has-password>
 					<label>Password</label>
-					<md-input v-model="form.password" autocomplete="current-password" type="password"></md-input>
+					<md-input
+						v-model="form.password"
+						autocomplete="current-password"
+						type="password"
+					></md-input>
 				</md-field>
 
 				<md-field md-has-password>
 					<label>confirm-Password</label>
-					<md-input v-model="form.password_confirmation" autocomplete="current-password" type="password"></md-input>
+					<md-input
+						v-model="form.password_confirmation"
+						autocomplete="current-password"
+						type="password"
+					></md-input>
 				</md-field>
 			</div>
 
@@ -36,7 +50,9 @@
 				<md-button class="md-link" to="/">
 					<md-icon>arrow_back</md-icon>Go home
 				</md-button>
-				<md-button type="submit" class="md-raised md-primary">Sign up</md-button>
+				<md-button type="submit" class="md-raised md-primary"
+					>Sign up</md-button
+				>
 			</div>
 
 			<div class="md-layout mt-4">
@@ -52,7 +68,11 @@
 
 			<div class="loading-overlay" v-if="loading">
 				<success-check v-if="isLoggedIn" />
-				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else></md-progress-spinner>
+				<md-progress-spinner
+					md-mode="indeterminate"
+					:md-stroke="2"
+					v-else
+				></md-progress-spinner>
 			</div>
 		</md-content>
 
@@ -80,7 +100,14 @@ export default {
 			error: null,
 		};
 	},
-	computed: {},
+	computed: {
+		authError() {
+			return this.$store.getters["user/authError"];
+		},
+		isLoggedIn() {
+			return this.$store.getters["user/isLoggedIn"];
+		},
+	},
 	methods: {
 		newUser() {
 			this.loading = true;
@@ -123,14 +150,6 @@ export default {
 				console.log(validation);
 				this.loading = false;
 			}
-		},
-	},
-	computed: {
-		authError() {
-			return this.$store.getters["user/authError"];
-		},
-		isLoggedIn() {
-			return this.$store.getters["user/isLoggedIn"];
 		},
 	},
 };
