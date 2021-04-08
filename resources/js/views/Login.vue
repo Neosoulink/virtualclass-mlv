@@ -8,12 +8,22 @@
 			<div class="form">
 				<md-field>
 					<label>E-mail</label>
-					<md-input v-model="form.email" type="email" name="email" autocomplete="email" autofocus></md-input>
+					<md-input
+						v-model="form.email"
+						type="email"
+						name="email"
+						autocomplete="email"
+						autofocus
+					></md-input>
 				</md-field>
 
 				<md-field md-has-password>
 					<label>Password</label>
-					<md-input v-model="form.password" autocomplete="current-password" type="password"></md-input>
+					<md-input
+						v-model="form.password"
+						autocomplete="current-password"
+						type="password"
+					></md-input>
 				</md-field>
 			</div>
 
@@ -25,7 +35,10 @@
 			</div>
 
 			<div class="md-layout mt-4">
-				<p>Don't have an account ? <router-link to="/signup">Sign-up !</router-link></p>
+				<p>
+					Don't have an account ?
+					<router-link to="/signup">Sign-up !</router-link>
+				</p>
 			</div>
 
 			<div class="text-danger pt-3" role="alert" v-if="authError">
@@ -33,8 +46,12 @@
 			</div>
 
 			<div class="loading-overlay" v-if="loading">
-				<success-check v-if="isLoggedIn" :class="{'d-none' : !isLoggedIn}" />
-				<md-progress-spinner md-mode="indeterminate" :md-stroke="2" v-else ></md-progress-spinner>
+				<success-check v-if="isLoggedIn" :class="{ 'd-none': !isLoggedIn }" />
+				<md-progress-spinner
+					md-mode="indeterminate"
+					:md-stroke="2"
+					v-else
+				></md-progress-spinner>
 			</div>
 		</md-content>
 		<div class="background" />
@@ -43,11 +60,12 @@
 
 <script>
 import { login } from "../helpers/auth";
-import SuccessCheck from "../components/progess/SuccessCheck"
+import SuccessCheck from "../components/progess/SuccessCheck";
+import validate from "validate.js";
 
 export default {
 	name: "Login",
-	components: {SuccessCheck},
+	components: { SuccessCheck },
 	data() {
 		return {
 			loading: false,
@@ -55,36 +73,58 @@ export default {
 				email: "",
 				password: "",
 			},
-			error: null,
-			loading :false,
+			objectErrors: null,
+			loading: false,
 		};
 	},
 	computed: {},
 	methods: {
 		authenticate() {
 			this.loading = true;
-			this.$store.dispatch("user/login");
 
-			login(this.$data.form)
-				.then((res) => {
-					this.$store.commit("user/LOGIN_SUCCESS", res);
-					setTimeout(() => {
-						this.$router.push({ path: "/dashboard" });
-					}, 2000);
-				})
-				.catch((error) => {
-					this.$store.commit("user/LOGIN_FAILED", { error });
-					this.loading = false;
-				});
+			let data = this.form;
+			let constraint = {
+				// credentials
+				// !!! Need deep rules !!!
+				email: {
+					presence: { allowEmpty: false },
+				},
+				password: {
+					presence: { allowEmpty: false },
+					length: { minimum: 8 },
+				},
+			};
+
+			const validattion = validate(data, constraint);
+
+			if (!validattion) {
+				this.$store.dispatch("user/login");
+				login(this.$data.form)
+					.then((res) => {
+						this.$store.commit("user/LOGIN_SUCCESS", res);
+						setTimeout(() => {
+							this.$router.push({ path: "/dashboard" });
+						}, 2000);
+					})
+					.catch((error) => {
+						this.$store.commit("user/LOGIN_FAILED", { error });
+					})
+					.finally(() => {
+						this.loading = false;
+					});
+			} else {
+				this.objectErrors = validate;
+				this.loading = false;
+			}
 		},
 	},
 	computed: {
 		authError() {
 			return this.$store.getters["user/authError"];
 		},
-		isLoggedIn(){
+		isLoggedIn() {
 			return this.$store.getters["user/isLoggedIn"];
-		}
+		},
 	},
 };
 </script>
