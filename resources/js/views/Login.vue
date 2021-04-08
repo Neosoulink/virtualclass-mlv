@@ -56,7 +56,7 @@ export default {
 				password: "",
 			},
 			error: null,
-			loading :false;
+			loading :false,
 		};
 	},
 	computed: {},
